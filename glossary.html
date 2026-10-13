@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>中英术语对照 · 太阳系中文探索</title>
+<title>中英术语对照 · 深空之眸</title>
 <meta name="description" content="NASA Eyes 实体库与界面字符串的中英术语对照表，标明每条译名的依据等级与未汉化范围。">
 <link rel="stylesheet" href="assets/css/main.css">
 </head>
@@ -31,8 +31,10 @@
       </select>
       <span id="c-ent" style="color:var(--fg-dim);font-size:13.5px"></span>
     </div>
-    <table><thead><tr><th>中文</th><th>站点英文名</th><th>类别</th><th>id（稳定键名）</th><th>依据</th></tr></thead>
-    <tbody id="t-ent"></tbody></table>
+    <div class="table-container">
+      <table><thead><tr><th>中文</th><th>站点英文名</th><th>类别</th><th>id（稳定键名）</th><th>依据</th></tr></thead>
+      <tbody id="t-ent"></tbody></table>
+    </div>
   </div>
 
   <div id="pane-ui" hidden>
@@ -40,7 +42,9 @@
       <input type="search" id="f-ui" placeholder="筛选界面字符串…" aria-label="筛选界面字符串">
       <span id="c-ui" style="color:var(--fg-dim);font-size:13.5px"></span>
     </div>
-    <table><thead><tr><th>站点原文</th><th>中文</th></tr></thead><tbody id="t-ui"></tbody></table>
+    <div class="table-container">
+      <table><thead><tr><th>站点原文</th><th>中文</th></tr></thead><tbody id="t-ui"></tbody></table>
+    </div>
     <h2>不翻译的内容</h2>
     <ul id="not-translated"></ul>
   </div>
@@ -51,7 +55,9 @@
       <input type="search" id="f-mis" placeholder="筛选…" aria-label="筛选未收录条目">
       <span id="c-mis" style="color:var(--fg-dim);font-size:13.5px"></span>
     </div>
-    <table><thead><tr><th>英文名</th><th>类别</th><th>id</th></tr></thead><tbody id="t-mis"></tbody></table>
+    <div class="table-container">
+      <table><thead><tr><th>英文名</th><th>类别</th><th>id</th></tr></thead><tbody id="t-mis"></tbody></table>
+    </div>
   </div>
 </main>
 <script type="module">

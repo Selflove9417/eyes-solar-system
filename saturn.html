@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>土星与环系奇观 · 太阳系中文探索</title>
-<meta name="description" content="土星壮丽光环、卡西尼号探测器、土卫六泰坦与土卫二地下冰海。基于 NASA/JPL Eyes 官方 3D 动力学渲染。">
+<title>土星与环系奇观 · 深空之眸</title>
+<meta name="description" content="土星壮丽光环、卡西尼号探测器、土卫六泰坦与土卫二地下冰海。基于 NASA/JPL Eyes 官方 3D 动力学解算。">
 <link rel="stylesheet" href="assets/css/main.css">
 <style>
   .saturn-views {
@@ -58,19 +58,19 @@
   <section class="big" id="stats">
     <div class="stat" style="border-top-color:#facc15">
       <div class="n" style="color:#facc15">14.3<small>亿公里</small></div>
-      <div class="k">距太阳平均距离（约 9.58 AU，光芒到达需要约 1 小时 20 分）</div>
+      <div class="k">距太阳平均距离（约 9.58 AU，阳光传播到达需约 1 小时 20 分）</div>
     </div>
     <div class="stat cyan">
       <div class="n">146<small>颗</small></div>
-      <div class="k">已知天然卫星数量（太阳系无可争议的“卫星之王”）</div>
+      <div class="k">国际天文学联合会 (IAU) 认证已确认天然卫星数量（太阳系无可争议的“卫星之王”）</div>
     </div>
     <div class="stat accent">
       <div class="n">约 10 ~ 100<small>米</small></div>
-      <div class="k">光环平均厚度（横跨 28 万公里，但在比例上比一张纸还要薄万倍）</div>
+      <div class="k">主光环典型厚度（横跨 28 万公里，但在比例上比一张纸还要薄万倍）</div>
     </div>
     <div class="stat purple">
       <div class="n">0.687<small>g/cm³</small></div>
-      <div class="k">平均物质密度（太阳系唯一密度小于水的行星，理论上能浮在水面）</div>
+      <div class="k">平均物质密度（太阳系唯一密度小于液态水的行星，理论上能浮于水面）</div>
     </div>
   </section>
 
@@ -86,7 +86,7 @@
   <div class="stage">
     <iframe id="eyes" title="土星及其卫星在 NASA Eyes 官方 3D 太阳系中的实时位置" allow="fullscreen"></iframe>
     <div class="stage-bar">
-      <span>画面由 NASA/JPL 官方服务实时渲染。当前视线：<strong id="stage-cur">土星全景 (Saturn)</strong></span>
+      <span>画面基于 NASA/JPL 轨道动力学模型在客户端 WebGL 实时驱动解算。当前视线：<strong id="stage-cur">土星全景 (Saturn)</strong></span>
       <a id="raw" href="https://eyes.nasa.gov/apps/solar-system/#/saturn" target="_blank" rel="noopener">在官方站点中打开 ↗</a>
     </div>
   </div>
@@ -111,7 +111,7 @@
   <div class="grid cols-2">
     <article class="card">
       <h3>土卫六“泰坦” (Titan) · 外星液态海洋</h3>
-      <p>比水星还大的超级卫星，是除地球外太阳系唯一表面拥有稳定液态循环的天体。不过泰坦的“雨水”和“海洋”并非液态水，而是零下 179 °C 的液态甲烷和乙烷。NASA 计划于 2028 年发射“蜻蜓号”核动力旋翼无人机前往泰坦展开跨区域空中探索。</p>
+      <p>比水星还大的超级卫星，是除地球外太阳系唯一表面拥有稳定液态循环的天体。不过泰坦的“雨水”和“海洋”并非液态水，而是零下 179 °C 的液态甲烷和乙烷。NASA 规划于 2028 年发射“蜻蜓号 (Dragonfly)”核动力旋翼飞行器前往泰坦展开空中巡航探索。</p>
     </article>
     <article class="card">
       <h3>土卫二“恩克拉多斯” (Enceladus) · 地下温暖咸海</h3>
@@ -126,11 +126,27 @@
     22 次从光环与土星云顶之间的未知狭缝穿过，最终受控坠入土星大气层自毁焚化，永远化作土星的一部分，以保护脆弱的冰海卫星免遭地球微生物污染。
   </p>
 
+  <h2>🚀 探索其他旗舰特写</h2>
+  <div class="grid cols-3" style="margin-bottom:30px">
+    <a class="card" href="mars.html">
+      <h3>🔴 火星探索与漫游车先驱 <span class="badge common">深度特写</span></h3>
+      <p>奥林匹斯山、水手号峡谷，以及毅力号、好奇号火星车的 3D 视角联动。</p>
+    </a>
+    <a class="card" href="jwst.html">
+      <h3>🔭 韦伯空间望远镜 <span class="badge new">深空之眼</span></h3>
+      <p>驻守日地 L2 点的红外天文望远镜，穿透宇宙尘埃回溯百亿年前的第一代星系。</p>
+    </a>
+    <a class="card" href="voyager-1.html">
+      <h3>🚀 旅行者 1 号星际穿越 <span class="badge std">实时星历</span></h3>
+      <p>飞出太阳系的星际信使，实时追踪其 250+ 亿公里外的退行速度与射电延迟。</p>
+    </a>
+  </div>
+
   <h2>数据出处与署名</h2>
   <p class="src">
     3D 模型与物理动力学：<a href="https://eyes.nasa.gov/apps/solar-system/#/saturn" target="_blank" rel="noopener">NASA JPL Eyes on the Solar System</a>。<br>
     任务数据：NASA Cassini-Huygens Mission / JPL Planetary Science Directorate / ESA / ASI。<br>
-    本页面为<strong>太阳系中文探索</strong>非官方深度科普特写。
+    本页面为<strong>深空之眸 · NASA Eyes 中文观测站</strong>非官方深度科普特写。
   </p>
 </main>
 

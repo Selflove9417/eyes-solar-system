@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>航天器与任务介绍 · 太阳系中文探索</title>
+<title>航天器与任务介绍 · 深空之眸</title>
 <meta name="description" content="NASA 行星探测任务的中文介绍，内容译自 NASA/JPL 官方 descriptions 数据并逐条标注来源，可一键进入官方 3D 视图。">
 <link rel="stylesheet" href="assets/css/main.css">
 </head>
@@ -44,12 +44,20 @@ function render(q = '') {
             el('summary', { style: 'font-size:12.5px;color:var(--fg-dim);cursor:pointer' }, '英文原文'),
             el('p', { style: 'font-size:12.5px;color:var(--fg-dim)' }, m.enBlurb))
         : null,
-      el('p', { style: 'margin-top:8px' },
-        m.src ? el('a', { href: m.src, target: '_blank', rel: 'noopener', style: 'font-size:12.5px' }, '来源 ↗ ') : null,
-        el('a', { href: `explore.html#${m.id}`, style: 'font-size:13.5px' }, ' 在 3D 探索中打开 →')),
+      el('p', { style: 'margin-top:10px;display:flex;gap:12px;flex-wrap:wrap;align-items:center' },
+        m.src ? el('a', { href: m.src, target: '_blank', rel: 'noopener', style: 'font-size:12.5px;color:var(--fg-dim)' }, '官方来源 ↗') : null,
+        el('a', { href: `explore.html#${m.id}`, style: 'font-size:13.5px' }, '在 3D 探索中打开 →'),
+        MISSION_TOPICS[m.id] ? el('a', { href: MISSION_TOPICS[m.id].url, style: 'font-size:13.5px;color:var(--accent-2);font-weight:600' }, MISSION_TOPICS[m.id].text) : null),
     );
   }));
 }
+const MISSION_TOPICS = {
+  sc_jwst: { url: 'jwst.html', text: '🔭 韦伯望远镜特写 ↗' },
+  sc_voyager_1: { url: 'voyager-1.html', text: '🚀 旅行者1号特写 ↗' },
+  sc_mars_2020: { url: 'mars.html', text: '🔴 毅力号火星特写 ↗' },
+  sc_mars_science_laboratory: { url: 'mars.html', text: '🔴 好奇号火星特写 ↗' },
+  sc_cassini: { url: 'saturn.html', text: '🪐 卡西尼土星特写 ↗' },
+};
 document.getElementById('filter').addEventListener('input', (e) => render(e.target.value));
 render();
 </script>

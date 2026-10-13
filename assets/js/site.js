@@ -170,10 +170,22 @@ export function renderChrome(active) {
   const toggleBtn = header.querySelector('.nav-toggle');
   const navMenu = header.querySelector('.nav');
   if (toggleBtn && navMenu) {
-    toggleBtn.addEventListener('click', () => {
+    const closeMenu = () => {
+      navMenu.classList.remove('open');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+      toggleBtn.textContent = '☰';
+    };
+    toggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
       const isOpen = navMenu.classList.toggle('open');
       toggleBtn.setAttribute('aria-expanded', String(isOpen));
       toggleBtn.textContent = isOpen ? '✕' : '☰';
+    });
+    document.addEventListener('click', (e) => {
+      if (!header.contains(e.target)) closeMenu();
+    });
+    navMenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', closeMenu);
     });
   }
 
@@ -182,7 +194,7 @@ export function renderChrome(active) {
     <div class="wrap">
       <div>
         <strong>深空之眸 · NASA Eyes 中文观测站</strong> · 非官方深空科普项目<br>
-        <span>3D 动力学与天体数据由 <a href="${NASA_APP}" target="_blank" rel="noopener">NASA/JPL Eyes on the Solar System</a> 官方实时渲染。</span>
+        <span>3D 动力学与天体数据基于 <a href="${NASA_APP}" target="_blank" rel="noopener">NASA/JPL Eyes on the Solar System</a> 官方模型在客户端 WebGL 驱动解算。</span>
       </div>
       <div>
         <span>中文资料逐条译自 NASA 官方开放数据 · </span>

@@ -8,110 +8,47 @@
 <link rel="stylesheet" href="assets/css/main.css">
 <style>
   .hero-container {
-    padding: 50px 0 30px;
+    padding: 52px 0 28px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
   }
+  .hero-pillars {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 24px;
+    margin: 18px 0 6px;
+    font-size: 13.5px;
+    color: var(--fg-dim);
+  }
+  .hero-pillar-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
   .hero-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
-    margin: 24px 0 10px;
-  }
-  .btn {
-    display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 11px 22px;
-    border-radius: 999px;
-    font-size: 15px;
-    font-weight: 600;
-    transition: all 0.2s ease;
-    cursor: pointer;
-    text-decoration: none;
+    gap: 14px;
+    margin: 24px 0 12px;
   }
-  .btn-primary {
-    background: linear-gradient(135deg, #0284c7, #38bdf8);
-    color: #fff;
-    box-shadow: 0 4px 18px var(--accent-glow);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-  }
-  .btn-primary:hover {
-    background: linear-gradient(135deg, #0369a1, #0ea5e9);
-    box-shadow: 0 6px 24px var(--accent-glow);
-    transform: translateY(-2px);
-    color: #fff;
-    text-decoration: none;
-  }
-  .btn-secondary {
-    background: rgba(15, 23, 42, 0.7);
-    color: var(--fg);
-    border: 1px solid var(--line);
+  .notice-statement {
+    border: 1px solid rgba(251, 146, 60, 0.25);
+    border-left: 4px solid var(--accent-2);
+    background: rgba(30, 20, 10, 0.45);
     backdrop-filter: blur(10px);
-  }
-  .btn-secondary:hover {
-    background: rgba(30, 41, 59, 0.85);
-    border-color: var(--accent);
-    color: #fff;
-    transform: translateY(-2px);
-    text-decoration: none;
-  }
-  .flagship-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-    gap: 18px;
-    margin: 18px 0 36px;
-  }
-  .flagship-card {
-    position: relative;
     border-radius: var(--r);
-    padding: 24px 22px;
-    background: var(--panel);
-    backdrop-filter: blur(var(--blur));
-    -webkit-backdrop-filter: blur(var(--blur));
-    border: 1px solid var(--line-subtle);
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
-    transition: all 0.24s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: 200px;
-  }
-  .flagship-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 36px -6px var(--accent-glow);
-    border-color: var(--accent);
-    text-decoration: none;
-  }
-  .flagship-card.mars:hover { box-shadow: 0 16px 36px -6px var(--accent-2-glow); border-color: var(--accent-2); }
-  .flagship-card.jwst:hover { box-shadow: 0 16px 36px -6px var(--purple-glow); border-color: var(--purple); }
-  .flagship-card.saturn:hover { box-shadow: 0 16px 36px -6px rgba(250, 204, 21, 0.3); border-color: #facc15; }
-  .flagship-icon {
-    font-size: 32px;
-    margin-bottom: 12px;
-    display: inline-block;
-  }
-  .flagship-title {
-    font-size: 19px;
-    font-weight: 700;
-    color: #fff;
-    margin: 0 0 6px;
-  }
-  .flagship-desc {
-    color: var(--fg-dim);
-    font-size: 14px;
+    padding: 14px 20px;
+    margin: 18px 0 32px;
+    font-size: 13.5px;
+    color: #fed7aa;
     line-height: 1.6;
-    margin: 0;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
   }
-  .flagship-meta {
-    margin-top: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 13px;
-    color: var(--accent);
-    font-weight: 500;
+  .notice-statement a {
+    color: #fba65a;
+    text-decoration: underline;
   }
 </style>
 </head>
@@ -121,59 +58,80 @@
     <div class="hero-tag">✨ 3D 太阳系动力学 · NASA Eyes 中文观测站</div>
     <h1 class="gradient-title">探索太阳系的每个角落</h1>
     <p class="lede">
-      在保留 NASA/JPL 原版 3D 模拟器实时轨道与物理渲染的基础上，为中文用户带来沉浸式天文漫游、深度任务特写与权威中英对照资料。
+      基于 NASA/JPL 官方 Eyes on the Solar System 原版 3D 动力学模型，专为中文用户打造的深空观测站。实时追踪行星与探测器航迹，探索四大旗舰专题与权威中文天体档案。
     </p>
 
+    <div class="hero-pillars">
+      <span class="hero-pillar-item">🪐 官方 3D 动力学解算</span>
+      <span class="hero-pillar-item">🔴 旗舰深空任务特写</span>
+      <span class="hero-pillar-item">🗺️ 700+ 规范中文天体库</span>
+      <span class="hero-pillar-item">⚡ 中英术语精准对照</span>
+    </div>
+
     <div class="hero-actions">
-      <a class="btn btn-primary" href="explore.html">🪐 开始 3D 实时漫游</a>
-      <a class="btn btn-secondary" href="mars.html">🔴 火星探索特写</a>
-      <a class="btn btn-secondary" href="jwst.html">🔭 韦伯太空望远镜</a>
-      <a class="btn btn-secondary" href="saturn.html">🪐 土星奇观</a>
-      <a class="btn btn-secondary" href="voyager-1.html">🚀 旅行者 1 号</a>
+      <!-- 醒目的首屏主要行动入口 -->
+      <a class="btn-hero-primary" href="explore.html">
+        <span>🪐 开始 3D 太阳系漫游</span>
+        <span class="btn-sub">官方实时视窗 · 中文天体直达</span>
+      </a>
+      <a class="btn btn-secondary" href="guide.html">🕹️ 操作技巧指引</a>
+      <a class="btn btn-secondary" href="bodies.html">🪐 查阅天体全库</a>
     </div>
   </div>
 
-  <div class="notice">
-    <strong>非官方中文项目说明：</strong>
-    本站为独立非官方中文科普项目，与 NASA / JPL 无官方隶属关系。3D 天体运行、行星轨道与探测器轨迹均直接由
+  <div class="notice-statement">
+    <strong>非官方项目声明：</strong>
+    本站为独立非官方中文科普项目，与 NASA / JPL 无官方隶属关系。3D 天体轨道与航天器轨迹均直接由
     <a href="https://eyes.nasa.gov/apps/solar-system/" target="_blank" rel="noopener">NASA JPL Eyes on the Solar System</a>
-    官方云服务实时渲染，本站不擅自修改任何物理规律与专有程序。
+    官方 3D 动力学模型在客户端通过 WebGL 实时驱动解算，本站不擅自修改任何物理规律与专有程序。
   </div>
 
   <h2>🌟 旗舰科普特写 · 3D 视线联动</h2>
   <div class="flagship-grid">
     <a class="flagship-card mars" href="mars.html">
       <div>
-        <span class="flagship-icon">🔴</span>
-        <div class="flagship-title">火星探索与火星车 <span class="badge common">深度特写</span></div>
-        <p class="flagship-desc">红色星球的奥林匹斯火山、水手号峡谷，以及毅力号火星车和好奇号着陆区的 3D 实时探索。</p>
+        <div class="flagship-header">
+          <span class="flagship-icon">🔴</span>
+          <span class="flagship-highlight">地火相对距离 ~5460万km+</span>
+        </div>
+        <div class="flagship-title">火星探索与漫游车先驱 <span class="badge common">深度特写</span></div>
+        <p class="flagship-desc">红色星球的奥林匹斯火山、水手号峡谷，以及毅力号和好奇号火星车着陆区的 3D 视角联动。</p>
       </div>
       <div class="flagship-meta"><span>进入特写与 3D 视角</span> <span>→</span></div>
     </a>
 
     <a class="flagship-card jwst" href="jwst.html">
       <div>
-        <span class="flagship-icon">🔭</span>
+        <div class="flagship-header">
+          <span class="flagship-icon">🔭</span>
+          <span class="flagship-highlight">日地 L2 点 150万km</span>
+        </div>
         <div class="flagship-title">詹姆斯·韦伯空间望远镜 <span class="badge new">深空之眼</span></div>
-        <p class="flagship-desc">人类最宏伟的太空观测设施：日地 L2 拉格朗日点晕轮轨道、镀金六边形主镜与展开式 3D 结构解析。</p>
+        <p class="flagship-desc">人类最宏伟的太空观测设施：驻守日地 L2 晕轮轨道、6.5 米金反射镜、7K 极端深冷与展开式 3D 结构解析。</p>
       </div>
       <div class="flagship-meta"><span>进入特写与 3D 视角</span> <span>→</span></div>
     </a>
 
     <a class="flagship-card saturn" href="saturn.html">
       <div>
-        <span class="flagship-icon">🪐</span>
+        <div class="flagship-header">
+          <span class="flagship-icon">🪐</span>
+          <span class="flagship-highlight">146 颗卫星 · 28万km环系</span>
+        </div>
         <div class="flagship-title">土星与环系奇观 <span class="badge common">环系巨星</span></div>
         <p class="flagship-desc">太阳系最壮丽的光环系统，拥有浓厚大气的土卫六泰坦，以及孕育地下冰海的土卫二喷泉。</p>
       </div>
       <div class="flagship-meta"><span>进入特写与 3D 视角</span> <span>→</span></div>
     </a>
 
-    <a class="flagship-card" href="voyager-1.html">
+    <a class="flagship-card voyager" href="voyager-1.html">
       <div>
-        <span class="flagship-icon">🚀</span>
+        <div class="flagship-header">
+          <span class="flagship-icon">🚀</span>
+          <span class="flagship-highlight">星际空间 172 AU · 250+亿km</span>
+        </div>
         <div class="flagship-title">旅行者 1 号星际穿越 <span class="badge std">实时星历</span></div>
-        <p class="flagship-desc">此刻它正在距离地球 240+ 亿公里的星际空间疾驰，信号单程需飞奔近 24 小时才能抵达地球。</p>
+        <p class="flagship-desc">此刻它正在距离地球 250+ 亿公里的星际空间疾驰，信号单程需飞奔近 24 小时才能抵达地球。</p>
       </div>
       <div class="flagship-meta"><span>进入特写与 3D 视角</span> <span>→</span></div>
     </a>

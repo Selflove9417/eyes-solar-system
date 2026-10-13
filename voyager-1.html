@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>旅行者 1 号特写 · 此刻它在太阳系的位置 · 太阳系中文探索</title>
-<meta name="description" content="旅行者 1 号的实时距离、信号延迟与星际穿越故事；位置由 NASA/JPL Eyes 官方 3D 模拟器实时渲染，星历数据取自 JPL Horizons。">
+<title>旅行者 1 号特写 · 此刻它在太阳系的位置 · 深空之眸</title>
+<meta name="description" content="旅行者 1 号的实时距离、信号延迟与星际穿越故事；位置基于 NASA/JPL Eyes 官方 3D 模拟器动力学解算，星历数据源自 JPL Horizons。">
 <link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
@@ -31,7 +31,7 @@
   <div class="stage">
     <iframe id="eyes" title="旅行者 1 号在 NASA Eyes 官方 3D 太阳系中的实时位置" allow="fullscreen"></iframe>
     <div class="stage-bar">
-      <span>画面由 NASA/JPL 官方云端服务实时计算与渲染。</span>
+      <span>画面基于 NASA/JPL 轨道动力学模型在客户端 WebGL 实时驱动解算。</span>
       <a id="raw" href="https://eyes.nasa.gov/apps/solar-system/#/sc_voyager_1" target="_blank" rel="noopener">在官方站点中打开 ↗</a>
     </div>
   </div>
@@ -56,11 +56,27 @@
     </article>
   </div>
 
+  <h2>🚀 探索其他旗舰特写</h2>
+  <div class="grid cols-3" style="margin-bottom:30px">
+    <a class="card" href="mars.html">
+      <h3>🔴 火星探索与漫游车先驱 <span class="badge common">深度特写</span></h3>
+      <p>奥林匹斯山、水手号峡谷，以及毅力号、好奇号火星车的 3D 视角联动。</p>
+    </a>
+    <a class="card" href="jwst.html">
+      <h3>🔭 韦伯空间望远镜 <span class="badge new">深空之眼</span></h3>
+      <p>驻守日地 L2 点的红外天文望远镜，穿透宇宙尘埃回溯百亿年前的第一代星系。</p>
+    </a>
+    <a class="card" href="saturn.html">
+      <h3>🪐 土星与环系奇观 <span class="badge common">环系巨星</span></h3>
+      <p>横跨 28 万公里的壮丽冰质光环，拥有甲烷湖泊的泰坦与地下温水冰海的土卫二。</p>
+    </a>
+  </div>
+
   <h2>数据出处与计算溯源</h2>
   <p class="src" id="prov">正在加载出处…</p>
   <p class="src">
-    3D 姿态与轨道渲染：<a href="https://eyes.nasa.gov/apps/solar-system/#/sc_voyager_1" target="_blank" rel="noopener">NASA JPL Eyes on the Solar System</a>。<br>
-    本页面为<strong>太阳系中文探索</strong>深度科普旗舰特写。
+    3D 姿态与轨道解算：<a href="https://eyes.nasa.gov/apps/solar-system/#/sc_voyager_1" target="_blank" rel="noopener">NASA JPL Eyes on the Solar System</a>。<br>
+    本页面为<strong>深空之眸 · NASA Eyes 中文观测站</strong>深度科普旗舰特写。
   </p>
 </main>
 
@@ -69,7 +85,11 @@ import { renderChrome, embedUrl, el } from './assets/js/site.js';
 renderChrome('voyager-1.html');
 
 try {
-  const res = await fetch(new URL('data/live/voyager-1.json', document.baseURI));
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 8000);
+  const res = await fetch(new URL('data/live/voyager-1.json', document.baseURI), { signal: controller.signal });
+  clearTimeout(timeoutId);
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
   const d = await res.json();
   const { raw, derived: dv, meta } = d;
 
@@ -110,7 +130,15 @@ try {
     `目标校对：<code>${meta.horizonsTargetLine}</code>）。` +
     `公里数与信号光时由物理常数换算。数据抓取于 ${meta.retrievedAt}。`;
 } catch (err) {
-  console.error(err);
+  console.error('Voyager-1 ephemeris load failed:', err);
+  document.getElementById('stats').replaceChildren(
+    el('div', { class: 'stat accent', style: 'grid-column:1/-1;border-left:4px solid var(--accent-2);background:rgba(30,20,10,0.6);' },
+      el('div', { class: 'n', style: 'font-size:22px;color:var(--accent-2);' }, '⚠️ 实时星历数据暂不可用'),
+      el('div', { class: 'k', style: 'margin-top:6px;font-size:14px;color:var(--fg-dim);' },
+        '未能成功连接或加载 JPL Horizons 权威星历数据缓存。您仍可点击下方 3D 视窗查看旅行者 1 号在太阳系中的实时模拟运行。'))
+  );
+  document.getElementById('asof').textContent = '星历状态：数据暂不可用（请检查网络或稍后刷新页面）';
+  document.getElementById('prov').textContent = '动态星历接口暂未返回数据，未展示未经检验的数值。';
 }
 
 const url = embedUrl({ route: 'sc_voyager_1', featured: 'false', hd: 'true' });

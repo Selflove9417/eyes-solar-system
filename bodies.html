@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>天体中文名与简介 · 太阳系中文探索</title>
+<title>天体中文名与简介 · 深空之眸</title>
 <meta name="description" content="太阳、行星、矮行星与主要卫星的规范中文名称及简介，中文内容译自 NASA/JPL 官方 descriptions 数据并逐条标注来源。">
 <link rel="stylesheet" href="assets/css/main.css">
 </head>
@@ -48,13 +48,21 @@ function render(q = '') {
             el('summary', { style: 'font-size:12.5px;color:var(--fg-dim);cursor:pointer' }, '英文原文'),
             el('p', { style: 'font-size:12.5px;color:var(--fg-dim)' }, b.en))
         : null,
-      el('p', { style: 'margin-top:8px' },
-        b.src ? el('a', { href: b.src, target: '_blank', rel: 'noopener', style: 'font-size:12.5px' }, '来源 ↗ ') : null,
-        el('a', { href: `explore.html#${b.id}`, style: 'font-size:13.5px' }, ' 在 3D 探索中打开 →')),
+      el('p', { style: 'margin-top:10px;display:flex;gap:12px;flex-wrap:wrap;align-items:center' },
+        b.src ? el('a', { href: b.src, target: '_blank', rel: 'noopener', style: 'font-size:12.5px;color:var(--fg-dim)' }, '官方来源 ↗') : null,
+        el('a', { href: `explore.html#${b.id}`, style: 'font-size:13.5px' }, '在 3D 探索中打开 →'),
+        SPECIAL_TOPICS[b.id] ? el('a', { href: SPECIAL_TOPICS[b.id].url, style: 'font-size:13.5px;color:var(--accent-2);font-weight:600' }, SPECIAL_TOPICS[b.id].text) : null),
     );
     return card;
   }));
 }
+const SPECIAL_TOPICS = {
+  mars: { url: 'mars.html', text: '🔴 火星深度特写 ↗' },
+  saturn: { url: 'saturn.html', text: '🪐 土星深度特写 ↗' },
+  titan: { url: 'saturn.html', text: '🪐 土卫六特写 ↗' },
+  enceladus: { url: 'saturn.html', text: '🪐 土卫二特写 ↗' },
+  phobos: { url: 'mars.html', text: '🔴 火卫一特写 ↗' },
+};
 document.getElementById('filter').addEventListener('input', (e) => render(e.target.value));
 render();
 </script>

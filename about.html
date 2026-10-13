@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>关于与合规 · 太阳系中文探索</title>
+<title>关于与合规 · 深空之眸</title>
 <meta name="description" content="非官方声明、汉化范围与无法汉化部分的准确说明、素材来源与署名、许可核查结论。">
 <link rel="stylesheet" href="assets/css/main.css">
 </head>
@@ -20,17 +20,19 @@
   </div>
 
   <h2>本项目做了什么，没做什么</h2>
-  <table>
-    <thead><tr><th></th><th>事实</th></tr></thead>
-    <tbody>
-      <tr><td>做了</td><td>中文门户、中文导航、中英术语表、天体与任务的中文转译、浏览器扩展的页内文字替换、官方嵌入参数封装。</td></tr>
-      <tr><td>做了</td><td>对官方站点做只读的技术取证：HTTP 响应头、加载完成后的 DOM 结构、运行时 DOM 文本采集、公开 JSON 接口探测。</td></tr>
-      <tr><td><strong>没有</strong>做</td><td>没有抓取、复制或重新托管 NASA 的任何程序（<code>app.js</code> / <code>vendors.js</code>）、三维模型、地形瓦片、纹理或星表数据。</td></tr>
-      <tr><td><strong>没有</strong>做</td><td>没有自建行星动力学或渲染引擎；画面 100% 来自官方服务。</td></tr>
-      <tr><td><strong>没有</strong>做</td><td>没有绕过同源策略：跨域 iframe 的内部文档在实测中不可读也不可写，本项目不做任何规避尝试。</td></tr>
-      <tr><td><strong>没有</strong>做</td><td>没有使用未经验证的内部接口。所有 URL 参数与路由都对应官方 Share → Embed 对话框中实际存在的控件。</td></tr>
-    </tbody>
-  </table>
+  <div class="table-container">
+    <table>
+      <thead><tr><th></th><th>事实</th></tr></thead>
+      <tbody>
+        <tr><td>做了</td><td>中文门户、中文导航、中英术语表、天体与任务的中文转译、官方嵌入参数封装。</td></tr>
+        <tr><td>做了</td><td>对官方站点做只读的技术取证：HTTP 响应头、加载完成后的 DOM 结构、运行时 DOM 文本采集、公开 JSON 接口探测。</td></tr>
+        <tr><td><strong>没有</strong>做</td><td>没有抓取、复制或重新托管 NASA 的任何程序（<code>app.js</code> / <code>vendors.js</code>）、三维模型、地形瓦片、纹理或星表数据。</td></tr>
+        <tr><td><strong>没有</strong>做</td><td>没有自建行星动力学或渲染引擎；画面 100% 来自官方服务驱动解算。</td></tr>
+        <tr><td><strong>没有</strong>做</td><td>没有绕过同源策略：跨域 iframe 的内部文档在实测中不可读也不可写，本项目不做任何规避尝试。</td></tr>
+        <tr><td><strong>没有</strong>做</td><td>没有使用未经验证的内部接口。所有 URL 参数与路由都对应官方 Share → Embed 对话框中实际存在的控件。</td></tr>
+      </tbody>
+    </table>
+  </div>
 
   <h2>汉化范围与无法汉化的部分</h2>
   <h3>可以汉化（且已实测）</h3>
@@ -42,18 +44,20 @@
   <p>实测把 10 个行星标签改写为中文后，静置 6 秒并模拟滚轮缩放，中文<em>全部保留</em>未被回写——应用只更新标签坐标，不重写文字。</p>
 
   <h3>无法汉化，或按规范不应汉化</h3>
-  <table>
-    <thead><tr><th>内容</th><th>原因</th></tr></thead>
-    <tbody>
-      <tr><td>本站 iframe 内模拟器的一切文字</td><td>浏览器同源策略。实测父页面读取 <code>contentDocument</code> 得到 <code>null</code>，访问 <code>contentWindow.location</code> 抛 <code>SecurityError</code>。这是不可绕过的硬限制，绕过它需要注入对方页面，属不安全做法。</td></tr>
-      <tr><td>NASA / JPL 标识与 <em>Eyes on the Solar System</em> 产品名</td><td>机构标识与产品名，按品牌规范保留原文，不翻译、不改写。</td></tr>
-      <tr><td>按键字母 <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> <kbd>K</kbd> <kbd>SHIFT</kbd> 等</td><td>与键盘物理印字一致，翻译反而造成障碍。</td></tr>
-      <tr><td>日期、时间、距离、坐标、单位数值</td><td>需求明确规定不得因翻译改变；本项目不做任何数字重排或换算。</td></tr>
-      <tr><td><code>##moon_count##</code> 一类运行时模板占位符</td><td>由官方站点在渲染时替换（例如海卫一的卫星计数）。翻译层必须原样保留占位符，只处理其周围文字。</td></tr>
-      <tr><td>官方库中未收录中文名的条目</td><td>官方实体库共 719 条，其中卫星 451 条。多数小卫星与任务代号没有可靠中文译名，一律保留英文并在术语表中标注为"未收录"。</td></tr>
-      <tr><td>少数官方简介缺失的条目</td><td>例如银河系（<code>milky_way</code>）在官方 <code>descriptions/</code> 中无对应文件；<code>sc_spitzer</code>、<code>pluto</code> 等路径返回 403。这些条目只显示名称，不编造简介。</td></tr>
-    </tbody>
-  </table>
+  <div class="table-container">
+    <table>
+      <thead><tr><th>内容</th><th>原因</th></tr></thead>
+      <tbody>
+        <tr><td>本站 iframe 内模拟器的一切文字</td><td>浏览器同源策略。实测父页面读取 <code>contentDocument</code> 得到 <code>null</code>，访问 <code>contentWindow.location</code> 抛 <code>SecurityError</code>。这是不可绕过的硬限制，绕过它需要注入对方页面，属不安全做法。</td></tr>
+        <tr><td>NASA / JPL 标识与 <em>Eyes on the Solar System</em> 产品名</td><td>机构标识与产品名，按品牌规范保留原文，不翻译、不改写。</td></tr>
+        <tr><td>按键字母 <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> <kbd>K</kbd> <kbd>SHIFT</kbd> 等</td><td>与键盘物理印字一致，翻译反而造成障碍。</td></tr>
+        <tr><td>日期、时间、距离、坐标、单位数值</td><td>需求明确规定不得因翻译改变；本项目不做任何数字重排或换算。</td></tr>
+        <tr><td><code>##moon_count##</code> 一类运行时模板占位符</td><td>由官方站点在渲染时替换（例如海卫一的卫星计数）。翻译层必须原样保留占位符，只处理其周围文字。</td></tr>
+        <tr><td>官方库中未收录中文名的条目</td><td>官方实体库共 719 条，其中卫星 451 条。多数小卫星与任务代号没有可靠中文译名，一律保留英文并在术语表中标注为"未收录"。</td></tr>
+        <tr><td>少数官方简介缺失的条目</td><td>例如银河系（<code>milky_way</code>）在官方 <code>descriptions/</code> 中无对应文件；<code>sc_spitzer</code>、<code>pluto</code> 等路径返回 403。这些条目只显示名称，不编造简介。</td></tr>
+      </tbody>
+    </table>
+  </div>
 
   <h2>许可核查结论</h2>
   <p>在官方 <code>app.js</code>（1 740 432 字节）中检索 <code>github.com</code>、<code>open source</code>、<code>opensource</code>、<code>license</code>、<code>terms of use</code>、<code>public domain</code>，命中次数均为 <strong>0</strong>。</p>

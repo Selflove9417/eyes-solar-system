@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>火星探索特写 · 红色星球与漫游车 · 太阳系中文探索</title>
-<meta name="description" content="火星全貌、地质奇观与毅力号、好奇号火星车 3D 实时联动。基于 NASA/JPL Eyes 官方 3D 动力学渲染。">
+<title>火星探索特写 · 红色星球与漫游车 · 深空之眸</title>
+<meta name="description" content="火星全貌、地质奇观与毅力号、好奇号火星车 3D 实时联动。基于 NASA/JPL Eyes 官方 3D 动力学解算。">
 <link rel="stylesheet" href="assets/css/main.css">
 <style>
   .mars-views {
@@ -54,26 +54,26 @@
     </div>
     <h1 class="gradient-accent">火星：红色星球与漫游车先驱</h1>
     <p class="lede">
-      拥有太阳系最高的火山与最宏伟的裂谷，也是人类搜寻地外古代生命痕迹与未来星际移民的第一站。
+      拥有太阳系最高的火山与最宏伟的裂谷，也是人类搜寻地外古代生命痕迹与未来星际探索的重要目标。
     </p>
   </div>
 
   <section class="big" id="stats">
     <div class="stat accent">
       <div class="n">0.55 ~ 4.0<small>亿公里</small></div>
-      <div class="k">火星至地球距离变动范围（近日点到远日点）</div>
+      <div class="k">地火直线距离变动范围（由相对公转几何位置决定，最接近约 5460 万公里至合日最远逾 4 亿公里）</div>
     </div>
     <div class="stat">
       <div class="n">3 ~ 22<small>分钟</small></div>
-      <div class="k">单程无线电光时（地球与火星双向延迟可达 44 分钟）</div>
+      <div class="k">单程无线电光时（地球与火星双向信号往返延迟可达 44 分钟）</div>
     </div>
     <div class="stat cyan">
-      <div class="n">24<small>小时</small> 37<small>分</small></div>
-      <div class="k">火星自转周期（一个火星太阳日 Sol，仅比地球多 39 分钟）</div>
+      <div class="n">24<small>h</small> 37<small>m</small> / 24<small>h</small> 39<small>m</small></div>
+      <div class="k">恒星自转周期约 24h 37m 22s；一个火星太阳日（Sol）约为 24h 39m 35s（比地球太阳日长约 39 分半）</div>
     </div>
     <div class="stat purple">
       <div class="n">0.38<small>g</small></div>
-      <div class="k">地表重力（地球的约 38%，起跳高度约为地球的 2.6 倍）</div>
+      <div class="k">地表重力加速度（约为地球表面重力的 38%，重力较小起跳高度理论约为地球的 2.6 倍）</div>
     </div>
   </section>
 
@@ -90,7 +90,7 @@
   <div class="stage">
     <iframe id="eyes" title="火星及火星车在 NASA Eyes 官方 3D 太阳系中的实时位置" allow="fullscreen"></iframe>
     <div class="stage-bar">
-      <span>画面由 NASA/JPL 官方云端服务实时渲染。当前视线：<strong id="stage-cur">火星全景 (Mars)</strong></span>
+      <span>画面基于 NASA/JPL 轨道动力学模型在客户端 WebGL 实时驱动解算。当前视线：<strong id="stage-cur">火星全景 (Mars)</strong></span>
       <a id="raw" href="https://eyes.nasa.gov/apps/solar-system/#/mars" target="_blank" rel="noopener">在官方站点中全屏查看 ↗</a>
     </div>
   </div>
@@ -99,14 +99,14 @@
   <div class="feature-grid">
     <article class="card">
       <h3>奥林匹斯山 (Olympus Mons)</h3>
-      <p>太阳系中已知最大的火山与最高山峰，高度达 21.9 公里（接近珠峰的 2.5 倍），基底宽达 600 公里，足以覆盖整个法国或中国华北平原。</p>
+      <p>太阳系中已知最大的盾状火山，高度达 21.9 公里（超过珠穆朗玛峰海拔的两倍），基底宽达 600 公里，规模足以覆盖整个法国。</p>
     </article>
     <article class="card">
       <h3>水手号峡谷 (Valles Marineris)</h3>
-      <p>横贯火星赤道的超级裂谷系统，长逾 4000 公里，宽达 200 公里，最深处超 7 公里。如果放在地球，能从美国西海岸一直延伸到东海岸。</p>
+      <p>横贯火星赤道的超级裂谷系统，长逾 4000 公里，宽达 200 公里，最深处超 7 公里。如果置于地球，可横跨整个美国大陆。</p>
     </article>
     <article class="card">
-      <h3>极地冰盖与干冰雪</h3>
+      <h3>极地冰盖与季节性升华</h3>
       <p>火星两极覆盖着由水冰和凝固二氧化碳（干冰）构成的永久冰盖。火星冬季极夜时，大气中多达 25~30% 的二氧化碳会直接冻结沉积在极冠上。</p>
     </article>
   </div>
@@ -115,36 +115,54 @@
   <div class="grid cols-3">
     <article class="card">
       <h3>毅力号火星车 <span class="badge std">2020年发射</span></h3>
-      <p>携带着 MOXIE 制氧实验仪与机智号无人直升机在耶泽罗撞击坑着陆，正钻探采集可能含有微生物古化石的岩芯样本，准备由未来的火星样本取回任务（MSR）带回地球。</p>
+      <p>携带着 MOXIE 原位氧气制作实验仪与机智号直升机在耶泽罗撞击坑着陆，正钻探采集具有科学价值的岩芯样本，为未来火星样本取回任务（MSR）做准备。</p>
     </article>
     <article class="card">
       <h3>好奇号火星车 <span class="badge std">2011年发射</span></h3>
-      <p>在盖尔撞击坑运行超过 12 年，证实火星古代曾存在流动淡水湖泊、中性水质和维持微生物生命所需的所有关键化学元素，彻底改写了火星演化史。</p>
+      <p>在盖尔撞击坑持续探测，证实火星远古时期曾存在温暖湿润的淡水湖泊系统与维持微生物生命所需的关键化学元素，深化了对火星古环境的认知。</p>
     </article>
     <article class="card">
       <h3>火星勘测轨道飞行器 (MRO)</h3>
-      <p>搭载超高分辨率 HiRISE 相机从轨道拍摄火星表面，精度可分辨地表小至餐盘大小的岩石，同时充当表面火星车与地球之间最关键的深空数据中继站。</p>
+      <p>搭载超高分辨率 HiRISE 相机从轨道高精度拍摄火星表面，同时充当地表火星车与地球深空测控网之间最关键的数据中继通信枢纽。</p>
     </article>
   </div>
 
   <h2>📐 地球与火星参数对比</h2>
-  <table>
-    <thead><tr><th>物理参数</th><th>地球 (Earth)</th><th>火星 (Mars)</th><th>对比差异</th></tr></thead>
-    <tbody>
-      <tr><td>赤道直径</td><td>12,756 km</td><td>6,792 km</td><td>火星约为地球的 53%（约一半大小）</td></tr>
-      <tr><td>公转轨道周期</td><td>365.25 天 (1.00 年)</td><td>687 地球日 (1.88 年)</td><td>火星的一年接近地球两倍长</td></tr>
-      <tr><td>表面大气压</td><td>101.3 kPa (1.0 bar)</td><td>约 0.6 ~ 0.8 kPa</td><td>火星大气极其稀薄，不足地球表面气压的 1%</td></tr>
-      <tr><td>大气主要成分</td><td>氮气 78% · 氧气 21%</td><td>二氧化碳 95.3% · 氮气 2.6%</td><td>无法供人类直接呼吸，温室效应极微弱</td></tr>
-      <tr><td>平均地表温度</td><td>约 +15 °C</td><td>约 -60 °C (冬夜最低 -140 °C)</td><td>极为寒冷干燥的行星荒漠</td></tr>
-      <tr><td>天然卫星数量</td><td>1 颗 (月球 Moon)</td><td>2 颗 (火卫一 Phobos, 火卫二 Deimos)</td><td>火星卫星均为捕获的小行星形态</td></tr>
-    </tbody>
-  </table>
+  <div class="table-container">
+    <table>
+      <thead><tr><th>物理参数</th><th>地球 (Earth)</th><th>火星 (Mars)</th><th>对比差异</th></tr></thead>
+      <tbody>
+        <tr><td>赤道直径</td><td>12,756 km</td><td>6,792 km</td><td>火星约为地球的 53%（约一半大小）</td></tr>
+        <tr><td>公转轨道周期</td><td>365.25 天 (1.00 年)</td><td>687 地球日 (1.88 年)</td><td>火星的一年接近地球两倍长</td></tr>
+        <tr><td>表面大气压</td><td>101.3 kPa (1.0 bar)</td><td>约 0.6 ~ 0.8 kPa</td><td>火星大气极其稀薄，不足地球表面气压的 1%</td></tr>
+        <tr><td>大气主要成分</td><td>氮气 78% · 氧气 21%</td><td>二氧化碳 95.3% · 氮气 2.6%</td><td>无法供人类直接呼吸，温室效应极微弱</td></tr>
+        <tr><td>平均地表温度</td><td>约 +15 °C</td><td>约 -60 °C (冬夜最低可达 -140 °C)</td><td>极为寒冷干燥的行星荒漠</td></tr>
+        <tr><td>天然卫星数量</td><td>1 颗 (月球 Moon)</td><td>2 颗 (火卫一 Phobos, 火卫二 Deimos)</td><td>形态不规则；起源存在“小行星捕获说”与“巨碰撞碎片吸积说”，学界尚存争议未有定论</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>🚀 探索其他旗舰特写</h2>
+  <div class="grid cols-3" style="margin-bottom:30px">
+    <a class="card" href="jwst.html">
+      <h3>🔭 韦伯空间望远镜 <span class="badge new">深空之眼</span></h3>
+      <p>驻守日地 L2 点的红外天文望远镜，穿透宇宙尘埃回溯百亿年前的第一代星系。</p>
+    </a>
+    <a class="card" href="saturn.html">
+      <h3>🪐 土星与环系奇观 <span class="badge common">环系巨星</span></h3>
+      <p>横跨 28 万公里的壮丽冰质光环，拥有甲烷湖泊的泰坦与地下温水冰海的土卫二。</p>
+    </a>
+    <a class="card" href="voyager-1.html">
+      <h3>🚀 旅行者 1 号星际穿越 <span class="badge std">实时星历</span></h3>
+      <p>飞出太阳系的星际信使，实时追踪其 250+ 亿公里外的退行速度与射电延迟。</p>
+    </a>
+  </div>
 
   <h2>数据出处与署名</h2>
   <p class="src">
-    3D 模型与物理引擎：<a href="https://eyes.nasa.gov/apps/solar-system/#/mars" target="_blank" rel="noopener">NASA JPL Eyes on the Solar System</a>。<br>
+    3D 模型与物理动力学：<a href="https://eyes.nasa.gov/apps/solar-system/#/mars" target="_blank" rel="noopener">NASA JPL Eyes on the Solar System</a>。<br>
     天体与任务数据：NASA Mars Exploration Program / NASA Planetary Data System。<br>
-    本页面为<strong>太阳系中文探索</strong>非官方深度科普特写。
+    本页面为<strong>深空之眸 · NASA Eyes 中文观测站</strong>非官方深度科普特写。
   </p>
 </main>
 

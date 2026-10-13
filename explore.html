@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>3D 漫游 · 深空之眸</title>
-<meta name="description" content="嵌入 NASA/JPL 官方 Eyes on the Solar System 3D 动力学模拟器，提供中文快捷导航与干净全景视口。">
+<meta name="description" content="嵌入 NASA/JPL 官方 Eyes on the Solar System 3D 动力学模拟器，提供中文快捷导航、探索引导与全景视口。">
 <link rel="stylesheet" href="assets/css/main.css">
 <style>
   .preset-bar {
@@ -19,13 +19,14 @@
     border: 1px solid var(--line);
     color: var(--fg);
     border-radius: 6px;
-    padding: 5px 12px;
+    padding: 6px 14px;
     font-size: 13px;
     cursor: pointer;
     transition: all 0.2s ease;
     display: inline-flex;
     align-items: center;
-    gap: 4px;
+    gap: 5px;
+    min-height: 36px;
   }
   .btn-fs:hover {
     border-color: var(--accent);
@@ -38,7 +39,7 @@
     justify-content: center;
     gap: 8px;
     width: 100%;
-    padding: 10px 14px;
+    padding: 11px 16px;
     border-radius: 10px;
     background: linear-gradient(135deg, rgba(2, 132, 199, 0.75), rgba(56, 189, 248, 0.85));
     border: 1px solid var(--accent);
@@ -60,6 +61,116 @@
     outline: 2px solid #fff;
     outline-offset: 1px;
   }
+  .search-box-wrap {
+    position: relative;
+    margin: 0 0 12px;
+  }
+  .search-results-panel {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    max-height: 290px;
+    overflow-y: auto;
+    background: rgba(11, 17, 32, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    box-shadow: 0 16px 36px rgba(0,0,0,0.7);
+    z-index: 150;
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .search-result-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: transparent;
+    border: 0;
+    color: var(--fg);
+    cursor: pointer;
+    font: inherit;
+    font-size: 13.5px;
+    text-align: left;
+    width: 100%;
+    transition: background 0.15s ease;
+  }
+  .search-result-item:hover, .search-result-item:focus {
+    background: rgba(56, 189, 248, 0.14);
+    color: #fff;
+  }
+  .search-no-results {
+    padding: 14px 12px;
+    text-align: center;
+    color: var(--fg-muted);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .side-mobile-toggle-bar {
+    display: none;
+    margin-bottom: 14px;
+  }
+  .side-toggle-btn {
+    width: 100%;
+    padding: 12px 18px;
+    border-radius: 10px;
+    background: rgba(15, 23, 42, 0.85);
+    border: 1px solid var(--line);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 600;
+    font-size: 14.5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .side-toggle-btn:hover {
+    border-color: var(--accent);
+    background: rgba(22, 33, 58, 0.95);
+  }
+  @media (max-width: 990px) {
+    .side-mobile-toggle-bar { display: block; }
+    .side {
+      display: none;
+      position: static;
+      max-height: 55vh;
+      border: 1px solid var(--line);
+      border-radius: var(--r);
+      background: rgba(11, 17, 32, 0.9);
+      padding: 16px;
+      margin-bottom: 24px;
+    }
+    .side.open {
+      display: block;
+    }
+    .explore-layout {
+      display: flex;
+      flex-direction: column;
+    }
+    .explore-layout > .stage-section {
+      order: 1;
+      width: 100%;
+    }
+    .explore-layout > .side-mobile-toggle-bar {
+      order: 2;
+      width: 100%;
+      margin-top: 14px;
+    }
+    .explore-layout > .side {
+      order: 3;
+      width: 100%;
+    }
+    .explore-layout > .guided-section {
+      order: 4;
+      width: 100%;
+    }
+  }
 </style>
 </head>
 <body>
@@ -68,11 +179,11 @@
     <div>
       <h1 style="margin:0 0 6px">3D 太阳系实时漫游</h1>
       <p class="lede" style="margin:0">
-        画面由 NASA/JPL 官方云端动力学服务实时渲染。左侧中文导航可一键直达指定天体与航天器。
+        画面基于 NASA/JPL 官方轨道动力学模型在客户端 WebGL 实时解算驱动。左侧中文导航可一键直达指定天体与航天器。
       </p>
     </div>
     <div style="font-size:13px;color:var(--fg-dim);background:rgba(56,189,248,0.08);border:1px solid rgba(56,189,248,0.2);padding:6px 14px;border-radius:999px">
-      💡 点击左侧列表或快捷航线可指挥 3D 飞船直达天体
+      💡 点击列表或快捷航线可指挥 3D 视角直达天体
     </div>
   </div>
 
@@ -89,15 +200,23 @@
   </div>
 
   <div class="explore-layout">
+    <!-- 移动端抽屉展开按钮 -->
+    <div class="side-mobile-toggle-bar">
+      <button type="button" id="side-toggle-btn" class="side-toggle-btn" aria-expanded="false">
+        <span>📂 天体快捷目录与搜索</span>
+        <span id="side-toggle-text" class="badge common">点击展开目录 ▾</span>
+      </button>
+    </div>
+
     <aside class="side">
       <!-- 显眼的全览重置按钮 -->
       <button class="btn-home-hero" id="side-home-btn" type="button" aria-current="true">
         🌌 返回太阳系全景 (全览模式)
       </button>
 
-      <div class="toolbar" style="margin:0 0 12px">
-        <input type="search" id="jump-search" placeholder="输入天体/航天器中文名搜索…" aria-label="跳转到天体或航天器" list="jump-list">
-        <datalist id="jump-list"></datalist>
+      <div class="search-box-wrap">
+        <input type="search" id="jump-search" placeholder="输入天体/航天器中文名搜索…" aria-label="跳转到天体或航天器" autocomplete="off">
+        <div id="search-results-panel" class="search-results-panel" style="display:none"></div>
       </div>
       <nav id="side-nav" aria-label="天体快捷导航"></nav>
 
@@ -120,12 +239,34 @@
       </div>
     </aside>
 
-    <section>
+    <section class="stage-section">
       <div class="stage" id="stage-wrapper">
-        <iframe id="stage" title="NASA Eyes on the Solar System 官方 3D 模拟器" allow="fullscreen" loading="lazy"></iframe>
+        <!-- 优雅的加载与恢复指示遮罩 -->
+        <div id="stage-overlay" class="stage-overlay">
+          <div id="stage-loading-box" style="display:flex;flex-direction:column;align-items:center;gap:12px">
+            <div class="stage-spinner"></div>
+            <div class="stage-loading-text" id="stage-status-title">正在连接 NASA Eyes 官方 3D 动力学服务…</div>
+            <div class="stage-loading-sub" id="stage-status-desc">
+              正在初始化行星轨道模型与太阳系空间数据（首次加载星图可能需要数秒）…
+            </div>
+          </div>
+          <div id="stage-error-box" class="stage-recovery" style="display:none">
+            <div style="font-size:28px">📡</div>
+            <div style="font-weight:700;font-size:16px;color:#fff">NASA 官方服务响应缓慢或连接受阻</div>
+            <div style="font-size:13.5px;color:var(--fg-dim);line-height:1.6;text-align:center">
+              NASA JPL 官方云端服务跨域加载耗时较长或暂未完成初始化。您可尝试刷新重试，或直接前往 NASA 官方网站。
+            </div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:6px">
+              <button class="btn btn-primary" id="stage-retry-btn" type="button">⟲ 重新尝试连接</button>
+              <a class="btn btn-secondary" id="stage-open-official" href="https://eyes.nasa.gov/apps/solar-system/" target="_blank" rel="noopener">在新标签页打开官网 ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <iframe id="stage" title="NASA Eyes on the Solar System 官方 3D 模拟器" allow="fullscreen"></iframe>
         <div class="stage-bar">
           <div>
-            <span>当前视线：<strong id="current-label">太阳系全景 (Home)</strong></span>
+            <span>当前视线：<strong id="current-label">太阳系全景 (全览模式)</strong></span>
             <span id="current-note"></span>
           </div>
           <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
@@ -142,6 +283,49 @@
       <p style="font-size:13px;color:var(--fg-dim);margin-top:10px;line-height:1.6">
         💡 <strong>操作提示</strong>：在左侧列表中点击任一天体即可指挥 3D 视角直达。由于浏览器跨域同源安全保护（SOP），在 3D 视窗内自由点击旋转时，外层页面无法获知视窗内的内部点击；若探索完毕想回到太阳系全貌，随时点击上方的【⟲ 返回全览模式】即可瞬间复位！
       </p>
+
+      <!-- 新手探索引导入口 -->
+      <div class="guided-section" style="margin-top: 36px">
+        <h2>🧭 新手引导探索路线 · 经典视角</h2>
+        <p class="lede" style="margin-bottom: 16px">精选三条适合初学者的经典探索航线，一键直达成倍缩短探索门槛，附深度科普档案：</p>
+        <div class="guided-grid">
+          <div class="guided-card">
+            <div class="guided-card-header">
+              <h4>🪐 环系巡航：观察土星光环</h4>
+              <span class="badge common">宏伟环系</span>
+            </div>
+            <p>从极地与环平面双重视角俯瞰宽达 28 万公里的璀璨冰环，近距离观察卡西尼环缝与环带光影。</p>
+            <div class="guided-card-actions">
+              <button class="btn btn-primary" type="button" data-guide-route="saturn">🔭 视角直达土星</button>
+              <a class="btn btn-secondary" href="saturn.html">📖 阅读土星特写</a>
+            </div>
+          </div>
+
+          <div class="guided-card">
+            <div class="guided-card-header">
+              <h4>🔴 火星搜奇：寻找火星与漫游车</h4>
+              <span class="badge std">深空巡视</span>
+            </div>
+            <p>飞跃红色星球，寻找正在耶泽罗陨石坑执行样本采集的毅力号火星车与好奇号轨道姿态。</p>
+            <div class="guided-card-actions">
+              <button class="btn btn-primary" type="button" data-guide-route="mars">🔭 视角直达火星</button>
+              <a class="btn btn-secondary" href="mars.html">📖 阅读火星特写</a>
+            </div>
+          </div>
+
+          <div class="guided-card">
+            <div class="guided-card-header">
+              <h4>🚀 星际边界：追踪旅行者 1 号</h4>
+              <span class="badge new">突破日球层</span>
+            </div>
+            <p>俯瞰突破日球层顶、疾驰在 250+ 亿公里星际空间的信使，感受太阳系盘面的宏大尺度。</p>
+            <div class="guided-card-actions">
+              <button class="btn btn-primary" type="button" data-guide-route="sc_voyager_1">🔭 视角直达旅行者1号</button>
+              <a class="btn btn-secondary" href="voyager-1.html">📖 阅读星际特写</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
   </div>
 </main>
@@ -161,7 +345,6 @@ const GROUPS = [
   ['现代瞩目任务', ['sc_artemis_1', 'sc_artemis_2', 'sc_lucy', 'sc_psyche', 'sc_osiris_rex', 'sc_dart', 'sc_dawn', 'sc_rosetta', 'sc_messenger', 'sc_galileo']],
 ];
 
-// Default: featured='false' (hides intrusive bottom announcement cards), interactPrompt='false'
 const state = {
   route: 'home',
   opts: {
@@ -177,10 +360,57 @@ const currentLabel = document.getElementById('current-label');
 const currentNote = document.getElementById('current-note');
 const sideHomeBtn = document.getElementById('side-home-btn');
 
+// Loading Overlay elements
+const overlay = document.getElementById('stage-overlay');
+const loadingBox = document.getElementById('stage-loading-box');
+const errorBox = document.getElementById('stage-error-box');
+const retryBtn = document.getElementById('stage-retry-btn');
+const officialLink = document.getElementById('stage-open-official');
+const statusTitle = document.getElementById('stage-status-title');
+const statusDesc = document.getElementById('stage-status-desc');
+let loadTimeout = null;
+
+function startLoading() {
+  if (loadTimeout) clearTimeout(loadTimeout);
+  overlay.classList.remove('hidden');
+  loadingBox.style.display = 'flex';
+  errorBox.style.display = 'none';
+  statusTitle.textContent = '正在连接 NASA Eyes 官方 3D 动力学服务…';
+  statusDesc.textContent = '正在初始化行星轨道模型与太阳系空间数据（首次加载星图可能需要数秒）…';
+
+  loadTimeout = setTimeout(() => {
+    loadingBox.style.display = 'none';
+    errorBox.style.display = 'flex';
+  }, 18000);
+}
+
+function finishLoading() {
+  if (loadTimeout) clearTimeout(loadTimeout);
+  statusTitle.textContent = '3D 动力学场景已就绪';
+  statusDesc.textContent = '正在同步视角与物理轨道渲染…';
+  setTimeout(() => {
+    overlay.classList.add('hidden');
+  }, 600);
+}
+
+frame.addEventListener('load', finishLoading);
+
+retryBtn.addEventListener('click', () => {
+  startLoading();
+  const cur = frame.src;
+  frame.src = 'about:blank';
+  setTimeout(() => { frame.src = cur; }, 120);
+});
+
 function refresh() {
   const url = embedUrl({ route: state.route, time: state.time || undefined, rate: state.rate || undefined, ...state.opts });
-  frame.src = url;
+  const cur = frame.src;
+  if (!cur || cur !== url) {
+    startLoading();
+    frame.src = url;
+  }
   document.getElementById('open-raw').href = url;
+  officialLink.href = url;
   
   if (state.route === 'home') {
     currentLabel.textContent = '太阳系全景 (全览模式)';
@@ -214,7 +444,11 @@ for (const [title, ids] of GROUPS) {
       const e = names.entities[id];
       const b = el('button', { type: 'button', 'data-route': id },
         e.zh, el('span', { class: 'en' }, e.en));
-      b.addEventListener('click', () => { state.route = id; markActive(b); refresh(); });
+      b.addEventListener('click', () => {
+        state.route = id;
+        markActive(b);
+        refresh();
+      });
       return b;
     })),
   );
@@ -248,6 +482,18 @@ document.querySelectorAll('[data-quick]').forEach((btn) => {
   });
 });
 
+// Guided exploration routes
+document.querySelectorAll('[data-guide-route]').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const route = btn.getAttribute('data-guide-route');
+    state.route = route;
+    const navBtn = nav.querySelector(`[data-route="${CSS.escape(route)}"]`);
+    markActive(navBtn);
+    refresh();
+    window.scrollTo({ top: 120, behavior: 'smooth' });
+  });
+});
+
 // Fullscreen
 document.getElementById('fullscreen-btn').addEventListener('click', () => {
   const wrapper = document.getElementById('stage-wrapper');
@@ -258,20 +504,67 @@ document.getElementById('fullscreen-btn').addEventListener('click', () => {
   }
 });
 
-// Search
-const dl = document.getElementById('jump-list');
-dl.append(...Object.entries(names.entities).map(([id, e]) =>
-  el('option', { value: `${e.zh} (${e.en})` }, id)));
-document.getElementById('jump-search').addEventListener('change', (ev) => {
-  const text = ev.target.value;
-  const id = Object.entries(names.entities).find(([k, e]) =>
-    text === k || text === `${e.zh} (${e.en})` || e.en === text || e.zh === text)?.[0];
-  if (!id) return;
-  state.route = id;
-  const navBtn = nav.querySelector(`[data-route="${CSS.escape(id)}"]`);
-  markActive(navBtn);
-  refresh();
+// Interactive Search with rich feedback
+const searchInput = document.getElementById('jump-search');
+const resultsPanel = document.getElementById('search-results-panel');
+
+function renderSearch(query) {
+  const q = query.trim().toLowerCase();
+  if (!q) {
+    resultsPanel.style.display = 'none';
+    return;
+  }
+  const hits = Object.entries(names.entities).filter(([id, e]) =>
+    e.zh.toLowerCase().includes(q) ||
+    e.en.toLowerCase().includes(q) ||
+    id.toLowerCase().includes(q) ||
+    (e.cat && e.cat.toLowerCase().includes(q))
+  ).slice(0, 12);
+
+  resultsPanel.style.display = 'flex';
+  if (!hits.length) {
+    resultsPanel.innerHTML = '<div class="search-no-results">未找到包含 “' + CSS.escape(query) + '” 的天体或航天器<br><small style="color:var(--fg-dim)">可尝试搜索“火星”、“土星”、“旅行者”或小行星编号</small></div>';
+    return;
+  }
+
+  resultsPanel.replaceChildren(...hits.map(([id, e]) => {
+    const btn = el('button', { class: 'search-result-item', type: 'button' },
+      el('div', {}, el('strong', {}, e.zh), el('span', { class: 'en', style: 'margin-left:8px' }, e.en)),
+      el('span', { class: 'badge ' + (e.status || 'keep') }, e.cat || (e.status === 'std' ? '规范译名' : '已收录'))
+    );
+    btn.addEventListener('click', () => {
+      state.route = id;
+      const navBtn = nav.querySelector(`[data-route="${CSS.escape(id)}"]`);
+      markActive(navBtn);
+      refresh();
+      resultsPanel.style.display = 'none';
+      searchInput.value = `${e.zh} (${e.en})`;
+    });
+    return btn;
+  }));
+}
+
+searchInput.addEventListener('input', (e) => renderSearch(e.target.value));
+document.addEventListener('click', (e) => {
+  if (!searchInput.contains(e.target) && !resultsPanel.contains(e.target)) {
+    resultsPanel.style.display = 'none';
+  }
 });
+searchInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') resultsPanel.style.display = 'none';
+});
+
+// Mobile drawer toggle
+const sideToggleBtn = document.getElementById('side-toggle-btn');
+const sideToggleText = document.getElementById('side-toggle-text');
+const sideNavAside = document.querySelector('.side');
+if (sideToggleBtn && sideNavAside) {
+  sideToggleBtn.addEventListener('click', () => {
+    const isOpen = sideNavAside.classList.toggle('open');
+    sideToggleBtn.setAttribute('aria-expanded', String(isOpen));
+    sideToggleText.textContent = isOpen ? '点击收起目录 ▴' : '点击展开目录 ▾';
+  });
+}
 
 // Controls config: default featured=false to hide big annoying announcement cards
 const OPTS = [
