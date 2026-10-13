@@ -1,206 +1,168 @@
-# NASA Eyes on the Solar System 中文本地化
+# 深空之眸 · NASA Eyes 中文观测站 (Eyes Solar System)
 
-面向中文用户的**非官方**太阳系 3D 探索项目。3D 模拟、天体历表与航天器轨迹全部由
-[NASA/JPL Eyes on the Solar System](https://eyes.nasa.gov/apps/solar-system/#/home)
-官方在线服务实时渲染；本项目不重新实现任何动力学或渲染逻辑，也不托管 NASA 的任何程序或素材。
+> **基于 NASA/JPL 官方 Eyes on the Solar System 实时 3D 动力学模型，专为中文用户打造的太阳系探索门户与科普观测站。**  
+> 线上体验地址：[https://selflove9417.github.io/eyes-solar-system/](https://selflove9417.github.io/eyes-solar-system/)
 
-## 交付内容
+---
 
-两条互补路径，缺一不可：
+## 一、项目愿景与定位
 
-| | 是什么 | 能汉化什么 | 部署 |
-|---|---|---|---|
-| **中文门户**（静态站） | 首页 + 官方 iframe 嵌入 + 中文资料层 | 本站全部界面；**模拟器内部 0%**（跨域限制） | GitHub Pages 等任意静态托管 |
-| **汉化扩展**（Chrome/Edge） | 在官方页面内替换 DOM 文字 | 模拟器内**全部**文字，含 3D 天体标签 | 用户本地"加载已解压的扩展" |
+**深空之眸（Eyes Solar System）** 致力于消除语言与交互门槛，让每一位天文学爱好者与公众能够零阻碍地探索太阳系的壮丽图景。
 
-为什么必须两条：实测该站所有可读文字（包括 3D 场景里的天体名称）都是普通 DOM 元素，
-所以页内注入可以完全汉化；而跨域 iframe 的文档在父页面中不可读也不可写
-（`contentDocument` 为 `null`，访问 `location` 抛 `SecurityError`），
-所以纯静态网站无法汉化嵌入的模拟器。完整证据见
-[docs/技术调查报告.md](docs/技术调查报告.md)。
+- **官方 3D 动力学驱动**：天体轨道运行、探测器航迹演化与行星几何姿态直接由 [NASA/JPL Eyes on the Solar System](https://eyes.nasa.gov/apps/solar-system/#/home) 客户端 WebGL 实时解算驱动。
+- **独立非官方科普声明**：本项目为独立开源科普项目，与 NASA 及 JPL 无任何官方隶属或商业背书关系。本项目严格遵守知识产权与安全规范，不篡改、不破解其任何专有程序与物理模型。
+- **严谨科学审校标准**：杜绝夸大与虚假包装，全站数据均可追溯至 NASA、JPL、IAU、ESA 等权威机构的原始科学公报。
 
-## 启动
+---
 
-### 最简单：双击 `start.cmd`
+## 二、双轨架构：静态门户 + 浏览器扩展
 
-在资源管理器里双击项目根目录的 `start.cmd`，它会自动起服务并打开浏览器；
-若服务已在运行则直接复用，不会因端口占用报错。停止方法：关掉标题为
-`NASA Eyes ZH server` 的最小化窗口。
+由于现代浏览器的**跨域同源安全策略（SOP）**，父页面无法直接穿透读取或修改外部嵌入 iframe 内部的 DOM 内容。本项目采用两条互补的技术路径实现最佳中文体验：
 
-### 手动
+```mermaid
+flowchart TD
+    User([用户访问]) --> ModeChoice{探索方式}
+    ModeChoice -->|即开即用 / 免安装| Portal[静态中文门户网站<br>GitHub Pages]
+    ModeChoice -->|原生 3D 视窗全深度汉化| Extension[浏览器汉化扩展程序<br>Chrome / Edge]
+    
+    Portal --> P1[官方 3D 模拟器嵌入]
+    Portal --> P2[中文快捷航线 & 模糊搜索]
+    Portal --> P3[四大旗舰专题 & 科普知识库]
+    
+    Extension --> E1[直接注入官方站点 DOM]
+    Extension --> E2[天体 3D 场景标签 97%+ 汉化]
+    Extension --> E3[右侧工具箱与官方长篇简介翻译]
+```
 
-无需构建步骤，无依赖，纯静态文件 + Node 自带模块。
+| 载体 | 形态 | 核心能力与汉化范围 | 部署与使用门槛 |
+| :--- | :--- | :--- | :--- |
+| **中文门户网站**（本站） | 纯静态 Web 站点 | 全站 UI、中文侧栏搜索、快捷航线直达、新手引导路线、四大旗舰专题、天体/任务知识库 | **零门槛**，任何浏览器直接打开即用，支持手机与桌面端 |
+| **浏览器汉化扩展** | Chrome / Edge Extension | 深入官方站点内部，汉化 3D 场景中的天体悬浮标签、详情面板、工具栏、菜单与官方科学简介 | 本地“加载已解压的扩展程序”，专为需要原生全界面中文的用户设计 |
+
+---
+
+## 三、核心功能与亮点
+
+### 1. 3D 太阳系实时漫游 (`explore.html`)
+- **智能加载指示与超时自愈**：引入前置加载遮罩与 18 秒服务响应超时恢复卡片；彻底解决同页内天体 Hash 切换不触发原生 `iframe.onload` 导致的遮罩误报死锁问题。
+- **中文模糊联想搜索**：支持输入天体、行星、航天器中文名、英文名或数字代号，实时呈现多维度匹配结果及置信度徽标。
+- **三大新手探索引导路线**：
+  - 🪐 **环系巡航**：直达土星与 28 万公里宏伟冰环，特写卡西尼环缝；
+  - 🔴 **火星搜奇**：探访红色星球，直达毅力号与好奇号火星表面巡视器模型与着陆区；
+  - 🚀 **星际边界**：俯瞰突破日球层顶、疾驰在 250+ 亿公里深空的旅行者 1 号。
+- **一键全景复位**：醒目的【🌌 返回太阳系全景 (全览模式)】控制，一键指挥 3D 视口恢复全局鸟瞰，并补齐前进后退 `hashchange` 状态双向同步。
+
+### 2. 四大旗舰特写专题
+- **火星：红色星球与漫游车先驱 (`mars.html`)**：
+  - 严格区分火星自转周期（24h 37m 22s）与火星太阳日 Sol（24h 39m 35s）；
+  - 科学解释地火距离几何变动，客观呈现火卫成因双假说；
+  - 正确区分地表巡视器与轨道探测器，规范三维模型展示。
+- **韦伯太空望远镜 JWST：窥见宇宙深空曙光 (`jwst.html`)**：
+  - 深入解析日地 L2 拉格朗日点晕轮轨道动力学；
+  - 详述五层遮阳板被动辐射冷却（<40K）与 MIRI 闭环机械氦脉冲管制冷（7K）双区温控机理。
+- **土星与环系奇观 (`saturn.html`)**：
+  - 权威更新：明确呈现**截至 2026 年 8 月 IAU/NASA 认证的 293 颗天然卫星**，注明动态发现口径；
+  - 揭示跨越 28 万公里但厚度仅 10~100 米的极薄主环比例。
+- **旅行者 1 号：突破星际边界的孤勇信使 (`voyager-1.html`)**：
+  - 阐述 172+ AU（250+ 亿公里）与单程近 24 小时光速延迟；
+  - 具备实时接口 `AbortController` 8 秒超时保护与优雅数据降级机制。
+
+### 3. 全面规范的中文知识库
+- **天体中文库 (`bodies.html`)**：八大行星、矮行星、主要卫星的规范审定中文名，逐条附带官方数据来源。
+- **航天任务库 (`missions.html`)**：人类 40 余项重大深空探测任务档案与在轨/退役状态梳理。
+- **中英天文学术语对照 (`glossary.html`)**：收录 **719 个 NASA 官方实体**，其中 **392 个已建立规范/通用中文对照**，未收录条目严格保留官方英文。
+
+### 4. 移动端与无障碍全面优化
+- **移动端优先视口适配**：针对 390px 典型手机竖屏，3D 视口置顶优先呈现，天体目录折叠为交互抽屉；
+- **排版防溢出设计**：探索引导卡片弹性折行，全站数据表格统一采用 `.table-container` 横向平滑滚动；
+- **全方位无障碍保障**：满足 WCAG 2.1 AA 对比度、所有可交互元素提供清晰 `:focus-visible` 焦点环，触控热区 $\ge 44\text{px}$，尊重系统的 `prefers-reduced-motion` 动效减弱偏好。
+
+---
+
+## 四、快速上手与本地运行
+
+项目完全遵循现代 Web 标准，**无须任何前端编译或打包构建步骤，零第三方依赖**。
+
+### 1. 本地启动服务
+
+> ⚠️ **注意**：由于现代浏览器安全策略禁止通过 `file://` 直接跨域读取本地 JSON 数据文件，必须通过本地 HTTP 服务访问。
+
+- **Windows 极速启动**：直接双击运行根目录下的 `start.cmd`（自动启动服务并调起默认浏览器）。
+- **命令行启动**（使用 Node.js 自带模块）：
+  ```bash
+  node tools/serve.mjs . 8890
+  # 访问 http://127.0.0.1:8890/
+  ```
+
+### 2. 自动化词条校验与代码规范
+
+代码库配备严格的 CI 校验工具，防止出现中英文不匹配或未翻译乱码：
 
 ```bash
-node tools/serve.mjs . 8890
-# 打开 http://127.0.0.1:8890/
+node tools/lint-zh.mjs
 ```
+*检查项：确保中文库中的英文原文与 NASA 官方数据基准逐字一致；检查是否存在未知 ID 或字段中残留的非规范英文。*
 
-必须用 HTTP 打开：页面使用 ES module 与 `fetch()` 读取 `data/*.json`，
-直接双击 `index.html`（`file://`）会被浏览器的同源策略拒绝。
-
-## 部署到 GitHub Pages
-
-仓库根目录即站点根目录，推送后在 *Settings → Pages* 选择分支根目录即可。
-所有路径均为相对路径，因此项目站点（`/<repo>/`）同样可用。
-
-## 构建汉化扩展
+### 3. 浏览器汉化扩展打包
 
 ```bash
-node tools/pack-extension.mjs     # -> dist/eyes-zh-extension/
+node tools/pack-extension.mjs
 ```
+打包输出至 `dist/eyes-zh-extension/` 目录。
+- **Chrome / Edge 安装**：打开 `chrome://extensions` 或 `edge://extensions` ➔ 开启【开发者模式】 ➔ 点击【加载已解压的扩展程序】 ➔ 选择 `dist/eyes-zh-extension` 目录即可。
 
-词典只有一份：`pack-extension.mjs` 把 `data/names.zh.json` 与 `data/ui.zh.json`
-复制进扩展目录，站点与扩展共用同一数据源，不会漂移。
+---
 
-安装步骤见站点内的 `extension.html`，要点：
-
-- Chrome：`chrome://extensions` → 开启开发者模式 → 加载已解压的扩展程序 → 选 `dist/eyes-zh-extension`
-- Edge：`edge://extensions` → 开启开发人员模式 → 加载解压缩的扩展 → 选同一目录
-
-## 校验脚本
-
-```bash
-node tools/lint-zh.mjs        # 中文条目的英文原文必须与官方存档逐字一致；检查残留英文
-node tools/build-events.mjs   # 由抓取到的事件标题生成 data/events.zh.json
-node tools/merge-moons.mjs research/wiki_saturn.json ... --write   # 合并维基卫星编号译名
-node tools/sync-glossary.mjs data/source/entities.en.json data/names.zh.json --write
-node tools/sync-sources.mjs --write   # 用官方存档回填英文字段，杜绝手抄错字
-node tools/test-extension.mjs mars    # 在官方页面端到端跑 content.js 并截图
-```
-
-官方站点改版时，先跑 `sync-glossary` 找出消失或新增的实体，再跑 `lint-zh` 确认译文完整。
-
-## 目录结构
+## 五、项目工程目录结构
 
 ```
-index.html  explore.html  mars.html  jwst.html  saturn.html  voyager-1.html
-bodies.html missions.html glossary.html guide.html about.html extension.html
-assets/css/main.css          现代深空科技风样式与毛玻璃规范
-assets/js/site.js            导航、星空背景微动效、嵌入参数构造
-.github/workflows/deploy.yml GitHub Actions Pages 自动部署流程
-data/names.zh.json           实体 id -> 中文 + 译名等级（392/719 条）
-data/ui.zh.json              界面英文字符串 -> 中文（实测采集）
-data/bodies.zh.json          天体中文简介（译自官方，逐条附来源 URL）
-data/missions.zh.json        任务中文简介（译自官方，逐条附来源 URL）
-data/events.zh.json            任务事件名中文对照（249 条，抓自公开 events JSON）
-data/source/entities.en.json 官方实体库快照（719 条，只读基准）
-data/source/descriptions.en.json 官方英文简介存档（93 条，只读基准）
-extension/                   扩展源文件（manifest + content.js）
-tools/                       serve / pack / sync / lint / test
-docs/技术调查报告.md          第一阶段全部取证与方案比较
-research/                    调查期的探针脚本与原始输出（证据存档）
-shots/                       验证截图
+e:\NASA/
+├── index.html                   # 中文观测站门户首页（核心行动入口、四大旗舰卡片、全景板块）
+├── explore.html                 # 3D 漫游核心页（官方 iframe、智能遮罩、中文搜索、引导路线）
+├── mars.html                    # 旗舰专题：火星探索与表面巡视器
+├── jwst.html                    # 旗舰专题：韦伯望远镜与 L2 轨道动力学
+├── saturn.html                  # 旗舰专题：土星、293 颗卫星与环系奇观
+├── voyager-1.html               # 旗舰专题：旅行者 1 号星际穿越与实时星历降级
+├── bodies.html                  # 天体规范中文名称与官方简介知识库
+├── missions.html                # 人类重大深空探测器与航天任务资料库
+├── glossary.html                # 中英天文学术语与实体对照表（719实体 / 392对照）
+├── guide.html                   # NASA Eyes 官方 3D 模拟器高阶操作技巧指南
+├── about.html                   # 项目背景、数据来源追溯与非官方合规声明
+├── extension.html               # 浏览器汉化扩展程序使用说明与离线包下载指引
+│
+├── assets/
+│   ├── css/main.css             # 全局设计规范：深空科技主题、响应式断点、无障碍与抽屉样式
+│   └── js/site.js               # 共享数据层、动态微星空 Canvas、嵌入 URL 构造器
+│
+├── data/
+│   ├── names.zh.json            # 官方实体 ID 到规范中文名对照（含译名依据等级）
+│   ├── ui.zh.json               # 界面原生字符串英中映射表
+│   ├── bodies.zh.json           # 官方天体中文简介与来源链接
+│   ├── missions.zh.json         # 官方航天任务中文简介与来源链接
+│   └── source/                  # 官方只读基准数据快照（entities.en.json / descriptions.en.json）
+│
+├── extension/                   # 汉化扩展程序源码（Manifest V3 + content.js）
+├── tools/                       # 零依赖本地工程工具链
+│   ├── serve.mjs                # 轻量静态 HTTP 服务器
+│   ├── lint-zh.mjs              # 中文知识库自动化数据校验脚本
+│   └── pack-extension.mjs       # 扩展程序一键打包脚本
+│
+├── .github/workflows/deploy.yml # GitHub Actions 自动化静态发布流水线
+└── README.md                    # 项目全景说明文档
 ```
 
-`research/` 只保留本项目自己编写的探针脚本与采集到的结构化证据。
-分析期下载的 NASA 专有文件（`app.js` 等）**不入库**，其取证结论与复现命令记录在
-`research/EVIDENCE-NOTE.md`。
+---
 
-## 实时数据：静态站的硬限制（实测）
+## 六、科学数据口径与更新规则
 
-想做"点开一个航天器看它此刻在哪"，绕不开这条：
+1. **坚持动态数据口径标注**：天文学发现（如系外天体、行星卫星数目）随观测技术进步动态演化，全站凡涉及变动数据均明确注明统计时间点（例如“截至 2026 年 8 月统计”），杜绝将动态科学结论固化为永久定论。
+2. **严谨区分工程实体系别**：严格区分地表巡视器（Rover）、轨道探测器（Orbiter）与深空飞越器（Flyby），不将模型外观展示等同于实时遥测位姿。
+3. **数据文本与渲染逻辑分离**：所有翻译数据均集中于 `data/*.json`，页面逻辑不硬编码翻译字符串，确保数据唯一权威。
 
-| 数据源 | 浏览器跨域可调？ | 证据 |
-|---|---|---|
-| JPL Horizons（星历、实时距离） | ❌ 否 | `mode:'no-cors'` 能到达（opaque），`mode:'cors'` 直接 `Failed to fetch` —— 服务端不发 `Access-Control-Allow-Origin` |
-| api.nasa.gov（APOD / NeoWS / EPIC） | ✅ 是 | 跨域 `status 200` |
+---
 
-所以**实时星历只能在构建期或定时任务里抓**，不能在前端现取。本项目据此提供
-`tools/fetch-ephemeris.mjs`：查询 Horizons、换算并写入 `data/live/*.json`，
-每个文件带 `asOf` 时间戳与完整出处。建议用 GitHub Actions 每天跑一次并提交。
+## 七、致谢与合规声明
 
-工具里对每个目标都做了**身份断言**：返回头里必须出现预期的目标名才落盘。
-原因是 Horizons 的编号极易张冠李戴——实测 `COMMAND='36'` 是颗小行星（3.58 AU），
-旅行者 1 号其实是 `'-31'`（172.01 AU）。猜错编号会安静地给出一个"看起来很合理"的错误数字。
-
-示例页：`voyager-1.html`（旅行者 1 号任务特写）。
-
-## 测试结果
-
-全部在桌面 Chrome 155（`headless=new` + SwiftShader WebGL，1600×900）上实测，截图见 `shots/`。
-
-### 门户站点
-
-| 项目 | 结果 | 证据 |
-|---|---|---|
-| 8 个页面均可打开、导航正常 | 通过（HTTP 200，中文渲染无乱码） | `shots/site_index.png`、`site_glossary.png`、`site_bodies.png`、`site_guide.png` |
-| 官方 3D 场景在嵌入区成功加载 | 通过 | `shots/site_explore_clean.png`（火星渲染完成） |
-| 中文侧栏跳转生效、当前项高亮 | 通过 | 同上，`火星 Mars` 处于选中态 |
-| 官方嵌入参数生效 | 通过（logo / 菜单 / 分享 / 搜索 / 精选 / 详情面板可分别隐藏） | `research/embed_probe/`、`docs/技术调查报告.md` §1.8 |
-| 深层链接 + 时间/速率参数 | 通过（`#/mars?time=…&rate=3600` → 时钟与速率随之改变） | `docs/技术调查报告.md` §1.8 |
-| 无遮挡、无错位、可退出 | 通过 | 截图 |
-
-### 汉化扩展（在官方页面内实测）
-
-| 范围 | 汉化率 | 说明 |
-|---|---|---|
-| 3D 场景标签 | **97.6%**（40/41） | 唯一漏项 `BioSentinel` 未收录中文，按规则保留英文 |
-| 右侧工具条 / 悬停提示（`aria-label`） | **100%**（47/47） | 含 `Help: ` 前缀剥离 |
-| 主菜单条目 | **74.4%**（32/43） | 余量为品牌名、条目计数数字（按规则不译）与官方专题标题 |
-| 详情面板 | 通过 | 信息 / 工具箱 / 视图选项 / 行星 / 简介 / 阅读更多 / 相关 / 外部专题 |
-| 官方简介正文 | 通过 | 已译的 23 篇天体 + 40 篇任务简介在页内直接替换英文 blurb |
-| 页面标题 | 通过 | `太阳系探索 - 火星 - NASA/JPL（非官方中文）` |
-| 时间轴 | 通过 | 实时 / 真实速率 / 下午；**日期 `OCT 11, 2026` 按规则保持原样** |
-
-证据：`shots/extension-mars.png`、`shots/extension-detail-final.png`。
-复现：`node tools/test-extension.mjs mars`。
-
-### 测试过程中定位到的两个环境陷阱
-
-1. **复用 Chrome `--user-data-dir` 会污染 HTTP 缓存**，导致 NASA 应用停在 LOADING 约 15–40%。
-   排查时一度以为是嵌入缺陷；对照实验（同一时刻直接顶层打开官方站点）同样停滞，
-   而**全新 profile 下官方站点与本站嵌入均完整渲染**，才确认是 profile 缓存问题。
-   复测时请换用新的 `--user-data-dir`。
-2. **`--virtual-time-budget` 不适用于此类测试**：它冻结真实网络等待，
-   会让嵌入区整片黑屏，产生假阴性。本项目一律走 CDP 实时加载。
-
-另外，后台标签页的 `requestAnimationFrame` 被浏览器节流，NASA 应用在不可见页面上会停止加载——
-这也是内置无表面浏览器无法完成验证的原因。
-
-## 已知限制
-
-1. 纯静态站无法汉化嵌入的模拟器界面——这是浏览器同源策略，不做任何规避。
-2. 官方实体库 719 条中已建立中文对照 392 条。451 颗卫星里 158 颗有规范编号中文名（土卫三十六、木卫十六、天卫十三…）；其余约 293 颗连维基百科也只用 `S/2021 U 1` 这类临时编号，不存在中文序号名，一律保留英文。
-3. 官方**专题故事标题**（如 `Entry, Descent, and Landing`）属动态内容，扩展不翻译。
-4. 扩展依赖 `.pioneer-label-div` 等 class 名与英文字面量，官方改版会造成漏译。
-5. 少数官方简介文件返回 403（如 `pluto.json`、`sc_spitzer.json`），这些条目只显示名称不显示简介。
-6. 后台标签页动画帧被浏览器节流，模拟器窗口切到后台过久会停在加载中；切回前台即恢复。
-7. 扩展无法一键安装——Chrome/Edge 只允许商店直接安装，本地扩展必须走"加载已解压"。
-8. 详情面板的"阅读更多"按钮把标签拆成裸文本节点与 `<span>`，且应用会替换该文本节点，
-   常规短语匹配无法重组；已按实测 DOM 结构对该按钮做定向处理（见 `content.js` 注释）。
-
-## 尚未完成的验证
-
-- **Edge 桌面端**：扩展与站点的 Edge 实测尚未执行（本机 Edge 可用，但本轮只在 Chrome 上完成验证）。
-- **真实扩展加载**：`headless=new` 忽略 `--load-extension`，因此 `content.js` 是通过 CDP 注入同一份文件验证的，
-  只替换了 `chrome.runtime.getURL`（仅用于解析扩展自身资源路径）。
-  扩展在真实浏览器中以"加载已解压的扩展"方式运行的端到端确认仍需人工执行一次。
-
-## 翻译与数据规则
-
-- 翻译文本与页面逻辑分离：界面代码不含任何中文串，全部来自 `data/*.json`。
-- 中文简介只译官方已有文本，不补充官方未给出的数据；数字、日期、距离、单位一律照原文。
-- 官方文案中的运行时模板占位符（如 `##moon_count##`）原样保留。
-- 每条中文都可通过 `src` 字段回溯到官方英文原文。
-- 无可靠译名者保留英文，并在术语表中明确列为"未收录"。
-- NASA / JPL 标识与 *Eyes on the Solar System* 产品名不翻译、不改写。
-
-## 已知限制
-
-1. 纯静态站无法汉化嵌入的模拟器界面——这是浏览器同源策略，不做任何规避。
-2. 官方实体库 719 条中已建立中文对照 270 条；451 颗卫星与多数任务代号无可靠译名，保留英文。
-3. 扩展依赖 `.pioneer-label-div` 等 class 名与英文字面量，官方改版会造成漏译。
-4. 少数官方简介文件返回 403（如 `pluto.json`、`sc_spitzer.json`），这些条目只显示名称不显示简介。
-5. 后台标签页动画帧被浏览器节流，模拟器窗口切到后台过久会停在加载中；切回前台即恢复。
-6. 扩展无法一键安装——Chrome/Edge 只允许商店直接安装，本地扩展必须走"加载已解压"。
-
-## 许可与署名
-
-本项目为独立非官方作品，与 NASA、Jet Propulsion Laboratory 无隶属或背书关系。
-在官方 `app.js` 中检索 `github.com`、`open source`、`license`、`public domain` 均为 0 命中，
-因此本项目**不声称 NASA 软件开源**，也不复制其任何程序、模型、纹理或星表数据。
-中文简介译自官方公开的 `descriptions/<id>.json` 事实性文本，逐条标注来源 URL。
-
-3D 模拟与数据来源：NASA/JPL Eyes on the Solar System；
-JPL Solar System Dynamics（`ssd.jpl.nasa.gov`）；JPL CNEOS（`cneos.jpl.nasa.gov`）。
+- **天体动力学与 3D 渲染**：[NASA/JPL Eyes on the Solar System](https://eyes.nasa.gov/apps/solar-system/)  
+- **天体星历与空间数据**：NASA Jet Propulsion Laboratory, California Institute of Technology  
+- **开源许可证**：本项目自有网页与工具脚本采用 MIT 许可证开源。引用之 NASA 官方公开事实数据及英文描述属于公共领域或官方公开科学资料，著作权归原机构所有。

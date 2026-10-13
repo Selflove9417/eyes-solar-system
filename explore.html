@@ -289,7 +289,7 @@
         <h2>🧭 新手引导探索路线 · 经典视角</h2>
         <p class="lede" style="margin-bottom: 16px">精选三条适合初学者的经典探索航线，一键直达成倍缩短探索门槛，附深度科普档案：</p>
         <div class="guided-grid">
-          <div class="guided-card">
+          <div class="guided-card" title="环系巡航：观察土星光环">
             <div class="guided-card-header">
               <h4>🪐 环系巡航：观察土星光环</h4>
               <span class="badge common">宏伟环系</span>
@@ -301,19 +301,19 @@
             </div>
           </div>
 
-          <div class="guided-card">
+          <div class="guided-card" title="火星搜奇：寻找火星与火星车">
             <div class="guided-card-header">
-              <h4>🔴 火星搜奇：寻找火星与漫游车</h4>
+              <h4>🔴 火星搜奇：寻找火星与火星车</h4>
               <span class="badge std">深空巡视</span>
             </div>
-            <p>飞跃红色星球，寻找正在耶泽罗陨石坑执行样本采集的毅力号火星车与好奇号轨道姿态。</p>
+            <p>飞跃红色星球，探访正在耶泽罗陨石坑执行样本采集的毅力号火星车与盖尔陨石坑的好奇号表面巡视器三维模型及着陆区。</p>
             <div class="guided-card-actions">
               <button class="btn btn-primary" type="button" data-guide-route="mars">🔭 视角直达火星</button>
               <a class="btn btn-secondary" href="mars.html">📖 阅读火星特写</a>
             </div>
           </div>
 
-          <div class="guided-card">
+          <div class="guided-card" title="星际边界：追踪旅行者 1 号">
             <div class="guided-card-header">
               <h4>🚀 星际边界：追踪旅行者 1 号</h4>
               <span class="badge new">突破日球层</span>
@@ -369,6 +369,7 @@ const officialLink = document.getElementById('stage-open-official');
 const statusTitle = document.getElementById('stage-status-title');
 const statusDesc = document.getElementById('stage-status-desc');
 let loadTimeout = null;
+let isInitialLoad = true;
 
 function startLoading() {
   if (loadTimeout) clearTimeout(loadTimeout);
@@ -386,6 +387,7 @@ function startLoading() {
 
 function finishLoading() {
   if (loadTimeout) clearTimeout(loadTimeout);
+  isInitialLoad = false;
   statusTitle.textContent = '3D 动力学场景已就绪';
   statusDesc.textContent = '正在同步视角与物理轨道渲染…';
   setTimeout(() => {
@@ -395,7 +397,12 @@ function finishLoading() {
 
 frame.addEventListener('load', finishLoading);
 
+window.addEventListener('beforeunload', () => {
+  if (loadTimeout) clearTimeout(loadTimeout);
+});
+
 retryBtn.addEventListener('click', () => {
+  isInitialLoad = true;
   startLoading();
   const cur = frame.src;
   frame.src = 'about:blank';
@@ -406,7 +413,9 @@ function refresh() {
   const url = embedUrl({ route: state.route, time: state.time || undefined, rate: state.rate || undefined, ...state.opts });
   const cur = frame.src;
   if (!cur || cur !== url) {
-    startLoading();
+    if (isInitialLoad) {
+      startLoading();
+    }
     frame.src = url;
   }
   document.getElementById('open-raw').href = url;
@@ -606,6 +615,19 @@ if (initial && initial !== 'home' && (names.entities[initial] || entityById.has(
   markActive(nav.querySelector(`[data-route="${CSS.escape(state.route)}"]`));
 }
 refresh();
+
+window.addEventListener('hashchange', () => {
+  const h = decodeURIComponent(location.hash.slice(1));
+  if (h && h !== state.route) {
+    if (h === 'home') {
+      goHome();
+    } else if (names.entities[h] || entityById.has(h)) {
+      state.route = h;
+      markActive(nav.querySelector(`[data-route="${CSS.escape(h)}"]`));
+      refresh();
+    }
+  }
+});
 </script>
 </body>
 </html>
