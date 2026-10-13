@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>3D 太阳系漫游 · 太阳系中文探索</title>
-<meta name="description" content="嵌入 NASA/JPL 官方 Eyes on the Solar System 3D 模拟器，提供中文快捷导航与官方嵌入参数控制。">
+<title>3D 漫游 · 深空之眸</title>
+<meta name="description" content="嵌入 NASA/JPL 官方 Eyes on the Solar System 3D 动力学模拟器，提供中文快捷导航与干净全景视口。">
 <link rel="stylesheet" href="assets/css/main.css">
 <style>
   .preset-bar {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    margin-bottom: 14px;
+    margin: 18px 0 16px;
     align-items: center;
   }
   .btn-fs {
@@ -19,27 +19,66 @@
     border: 1px solid var(--line);
     color: var(--fg);
     border-radius: 6px;
-    padding: 4px 10px;
+    padding: 5px 12px;
     font-size: 13px;
     cursor: pointer;
     transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
   }
   .btn-fs:hover {
     border-color: var(--accent);
     color: #fff;
     background: var(--panel);
   }
+  .btn-home-hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(2, 132, 199, 0.75), rgba(56, 189, 248, 0.85));
+    border: 1px solid var(--accent);
+    color: #fff;
+    font-size: 14.5px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 14px var(--accent-glow);
+    transition: all 0.2s ease;
+    margin-bottom: 12px;
+    font-family: inherit;
+  }
+  .btn-home-hero:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--accent-glow);
+    background: linear-gradient(135deg, rgba(3, 105, 161, 0.9), rgba(14, 165, 233, 0.95));
+  }
+  .btn-home-hero[aria-current="true"] {
+    outline: 2px solid #fff;
+    outline-offset: 1px;
+  }
 </style>
 </head>
 <body>
 <main class="wrap">
-  <h1>3D 太阳系实时漫游</h1>
-  <p class="lede">
-    画面由 NASA/JPL 官方云端动力学服务实时渲染。左侧中文导航使用官方公开的 URL 深层参数直达，无需破解任何内部接口。
-  </p>
+  <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px;margin-top:28px">
+    <div>
+      <h1 style="margin:0 0 6px">3D 太阳系实时漫游</h1>
+      <p class="lede" style="margin:0">
+        画面由 NASA/JPL 官方云端动力学服务实时渲染。左侧中文导航可一键直达指定天体与航天器。
+      </p>
+    </div>
+    <div style="font-size:13px;color:var(--fg-dim);background:rgba(56,189,248,0.08);border:1px solid rgba(56,189,248,0.2);padding:6px 14px;border-radius:999px">
+      💡 点击左侧列表或快捷航线可指挥 3D 飞船直达天体
+    </div>
+  </div>
 
   <div class="preset-bar">
     <span style="font-size:13.5px;color:var(--fg-dim);font-weight:500">快捷航线：</span>
+    <button class="chip" data-quick="home" type="button" style="border-color:var(--accent);color:#fff;background:rgba(56,189,248,0.2)">🌌 太阳系全览</button>
     <button class="chip" data-quick="sun" type="button">☀️ 太阳</button>
     <button class="chip" data-quick="earth" type="button">🌍 地球</button>
     <button class="chip" data-quick="mars" type="button">🔴 火星</button>
@@ -49,14 +88,13 @@
     <button class="chip" data-quick="sc_mars_2020" type="button">🤖 毅力号火星车</button>
   </div>
 
-  <div class="notice">
-    <strong>跨域汉化说明：</strong>
-    由于浏览器跨域同源策略（SOP），模拟器内部的悬浮标签由 NASA 域名独立隔离，在网页端无法被父页面直接改写。
-    如需模拟器内全部 3D 标签完全显示简体中文，请安装本地<a href="extension.html">中文汉化扩展</a>后直接在官方网站中畅爽游览。
-  </div>
-
   <div class="explore-layout">
     <aside class="side">
+      <!-- 显眼的全览重置按钮 -->
+      <button class="btn-home-hero" id="side-home-btn" type="button" aria-current="true">
+        🌌 返回太阳系全景 (全览模式)
+      </button>
+
       <div class="toolbar" style="margin:0 0 12px">
         <input type="search" id="jump-search" placeholder="输入天体/航天器中文名搜索…" aria-label="跳转到天体或航天器" list="jump-list">
         <datalist id="jump-list"></datalist>
@@ -87,17 +125,22 @@
         <iframe id="stage" title="NASA Eyes on the Solar System 官方 3D 模拟器" allow="fullscreen" loading="lazy"></iframe>
         <div class="stage-bar">
           <div>
-            <span>当前视线：<strong id="current-label">—</strong></span>
+            <span>当前视线：<strong id="current-label">太阳系全景 (Home)</strong></span>
             <span id="current-note"></span>
           </div>
-          <div style="display:flex;gap:12px;align-items:center">
-            <button class="btn-fs" id="fullscreen-btn" type="button">⛶ 全屏视口</button>
+          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+            <button class="btn-fs" id="reset-home-btn" type="button" style="color:var(--accent);border-color:var(--accent)">
+              ⟲ 返回全览模式
+            </button>
+            <button class="btn-fs" id="fullscreen-btn" type="button">
+              ⛶ 全屏视口
+            </button>
             <a id="open-raw" href="https://eyes.nasa.gov/apps/solar-system/" target="_blank" rel="noopener">在新标签页打开官方站点 ↗</a>
           </div>
         </div>
       </div>
-      <p style="font-size:13.5px;color:var(--fg-dim);margin-top:12px">
-        💡 首次进入可能需要 5~15 秒缓冲 NASA 高精度地表纹理与天体模型。若加载较慢，建议保持当前标签页处于激活状态（后台标签页会被浏览器节流动画帧）。
+      <p style="font-size:13px;color:var(--fg-dim);margin-top:10px;line-height:1.6">
+        💡 <strong>操作提示</strong>：在左侧列表中点击任一天体即可指挥 3D 视角直达。由于浏览器跨域同源安全保护（SOP），在 3D 视窗内自由点击旋转时，外层页面无法获知视窗内的内部点击；若探索完毕想回到太阳系全貌，随时点击上方的【⟲ 返回全览模式】即可瞬间复位！
       </p>
     </section>
   </div>
@@ -118,26 +161,46 @@ const GROUPS = [
   ['现代瞩目任务', ['sc_artemis_1', 'sc_artemis_2', 'sc_lucy', 'sc_psyche', 'sc_osiris_rex', 'sc_dart', 'sc_dawn', 'sc_rosetta', 'sc_messenger', 'sc_galileo']],
 ];
 
-const state = { route: 'home', opts: {}, time: '', rate: '' };
+// Default: featured='false' (hides intrusive bottom announcement cards), interactPrompt='false'
+const state = {
+  route: 'home',
+  opts: {
+    featured: 'false',
+    interactPrompt: 'false',
+  },
+  time: '',
+  rate: ''
+};
+
 const frame = document.getElementById('stage');
 const currentLabel = document.getElementById('current-label');
 const currentNote = document.getElementById('current-note');
+const sideHomeBtn = document.getElementById('side-home-btn');
 
 function refresh() {
   const url = embedUrl({ route: state.route, time: state.time || undefined, rate: state.rate || undefined, ...state.opts });
   frame.src = url;
   document.getElementById('open-raw').href = url;
-  const hit = names.entities[state.route];
-  const real = entityById.get(state.route);
-  const en = hit?.en || real?.displayName || real?.iauName || (state.route === 'home' ? '首页' : state.route);
-  currentLabel.textContent = (state.route === 'home' ? '太阳系全景' : (hit?.zh || en)) + ' (' + en + ')';
-  currentNote.innerHTML = hit
-    ? (hit.status === 'std' || hit.status === 'common'
-        ? '<span class="badge std">规范译名</span>'
-        : '<span class="badge code">参考译名</span>')
-    : real
-      ? '<span class="badge en-left">未收录中文</span>'
-      : '';
+  
+  if (state.route === 'home') {
+    currentLabel.textContent = '太阳系全景 (全览模式)';
+    currentNote.innerHTML = '<span class="badge std">宏观视野</span>';
+    sideHomeBtn.setAttribute('aria-current', 'true');
+    nav.querySelectorAll('button').forEach((b) => b.removeAttribute('aria-current'));
+  } else {
+    sideHomeBtn.removeAttribute('aria-current');
+    const hit = names.entities[state.route];
+    const real = entityById.get(state.route);
+    const en = hit?.en || real?.displayName || real?.iauName || state.route;
+    currentLabel.textContent = (hit?.zh || en) + ' (' + en + ')';
+    currentNote.innerHTML = hit
+      ? (hit.status === 'std' || hit.status === 'common'
+          ? '<span class="badge std">规范译名</span>'
+          : '<span class="badge code">参考译名</span>')
+      : real
+        ? '<span class="badge en-left">未收录中文</span>'
+        : '';
+  }
   history.replaceState(null, '', '#' + state.route);
 }
 
@@ -162,14 +225,26 @@ function markActive(btn) {
   btn?.setAttribute('aria-current', 'true');
 }
 
+// Home Overview triggers
+function goHome() {
+  state.route = 'home';
+  refresh();
+}
+sideHomeBtn.addEventListener('click', goHome);
+document.getElementById('reset-home-btn').addEventListener('click', goHome);
+
 // Preset buttons
 document.querySelectorAll('[data-quick]').forEach((btn) => {
   btn.addEventListener('click', () => {
     const id = btn.getAttribute('data-quick');
-    state.route = id;
-    const navBtn = nav.querySelector(`[data-route="${CSS.escape(id)}"]`);
-    markActive(navBtn);
-    refresh();
+    if (id === 'home') {
+      goHome();
+    } else {
+      state.route = id;
+      const navBtn = nav.querySelector(`[data-route="${CSS.escape(id)}"]`);
+      markActive(navBtn);
+      refresh();
+    }
   });
 });
 
@@ -198,12 +273,13 @@ document.getElementById('jump-search').addEventListener('change', (ev) => {
   refresh();
 });
 
+// Controls config: default featured=false to hide big annoying announcement cards
 const OPTS = [
-  ['featured', '显示精选专题故事', true],
-  ['detailPanel', '显示详情面板', true],
+  ['detailPanel', '显示右侧详情面板', true],
   ['menu', '显示主菜单', true],
-  ['search', '显示搜索', true],
+  ['search', '显示搜索框', true],
   ['logo', '显示 NASA 标识', true],
+  ['featured', '显示精选故事公告卡片（默认关）', false],
   ['hd', '启用高清纹理', false],
   ['surfaceMapTiling', '启用地表纹理瓦片', false],
   ['heliosphere', '显示日球层', false],
@@ -212,9 +288,13 @@ const OPTS = [
 const box = document.getElementById('embed-opts');
 for (const [key, label, onByDefault] of OPTS) {
   const cb = el('input', { type: 'checkbox', id: 'opt-' + key });
-  if (onByDefault) cb.checked = true;
+  if (key === 'featured') {
+    cb.checked = false;
+  } else if (onByDefault) {
+    cb.checked = true;
+  }
   cb.addEventListener('change', () => {
-    state.opts[key] = onByDefault ? (cb.checked ? undefined : 'false') : (cb.checked ? 'true' : undefined);
+    state.opts[key] = cb.checked ? undefined : 'false';
     refresh();
   });
   box.append(el('label', { class: 'opt', for: 'opt-' + key }, cb, label));
@@ -228,8 +308,10 @@ document.getElementById('apply-time').addEventListener('click', () => {
 });
 
 const initial = decodeURIComponent(location.hash.slice(1));
-if (initial && initial !== 'home' && (names.entities[initial] || entityById.has(initial))) state.route = initial;
-markActive(nav.querySelector(`[data-route="${CSS.escape(state.route)}"]`));
+if (initial && initial !== 'home' && (names.entities[initial] || entityById.has(initial))) {
+  state.route = initial;
+  markActive(nav.querySelector(`[data-route="${CSS.escape(state.route)}"]`));
+}
 refresh();
 </script>
 </body>
