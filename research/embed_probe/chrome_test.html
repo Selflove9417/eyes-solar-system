@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>embed chrome-hiding probe</title>
+<style>
+  body { margin:0; font:14px/1.5 system-ui; background:#0a0d14; color:#eee; }
+  header { padding:10px 16px; background:#111827; border-bottom:1px solid #223; }
+  #box { width:100%; height:80vh; border:0; display:block; }
+  #log { padding:6px 16px; white-space:pre-wrap; font:12px/1.4 ui-monospace,Consolas,monospace; color:#9f9; }
+</style>
+</head>
+<body>
+<header>中文导航占位（测试用）</header>
+<iframe id="box" allow="fullscreen"
+  src="https://eyes.nasa.gov/apps/solar-system/#/saturn?menu=false&featured=false&logo=false&shareButton=false&search=false&detailPanel=false&interactPrompt=false&hd=true&lighting=natural&rate=3600"></iframe>
+<div id="log">loading…</div>
+<script>
+const frame = document.getElementById('box');
+let loaded = false;
+frame.addEventListener('load', () => { loaded = true; document.getElementById('log').textContent = '[load] fired'; });
+setTimeout(() => {
+  document.getElementById('log').textContent =
+    '[t+70s] loadFired=' + loaded + ' rect=' + JSON.stringify(frame.getBoundingClientRect().toJSON()).slice(0,80);
+  document.title = 'PROBE_DONE';
+}, 70000);
+</script>
+</body>
+</html>

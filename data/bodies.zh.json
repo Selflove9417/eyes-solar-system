@@ -1,0 +1,388 @@
+{
+  "meta": {
+    "translatedFrom": "NASA/JPL Eyes on the Solar System 官方 descriptions/<id>.json 的 description.blurb 字段",
+    "policy": "只译文字；数字、日期、距离、单位、<a> 标记与 ##占位符## 一律保持原样。中文为忠实转译，不补充官方未给出的数据。",
+    "collectedAt": "2026-10-11",
+    "srcPrefix": "https://eyes.nasa.gov/apps/solar-system/descriptions/"
+  },
+  "bodies": [
+    {
+      "id": "sun",
+      "zh": "太阳",
+      "cat": "恒星",
+      "en": "The Sun—the heart of our solar system—is a yellow dwarf star, a hot ball of glowing gases.",
+      "zhl": "太阳是太阳系的心脏，是一颗黄色矮星——一团炽热发光的气体球。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sun.json"
+    },
+    {
+      "id": "mercury",
+      "zh": "水星",
+      "cat": "行星",
+      "en": "The smallest planet in our solar system and nearest to the Sun, Mercury is only slightly larger than Earth's Moon.",
+      "zhl": "水星是太阳系中最小的行星，也是距离太阳最近的行星，其体积只比月球略大一点。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/mercury.json"
+    },
+    {
+      "id": "venus",
+      "zh": "金星",
+      "cat": "行星",
+      "en": "Similar in size and structure to Earth, Venus has been called Earth's twin. These are not identical twins, however – there are radical differences between the two worlds.",
+      "zhl": "金星在大小和结构上与地球相似，常被称为地球的孪生兄弟。不过它们并非同卵双胞胎——这两个世界之间存在根本差异。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/venus.json"
+    },
+    {
+      "id": "earth",
+      "zh": "地球",
+      "cat": "行星",
+      "en": "Earth—our home planet—is the only place we know of so far that’s inhabited by living things. It's also the only planet in our solar system with liquid water on the surface.",
+      "zhl": "地球是我们的家园，也是目前已知唯一存在生命的场所。它还是太阳系中唯一表面存在液态水的行星。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/earth.json"
+    },
+    {
+      "id": "mars",
+      "zh": "火星",
+      "cat": "行星",
+      "en": "The fourth planet from the Sun, Mars is a dusty, cold, desert world with a very thin atmosphere.",
+      "zhl": "火星是距离太阳第四远的行星，是一个多尘、寒冷、如同荒漠的世界，大气层极为稀薄。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/mars.json"
+    },
+    {
+      "id": "jupiter",
+      "zh": "木星",
+      "cat": "行星",
+      "en": "Jupiter is the fifth planet from our Sun and is, by far, the largest planet in the solar system – more than twice as massive as all the other planets combined.",
+      "zhl": "木星是距离太阳第五远的行星，也是太阳系中当之无愧的最大行星——其质量超过其余所有行星总和的两倍。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/jupiter.json"
+    },
+    {
+      "id": "saturn",
+      "zh": "土星",
+      "cat": "行星",
+      "en": "Saturn is the sixth planet from the Sun and the second largest planet in our solar system. Adorned with thousands of beautiful ringlets, Saturn is unique among the planets. It is not the only planet to have rings—made of chunks of ice and rock—but none are as spectacular or as complicated as Saturn's. Like fellow gas giant Jupiter, Saturn is a massive ball made mostly of hydrogen and helium.",
+      "zhl": "土星是距离太阳第六远的行星，也是太阳系中第二大的行星。上千条美丽的细环环绕着它，这使它在行星中独一无二。拥有环的行星并不只有土星——这些环由冰块和岩石碎块构成——但没有哪一颗行星的环像土星那样壮观、那样复杂。与同为气态巨行星的木星一样，土星是一个主要由氢和氦构成的巨大球体。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/saturn.json"
+    },
+    {
+      "id": "uranus",
+      "zh": "天王星",
+      "cat": "行星",
+      "en": "The seventh planet from the Sun with the third largest diameter in our solar system, Uranus is very cold and windy.",
+      "zhl": "天王星是距离太阳第七远的行星，在太阳系中直径位列第三，表面极为寒冷且大风肆虐。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/uranus.json"
+    },
+    {
+      "id": "neptune",
+      "zh": "海王星",
+      "cat": "行星",
+      "en": "Dark, cold and whipped by supersonic winds, ice giant Neptune is the eighth and most distant planet in our solar system.",
+      "zhl": "黑暗、寒冷，并被超声速风反复鞭挞——冰质巨行星海王星是太阳系中第八颗、也是距离最远的行星。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/neptune.json"
+    },
+    {
+      "id": "134340_pluto",
+      "zh": "冥王星",
+      "cat": "矮行星",
+      "en": "Pluto – which is smaller than Earth’s Moon – has a heart-shaped glacier that’s the size of Texas and Oklahoma. This fascinating dwarf planet has blue skies, spinning moons, mountains as high as the Rockies, and it snows – but the snow is red.",
+      "zhl": "冥王星比月球还小，却拥有一条心形冰川，面积相当于得克萨斯州与俄克拉荷马州之和。这颗迷人的矮行星有着蓝色的天空、旋转的卫星、与落基山脉相当的高山，还会下雪——只不过雪是红色的。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/134340_pluto.json"
+    },
+    {
+      "id": "1_ceres",
+      "zh": "谷神星",
+      "cat": "矮行星",
+      "en": "Dwarf planet Ceres is the largest object in the asteroid belt between Mars and Jupiter and the only dwarf planet located in the inner solar system.",
+      "zhl": "矮行星谷神星是火星与木星之间小行星带中最大的天体，也是唯一位于太阳系内侧的矮行星。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/1_ceres.json"
+    },
+    {
+      "id": "moon",
+      "zh": "月球",
+      "cat": "卫星",
+      "en": "Earth's Moon is the only place beyond Earth where humans have set foot.",
+      "zhl": "月球是地球之外唯一有人类踏上过足迹的地方。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/moon.json"
+    },
+    {
+      "id": "io",
+      "zh": "木卫一",
+      "cat": "卫星",
+      "en": "Jupiter's moon Io is the most volcanically active world in the Solar System, with hundreds of volcanoes, some erupting lava fountains dozens of miles (or kilometers) high.",
+      "zhl": "木卫一是太阳系中火山活动最活跃的天体，拥有数百座火山，其中一些喷发的熔岩泉高达数十英里（或数十公里）。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/io.json"
+    },
+    {
+      "id": "europa",
+      "zh": "木卫二",
+      "cat": "卫星",
+      "en": "Europa may be the most promising place in our solar system to find present-day environments suitable for some form of life beyond Earth.",
+      "zhl": "木卫二可能是太阳系中最有希望找到当今存在、适合地外某种生命形式的环境的地方。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/europa.json"
+    },
+    {
+      "id": "ganymede",
+      "zh": "木卫三",
+      "cat": "卫星",
+      "en": "Jupiter's moon Ganymede is the largest moon in our solar system and the only moon with its own magnetic field.",
+      "zhl": "木卫三是太阳系中最大的卫星，也是唯一拥有自身磁场的卫星。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/ganymede.json"
+    },
+    {
+      "id": "callisto",
+      "zh": "木卫四",
+      "cat": "卫星",
+      "en": "Callisto is Jupiter’s second largest moon and the third largest moon in our solar system.",
+      "zhl": "木卫四是木星的第二大卫星，也是太阳系中第三大的卫星。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/callisto.json"
+    },
+    {
+      "id": "titan",
+      "zh": "土卫六",
+      "cat": "卫星",
+      "en": "Saturn’s largest moon Titan is an extraordinary and exceptional world.",
+      "zhl": "土卫六是土星最大的卫星，是一个非凡而独特的世界。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/titan.json"
+    },
+    {
+      "id": "enceladus",
+      "zh": "土卫二",
+      "cat": "卫星",
+      "en": "One of Saturn's most surprising moons, Enceladus has altered views about where life might exist.",
+      "zhl": "土卫二是土星最令人意外的卫星之一，它改变了人们关于生命可能存在于何处的看法。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/enceladus.json"
+    },
+    {
+      "id": "triton",
+      "zh": "海卫一",
+      "cat": "卫星",
+      "en": "Triton is the largest of Neptune's [##moon_count##] moons. It is unusual because it is the only large moon in our solar system that orbits in the opposite direction of its planet's rotation―a retrograde orbit.",
+      "zhl": "海卫一是海王星 [##moon_count##] 颗卫星中最大的一颗。它的特别之处在于，它是太阳系中唯一一颗绕行方向与行星自转方向相反的大型卫星——即逆行轨道。",
+      "note": "##moon_count## 是站点运行时替换的模板占位符，此处按原样保留，不做数字填充。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/triton.json"
+    },
+    {
+      "id": "charon",
+      "zh": "冥卫一",
+      "cat": "卫星",
+      "en": "At half the size of Pluto, Charon is the largest of Pluto's moons and the largest known satellite relative to its parent body.",
+      "zhl": "冥卫一的尺寸约为冥王星的一半，是冥王星最大的卫星，也是已知相对于其母天体比例最大的卫星。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/charon.json"
+    },
+    {
+      "id": "16_psyche",
+      "zh": "灵神星",
+      "cat": "小行星",
+      "en": "Psyche is one of the largest asteroids in the solar system, and is mostly made of metal.",
+      "zhl": "灵神星是太阳系中最大的小行星之一，主要由金属构成。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/16_psyche.json"
+    },
+    {
+      "id": "101955_bennu",
+      "zh": "贝努小行星",
+      "cat": "小行星",
+      "en": "An ancient relic of our solar system’s early days, Bennu has seen more than 4.5 billion years of history. Scientists think that within 10 million years of our solar system’s formation, Bennu’s present-day composition was already established.",
+      "zhl": "贝努是太阳系早期留下的古老遗存，已经历了 45 亿多年的历史。科学家认为，在太阳系形成后的 1000 万年之内，贝努如今的物质组成就已经确定。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/101955_bennu.json"
+    },
+    {
+      "id": "milky_way",
+      "zh": "银河系",
+      "cat": "星系",
+      "en": "",
+      "zhl": "官方未提供该条目的简介文本，此处不作转述。",
+      "note": "无官方英文原文，故不提供中文转述。",
+      "src": null
+    },
+    {
+      "id": "136199_eris",
+      "zh": "阋神星",
+      "cat": "Dwarf Planet",
+      "en": "Eris is one of the largest known dwarf planets in our solar system. It's about the same size as Pluto, but is three times farther from the Sun.",
+      "zhl": "阋神星是太阳系中已知最大的矮行星之一。它的体积与冥王星相仿，但距离太阳是冥王星的三倍。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/136199_eris.json"
+    },
+    {
+      "id": "136108_haumea",
+      "zh": "妊神星",
+      "cat": "Dwarf Planet",
+      "en": "Located in the Kuiper Belt beyond Neptune’s orbit, the dwarf planet Haumea is an oval-shaped object about the same size as Pluto.",
+      "zhl": "妊神星这颗矮行星位于海王星轨道之外的柯伊伯带，是一个椭球形天体，大小与冥王星相仿。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/136108_haumea.json"
+    },
+    {
+      "id": "136472_makemake",
+      "zh": "鸟神星",
+      "cat": "Dwarf Planet",
+      "en": "Along with fellow dwarf planets Pluto, Eris and Haumea, Makemake is located in the Kuiper Belt, a region outside the orbit of Neptune.",
+      "zhl": "鸟神星与冥王星、阋神星、妊神星这几颗矮行星一样，位于海王星轨道之外的柯伊伯带区域。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/136472_makemake.json"
+    },
+    {
+      "id": "90377_sedna",
+      "zh": "塞德娜",
+      "cat": "Dwarf Planet",
+      "en": "Sedna is a possible dwarf planet well beyond the orbit of Neptune. It has an exceptionally long and elongated orbit, taking approximately 11,400 years to complete.",
+      "zhl": "塞德娜是一颗可能属于矮行星的天体，位于海王星轨道之外极远处。它的轨道极为细长，绕太阳一周约需 11,400 年。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/90377_sedna.json"
+    },
+    {
+      "id": "phobos",
+      "zh": "火卫一",
+      "cat": "Moon",
+      "en": "Phobos is the larger of Mars' two moons. It orbits Mars three times a day, and is so close to the planet's surface that in some locations on Mars it cannot always be seen.",
+      "zhl": "火卫一是火星两颗卫星中较大的一颗。它每天绕火星运行三圈，且距火星表面极近，以致在火星上某些位置并不能始终看到它。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/phobos.json"
+    },
+    {
+      "id": "deimos",
+      "zh": "火卫二",
+      "cat": "Moon",
+      "en": "Deimos is the smaller of Mars' two moons. Being only 9 by 7 by 6.8 miles in size (15 by 12 by 11 kilometers), Deimos whirls around Mars every 30 hours.",
+      "zhl": "火卫二是火星两颗卫星中较小的一颗。它的尺寸仅约 9 × 7 × 6.8 英里（15 × 12 × 11 公里），每 30 小时环绕火星一周。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/deimos.json"
+    },
+    {
+      "id": "iapetus",
+      "zh": "土卫八",
+      "cat": "Moon",
+      "en": "Iapetus, the third largest moon of Saturn, is known for having a bright half and a dark half, with the leading hemisphere being dark.",
+      "zhl": "土卫八是土星第三大的卫星，以一半明亮、一半黑暗著称，其前导半球为暗色。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/iapetus.json"
+    },
+    {
+      "id": "rhea",
+      "zh": "土卫五",
+      "cat": "Moon",
+      "en": "Rhea is the second largest moon of Saturn",
+      "zhl": "土卫五是土星第二大的卫星。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/rhea.json"
+    },
+    {
+      "id": "dione",
+      "zh": "土卫四",
+      "cat": "Moon",
+      "en": "Dione is a small moon orbiting Saturn every 2.7 days at a distance roughly the same as our moon orbits around the Earth.",
+      "zhl": "土卫四是一颗较小的卫星，每 2.7 天环绕土星一周，其轨道距离与月球绕地球的距离大致相当。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/dione.json"
+    },
+    {
+      "id": "tethys",
+      "zh": "土卫三",
+      "cat": "Moon",
+      "en": "Tethys is Saturn's fifth largest moon.",
+      "zhl": "土卫三是土星第五大的卫星。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/tethys.json"
+    },
+    {
+      "id": "mimas",
+      "zh": "土卫一",
+      "cat": "Moon",
+      "en": "Crater-covered Mimas is the smallest and innermost of Saturn's major moons.",
+      "zhl": "布满撞击坑的土卫一是土星主要卫星中最小、也是最靠近土星的一颗。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/mimas.json"
+    },
+    {
+      "id": "miranda",
+      "zh": "天卫五",
+      "cat": "Moon",
+      "en": "Miranda, a moon of Uranus, looks like it was pieced together from parts that didn't quite merge properly.",
+      "zhl": "天卫五是天王星的一颗卫星，看起来像是由一些没能完全融合的部分拼凑而成。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/miranda.json"
+    },
+    {
+      "id": "titania",
+      "zh": "天卫三",
+      "cat": "Moon",
+      "en": "Titania is Uranus' largest moon. Images taken by Voyager 2 almost 200 years after Titania's discovery revealed signs that the moon was geologically active.",
+      "zhl": "天卫三是天王星最大的卫星。旅行者 2 号在天卫三被发现近 200 年后拍摄的图像显示，这颗卫星曾有过地质活动。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/titania.json"
+    },
+    {
+      "id": "oberon",
+      "zh": "天卫四",
+      "cat": "Moon",
+      "en": "Oberon is the second largest moon of Uranus.",
+      "zhl": "天卫四是天王星第二大的卫星。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/oberon.json"
+    },
+    {
+      "id": "ariel",
+      "zh": "天卫一",
+      "cat": "Moon",
+      "en": "Ariel is a moon of Uranus.",
+      "zhl": "天卫一是天王星的一颗卫星。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/ariel.json"
+    },
+    {
+      "id": "umbriel",
+      "zh": "天卫二",
+      "cat": "Moon",
+      "en": "Umbriel is the darkest of Uranus' largest moons. It reflects only 16 percent of the light that strikes its surface, a feature similar to the highland areas of Earth's Moon.",
+      "zhl": "天卫二在天王星的大型卫星中最为黑暗，它只反射照射到其表面光线的 16%，这一特征与月球的高地区域相似。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/umbriel.json"
+    },
+    {
+      "id": "4_vesta",
+      "zh": "灶神星",
+      "cat": "Asteroid",
+      "en": "Vesta is one of the largest objects in the asteroid belt, and was visited for over a year by NASA's Dawn Spacecraft.",
+      "zhl": "灶神星是小行星带中最大的天体之一，NASA 的黎明号航天器曾对其探测超过一年。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/4_vesta.json"
+    },
+    {
+      "id": "2_pallas",
+      "zh": "智神星",
+      "cat": "Asteroid",
+      "en": "2 Pallas is the second asteroid to have been discovered, after 1 Ceres.",
+      "zhl": "智神星是继谷神星之后第二颗被发现的小行星。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/2_pallas.json"
+    },
+    {
+      "id": "162173_ryugu",
+      "zh": "龙宫小行星",
+      "cat": "Asteroid",
+      "en": "Ryugu is an asteroid whose orbit could bring it very near to Earth. It was visited by the Hayabusa2 mission in 2018, where it sampled the surface and returned the asteroid material to Earth in December of 2020.",
+      "zhl": "龙宫是一颗轨道可能极为接近地球的小行星。隼鸟 2 号任务于 2018 年造访它并采集其表面样本，于 2020 年 12 月将小行星物质送回地球。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/162173_ryugu.json"
+    },
+    {
+      "id": "486958_arrokoth",
+      "zh": "阿罗科思",
+      "cat": "Asteroid",
+      "en": "The small Kuiper Belt object officially known as Arrokoth is the most distant and most primitive object ever explored by a spacecraft.",
+      "zhl": "这颗小型柯伊伯带天体的正式名称为阿罗科思（Arrokoth），是航天器迄今探测过的距离最远、也最原始的天体。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/486958_arrokoth.json"
+    },
+    {
+      "id": "65803_didymos",
+      "zh": "迪迪莫斯",
+      "cat": "Asteroid",
+      "en": "65803 Didymos is a sub-kilometer asteroid classified as both a potentially hazardous asteroid and a near-Earth object of both the Apollo and Amor group.",
+      "zhl": "迪迪莫斯是一颗直径不足一公里的小行星，同时被归类为潜在威胁小行星，以及阿波罗群与阿莫尔群的近地天体。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/65803_didymos.json"
+    },
+    {
+      "id": "dimorphos",
+      "zh": "迪莫弗斯",
+      "cat": "Moon",
+      "en": "Dimorphos is an asteroid that is part of a binary system with the larger asteroid Didymos, and has an orbital period of 11.9 hours.",
+      "zhl": "迪莫弗斯是一颗与较大小行星迪迪莫斯组成双星系统的小行星，轨道周期为 11.9 小时。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/dimorphos.json"
+    },
+    {
+      "id": "1p_halley",
+      "zh": "哈雷彗星",
+      "cat": "Comet",
+      "en": "Halley's Comet or Comet Halley, officially designated 1P/Halley, is a short-period comet visible from Earth every 75–76 years. Halley is the only known short-period comet that is regularly visible to the naked eye from Earth, and the only naked-eye comet that can appear twice in a human lifetime.",
+      "zhl": "哈雷彗星（Comet Halley），正式编号 1P/Halley，是一颗短周期彗星，每 75–76 年可从地球观测到一次。哈雷彗星是已知唯一一颗能定期以肉眼从地球看到的短周期彗星，也是唯一一颗能在人一生中出现的肉眼可见彗星。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/1p_halley.json"
+    },
+    {
+      "id": "67p_churyumov_gerasimenko",
+      "zh": "丘留莫夫－格拉西缅科彗星",
+      "cat": "Comet",
+      "en": "Comet 67P/ Churyumov-Gerasimenko made history as the first comet to be orbited and landed upon by robots from Earth.",
+      "zhl": "67P/丘留莫夫－格拉西缅科彗星创造了历史——它是第一颗被来自地球的航天器环绕并着陆的彗星。",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/67p_churyumov_gerasimenko.json"
+    }
+  ]
+}

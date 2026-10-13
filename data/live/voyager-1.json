@@ -1,0 +1,36 @@
+{
+  "meta": {
+    "asOf": "2026-10-12T00:00:00Z",
+    "julianDateUT": "2461325.500000000",
+    "source": "NASA/JPL Solar System Dynamics Horizons API",
+    "sourceUrl": "https://ssd.jpl.nasa.gov/api/horizons.api",
+    "horizonsCommand": "-31",
+    "horizonsTargetLine": "Voyager 1 Spacecraft (interplanetary) / (Sun)     -31",
+    "observer": "500@399 (Earth geocenter)",
+    "quantities": "19 (target range and range rate)",
+    "retrievedAt": "2026-10-12",
+    "provenance": "r_AU 与 range rate 为 Horizons 原样返回值；km / 光时由 r_AU 乘以定义常数换算，见 derived。",
+    "constants": { "auKm": 149597870.7, "cKmS": 299792.458 },
+    "refresh": "由 tools/fetch-ephemeris.mjs 生成；Horizons 不提供跨域头，静态站无法在浏览器里直接查询，只能在构建期或定时任务中抓取。"
+  },
+  "raw": {
+    "rangeAU": 172.0146366300,
+    "rangeRateKmS": 16.8816483
+  },
+  "derived": {
+    "rangeKm": 25733023369,
+    "rangeKmText": "约 257.33 亿公里",
+    "oneWayLightTimeS": 85836,
+    "oneWayLightTimeText": "23 小时 50 分 36 秒",
+    "roundTripLightTimeText": "47 小时 41 分 12 秒",
+    "rangeAuPerYear": 3.561,
+    "kmPerSecond": 16.88
+  },
+  "context": {
+    "launchDate": "1977-09-05",
+    "launchDateText": "1977 年 9 月 5 日",
+    "operatingSince": 49,
+    "interstellarSince": "2012-08",
+    "note": "1977 年发射，2012 年 8 月进入星际空间，至今仍是距离地球最远的人造物体。"
+  }
+}

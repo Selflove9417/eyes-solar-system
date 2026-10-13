@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>航天器与任务介绍 · 太阳系中文探索</title>
+<meta name="description" content="NASA 行星探测任务的中文介绍，内容译自 NASA/JPL 官方 descriptions 数据并逐条标注来源，可一键进入官方 3D 视图。">
+<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<main class="wrap">
+  <h1>航天器与任务介绍</h1>
+  <p class="lede">官方实体库共有 169 个航天器条目。本页收录已核对官方原文的重点任务；发射日期、距离与纪录数字一律照原文保留。</p>
+  <div class="toolbar">
+    <input type="search" id="filter" placeholder="按任务名、代号或关键词筛选…" aria-label="筛选任务">
+    <span id="count" style="color:var(--fg-dim);font-size:13.5px"></span>
+  </div>
+  <div class="grid cols-3" id="list"></div>
+  <p style="margin-top:26px;color:var(--fg-dim);font-size:13.5px">
+    未收录的航天器（如 <code>TDRS-11</code>、<code>CYGNSS 5</code>、<code>GRACE-FO2</code> 等任务代号）在模拟器中保留英文，
+    完整名单见<a href="glossary.html">中英术语对照</a>。
+  </p>
+</main>
+<script type="module">
+import { renderChrome, getData, el, statusBadge } from './assets/js/site.js';
+renderChrome('missions.html');
+const { missions, names } = await getData();
+const list = document.getElementById('list');
+const count = document.getElementById('count');
+
+function render(q = '') {
+  const needle = q.trim().toLowerCase();
+  const hits = missions.missions.filter((m) =>
+    !needle || [m.zh, m.en, m.id].join(' ').toLowerCase().includes(needle));
+  count.textContent = `显示 ${hits.length} / ${missions.missions.length} 条`;
+  list.replaceChildren(...hits.map((m) => {
+    const entry = names.entities[m.id];
+    return el('article', { class: 'card' },
+      el('h3', {}, m.zh, entry ? statusBadge(entry.status) : null),
+      el('div', { class: 'en' }, m.en),
+      el('p', { style: 'margin-top:8px' }, m.zhBlurb || '官方未提供该条目的简介文本。'),
+      m.src
+        ? el('details', { style: 'margin-top:8px' },
+            el('summary', { style: 'font-size:12.5px;color:var(--fg-dim);cursor:pointer' }, '英文原文'),
+            el('p', { style: 'font-size:12.5px;color:var(--fg-dim)' }, m.enBlurb))
+        : null,
+      el('p', { style: 'margin-top:8px' },
+        m.src ? el('a', { href: m.src, target: '_blank', rel: 'noopener', style: 'font-size:12.5px' }, '来源 ↗ ') : null,
+        el('a', { href: `explore.html#${m.id}`, style: 'font-size:13.5px' }, ' 在 3D 探索中打开 →')),
+    );
+  }));
+}
+document.getElementById('filter').addEventListener('input', (e) => render(e.target.value));
+render();
+</script>
+</body>
+</html>

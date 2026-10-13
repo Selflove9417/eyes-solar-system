@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>iframe load A/B</title>
+<style>
+  body { margin:0; background:#0a0d14; color:#eee; font:13px system-ui; }
+  .row { display:flex; gap:6px; }
+  .cell { flex:1; }
+  iframe { width:100%; height:640px; border:1px solid #333; display:block; }
+  h2 { font-size:13px; margin:6px; font-weight:600; }
+</style>
+</head>
+<body>
+<div class="row">
+  <div class="cell">
+    <h2>A · #/mars 裸 URL（无参数）</h2>
+    <iframe id="a" src="https://eyes.nasa.gov/apps/solar-system/#/mars"></iframe>
+  </div>
+  <div class="cell">
+    <h2>B · #/mars?featured=false&amp;time=…&amp;rate=3600</h2>
+    <iframe id="b" src="https://eyes.nasa.gov/apps/solar-system/#/mars?time=2026-10-01T00:00:00.000Z&rate=3600&featured=false"></iframe>
+  </div>
+</div>
+</body>
+</html>

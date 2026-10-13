@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>土星与环系奇观 · 太阳系中文探索</title>
+<meta name="description" content="土星壮丽光环、卡西尼号探测器、土卫六泰坦与土卫二地下冰海。基于 NASA/JPL Eyes 官方 3D 动力学渲染。">
+<link rel="stylesheet" href="assets/css/main.css">
+<style>
+  .saturn-views {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 18px 0;
+  }
+  .saturn-views button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid var(--line);
+    color: var(--fg);
+    font: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .saturn-views button:hover {
+    border-color: #facc15;
+    color: #fff;
+    background: rgba(30, 41, 59, 0.85);
+  }
+  .saturn-views button[aria-pressed="true"] {
+    background: linear-gradient(135deg, rgba(202, 138, 4, 0.85), rgba(250, 204, 21, 0.95));
+    border-color: #facc15;
+    color: #0f172a;
+    font-weight: 600;
+    box-shadow: 0 4px 14px rgba(250, 204, 21, 0.35);
+  }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="hero">
+    <div class="hero-tag" style="background:rgba(250,204,21,0.12);border-color:rgba(250,204,21,0.3);color:#facc15">
+      🪐 太阳系珠宝 · 最壮丽的气态巨行星环系
+    </div>
+    <h1 style="background:linear-gradient(135deg, #ffffff 20%, #fef08a 60%, #eab308 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">
+      土星：光环之冠与神秘冰海
+    </h1>
+    <p class="lede">
+      太阳系中最令人叹为观止的奇景：宽达数十万公里却薄如蝉翼的冰质光环、拥有氮气大气层与甲烷湖泊的土卫六，以及南极喷射百公里水冰喷泉的土卫二。
+    </p>
+  </div>
+
+  <section class="big" id="stats">
+    <div class="stat" style="border-top-color:#facc15">
+      <div class="n" style="color:#facc15">14.3<small>亿公里</small></div>
+      <div class="k">距太阳平均距离（约 9.58 AU，光芒到达需要约 1 小时 20 分）</div>
+    </div>
+    <div class="stat cyan">
+      <div class="n">146<small>颗</small></div>
+      <div class="k">已知天然卫星数量（太阳系无可争议的“卫星之王”）</div>
+    </div>
+    <div class="stat accent">
+      <div class="n">约 10 ~ 100<small>米</small></div>
+      <div class="k">光环平均厚度（横跨 28 万公里，但在比例上比一张纸还要薄万倍）</div>
+    </div>
+    <div class="stat purple">
+      <div class="n">0.687<small>g/cm³</small></div>
+      <div class="k">平均物质密度（太阳系唯一密度小于水的行星，理论上能浮在水面）</div>
+    </div>
+  </section>
+
+  <h2>🛰️ 3D 环系与卫星多维视角</h2>
+  <div class="saturn-views" id="view-buttons">
+    <button type="button" data-route="saturn" aria-pressed="true">🪐 土星本体与光环全景</button>
+    <button type="button" data-route="sc_cassini">🛰️ 卡西尼号探测器 (Cassini)</button>
+    <button type="button" data-route="titan">🟠 土卫六泰坦 (Titan 浓厚大气卫星)</button>
+    <button type="button" data-route="enceladus">❄️ 土卫二恩克拉多斯 (Enceladus 冰泉世界)</button>
+    <button type="button" data-route="iapetus">🌓 土卫八伊阿珀托斯 (阴阳脸双色卫星)</button>
+  </div>
+
+  <div class="stage">
+    <iframe id="eyes" title="土星及其卫星在 NASA Eyes 官方 3D 太阳系中的实时位置" allow="fullscreen"></iframe>
+    <div class="stage-bar">
+      <span>画面由 NASA/JPL 官方服务实时渲染。当前视线：<strong id="stage-cur">土星全景 (Saturn)</strong></span>
+      <a id="raw" href="https://eyes.nasa.gov/apps/solar-system/#/saturn" target="_blank" rel="noopener">在官方站点中打开 ↗</a>
+    </div>
+  </div>
+
+  <h2>🧊 极薄而璀璨的光环系统</h2>
+  <div class="grid cols-3">
+    <article class="card">
+      <h3>99% 纯净水冰构成</h3>
+      <p>土星光环由数以万亿计的冰块和碎石组成，小如尘埃微粒，大至数米巨石。它们以不同的速度环绕土星赤道飞驰，在阳光照射下反射出璀璨的光彩。</p>
+    </article>
+    <article class="card">
+      <h3>极度精细的缝隙结构</h3>
+      <p>光环被分为 A、B、C、D、E、F、G 等多组，其中著名的“卡西尼环缝”宽达 4,800 公里，是由土卫一（Mimas）的引力轨道共振清理出来的空旷地带。</p>
+    </article>
+    <article class="card">
+      <h3>正在消失的光环雨</h3>
+      <p>卡西尼号的探测表明，在引力和磁场的作用下，光环中的水冰正在化作“环雨”流入土星大气层。据推算，这些宏伟的光环可能在 1~3 亿年后彻底消散。</p>
+    </article>
+  </div>
+
+  <h2>🌊 孕育生命的潜在摇篮</h2>
+  <div class="grid cols-2">
+    <article class="card">
+      <h3>土卫六“泰坦” (Titan) · 外星液态海洋</h3>
+      <p>比水星还大的超级卫星，是除地球外太阳系唯一表面拥有稳定液态循环的天体。不过泰坦的“雨水”和“海洋”并非液态水，而是零下 179 °C 的液态甲烷和乙烷。NASA 计划于 2028 年发射“蜻蜓号”核动力旋翼无人机前往泰坦展开跨区域空中探索。</p>
+    </article>
+    <article class="card">
+      <h3>土卫二“恩克拉多斯” (Enceladus) · 地下温暖咸海</h3>
+      <p>这颗表面被纯白反光冰层覆盖的冰雪卫星，南极存在由潮汐加热驱动的“虎斑纹”裂隙。卡西尼号直接穿过了其喷射而出的冰羽流，探测到了水蒸气、盐分、二氧化碳和简单的有机分子，证实其冰壳下方拥有一个具备热液活动的全球咸水海洋。</p>
+    </article>
+  </div>
+
+  <h2>🛰️ 卡西尼-惠更斯号：13 年壮丽史诗</h2>
+  <p>
+    1997 年发射、2004 年抵达土星系统的<strong>卡西尼-惠更斯号 (Cassini-Huygens)</strong> 是人类有史以来最雄心勃勃的深空探索任务之一。
+    它释放的惠更斯号着陆器成功穿透泰坦浓雾软着陆；2017 年 9 月 15 日，在燃料耗尽前夕，卡西尼号执行了英勇的“大结局 (Grand Finale)”——
+    22 次从光环与土星云顶之间的未知狭缝穿过，最终受控坠入土星大气层自毁焚化，永远化作土星的一部分，以保护脆弱的冰海卫星免遭地球微生物污染。
+  </p>
+
+  <h2>数据出处与署名</h2>
+  <p class="src">
+    3D 模型与物理动力学：<a href="https://eyes.nasa.gov/apps/solar-system/#/saturn" target="_blank" rel="noopener">NASA JPL Eyes on the Solar System</a>。<br>
+    任务数据：NASA Cassini-Huygens Mission / JPL Planetary Science Directorate / ESA / ASI。<br>
+    本页面为<strong>太阳系中文探索</strong>非官方深度科普特写。
+  </p>
+</main>
+
+<script type="module">
+import { renderChrome, embedUrl } from './assets/js/site.js';
+renderChrome('saturn.html');
+
+const views = {
+  saturn: { label: '土星全景 (Saturn)', route: 'saturn' },
+  sc_cassini: { label: '卡西尼号探测器 (Cassini)', route: 'sc_cassini' },
+  titan: { label: '土卫六泰坦 (Titan)', route: 'titan' },
+  enceladus: { label: '土卫二恩克拉多斯 (Enceladus)', route: 'enceladus' },
+  iapetus: { label: '土卫八伊阿珀托斯 (Iapetus)', route: 'iapetus' },
+};
+
+const frame = document.getElementById('eyes');
+const rawLink = document.getElementById('raw');
+const stageCur = document.getElementById('stage-cur');
+const buttons = document.querySelectorAll('#view-buttons button');
+
+function switchView(routeKey) {
+  const v = views[routeKey] || views.saturn;
+  const url = embedUrl({ route: v.route, featured: 'false', hd: 'true' });
+  frame.src = url;
+  rawLink.href = url;
+  stageCur.textContent = v.label;
+
+  buttons.forEach((b) => {
+    b.setAttribute('aria-pressed', String(b.getAttribute('data-route') === routeKey));
+  });
+}
+
+buttons.forEach((btn) => {
+  btn.addEventListener('click', () => switchView(btn.getAttribute('data-route')));
+});
+
+// Init with saturn
+switchView('saturn');
+</script>
+</body>
+</html>

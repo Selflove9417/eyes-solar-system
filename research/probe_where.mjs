@@ -1,0 +1,1 @@
+() => ({ href: location.href, title: document.title, labels: document.querySelectorAll(".pioneer-label-div").length, loading: !!document.getElementById("loading-screen"), bodyLen: document.body ? document.body.innerHTML.length : -1 })

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>中英术语对照 · 太阳系中文探索</title>
+<meta name="description" content="NASA Eyes 实体库与界面字符串的中英术语对照表，标明每条译名的依据等级与未汉化范围。">
+<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<main class="wrap">
+  <h1>中英术语对照</h1>
+  <p class="lede">翻译文本与页面逻辑完全分离：本表由 <code>data/names.zh.json</code> 与 <code>data/ui.zh.json</code> 驱动，站点与汉化扩展共用同一份数据。</p>
+
+  <div class="notice" id="coverage">统计加载中…</div>
+
+  <div class="chips" style="margin:16px 0">
+    <button class="chip" type="button" data-tab="entities" aria-pressed="true">实体名称</button>
+    <button class="chip" type="button" data-tab="ui" aria-pressed="false">界面字符串</button>
+    <button class="chip" type="button" data-tab="missing" aria-pressed="false">未收录条目（保留英文）</button>
+  </div>
+
+  <div id="pane-entities">
+    <div class="toolbar">
+      <input type="search" id="f-ent" placeholder="筛选实体：中文名 / 英文名 / id / 类别…" aria-label="筛选实体">
+      <select id="f-status" style="background:var(--bg-soft);border:1px solid var(--line);border-radius:999px;color:var(--fg);padding:8px 12px;font:inherit">
+        <option value="">全部译名等级</option>
+        <option value="std">规范译名</option>
+        <option value="common">通用译名</option>
+        <option value="code">代号保留</option>
+      </select>
+      <span id="c-ent" style="color:var(--fg-dim);font-size:13.5px"></span>
+    </div>
+    <table><thead><tr><th>中文</th><th>站点英文名</th><th>类别</th><th>id（稳定键名）</th><th>依据</th></tr></thead>
+    <tbody id="t-ent"></tbody></table>
+  </div>
+
+  <div id="pane-ui" hidden>
+    <div class="toolbar">
+      <input type="search" id="f-ui" placeholder="筛选界面字符串…" aria-label="筛选界面字符串">
+      <span id="c-ui" style="color:var(--fg-dim);font-size:13.5px"></span>
+    </div>
+    <table><thead><tr><th>站点原文</th><th>中文</th></tr></thead><tbody id="t-ui"></tbody></table>
+    <h2>不翻译的内容</h2>
+    <ul id="not-translated"></ul>
+  </div>
+
+  <div id="pane-missing" hidden>
+    <p style="color:var(--fg-dim)">以下条目存在于官方实体库，但本站未建立中文对照，在模拟器与官方站点中一律<strong style="color:var(--warn)">保留英文</strong>。</p>
+    <div class="toolbar">
+      <input type="search" id="f-mis" placeholder="筛选…" aria-label="筛选未收录条目">
+      <span id="c-mis" style="color:var(--fg-dim);font-size:13.5px"></span>
+    </div>
+    <table><thead><tr><th>英文名</th><th>类别</th><th>id</th></tr></thead><tbody id="t-mis"></tbody></table>
+  </div>
+</main>
+<script type="module">
+import { renderChrome, getData, el } from './assets/js/site.js';
+renderChrome('glossary.html');
+const { names, ui, entityById } = await getData();
+
+const covered = Object.keys(names.entities).length;
+const total = names.meta.totalEntities;
+const byStatus = Object.values(names.entities).reduce((a, e) => ((a[e.status] = (a[e.status] || 0) + 1), a), {});
+document.getElementById('coverage').innerHTML =
+  `官方实体库 <strong>${total}</strong> 条 · 已建立中文对照 <strong>${covered}</strong> 条（${(covered / total * 100).toFixed(1)}%）` +
+  ` · 规范译名 ${byStatus.std || 0} / 通用译名 ${byStatus.common || 0} / 代号保留 ${byStatus.code || 0}` +
+  ` · <strong style="color:#ff8f6b">未收录 ${total - covered} 条保留英文</strong><br>` +
+  `界面字符串 <strong>${Object.keys(ui.ui).length}</strong> 条已收录，全部来自加载完成页面的实测采集。` +
+  `英文名取自官方数据，规则为 <code>displayName || iauName</code>（与站点渲染标签逐条核对一致）。`;
+
+const tbody = (id) => document.getElementById(id);
+const LABEL = { std: '规范译名', common: '通用译名', code: '代号保留' };
+
+function renderEnt() {
+  const q = document.getElementById('f-ent').value.trim().toLowerCase();
+  const st = document.getElementById('f-status').value;
+  const rows = Object.entries(names.entities)
+    .filter(([, e]) => (!st || e.status === st) &&
+      (!q || [e.zh, e.en, e.cat].join(' ').toLowerCase().includes(q)))
+    .sort((a, b) => (a[1].cat || '').localeCompare(b[1].cat || '') || a[1].zh.localeCompare(b[1].zh, 'zh'));
+  tbody('t-ent').replaceChildren(...rows.map(([id, e]) => el('tr', {},
+    el('td', {}, e.zh), el('td', {}, e.en), el('td', {}, e.cat || ''),
+    el('td', { class: 'mono' }, id), el('td', {}, el('span', { class: 'badge ' + e.status }, LABEL[e.status] || e.status)))));
+  document.getElementById('c-ent').textContent = `显示 ${rows.length} / ${covered} 条`;
+}
+
+function renderUi() {
+  const q = document.getElementById('f-ui').value.trim().toLowerCase();
+  const rows = Object.entries(ui.ui)
+    .filter(([k, v]) => !q || (k + ' ' + v).toLowerCase().includes(q))
+    .sort((a, b) => a[0].localeCompare(b[0]));
+  tbody('t-ui').replaceChildren(...rows.map(([k, v]) =>
+    el('tr', {}, el('td', { class: 'mono' }, k), el('td', {}, v))));
+  document.getElementById('c-ui').textContent = `显示 ${rows.length} / ${Object.keys(ui.ui).length} 条`;
+  document.getElementById('not-translated').replaceChildren(
+    ...ui.meta.notTranslated.map((t) => el('li', {}, t)));
+}
+
+function renderMissing() {
+  const q = document.getElementById('f-mis').value.trim().toLowerCase();
+  const rows = [...entityById.values()]
+    .filter((e) => !names.entities[e.id])
+    .filter((e) => !q || [e.displayName || e.iauName, e.category, e.id].join(' ').toLowerCase().includes(q))
+    .sort((a, b) => (a.category || '').localeCompare(b.category || '') ||
+      (a.displayName || a.iauName || '').localeCompare(b.displayName || b.iauName || ''));
+  tbody('t-mis').replaceChildren(...rows.map((e) => el('tr', {},
+    el('td', {}, e.displayName || e.iauName || e.id),
+    el('td', {}, e.category || ''), el('td', { class: 'mono' }, e.id))));
+  document.getElementById('c-mis').textContent = `显示 ${rows.length} / ${[...entityById.values()].filter((e) => !names.entities[e.id]).length} 条`;
+}
+
+document.getElementById('f-ent').addEventListener('input', renderEnt);
+document.getElementById('f-status').addEventListener('change', renderEnt);
+document.getElementById('f-ui').addEventListener('input', renderUi);
+document.getElementById('f-mis').addEventListener('input', renderMissing);
+renderEnt(); renderUi(); renderMissing();
+
+const panes = { entities: 'pane-entities', ui: 'pane-ui', missing: 'pane-missing' };
+document.querySelectorAll('[data-tab]').forEach((btn) => btn.addEventListener('click', () => {
+  document.querySelectorAll('[data-tab]').forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+  for (const [k, id] of Object.entries(panes)) document.getElementById(id).hidden = k !== btn.dataset.tab;
+}));
+</script>
+</body>
+</html>

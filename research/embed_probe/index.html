@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>iframe embed feasibility probe</title>
+<style>
+  body { margin:0; font:14px/1.5 system-ui; background:#111; color:#eee; }
+  #box { width:100%; height:82vh; border:0; }
+  #log { padding:8px 12px; white-space:pre-wrap; font:12px/1.4 ui-monospace,Consolas,monospace; color:#9f9; max-height:16vh; overflow:auto; }
+</style>
+</head>
+<body>
+<iframe id="box" allow="fullscreen" src="https://eyes.nasa.gov/apps/solar-system/#/mars?time=2026-10-01T00:00:00.000Z&rate=3600&featured=false"></iframe>
+<div id="log">probing…</div>
+<script>
+const log = [];
+const push = (m) => { log.push(m); document.getElementById('log').textContent = log.join('\n'); };
+const frame = document.getElementById('box');
+frame.addEventListener('load', () => push('[load] iframe load event fired'));
+setTimeout(() => {
+  push('[t+55s] report');
+  push('iframe.src = ' + frame.src);
+  // 1. Can the parent read the inner document?
+  let domAccess;
+  try {
+    const d = frame.contentDocument;
+    domAccess = d ? 'ACCESSIBLE: ' + d.querySelectorAll('.pioneer-label-div').length + ' labels' : 'null (cross-origin blocked silently)';
+  } catch (e) {
+    domAccess = 'THREW: ' + e.name + ' ' + e.message;
+  }
+  push('contentDocument -> ' + domAccess);
+  let locAccess;
+  try { locAccess = 'ACCESSIBLE: ' + frame.contentWindow.location.href; }
+  catch (e) { locAccess = 'THREW: ' + e.name; }
+  push('contentWindow.location -> ' + locAccess);
+  // 2. Did it actually render? Read back what we can see via rect + internal canvas count is impossible cross-origin,
+  //    so use the browser's own paint timing through the frame's remote element.
+  const r = frame.getBoundingClientRect();
+  push('iframe rect = ' + Math.round(r.width) + 'x' + Math.round(r.height));
+  push('crossOriginIsolated = ' + self.crossOriginIsolated);
+  document.title = 'PROBE_DONE';
+}, 55000);
+</script>
+</body>
+</html>

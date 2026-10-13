@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>火星探索特写 · 红色星球与漫游车 · 太阳系中文探索</title>
+<meta name="description" content="火星全貌、地质奇观与毅力号、好奇号火星车 3D 实时联动。基于 NASA/JPL Eyes 官方 3D 动力学渲染。">
+<link rel="stylesheet" href="assets/css/main.css">
+<style>
+  .mars-views {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 18px 0;
+  }
+  .mars-views button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid var(--line);
+    color: var(--fg);
+    font: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .mars-views button:hover {
+    border-color: var(--accent-2);
+    color: #fff;
+    background: rgba(30, 41, 59, 0.85);
+  }
+  .mars-views button[aria-pressed="true"] {
+    background: linear-gradient(135deg, rgba(234, 88, 12, 0.85), rgba(251, 146, 60, 0.95));
+    border-color: var(--accent-2);
+    color: #fff;
+    box-shadow: 0 4px 14px var(--accent-2-glow);
+  }
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin: 20px 0;
+  }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="hero">
+    <div class="hero-tag" style="background:rgba(251,146,60,0.12);border-color:rgba(251,146,60,0.3);color:var(--accent-2)">
+      🔴 太阳系第四行星 · 人类深空探索先锋
+    </div>
+    <h1 class="gradient-accent">火星：红色星球与漫游车先驱</h1>
+    <p class="lede">
+      拥有太阳系最高的火山与最宏伟的裂谷，也是人类搜寻地外古代生命痕迹与未来星际移民的第一站。
+    </p>
+  </div>
+
+  <section class="big" id="stats">
+    <div class="stat accent">
+      <div class="n">0.55 ~ 4.0<small>亿公里</small></div>
+      <div class="k">火星至地球距离变动范围（近日点到远日点）</div>
+    </div>
+    <div class="stat">
+      <div class="n">3 ~ 22<small>分钟</small></div>
+      <div class="k">单程无线电光时（地球与火星双向延迟可达 44 分钟）</div>
+    </div>
+    <div class="stat cyan">
+      <div class="n">24<small>小时</small> 37<small>分</small></div>
+      <div class="k">火星自转周期（一个火星太阳日 Sol，仅比地球多 39 分钟）</div>
+    </div>
+    <div class="stat purple">
+      <div class="n">0.38<small>g</small></div>
+      <div class="k">地表重力（地球的约 38%，起跳高度约为地球的 2.6 倍）</div>
+    </div>
+  </section>
+
+  <h2>🛰️ 3D 实时视角联动</h2>
+  <p>点击下方快捷视角，无缝切换查看火星全貌、火星车在轨姿态或着陆区表面：</p>
+  <div class="mars-views" id="view-buttons">
+    <button type="button" data-route="mars" aria-pressed="true">🔴 火星全貌全景观览</button>
+    <button type="button" data-route="sc_mars_2020">🤖 毅力号火星车 (Perseverance)</button>
+    <button type="button" data-route="sc_mars_science_laboratory">🚜 好奇号火星车 (Curiosity)</button>
+    <button type="button" data-route="sc_mars_2020_landing_site">📍 耶泽罗陨石坑着陆点</button>
+    <button type="button" data-route="phobos">🥔 火卫一 (Phobos 形状不规则卫星)</button>
+  </div>
+
+  <div class="stage">
+    <iframe id="eyes" title="火星及火星车在 NASA Eyes 官方 3D 太阳系中的实时位置" allow="fullscreen"></iframe>
+    <div class="stage-bar">
+      <span>画面由 NASA/JPL 官方云端服务实时渲染。当前视线：<strong id="stage-cur">火星全景 (Mars)</strong></span>
+      <a id="raw" href="https://eyes.nasa.gov/apps/solar-system/#/mars" target="_blank" rel="noopener">在官方站点中全屏查看 ↗</a>
+    </div>
+  </div>
+
+  <h2>🌋 极限地貌与奇观</h2>
+  <div class="feature-grid">
+    <article class="card">
+      <h3>奥林匹斯山 (Olympus Mons)</h3>
+      <p>太阳系中已知最大的火山与最高山峰，高度达 21.9 公里（接近珠峰的 2.5 倍），基底宽达 600 公里，足以覆盖整个法国或中国华北平原。</p>
+    </article>
+    <article class="card">
+      <h3>水手号峡谷 (Valles Marineris)</h3>
+      <p>横贯火星赤道的超级裂谷系统，长逾 4000 公里，宽达 200 公里，最深处超 7 公里。如果放在地球，能从美国西海岸一直延伸到东海岸。</p>
+    </article>
+    <article class="card">
+      <h3>极地冰盖与干冰雪</h3>
+      <p>火星两极覆盖着由水冰和凝固二氧化碳（干冰）构成的永久冰盖。火星冬季极夜时，大气中多达 25~30% 的二氧化碳会直接冻结沉积在极冠上。</p>
+    </article>
+  </div>
+
+  <h2>🤖 正在执勤的火星特使</h2>
+  <div class="grid cols-3">
+    <article class="card">
+      <h3>毅力号火星车 <span class="badge std">2020年发射</span></h3>
+      <p>携带着 MOXIE 制氧实验仪与机智号无人直升机在耶泽罗撞击坑着陆，正钻探采集可能含有微生物古化石的岩芯样本，准备由未来的火星样本取回任务（MSR）带回地球。</p>
+    </article>
+    <article class="card">
+      <h3>好奇号火星车 <span class="badge std">2011年发射</span></h3>
+      <p>在盖尔撞击坑运行超过 12 年，证实火星古代曾存在流动淡水湖泊、中性水质和维持微生物生命所需的所有关键化学元素，彻底改写了火星演化史。</p>
+    </article>
+    <article class="card">
+      <h3>火星勘测轨道飞行器 (MRO)</h3>
+      <p>搭载超高分辨率 HiRISE 相机从轨道拍摄火星表面，精度可分辨地表小至餐盘大小的岩石，同时充当表面火星车与地球之间最关键的深空数据中继站。</p>
+    </article>
+  </div>
+
+  <h2>📐 地球与火星参数对比</h2>
+  <table>
+    <thead><tr><th>物理参数</th><th>地球 (Earth)</th><th>火星 (Mars)</th><th>对比差异</th></tr></thead>
+    <tbody>
+      <tr><td>赤道直径</td><td>12,756 km</td><td>6,792 km</td><td>火星约为地球的 53%（约一半大小）</td></tr>
+      <tr><td>公转轨道周期</td><td>365.25 天 (1.00 年)</td><td>687 地球日 (1.88 年)</td><td>火星的一年接近地球两倍长</td></tr>
+      <tr><td>表面大气压</td><td>101.3 kPa (1.0 bar)</td><td>约 0.6 ~ 0.8 kPa</td><td>火星大气极其稀薄，不足地球表面气压的 1%</td></tr>
+      <tr><td>大气主要成分</td><td>氮气 78% · 氧气 21%</td><td>二氧化碳 95.3% · 氮气 2.6%</td><td>无法供人类直接呼吸，温室效应极微弱</td></tr>
+      <tr><td>平均地表温度</td><td>约 +15 °C</td><td>约 -60 °C (冬夜最低 -140 °C)</td><td>极为寒冷干燥的行星荒漠</td></tr>
+      <tr><td>天然卫星数量</td><td>1 颗 (月球 Moon)</td><td>2 颗 (火卫一 Phobos, 火卫二 Deimos)</td><td>火星卫星均为捕获的小行星形态</td></tr>
+    </tbody>
+  </table>
+
+  <h2>数据出处与署名</h2>
+  <p class="src">
+    3D 模型与物理引擎：<a href="https://eyes.nasa.gov/apps/solar-system/#/mars" target="_blank" rel="noopener">NASA JPL Eyes on the Solar System</a>。<br>
+    天体与任务数据：NASA Mars Exploration Program / NASA Planetary Data System。<br>
+    本页面为<strong>太阳系中文探索</strong>非官方深度科普特写。
+  </p>
+</main>
+
+<script type="module">
+import { renderChrome, embedUrl } from './assets/js/site.js';
+renderChrome('mars.html');
+
+const views = {
+  mars: { label: '火星全景 (Mars)', route: 'mars' },
+  sc_mars_2020: { label: '毅力号火星车 (Perseverance)', route: 'sc_mars_2020' },
+  sc_mars_science_laboratory: { label: '好奇号火星车 (Curiosity)', route: 'sc_mars_science_laboratory' },
+  sc_mars_2020_landing_site: { label: '耶泽罗陨石坑着陆点', route: 'sc_mars_2020_landing_site' },
+  phobos: { label: '火卫一 (Phobos)', route: 'phobos' },
+};
+
+const frame = document.getElementById('eyes');
+const rawLink = document.getElementById('raw');
+const stageCur = document.getElementById('stage-cur');
+const buttons = document.querySelectorAll('#view-buttons button');
+
+function switchView(routeKey) {
+  const v = views[routeKey] || views.mars;
+  const url = embedUrl({ route: v.route, featured: 'false', hd: 'true' });
+  frame.src = url;
+  rawLink.href = url;
+  stageCur.textContent = v.label;
+
+  buttons.forEach((b) => {
+    b.setAttribute('aria-pressed', String(b.getAttribute('data-route') === routeKey));
+  });
+}
+
+buttons.forEach((btn) => {
+  btn.addEventListener('click', () => switchView(btn.getAttribute('data-route')));
+});
+
+// Init with mars
+switchView('mars');
+</script>
+</body>
+</html>

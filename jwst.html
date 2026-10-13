@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>詹姆斯·韦伯空间望远镜特写 · 深空之眼 · 太阳系中文探索</title>
+<meta name="description" content="詹姆斯·韦伯空间望远镜 (JWST) 核心参数、日地 L2 拉格朗日点晕轮轨道与 3D 展开姿态解析。">
+<link rel="stylesheet" href="assets/css/main.css">
+<style>
+  .jwst-specs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+    margin: 20px 0;
+  }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="hero">
+    <div class="hero-tag" style="background:rgba(192,132,252,0.12);border-color:rgba(192,132,252,0.3);color:var(--purple)">
+      🔭 人类史上最强太空望远镜 · 红外深空之眼
+    </div>
+    <h1 style="background:linear-gradient(135deg, #fef08a 0%, #fb923c 45%, #c084fc 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">
+      詹姆斯·韦伯空间望远镜 (JWST)
+    </h1>
+    <p class="lede">
+      驻守在距地球 150 万公里的日地拉格朗日 L2 点，透过金光闪耀的 6.5 米六边形主镜，穿透星际尘埃，捕捉 135 亿年前宇宙第一批星系的光芒。
+    </p>
+  </div>
+
+  <section class="big" id="stats">
+    <div class="stat purple">
+      <div class="n">150<small>万公里</small></div>
+      <div class="k">距地球距离（约地月距离的 4 倍，驻留在日地 L2 晕轮轨道）</div>
+    </div>
+    <div class="stat accent">
+      <div class="n">6.5<small>米</small></div>
+      <div class="k">主反射镜直径（由 18 块镀纯金超轻铍金属六边形子镜拼接）</div>
+    </div>
+    <div class="stat cyan">
+      <div class="n">&lt; -233<small>°C</small></div>
+      <div class="k">冷侧探测器工作温度（低于 40 K，MIRI 仪器借氦制冷剂冷至 7 K）</div>
+    </div>
+    <div class="stat">
+      <div class="n">21 × 14<small>米</small></div>
+      <div class="k">五层聚酰亚胺遮阳板（相当于一个标准网球场大小，隔绝太阳热量）</div>
+    </div>
+  </section>
+
+  <h2>🛰️ 3D 实时轨道与姿态展示</h2>
+  <div class="stage">
+    <iframe id="eyes" title="韦伯望远镜在 NASA Eyes 官方 3D 太阳系中的实时位置与姿态" allow="fullscreen"></iframe>
+    <div class="stage-bar">
+      <span>当前位置：<strong>詹姆斯·韦伯空间望远镜 (James Webb Space Telescope)</strong> · 日地 L2 晕轮轨道</span>
+      <a id="raw" href="https://eyes.nasa.gov/apps/solar-system/#/sc_jwst" target="_blank" rel="noopener">在官方站点中打开 ↗</a>
+    </div>
+  </div>
+
+  <h2>💎 颠覆天文学的四大科学神器</h2>
+  <div class="jwst-specs">
+    <article class="card">
+      <h3>近红外相机 (NIRCam) <span class="badge std">主力成像</span></h3>
+      <p>由亚利桑那大学开发，工作在 0.6 ~ 5 微米波段。它是探测第一代恒星与星系、年轻星团中新诞生行星的最关键成像载荷，具有极致锐利的解析力。</p>
+    </article>
+    <article class="card">
+      <h3>近红外光谱仪 (NIRSpec) <span class="badge common">微快门阵列</span></h3>
+      <p>搭载约 25 万个微型可编程机械快门，能够在单一视野内同时对 100 个遥远星系进行高分辨率光谱分析，极大提升了宇宙学巡天效率。</p>
+    </article>
+    <article class="card">
+      <h3>中红外仪器 (MIRI) <span class="badge new">极端深冷 7K</span></h3>
+      <p>观测 5 ~ 28 微米的长波中红外线，配备专属的脉冲管制冷机将探测器冷却至绝对零度以上仅 7 度（-266 °C），能够穿透厚重的星际尘埃云看清星系核心。</p>
+    </article>
+    <article class="card">
+      <h3>精细制导传感器 / 无缝摄谱仪 (FGS/NIRISS)</h3>
+      <p>加拿大宇航局提供，提供达到毫角秒级别的超高精度指向锁定，并专攻系外行星凌星光谱，分析数百光年外行星大气中是否存在水蒸气、二氧化碳或甲烷。</p>
+    </article>
+  </div>
+
+  <h2>🌌 为什么韦伯望远镜能“看穿时间”？</h2>
+  <div class="grid cols-3">
+    <article class="card">
+      <h3>宇宙膨胀与红移现象</h3>
+      <p>早期宇宙发出的可见光和紫外光，在穿行了 130 多亿光年的膨胀空间后，波长被大幅拉长进入了红外波段。韦伯专攻红外，因此能直击哈勃看不见的宇宙黎明。</p>
+    </article>
+    <article class="card">
+      <h3>穿透致密恒星孵化场</h3>
+      <p>宇宙尘埃会散射可见光，使得恒星孕育地（如著名的“创生之柱”）在传统望远镜中漆黑一片；而红外光波长更长，能轻易穿透尘埃，看清原恒星的诞生全过程。</p>
+    </article>
+    <article class="card">
+      <h3>系外行星大气分子指纹</h3>
+      <p>当系外行星穿过母恒星前方时，恒星光芒穿过行星大气层，水、甲烷等分子会在特定红外波长吸收光线。韦伯能精准捕获这些吸收谱线，寻找潜在生命指纹。</p>
+    </article>
+  </div>
+
+  <h2>📐 韦伯 (JWST) 与 哈勃 (Hubble) 关键指标对比</h2>
+  <table>
+    <thead><tr><th>对比指标</th><th>哈勃空间望远镜 (Hubble)</th><th>詹姆斯·韦伯空间望远镜 (JWST)</th></tr></thead>
+    <tbody>
+      <tr><td>主镜直径</td><td>2.4 米 (单块硼硅酸盐玻璃)</td><td><strong>6.5 米</strong> (18 块镀金铍金属六边形镜面，聚光面积达 6.25 倍)</td></tr>
+      <tr><td>主要观测波段</td><td>紫外线、可见光、微量近红外 (0.1 ~ 1.0 μm)</td><td><strong>红外线为主</strong> (0.6 ~ 28 μm，深空红外穿透力绝佳)</td></tr>
+      <tr><td>运行轨道位置</td><td>低地球轨道 (LEO，高度约 540 公里)</td><td><strong>日地 L2 拉格朗日点</strong> (距离地球约 150 万公里)</td></tr>
+      <tr><td>宇航员在轨维修</td><td>支持（曾由航天飞机执行 5 次大修）</td><td><strong>不支持在轨人工维护</strong>（距离太远，全靠自检与地面精准控制）</td></tr>
+      <tr><td>发射时间</td><td>1990 年 4 月 24 日</td><td>2021 年 12 月 25 日（阿丽亚娜 5 号火箭完美入轨）</td></tr>
+    </tbody>
+  </table>
+
+  <h2>数据出处与署名</h2>
+  <p class="src">
+    3D 模型与姿态：<a href="https://eyes.nasa.gov/apps/solar-system/#/sc_jwst" target="_blank" rel="noopener">NASA JPL Eyes on the Solar System</a>。<br>
+    科学载荷与轨道数据：NASA Goddard Space Flight Center / Space Telescope Science Institute (STScI) / ESA / CSA。<br>
+    本页面为<strong>太阳系中文探索</strong>非官方深度科普特写。
+  </p>
+</main>
+
+<script type="module">
+import { renderChrome, embedUrl } from './assets/js/site.js';
+renderChrome('jwst.html');
+
+const url = embedUrl({ route: 'sc_jwst', featured: 'false', hd: 'true' });
+document.getElementById('eyes').src = url;
+document.getElementById('raw').href = url;
+</script>
+</body>
+</html>

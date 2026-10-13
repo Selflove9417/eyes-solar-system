@@ -1,0 +1,7 @@
+{
+  "bodyClasses": "solar-system touch hover",
+  "dynamicCount": 0,
+  "loading": "block",
+  "staticCount": 1,
+  "textSample": ""
+}

@@ -1,0 +1,386 @@
+{
+  "meta": {
+    "translatedFrom": "NASA/JPL Eyes on the Solar System 官方 descriptions/<id>.json 的 description.blurb 字段",
+    "policy": "只译文字；数字、日期、距离、单位、<a> 标记一律保持原样。",
+    "collectedAt": "2026-10-11",
+    "srcPrefix": "https://eyes.nasa.gov/apps/solar-system/descriptions/"
+  },
+  "missions": [
+    {
+      "id": "sc_voyager_1",
+      "zh": "旅行者 1 号",
+      "en": "Voyager 1",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_voyager_1.json",
+      "enBlurb": "No spacecraft has gone farther than NASA's Voyager 1. Launched in 1977 to fly by Jupiter and Saturn, Voyager 1 crossed into interstellar space in August 2012 and continues to collect data.",
+      "zhBlurb": "没有任何航天器比 NASA 的旅行者 1 号飞得更远。它于 1977 年发射，用于飞掠木星和土星；2012 年 8 月它穿越进入星际空间，并持续采集数据。"
+    },
+    {
+      "id": "sc_voyager_2",
+      "zh": "旅行者 2 号",
+      "en": "Voyager 2",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_voyager_2.json",
+      "enBlurb": "NASA's Voyager 2 is the second spacecraft to enter interstellar space. On Dec. 10, 2018, the spacecraft joined its twin—Voyager 1—as the only human-made objects to enter the space between the stars.",
+      "zhBlurb": "NASA 的旅行者 2 号是第二艘进入星际空间的航天器。2018 年 12 月 10 日，它与孪生探测器旅行者 1 号会合，成为仅有的进入恒星之间空间的人造物体。"
+    },
+    {
+      "id": "sc_pioneer_10",
+      "zh": "先驱者 10 号",
+      "en": "Pioneer 10",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_pioneer_10.json",
+      "enBlurb": "Launched in 1972, Pioneer 10 was the first spacecraft to visit Jupiter. Its mission ended in 2003, but it is one of four spacecraft (including the two Voyagers and Pioneer 11) carrying a message from Earth beyond our solar system.",
+      "zhBlurb": "先驱者 10 号于 1972 年发射，是第一艘造访木星的航天器。其任务于 2003 年结束，但它是携带着来自地球的信息飞出太阳系的四艘航天器之一（另外三艘为两艘旅行者号和先驱者 11 号）。"
+    },
+    {
+      "id": "sc_pioneer_11",
+      "zh": "先驱者 11 号",
+      "en": "Pioneer 11",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_pioneer_11.json",
+      "enBlurb": "Launched in 1973, Pioneer 11 was the first spacecraft to fly past Saturn. Its mission ended in 1995, but it is one of four spacecraft (including the two Voyagers and Pioneer 10) carrying a message from Earth beyond our solar system.",
+      "zhBlurb": "先驱者 11 号于 1973 年发射，是第一艘飞掠土星的航天器。其任务于 1995 年结束，但它是携带着来自地球的信息飞出太阳系的四艘航天器之一（另外三艘为两艘旅行者号和先驱者 10 号）。"
+    },
+    {
+      "id": "sc_new_horizons",
+      "zh": "新视野号",
+      "en": "New Horizons",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_new_horizons.json",
+      "enBlurb": "New Horizons is a NASA mission to study the dwarf planet Pluto, its moons, and other objects in the Kuiper Belt, a region of the solar system that extends from about 30 AU, near the orbit of Neptune, to about 50 AU from the Sun.",
+      "zhBlurb": "新视野号是 NASA 的一项任务，用于研究矮行星冥王星、它的卫星以及柯伊伯带中的其他天体。柯伊伯带是太阳系中从约 30 AU（靠近海王星轨道）延伸到距太阳约 50 AU 的区域。"
+    },
+    {
+      "id": "sc_cassini",
+      "zh": "卡西尼号",
+      "en": "Cassini",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_cassini.json",
+      "enBlurb": "For more than a decade, NASA’s Cassini spacecraft shared the wonders of Saturn and its family of icy moons—taking us to astounding worlds where methane rivers run to a methane sea and where jets of ice and gas are blasting material into space from a liquid water ocean that might harbor the ingredients for life. Cassini revealed in great detail the true wonders of Saturn, a giant world ruled by raging storms and delicate harmonies of gravity.",
+      "zhBlurb": "十多年来，NASA 的卡西尼号航天器向我们展示了土星及其冰冷卫星家族的奇观——带我们前往那些令人惊叹的世界：甲烷河流汇入甲烷之海，冰与气构成的喷射流从可能孕育生命要素的液态水海洋喷向太空。"
+    },
+    {
+      "id": "sc_juno",
+      "zh": "朱诺号",
+      "en": "Juno",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_juno.json",
+      "enBlurb": "Juno is studying the interior and origins of giant planet Jupiter for the first time. It has been orbiting Jupiter since it arrived in 2016.",
+      "zhBlurb": "朱诺号首次对气态巨行星木星的内部结构与起源进行研究。自 2016 年抵达以来，它一直在环绕木星运行。"
+    },
+    {
+      "id": "sc_europa_clipper",
+      "zh": "欧罗巴快船",
+      "en": "Europa Clipper",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_europa_clipper.json",
+      "enBlurb": "Europa Clipper will search for signs of potential habitability on Jupiter's icy ocean moon Europa.",
+      "zhBlurb": "欧罗巴快船将搜寻木星的冰下海洋卫星木卫二上可能存在宜居条件的迹象。"
+    },
+    {
+      "id": "sc_parker_solar_probe",
+      "zh": "帕克太阳探测器",
+      "en": "Parker Solar Probe",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_parker_solar_probe.json",
+      "enBlurb": "NASA's Parker Solar Probe is on a mission to \"touch the Sun.\" The spacecraft is flying closer to the Sun’s surface than any spacecraft before it. The mission will revolutionize our understanding of the Sun.",
+      "zhBlurb": "NASA 的帕克太阳探测器执行着一项\"触摸太阳\"的任务。这艘航天器正以史无前例的近度掠过太阳表面。这项任务将彻底改变我们对太阳的认识。"
+    },
+    {
+      "id": "sc_jwst",
+      "zh": "詹姆斯·韦布空间望远镜",
+      "en": "James Webb Space Telescope",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_jwst.json",
+      "enBlurb": "The James Webb Space Telescope (JWST) is a large infrared telescope with an approximately 6.5 meter primary mirror.",
+      "zhBlurb": "詹姆斯·韦布空间望远镜（JWST）是一台大型红外望远镜，主镜口径约 6.5 米。"
+    },
+    {
+      "id": "sc_hubble_space_telescope",
+      "zh": "哈勃空间望远镜",
+      "en": "Hubble Space Telescope",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_hubble_space_telescope.json",
+      "enBlurb": "NASA’s Hubble Space Telescope is the first astronomical observatory placed into orbit around Earth with the ability to record images in wavelengths of light spanning from ultraviolet to near-infrared.",
+      "zhBlurb": "NASA 的哈勃空间望远镜是第一座被送入地球轨道、能够记录从紫外到近红外波段光学的天文台。"
+    },
+    {
+      "id": "sc_roman_space_telescope",
+      "zh": "南希·格雷斯·罗曼空间望远镜",
+      "en": "Nancy Grace Roman Space Telescope",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_roman_space_telescope.json",
+      "enBlurb": "Named after NASA’s first chief astronomer, the ‘mother of the Hubble Space Telescope,’ the Nancy Grace Roman Space Telescope has a field of view at least 100 times larger than Hubble's, potentially measuring light from a billion galaxies in its lifetime. The mission launched on August 30, 2026.",
+      "zhBlurb": "该望远镜以 NASA 首任首席天文学家、\"哈勃空间望远镜之母\"的名字命名。南希·格雷斯·罗曼空间望远镜的视场至少是哈勃的 100 倍，在其寿命期内有望测量来自 10 亿个星系的光。这项任务于 2026 年 8 月 30 日发射。"
+    },
+    {
+      "id": "sc_mars_2020",
+      "zh": "毅力号（火星 2020）",
+      "en": "Perseverance",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_mars_2020.json",
+      "enBlurb": "The Perseverance rover is looking for signs of ancient life and is collecting rock and soil samples for a possible return to Earth by a subsequent Mars mission.",
+      "zhBlurb": "毅力号火星车正在寻找古代生命的迹象，并采集岩石与土壤样本，以便由后续的火星任务送回地球。"
+    },
+    {
+      "id": "sc_mars_science_laboratory",
+      "zh": "好奇号（火星科学实验室）",
+      "en": "Mars Science Laboratory (Curiosity)",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_mars_science_laboratory.json",
+      "enBlurb": "Part of NASA's Mars Science Laboratory mission, Curiosity was the largest and most capable rover ever sent to Mars at the time of launch.",
+      "zhBlurb": "好奇号是 NASA 火星科学实验室任务的一部分，在发射时是送往火星的最大、能力最强的火星车。"
+    },
+    {
+      "id": "sc_insight",
+      "zh": "洞察号",
+      "en": "InSight",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_insight.json",
+      "enBlurb": "NASA's InSight lander (Interior Exploration using Seismic Investigations, Geodesy and Heat Transport) is the first mission to study the deep interior of Mars.",
+      "zhBlurb": "NASA 的洞察号着陆器（InSight，全称\"利用地震探测、大地测量与热传输开展内部探测\"）是第一项研究火星深部内部结构的任务。"
+    },
+    {
+      "id": "sc_phoenix",
+      "zh": "凤凰号",
+      "en": "Phoenix",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_phoenix.json",
+      "enBlurb": "NASA's Phoenix mission landed farther north on Mars than any previous spacecraft to date. The lander verified the presence of water-ice on Mars by actually scooping it up and analyzing it.",
+      "zhBlurb": "NASA 的凤凰号任务在火星上着陆的位置比此前任何航天器都更靠北。该着陆器通过实际铲起并分析样本，证实了火星上存在水冰。"
+    },
+    {
+      "id": "sc_iss",
+      "zh": "国际空间站",
+      "en": "International Space Station (ISS)",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_iss.json",
+      "enBlurb": "The International Space Station (ISS) is a permanently crewed on-orbit laboratory that enables scientific research supporting innovation on Earth and future deep space exploration.",
+      "zhBlurb": "国际空间站（ISS）是一座长期有人驻留的在轨实验室，支撑着服务于地球创新与未来深空探测的科学研究。"
+    },
+    {
+      "id": "sc_lucy",
+      "zh": "露西号",
+      "en": "Lucy",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_lucy.json",
+      "enBlurb": "The <a href='https://science.nasa.gov/mission/lucy/' target='_blank'>Lucy</a> spacecraft will explore a record-breaking number of asteroids, flying by two asteroids in the solar system’s main asteroid belt, and by eight Trojan asteroids that share an orbit around the Sun with Jupiter.",
+      "zhBlurb": "露西号航天器将探测数量创纪录的小行星：飞掠主小行星带中的两颗小行星，以及与木星共用绕日轨道的八颗特洛伊小行星。"
+    },
+    {
+      "id": "sc_psyche",
+      "zh": "灵神星号",
+      "en": "Psyche",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_psyche.json",
+      "enBlurb": "The <a href='https://www.jpl.nasa.gov/missions/psyche' target='_blank'>Psyche</a> mission launched on October 13th, 2023, and will explore the origin of planetary cores by studying the metallic asteroid of the same name.",
+      "zhBlurb": "灵神星号任务于 2023 年 10 月 13 日发射，将通过研究同名的金属小行星来探索行星核的起源。"
+    },
+    {
+      "id": "sc_osiris_rex",
+      "zh": "奥西里斯-APEX",
+      "en": "OSIRIS-APEX (OSIRIS-REx)",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_osiris_rex.json",
+      "enBlurb": "NASA’s <a href='https://www.nasa.gov/osiris-rex' target='_blank'>OSIRIS-REx</a> was the first U.S. mission to deliver an asteroid sample to Earth on September 24th, 2023. The spacecraft, renamed OSIRIS-APEX after the delivery, is now headed to asteroid Apophis for a 2029 rendezvous.",
+      "zhBlurb": "NASA 的 OSIRIS-REx 是美国首个将小行星样本送回地球的任务，于 2023 年 9 月 24 日完成送达。该航天器在送样后更名为 OSIRIS-APEX，目前正飞往阿波菲斯小行星，计划于 2029 年与之交会。"
+    },
+    {
+      "id": "sc_dart",
+      "zh": "DART（双小行星重定向测试）",
+      "en": "DART",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_dart.json",
+      "enBlurb": "<a href='https://dart.jhuapl.edu/' target='_blank'>DART</a>, or Double Asteroid Redirection Test, was the first attempt to change the course of an asteroid with a kinetic impact.",
+      "zhBlurb": "DART（双小行星重定向测试）是首次尝试用动能撞击改变小行星的轨道。"
+    },
+    {
+      "id": "sc_artemis_1",
+      "zh": "阿尔忒弥斯 1 号",
+      "en": "Artemis I",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_artemis_1.json",
+      "enBlurb": "Artemis I was an uncrewed flight test that was the first mission to use NASA's Space Launch System (SLS) and the Orion spacecraft. It was followed by a crewed flight on Artemis II in April of 2026.",
+      "zhBlurb": "阿尔忒弥斯 1 号是一次无人飞行测试，也是首次使用 NASA 太空发射系统（SLS）与猎户座飞船的任务。随后在 2026 年 4 月进行了阿尔忒弥斯 2 号的载人飞行。"
+    },
+    {
+      "id": "sc_artemis_2",
+      "zh": "阿尔忒弥斯 2 号",
+      "en": "Artemis II",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_artemis_2.json",
+      "enBlurb": "Artemis II built on the success of the uncrewed Artemis I in 2022, and demonstrated a broad range of capabilities needed on deep space missions. The Artemis II test flight was NASA’s first mission with crew aboard the SLS (Space Launch System) rocket and Orion spacecraft. The Artemis II crew traveled approximately 6,545 kilometers (4,067 miles) beyond the far side of the Moon on April 6th, 2026, setting a human spaceflight distance record. Artemis II launched on April 1st, 2026, at 06:35 PM EDT, and arrived safely back to Earth on April 10th, 2026, at 08:07:27 PM EDT.",
+      "zhBlurb": "阿尔忒弥斯 2 号建立在 2022 年无人任务阿尔忒弥斯 1 号的成功之上，验证了深空任务所需的多种能力。这次测试飞行是 NASA 首次由航天员搭乘 SLS（太空发射系统）火箭与猎户座飞船执行的任务。2026 年 4 月 6 日，阿尔忒弥斯 2 号乘组飞越月球背面并继续前行约 6,545 公里（4,067 英里），创造了载人航天飞行距离纪录。阿尔忒弥斯 2 号于 2026 年 4 月 1 日 06:35 PM EDT 发射，并于 2026 年 4 月 10 日 08:07:27 PM EDT 安全返回地球。"
+    },
+    {
+      "id": "sc_mars_odyssey",
+      "zh": "火星奥德赛号",
+      "en": "Mars Odyssey",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_mars_odyssey.json",
+      "enBlurb": "Still in orbit around Mars, 2001 Mars Odyssey holds the record for the longest continually active spacecraft in orbit around a planet other than Earth.",
+      "zhBlurb": "2001 火星奥德赛号至今仍在环绕火星运行，保持着围绕地球以外行星运行且持续工作时间最长的航天器纪录。"
+    },
+    {
+      "id": "sc_mars_reconnaissance_orbiter",
+      "zh": "火星勘测轨道飞行器",
+      "en": "Mars Reconnaissance Orbiter",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_mars_reconnaissance_orbiter.json",
+      "enBlurb": "Mars Reconnaissance Orbiter (MRO) is a large orbiter, modeled in part on NASA’s highly successful Mars Global Surveyor spacecraft, designed to photograph Mars from orbit.",
+      "zhBlurb": "火星勘测轨道飞行器（MRO）是一台大型轨道器，部分参照 NASA 极为成功的火星全球勘测者号设计，用于从轨道上对火星成像。"
+    },
+    {
+      "id": "sc_messenger",
+      "zh": "信使号",
+      "en": "MESSENGER",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_messenger.json",
+      "enBlurb": "MESSENGER was a NASA robotic space probe that orbited the planet Mercury between 2011 and 2015, studying Mercury's chemical composition, geology, and magnetic field.",
+      "zhBlurb": "信使号是 NASA 的一台机器人空间探测器，于 2011 年至 2015 年间环绕水星运行，研究水星的化学组成、地质与磁场。"
+    },
+    {
+      "id": "sc_magellan",
+      "zh": "麦哲伦号",
+      "en": "Magellan",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_magellan.json",
+      "enBlurb": "NASA's Magellan mission was the first spacecraft to image the entire surface of Venus and made several discoveries about the planet.",
+      "zhBlurb": "NASA 的麦哲伦号是第一艘对金星整个表面进行成像的航天器，并就该行星做出多项发现。"
+    },
+    {
+      "id": "sc_kepler_space_telescope",
+      "zh": "开普勒空间望远镜",
+      "en": "Kepler",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_kepler_space_telescope.json",
+      "enBlurb": "NASA's Kepler spacecraft was launched to search for Earth-like planets orbiting other stars. It discovered more than 2,600 of these \"exoplanets\"—including many that are promising places for life to exist.",
+      "zhBlurb": "NASA 的开普勒航天器旨在搜寻绕其他恒星运行的类地行星。它发现了 2,600 多颗此类\"系外行星\"，其中许多被认为有可能存在生命。"
+    },
+    {
+      "id": "sc_tess",
+      "zh": "TESS（凌日系外行星巡天卫星）",
+      "en": "TESS",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_tess.json",
+      "enBlurb": "NASA’s Transiting Exoplanet Survey Satellite is an all-sky survey mission that will discover thousands of exoplanets around nearby bright stars.",
+      "zhBlurb": "NASA 的凌日系外行星巡天卫星（TESS）是一项全天巡天任务，将在近处明亮恒星周围发现数千颗系外行星。"
+    },
+    {
+      "id": "sc_chandra",
+      "zh": "钱德拉 X 射线天文台",
+      "en": "Chandra X-ray Observatory",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_chandra.json",
+      "enBlurb": "Chandra allows scientists from around the world to obtain X-ray images of exotic environments to help understand the structure and evolution of the universe.",
+      "zhBlurb": "钱德拉使世界各地的科学家能够获取奇异环境的 X 射线图像，帮助理解宇宙的结构与演化。"
+    },
+    {
+      "id": "sc_sdo",
+      "zh": "太阳动力学天文台",
+      "en": "Solar Dynamics Observatory",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_sdo.json",
+      "enBlurb": "The Solar Dynamics Observatory (SDO) is the first mission to be launched for NASA's Living With a Star (LWS) Program, a program designed to understand the causes of solar variability and its impacts on Earth.",
+      "zhBlurb": "太阳动力学天文台（SDO）是 NASA \"与星共存\"（LWS）计划发射的首个任务，该计划旨在理解太阳活动变化的成因及其对地球的影响。"
+    },
+    {
+      "id": "sc_dawn",
+      "zh": "黎明号",
+      "en": "Dawn",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_dawn.json",
+      "enBlurb": "<a href='https://solarsystem.nasa.gov/missions/dawn/overview/' target='_blank'>Dawn</a> was the first spacecraft to orbit two extraterrestrial bodies, as well as the first spacecraft to visit either Vesta or Ceres, and the first to orbit a dwarf planet.",
+      "zhBlurb": "黎明号是第一艘环绕两天外天体运行的航天器，也是首先造访灶神星与谷神星的航天器，并且是第一艘环绕矮行星运行的航天器。"
+    },
+    {
+      "id": "sc_stardust",
+      "zh": "星尘号",
+      "en": "Stardust",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_stardust.json",
+      "enBlurb": "NASA's <a href='https://solarsystem.nasa.gov/missions/stardust/in-depth/'target='_blank'>Stardust</a> was the first spacecraft to bring samples from a comet to Earth.",
+      "zhBlurb": "NASA 的星尘号是第一艘将彗星样本带回地球的航天器。"
+    },
+    {
+      "id": "sc_deep_impact",
+      "zh": "深度撞击号",
+      "en": "Deep Impact",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_deep_impact.json",
+      "enBlurb": "The primary mission of NASA's <a href='https://www.jpl.nasa.gov/missions/deep-impact' target='_blank'>Deep Impact</a> was to probe beneath the surface of a comet. The spacecraft delivered a special impactor into the path of Tempel 1 to reveal never before seen materials and provide clues about the internal composition and structure of a comet. The spacecraft released its impactor which collided with the comet, and then the spacecraft observed the result.",
+      "zhBlurb": "NASA 深度撞击号的主要任务是探测彗星表面之下。该航天器将一枚专用撞击器送入坦普尔 1 号彗星的轨道，以揭示前所未见的物质，并提供关于彗星内部组成与结构的线索。"
+    },
+    {
+      "id": "sc_maven",
+      "zh": "MAVEN（火星大气与挥发物演化任务）",
+      "en": "MAVEN",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_maven.json",
+      "enBlurb": "NASA's MAVEN studied the structure and composition of the upper atmosphere of the Red Planet.",
+      "zhBlurb": "NASA 的 MAVEN 研究了这颗红色星球高层大气的结构与组成。"
+    },
+    {
+      "id": "sc_lunar_reconnaissance_orbiter",
+      "zh": "月球勘测轨道飞行器",
+      "en": "Lunar Reconnaissance Orbiter",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_lunar_reconnaissance_orbiter.json",
+      "enBlurb": "The Lunar Reconnaissance Orbiter (LRO) was launched in 2009 on the first U.S. mission to the Moon in over 10 years.",
+      "zhBlurb": "月球勘测轨道飞行器（LRO）于 2009 年发射，是美国十余年来首个奔月任务。"
+    },
+    {
+      "id": "sc_ulysses",
+      "zh": "尤利西斯号",
+      "en": "Ulysses",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_ulysses.json",
+      "enBlurb": "The Ulysses mission made nearly three complete orbits of the Sun during more than 18 years in service.",
+      "zhBlurb": "尤利西斯号在超过 18 年的服役期内，几乎完成了三圈绕日轨道。"
+    },
+    {
+      "id": "sc_galileo",
+      "zh": "伽利略号",
+      "en": "Galileo",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_galileo.json",
+      "enBlurb": "The <a href='https://solarsystem.nasa.gov/missions/galileo/overview/' target='_blank'>Galileo </a>mission was the first spacecraft to enter orbit around the planet Jupiter, arriving in December of 1995 and staying for eight years, and made close passes by all its major moons. Galileo even carried a small probe that it deployed and sent deep into the atmosphere of Jupiter, taking readings for almost an hour before the probe was crushed by overwhelming pressure.",
+      "zhBlurb": "伽利略号是第一艘进入木星轨道的航天器，于 1995 年 12 月抵达并驻留八年，近距离飞掠了木星所有主要卫星。伽利略号还携带了一台小型探测器，将其释放并送入木星大气深处；该探测器在极端压力下被压毁之前，近一个小时持续传回读数。"
+    },
+    {
+      "id": "sc_rosetta",
+      "zh": "罗塞塔号",
+      "en": "Rosetta",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_rosetta.json",
+      "enBlurb": "<a href='https://www.esa.int/Enabling_Support/Operations/Rosetta' target='_blank'>Rosetta </a>was a European Space Agency mission that was the first spacecraft to orbit a comet, 67P/Churyumov-Gerasimenko.",
+      "zhBlurb": "罗塞塔号是欧洲空间局的任务，其航天器是第一艘环绕彗星——67P/丘留莫夫－格拉西缅科——运行的航天器。"
+    },
+    {
+      "id": "sc_explorer_1",
+      "zh": "探索者 1 号",
+      "en": "Explorer 1",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_explorer_1.json",
+      "enBlurb": "On January 31st, 1958, Explorer 1 became the first satellite launched by the United States of America. It followed the launch the previous year of the Russian satellites Sputnik 1 and 2.",
+      "zhBlurb": "1958 年 1 月 31 日，探索者 1 号成为美国发射的第一颗卫星；此前一年苏联已发射了斯普特尼克 1 号与 2 号。"
+    },
+    {
+      "id": "sc_soho",
+      "zh": "太阳与日球层天文台 SOHO",
+      "en": "SOHO",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_soho.json",
+      "enBlurb": "SOHO is the longest-lived Sun-watching satellite to date. Numerous mission extensions have enabled the spacecraft to observe two 11-year solar cycles and to discover thousands of comets.",
+      "zhBlurb": "SOHO 迄今是服役时间最长的太阳观测卫星。多次任务延期使这艘航天器得以观测两个 11 年的太阳活动周期，并发现了数千颗彗星。"
+    },
+    {
+      "id": "sc_clementine",
+      "zh": "克莱门汀号",
+      "en": "Clementine",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_clementine.json",
+      "enBlurb": "Clementine was the first U.S. spacecraft launched to the Moon in over 20 years. It was designed to test spacecraft components during extended exposure to space and to study the Moon and an asteroid.",
+      "zhBlurb": "克莱门汀号是二十多年来美国发射的首个月球探测器。其设计目的是在长期暴露于太空环境的条件下检验航天器部件，并研究月球与一颗小行星。"
+    },
+    {
+      "id": "sc_grail_a",
+      "zh": "重力恢复与内部实验室 A",
+      "en": "GRAIL A",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_grail_a.json",
+      "enBlurb": "NASA's GRAIL mission flew twin spacecraft—Ebb and Flow—in tandem around the Moon to map variations in the lunar gravitational field",
+      "zhBlurb": "NASA 的 GRAIL 任务让孪生航天器 Ebb 与 Flow 编队环绕月球飞行，以绘制月球重力场的变化。"
+    },
+    {
+      "id": "sc_mars_express",
+      "zh": "火星快车号",
+      "en": "Mars Express",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_mars_express.json",
+      "enBlurb": "The Mars Express mission is exploring the planet Mars, and is the first planetary mission attempted by the European Space Agency (ESA).",
+      "zhBlurb": "火星快车号任务正在探测火星，它是欧洲空间局（ESA）尝试的首个行星探测任务。"
+    },
+    {
+      "id": "sc_trace_gas_orbiter",
+      "zh": "微量气体轨道器",
+      "en": "Trace Gas Orbiter",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_trace_gas_orbiter.json",
+      "enBlurb": "The ExoMars Trace Gas Orbiter (ExoMars TGO) is searching for methane and other trace gases in the Martian atmosphere that could be evidence of possible biological or geological activity. The orbiter is the first in a series of joint missions between the European Space Agency (ESA) and Roscosmos, the Russian space agency.",
+      "zhBlurb": "ExoMars 微量气体轨道器（ExoMars TGO）正在搜寻火星大气中的甲烷及其他微量气体——它们可能是生物或地质活动的证据。该轨道器是欧洲空间局（ESA）与俄罗斯国家航天集团（Roscosmos）一系列联合任务中的第一个。"
+    },
+    {
+      "id": "sc_mariner_2",
+      "zh": "水手 2 号",
+      "en": "Mariner 2",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_mariner_2.json",
+      "enBlurb": "NASA's Mariner 2 was the world's first successful interplanetary spacecraft. The spacecraft flew by Venus, sending back valuable new information about interplanetary space and the Venusian atmosphere.",
+      "zhBlurb": "NASA 的水手 2 号是世界上第一艘取得成功的行星际航天器。它飞掠金星，传回了关于行星际空间与金星大气的宝贵新信息。"
+    },
+    {
+      "id": "sc_huygens",
+      "zh": "惠更斯号",
+      "en": "Huygens",
+      "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_huygens.json",
+      "enBlurb": "The European Space Agency's Huygens Probe was a unique, advanced spacecraft and a crucial part of the overall Cassini mission to explore Saturn.",
+      "zhBlurb": "欧洲空间局的惠更斯探测器是一艘独特而先进的航天器，也是卡西尼号土星探测任务整体的关键组成部分。"
+    }
+  ]
+}

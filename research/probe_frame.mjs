@@ -1,0 +1,1 @@
+() => { const f=document.getElementById("eyes"); const r=f.getBoundingClientRect(); return { src: f.src, w: Math.round(r.width), h: Math.round(r.height), css: getComputedStyle(f).display + "/" + getComputedStyle(f).visibility }; }

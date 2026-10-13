@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>旅行者 1 号特写 · 此刻它在太阳系的位置 · 太阳系中文探索</title>
+<meta name="description" content="旅行者 1 号的实时距离、信号延迟与星际穿越故事；位置由 NASA/JPL Eyes 官方 3D 模拟器实时渲染，星历数据取自 JPL Horizons。">
+<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<main class="wrap">
+  <div class="hero">
+    <div class="hero-tag">
+      🚀 飞出太阳系的人类信使 · 星际空间穿越者
+    </div>
+    <h1 class="gradient-title">旅行者 1 号 <span class="src" style="font-size:22px;vertical-align:middle">Voyager 1</span></h1>
+    <p class="lede">
+      人类迄今为止飞行距离最遥远的人造物体。它此刻正携带着刻录人类文明声音与图像的镀金唱片，向深邃的星际空间飞驰。
+    </p>
+  </div>
+
+  <section class="big" id="stats" aria-live="polite">
+    <div class="stat accent">
+      <div class="n">—<small>亿公里</small></div>
+      <div class="k">正在获取实时星历…</div>
+    </div>
+  </section>
+  <p class="src" id="asof"></p>
+
+  <h2>🛰️ 此刻它在太阳系中的实时位置与姿态</h2>
+  <div class="stage">
+    <iframe id="eyes" title="旅行者 1 号在 NASA Eyes 官方 3D 太阳系中的实时位置" allow="fullscreen"></iframe>
+    <div class="stage-bar">
+      <span>画面由 NASA/JPL 官方云端服务实时计算与渲染。</span>
+      <a id="raw" href="https://eyes.nasa.gov/apps/solar-system/#/sc_voyager_1" target="_blank" rel="noopener">在官方站点中打开 ↗</a>
+    </div>
+  </div>
+
+  <h2>📏 这些天文数字到底有多夸张？</h2>
+  <p class="lede">把两百多亿公里的极端距离，换算成光速与太阳系尺度的直观感受：</p>
+  <ul class="scale" id="scale"></ul>
+
+  <h2>📜 伟大的星际远征简史</h2>
+  <div class="grid cols-3">
+    <article class="card">
+      <h3>1977-09-05 启程发射</h3>
+      <p>比姊妹号旅行者 2 号晚两周升空，但凭借更直接的引力弹弓加速轨道，在 1977 年 12 月 15 日率先超越旅行者 2 号并飞跃小行星带。</p>
+    </article>
+    <article class="card">
+      <h3>1979 木星 · 1980 土星</h3>
+      <p>人类历史上首次近距离拍摄到木卫一的剧烈活火山喷发，揭示了土卫六的浓厚橙色雾霭，发回的照片彻底重塑了人类对太阳系的认知。</p>
+    </article>
+    <article class="card">
+      <h3>2012-08 跨入星际空间</h3>
+      <p>传感器检测到太阳风粒子急剧骤降、星际宇宙射线激增，确认正式突破“日球层顶 (Heliopause)”，成为首个跨入恒星际空间的人类使者。</p>
+    </article>
+  </div>
+
+  <h2>数据出处与计算溯源</h2>
+  <p class="src" id="prov">正在加载出处…</p>
+  <p class="src">
+    3D 姿态与轨道渲染：<a href="https://eyes.nasa.gov/apps/solar-system/#/sc_voyager_1" target="_blank" rel="noopener">NASA JPL Eyes on the Solar System</a>。<br>
+    本页面为<strong>太阳系中文探索</strong>深度科普旗舰特写。
+  </p>
+</main>
+
+<script type="module">
+import { renderChrome, embedUrl, el } from './assets/js/site.js';
+renderChrome('voyager-1.html');
+
+try {
+  const res = await fetch(new URL('data/live/voyager-1.json', document.baseURI));
+  const d = await res.json();
+  const { raw, derived: dv, meta } = d;
+
+  document.getElementById('stats').replaceChildren(
+    el('div', { class: 'stat accent' },
+      el('div', { class: 'n' }, (dv.rangeKm / 1e8).toFixed(2), el('small', {}, '亿公里')),
+      el('div', { class: 'k' }, '此刻离地球实际直线距离')),
+    el('div', { class: 'stat' },
+      el('div', { class: 'n' }, dv.oneWayLightTimeText.replace(/\s/g, ' ')),
+      el('div', { class: 'k' }, '一条指令光速发过去需要（单程光时）')),
+    el('div', { class: 'stat cyan' },
+      el('div', { class: 'n' }, raw.rangeAU.toFixed(2), el('small', {}, 'AU')),
+      el('div', { class: 'k' }, `相当于日地平均距离的 ${raw.rangeAU.toFixed(0)} 倍`)),
+    el('div', { class: 'stat purple' },
+      el('div', { class: 'n' }, dv.kmPerSecond.toFixed(2), el('small', {}, 'km/s')),
+      el('div', { class: 'k' }, `远离太阳的速度（每年远行约 ${dv.rangeAuPerYear.toFixed(2)} AU）`)),
+  );
+
+  document.getElementById('asof').textContent =
+    `数据观测时刻：${meta.asOf.replace('T', ' ').replace('Z', ' UTC')} · 观测基准点：地球质心 · 数据源：${meta.source}`;
+
+  const AU_MIN = 8.317;
+  const rows = [
+    ['太阳光直达地球表面', AU_MIN, '约 8 分 20 秒'],
+    ['太阳光行至海王星轨道 (约 30 AU)', 30 * AU_MIN, '约 4 小时 10 分'],
+    ['人类射电信号抵达旅行者 1 号', dv.oneWayLightTimeS / 60, dv.oneWayLightTimeText],
+  ];
+  const maxMin = Math.max(...rows.map((r) => r[1]));
+  document.getElementById('scale').replaceChildren(...rows.map(([label, min, txt]) =>
+    el('li', {},
+      el('div', {}, el('strong', {}, label), el('span', { class: 'src' }, '　' + txt)),
+      el('div', { class: 'bar' }, el('i', { style: `width:${Math.max(2, (min / maxMin) * 100).toFixed(1)}%` }))),
+  ));
+
+  document.getElementById('prov').innerHTML =
+    `实时距离与航向速度源自 JPL Horizons API 权威返回数据 ` +
+    `（<code>COMMAND=${meta.horizonsCommand}</code>，<code>CENTER=${meta.observer}</code>，` +
+    `目标校对：<code>${meta.horizonsTargetLine}</code>）。` +
+    `公里数与信号光时由物理常数换算。数据抓取于 ${meta.retrievedAt}。`;
+} catch (err) {
+  console.error(err);
+}
+
+const url = embedUrl({ route: 'sc_voyager_1', featured: 'false', hd: 'true' });
+document.getElementById('eyes').src = url;
+document.getElementById('raw').href = url;
+</script>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3D 太阳系漫游 · 太阳系中文探索</title>
+<meta name="description" content="嵌入 NASA/JPL 官方 Eyes on the Solar System 3D 模拟器，提供中文快捷导航与官方嵌入参数控制。">
+<link rel="stylesheet" href="assets/css/main.css">
+<style>
+  .preset-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+    align-items: center;
+  }
+  .btn-fs {
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid var(--line);
+    color: var(--fg);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .btn-fs:hover {
+    border-color: var(--accent);
+    color: #fff;
+    background: var(--panel);
+  }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <h1>3D 太阳系实时漫游</h1>
+  <p class="lede">
+    画面由 NASA/JPL 官方云端动力学服务实时渲染。左侧中文导航使用官方公开的 URL 深层参数直达，无需破解任何内部接口。
+  </p>
+
+  <div class="preset-bar">
+    <span style="font-size:13.5px;color:var(--fg-dim);font-weight:500">快捷航线：</span>
+    <button class="chip" data-quick="sun" type="button">☀️ 太阳</button>
+    <button class="chip" data-quick="earth" type="button">🌍 地球</button>
+    <button class="chip" data-quick="mars" type="button">🔴 火星</button>
+    <button class="chip" data-quick="sc_jwst" type="button">🔭 韦伯望远镜</button>
+    <button class="chip" data-quick="saturn" type="button">🪐 土星</button>
+    <button class="chip" data-quick="sc_voyager_1" type="button">🚀 旅行者 1 号</button>
+    <button class="chip" data-quick="sc_mars_2020" type="button">🤖 毅力号火星车</button>
+  </div>
+
+  <div class="notice">
+    <strong>跨域汉化说明：</strong>
+    由于浏览器跨域同源策略（SOP），模拟器内部的悬浮标签由 NASA 域名独立隔离，在网页端无法被父页面直接改写。
+    如需模拟器内全部 3D 标签完全显示简体中文，请安装本地<a href="extension.html">中文汉化扩展</a>后直接在官方网站中畅爽游览。
+  </div>
+
+  <div class="explore-layout">
+    <aside class="side">
+      <div class="toolbar" style="margin:0 0 12px">
+        <input type="search" id="jump-search" placeholder="输入天体/航天器中文名搜索…" aria-label="跳转到天体或航天器" list="jump-list">
+        <datalist id="jump-list"></datalist>
+      </div>
+      <nav id="side-nav" aria-label="天体快捷导航"></nav>
+
+      <h3>官方嵌入控制</h3>
+      <div id="embed-opts" style="display:flex;flex-direction:column;gap:7px"></div>
+
+      <h3>时间机器与流速</h3>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <label class="sr" for="time-input">时间</label>
+        <input type="datetime-local" id="time-input" style="background:var(--bg-soft);border:1px solid var(--line);border-radius:6px;color:var(--fg);padding:7px 10px;font:inherit">
+        <label class="sr" for="rate-input">流速</label>
+        <select id="rate-input" style="background:var(--bg-soft);border:1px solid var(--line);border-radius:6px;color:var(--fg);padding:7px 10px;font:inherit">
+          <option value="">实时流速 (真实速度)</option>
+          <option value="60">1 分钟 / 秒</option>
+          <option value="3600">1 小时 / 秒</option>
+          <option value="86400">1 天 / 秒</option>
+          <option value="604800">1 周 / 秒</option>
+        </select>
+        <button class="chip" id="apply-time" type="button">应用时间与速率</button>
+      </div>
+    </aside>
+
+    <section>
+      <div class="stage" id="stage-wrapper">
+        <iframe id="stage" title="NASA Eyes on the Solar System 官方 3D 模拟器" allow="fullscreen" loading="lazy"></iframe>
+        <div class="stage-bar">
+          <div>
+            <span>当前视线：<strong id="current-label">—</strong></span>
+            <span id="current-note"></span>
+          </div>
+          <div style="display:flex;gap:12px;align-items:center">
+            <button class="btn-fs" id="fullscreen-btn" type="button">⛶ 全屏视口</button>
+            <a id="open-raw" href="https://eyes.nasa.gov/apps/solar-system/" target="_blank" rel="noopener">在新标签页打开官方站点 ↗</a>
+          </div>
+        </div>
+      </div>
+      <p style="font-size:13.5px;color:var(--fg-dim);margin-top:12px">
+        💡 首次进入可能需要 5~15 秒缓冲 NASA 高精度地表纹理与天体模型。若加载较慢，建议保持当前标签页处于激活状态（后台标签页会被浏览器节流动画帧）。
+      </p>
+    </section>
+  </div>
+</main>
+
+<script type="module">
+import { renderChrome, getData, embedUrl, el } from './assets/js/site.js';
+renderChrome('explore.html');
+const { names, entityById } = await getData();
+
+const GROUPS = [
+  ['太阳与行星', ['sun', 'mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune']],
+  ['矮行星', ['134340_pluto', '1_ceres', '136199_eris', '136108_haumea', '136472_makemake', '90377_sedna']],
+  ['主要卫星', ['moon', 'phobos', 'deimos', 'io', 'europa', 'ganymede', 'callisto', 'titan', 'enceladus', 'iapetus', 'rhea', 'triton', 'charon', 'ariel', 'umbriel', 'titania', 'oberon', 'miranda']],
+  ['彗星与小行星', ['1p_halley', '67p_churyumov_gerasimenko', '9p_tempel_1', '1i_oumuamua', 'c_2025_n1', '16_psyche', '4_vesta', '101955_bennu', '162173_ryugu', '65803_didymos', '486958_arrokoth']],
+  ['旗舰深空任务', ['sc_voyager_1', 'sc_voyager_2', 'sc_pioneer_10', 'sc_pioneer_11', 'sc_new_horizons', 'sc_cassini', 'sc_juno', 'sc_europa_clipper', 'sc_parker_solar_probe', 'sc_jwst', 'sc_hubble_space_telescope', 'sc_roman_space_telescope']],
+  ['火星与月球探测', ['sc_mars_2020', 'sc_mars_science_laboratory', 'sc_insight', 'sc_phoenix', 'sc_mars_odyssey', 'sc_mars_reconnaissance_orbiter', 'sc_lunar_reconnaissance_orbiter', 'sc_iss']],
+  ['现代瞩目任务', ['sc_artemis_1', 'sc_artemis_2', 'sc_lucy', 'sc_psyche', 'sc_osiris_rex', 'sc_dart', 'sc_dawn', 'sc_rosetta', 'sc_messenger', 'sc_galileo']],
+];
+
+const state = { route: 'home', opts: {}, time: '', rate: '' };
+const frame = document.getElementById('stage');
+const currentLabel = document.getElementById('current-label');
+const currentNote = document.getElementById('current-note');
+
+function refresh() {
+  const url = embedUrl({ route: state.route, time: state.time || undefined, rate: state.rate || undefined, ...state.opts });
+  frame.src = url;
+  document.getElementById('open-raw').href = url;
+  const hit = names.entities[state.route];
+  const real = entityById.get(state.route);
+  const en = hit?.en || real?.displayName || real?.iauName || (state.route === 'home' ? '首页' : state.route);
+  currentLabel.textContent = (state.route === 'home' ? '太阳系全景' : (hit?.zh || en)) + ' (' + en + ')';
+  currentNote.innerHTML = hit
+    ? (hit.status === 'std' || hit.status === 'common'
+        ? '<span class="badge std">规范译名</span>'
+        : '<span class="badge code">参考译名</span>')
+    : real
+      ? '<span class="badge en-left">未收录中文</span>'
+      : '';
+  history.replaceState(null, '', '#' + state.route);
+}
+
+const nav = document.getElementById('side-nav');
+for (const [title, ids] of GROUPS) {
+  const known = ids.filter((id) => names.entities[id]);
+  if (!known.length) continue;
+  nav.append(
+    el('h3', {}, title),
+    el('div', { class: 'list' }, ...known.map((id) => {
+      const e = names.entities[id];
+      const b = el('button', { type: 'button', 'data-route': id },
+        e.zh, el('span', { class: 'en' }, e.en));
+      b.addEventListener('click', () => { state.route = id; markActive(b); refresh(); });
+      return b;
+    })),
+  );
+}
+
+function markActive(btn) {
+  nav.querySelectorAll('button').forEach((b) => b.removeAttribute('aria-current'));
+  btn?.setAttribute('aria-current', 'true');
+}
+
+// Preset buttons
+document.querySelectorAll('[data-quick]').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const id = btn.getAttribute('data-quick');
+    state.route = id;
+    const navBtn = nav.querySelector(`[data-route="${CSS.escape(id)}"]`);
+    markActive(navBtn);
+    refresh();
+  });
+});
+
+// Fullscreen
+document.getElementById('fullscreen-btn').addEventListener('click', () => {
+  const wrapper = document.getElementById('stage-wrapper');
+  if (!document.fullscreenElement) {
+    wrapper.requestFullscreen().catch((err) => console.log(err));
+  } else {
+    document.exitFullscreen();
+  }
+});
+
+// Search
+const dl = document.getElementById('jump-list');
+dl.append(...Object.entries(names.entities).map(([id, e]) =>
+  el('option', { value: `${e.zh} (${e.en})` }, id)));
+document.getElementById('jump-search').addEventListener('change', (ev) => {
+  const text = ev.target.value;
+  const id = Object.entries(names.entities).find(([k, e]) =>
+    text === k || text === `${e.zh} (${e.en})` || e.en === text || e.zh === text)?.[0];
+  if (!id) return;
+  state.route = id;
+  const navBtn = nav.querySelector(`[data-route="${CSS.escape(id)}"]`);
+  markActive(navBtn);
+  refresh();
+});
+
+const OPTS = [
+  ['featured', '显示精选专题故事', true],
+  ['detailPanel', '显示详情面板', true],
+  ['menu', '显示主菜单', true],
+  ['search', '显示搜索', true],
+  ['logo', '显示 NASA 标识', true],
+  ['hd', '启用高清纹理', false],
+  ['surfaceMapTiling', '启用地表纹理瓦片', false],
+  ['heliosphere', '显示日球层', false],
+  ['minorMoons', '显示小微卫星', false],
+];
+const box = document.getElementById('embed-opts');
+for (const [key, label, onByDefault] of OPTS) {
+  const cb = el('input', { type: 'checkbox', id: 'opt-' + key });
+  if (onByDefault) cb.checked = true;
+  cb.addEventListener('change', () => {
+    state.opts[key] = onByDefault ? (cb.checked ? undefined : 'false') : (cb.checked ? 'true' : undefined);
+    refresh();
+  });
+  box.append(el('label', { class: 'opt', for: 'opt-' + key }, cb, label));
+}
+
+document.getElementById('apply-time').addEventListener('click', () => {
+  const raw = document.getElementById('time-input').value;
+  state.time = raw ? raw + ':00.000Z' : '';
+  state.rate = document.getElementById('rate-input').value;
+  refresh();
+});
+
+const initial = decodeURIComponent(location.hash.slice(1));
+if (initial && initial !== 'home' && (names.entities[initial] || entityById.has(initial))) state.route = initial;
+markActive(nav.querySelector(`[data-route="${CSS.escape(state.route)}"]`));
+refresh();
+</script>
+</body>
+</html>

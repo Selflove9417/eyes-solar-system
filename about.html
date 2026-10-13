@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>关于与合规 · 太阳系中文探索</title>
+<meta name="description" content="非官方声明、汉化范围与无法汉化部分的准确说明、素材来源与署名、许可核查结论。">
+<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<main class="wrap">
+  <h1>关于与合规</h1>
+
+  <div class="notice">
+    <strong>非官方声明。</strong>
+    本项目是独立开发的非官方中文界面与资料层，与 <strong>NASA</strong>、<strong>Jet Propulsion Laboratory</strong>
+    及 <strong>Eyes on the Solar System</strong> 无任何隶属、授权或背书关系。
+    3D 模拟、天体历表与航天器轨迹由 NASA/JPL 官方在线服务提供并渲染，本项目不参与任何计算。
+    NASA 与 JPL 标识的所有权归其各自机构。
+  </div>
+
+  <h2>本项目做了什么，没做什么</h2>
+  <table>
+    <thead><tr><th></th><th>事实</th></tr></thead>
+    <tbody>
+      <tr><td>做了</td><td>中文门户、中文导航、中英术语表、天体与任务的中文转译、浏览器扩展的页内文字替换、官方嵌入参数封装。</td></tr>
+      <tr><td>做了</td><td>对官方站点做只读的技术取证：HTTP 响应头、加载完成后的 DOM 结构、运行时 DOM 文本采集、公开 JSON 接口探测。</td></tr>
+      <tr><td><strong>没有</strong>做</td><td>没有抓取、复制或重新托管 NASA 的任何程序（<code>app.js</code> / <code>vendors.js</code>）、三维模型、地形瓦片、纹理或星表数据。</td></tr>
+      <tr><td><strong>没有</strong>做</td><td>没有自建行星动力学或渲染引擎；画面 100% 来自官方服务。</td></tr>
+      <tr><td><strong>没有</strong>做</td><td>没有绕过同源策略：跨域 iframe 的内部文档在实测中不可读也不可写，本项目不做任何规避尝试。</td></tr>
+      <tr><td><strong>没有</strong>做</td><td>没有使用未经验证的内部接口。所有 URL 参数与路由都对应官方 Share → Embed 对话框中实际存在的控件。</td></tr>
+    </tbody>
+  </table>
+
+  <h2>汉化范围与无法汉化的部分</h2>
+  <h3>可以汉化（且已实测）</h3>
+  <p>官方模拟器的<strong>全部可读文字都在 DOM 里</strong>，包括 3D 场景中的天体名称标签——它们不是贴图文字：</p>
+  <pre style="background:var(--bg-soft);border:1px solid var(--line);border-radius:8px;padding:14px;overflow:auto;font-size:13px">&lt;div class="pioneer-label-div no-select earth planet clickable"
+     style="position:absolute; translate:792px 362px"&gt;
+  &lt;span class="icon no-icon"&gt;&lt;/span&gt;&lt;span class="text"&gt;Earth&lt;/span&gt;
+&lt;/div&gt;</pre>
+  <p>实测把 10 个行星标签改写为中文后，静置 6 秒并模拟滚轮缩放，中文<em>全部保留</em>未被回写——应用只更新标签坐标，不重写文字。</p>
+
+  <h3>无法汉化，或按规范不应汉化</h3>
+  <table>
+    <thead><tr><th>内容</th><th>原因</th></tr></thead>
+    <tbody>
+      <tr><td>本站 iframe 内模拟器的一切文字</td><td>浏览器同源策略。实测父页面读取 <code>contentDocument</code> 得到 <code>null</code>，访问 <code>contentWindow.location</code> 抛 <code>SecurityError</code>。这是不可绕过的硬限制，绕过它需要注入对方页面，属不安全做法。</td></tr>
+      <tr><td>NASA / JPL 标识与 <em>Eyes on the Solar System</em> 产品名</td><td>机构标识与产品名，按品牌规范保留原文，不翻译、不改写。</td></tr>
+      <tr><td>按键字母 <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> <kbd>K</kbd> <kbd>SHIFT</kbd> 等</td><td>与键盘物理印字一致，翻译反而造成障碍。</td></tr>
+      <tr><td>日期、时间、距离、坐标、单位数值</td><td>需求明确规定不得因翻译改变；本项目不做任何数字重排或换算。</td></tr>
+      <tr><td><code>##moon_count##</code> 一类运行时模板占位符</td><td>由官方站点在渲染时替换（例如海卫一的卫星计数）。翻译层必须原样保留占位符，只处理其周围文字。</td></tr>
+      <tr><td>官方库中未收录中文名的条目</td><td>官方实体库共 719 条，其中卫星 451 条。多数小卫星与任务代号没有可靠中文译名，一律保留英文并在术语表中标注为"未收录"。</td></tr>
+      <tr><td>少数官方简介缺失的条目</td><td>例如银河系（<code>milky_way</code>）在官方 <code>descriptions/</code> 中无对应文件；<code>sc_spitzer</code>、<code>pluto</code> 等路径返回 403。这些条目只显示名称，不编造简介。</td></tr>
+    </tbody>
+  </table>
+
+  <h2>许可核查结论</h2>
+  <p>在官方 <code>app.js</code>（1 740 432 字节）中检索 <code>github.com</code>、<code>open source</code>、<code>opensource</code>、<code>license</code>、<code>terms of use</code>、<code>public domain</code>，命中次数均为 <strong>0</strong>。</p>
+  <p>因此：<strong>本次调查未发现任何允许再分发 NASA Eyes 程序或素材的许可声明，本项目不作"NASA 软件已开源"的断言</strong>，也不复制其任何程序或数据资源。
+  中文简介译自官方公开提供的 <code>descriptions/&lt;id&gt;.json</code> 文本，逐条附来源 URL，属于对公开事实性文本的转译并注明出处；如需扩大使用范围，请直接向 NASA/JPL 确认。</p>
+
+  <h2>素材与数据来源</h2>
+  <dl class="kv">
+    <dt>3D 模拟与渲染</dt><dd>NASA/JPL <em>Eyes on the Solar System</em>，<a href="https://eyes.nasa.gov/apps/solar-system/" target="_blank" rel="noopener">eyes.nasa.gov/apps/solar-system</a></dd>
+    <dt>实体名称与 id</dt><dd>该应用运行时实体库导出的快照，存档于 <code>data/source/entities.en.json</code>（719 条，导出于 2026-10-11）</dd>
+    <dt>天体与任务英文原文</dt><dd>该应用公开的 <code>descriptions/&lt;id&gt;.json</code>，存档于 <code>data/source/descriptions.en.json</code>（93 条）</dd>
+    <dt>界面字符串</dt><dd>加载完成页面的 DOM 实测采集，存档于 <code>research/harvest_mars.json</code></dd>
+    <dt>轨道与历表数据</dt><dd>JPL Solar System Dynamics（<a href="https://ssd.jpl.nasa.gov" target="_blank" rel="noopener">ssd.jpl.nasa.gov</a>）、CNEOS（<a href="https://cneos.jpl.nasa.gov" target="_blank" rel="noopener">cneos.jpl.nasa.gov</a>）——由官方服务自行调用，本项目不接触</dd>
+    <dt>中文译名依据</dt><dd>全国科学技术名词审定委员会《天文学名词》通行译法；无可靠译名者保留原文并标注</dd>
+    <dt>卫星中文序号名</dt><dd>中文维基百科各行星卫星条目（<em>木星的卫星</em>、<em>土星的卫星</em>、<em>天王星的卫星</em>、<em>海王星的卫星</em>）表格中的「编号 / 名称」列，
+      例如 土卫三十六 = Aegir、木卫十六 = Metis。共据此补入 122 条，逐条与 NASA 实体库的 id 对齐后才写入；
+      对不上的 2 条已丢弃而非猜测。该来源为第三方百科，非官方审定术语，如需正式出版物用名请另行核对。</dd>
+    <dt>任务事件名</dt><dd>该应用公开的 <code>events/&lt;id&gt;/all_events.json</code> 的 <code>title</code> 字段，
+      2026-10-11 实际抓取到 27/169 个航天器提供该文件，去重得 249 条标题</dd>
+  </dl>
+
+  <h2>技术事实（可复核）</h2>
+  <p>以下每一条都在 <a href="docs/技术调查报告.md" style="color:var(--accent)">技术调查报告</a> 中附有原始输出：</p>
+  <ul>
+    <li>渲染引擎 Three.js r185，单张 WebGL canvas；自研引擎代号 Pioneer。</li>
+    <li>响应头中不存在 <code>X-Frame-Options</code>，也不存在 <code>Content-Security-Policy</code>；官方 Share → Embed 对话框本身就会生成 <code>&lt;iframe … allowfullscreen&gt;</code> 代码。</li>
+    <li>应用<strong>没有任何国际化机制</strong>：界面英文字面量硬编码在 bundle 中，从不读取 <code>navigator.language</code>；bundle 里的 <code>zh-cn</code> 命中全部来自 moment.js 的日期语言分包，与本应用文案无关。</li>
+    <li>路由 <code>/:spaceObject</code>、<code>/:spaceObject/events/:child</code>、<code>/:spaceObject/compare</code> 等，以及时间参数格式 <code>YYYY-MM-DDTHH:mm:ss.SSSZ</code>，均取自 bundle 中的路由表与 <code>_dateFormats.utc.url</code>，并经实际跳转验证。</li>
+  </ul>
+
+  <h2>维护</h2>
+  <p>官方站点改版会让依赖 class 名与英文字面量的汉化层失效。项目提供两个校验脚本：</p>
+  <ul>
+    <li><code>node tools/sync-glossary.mjs data/source/entities.en.json data/names.zh.json --write</code> —— 用官方实体库校正 id 与英文名，剔除已消失的条目。</li>
+    <li><code>node tools/lint-zh.mjs</code> —— 校验中文条目的英文原文与官方存档逐字一致，并检查中文串里是否残留未译英文。</li>
+  </ul>
+</main>
+<script type="module">
+import { renderChrome } from './assets/js/site.js';
+renderChrome('about.html');
+</script>
+</body>
+</html>

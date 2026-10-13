@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>天体中文名与简介 · 太阳系中文探索</title>
+<meta name="description" content="太阳、行星、矮行星与主要卫星的规范中文名称及简介，中文内容译自 NASA/JPL 官方 descriptions 数据并逐条标注来源。">
+<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<main class="wrap">
+  <h1>天体中文名与简介</h1>
+  <p class="lede">名称键取自官方实体库的稳定 slug；中文简介逐条译自官方 <code>descriptions/&lt;id&gt;.json</code> 的 blurb 字段，数字与单位保持原样。</p>
+  <div class="toolbar">
+    <input type="search" id="filter" placeholder="按中文名、英文名或类别筛选…" aria-label="筛选天体">
+    <span id="count" style="color:var(--fg-dim);font-size:13.5px"></span>
+  </div>
+  <div class="grid cols-3" id="list"></div>
+  <p style="margin-top:26px;color:var(--fg-dim);font-size:13.5px">
+    徽标含义：<span class="badge std">规范译名</span> 采用天文学规范术语；
+    <span class="badge common">通用译名</span> 中文出版物通用但非审定术语；
+    <span class="badge code">代号保留</span> 编号或任务代号按惯例保留原文。
+    未列出的天体（官方库共 719 条，其中卫星 451 条）暂无可靠中文译名，在模拟器中保留英文。
+  </p>
+</main>
+<script type="module">
+import { renderChrome, getData, el, statusBadge } from './assets/js/site.js';
+renderChrome('bodies.html');
+const { bodies, names } = await getData();
+const list = document.getElementById('list');
+const count = document.getElementById('count');
+
+function render(q = '') {
+  const needle = q.trim().toLowerCase();
+  const hits = bodies.bodies.filter((b) => {
+    if (!needle) return true;
+    return [b.zh, b.en, b.cat, b.id].join(' ').toLowerCase().includes(needle);
+  });
+  count.textContent = `显示 ${hits.length} / ${bodies.bodies.length} 条`;
+  list.replaceChildren(...hits.map((b) => {
+    const entry = names.entities[b.id];
+    const card = el('article', { class: 'card' },
+      el('h3', {}, b.zh || b.id, entry ? statusBadge(entry.status) : null),
+      el('div', { class: 'en' }, (b.cat || entry?.cat || '') + ' · ' + (b.en || entry?.en || '')),
+      el('p', { style: 'margin-top:8px' }, b.zhl || '官方未提供该条目的简介文本。'),
+      b.src
+        ? el('details', { style: 'margin-top:8px' },
+            el('summary', { style: 'font-size:12.5px;color:var(--fg-dim);cursor:pointer' }, '英文原文'),
+            el('p', { style: 'font-size:12.5px;color:var(--fg-dim)' }, b.en))
+        : null,
+      el('p', { style: 'margin-top:8px' },
+        b.src ? el('a', { href: b.src, target: '_blank', rel: 'noopener', style: 'font-size:12.5px' }, '来源 ↗ ') : null,
+        el('a', { href: `explore.html#${b.id}`, style: 'font-size:13.5px' }, ' 在 3D 探索中打开 →')),
+    );
+    return card;
+  }));
+}
+document.getElementById('filter').addEventListener('input', (e) => render(e.target.value));
+render();
+</script>
+</body>
+</html>
