@@ -15,41 +15,67 @@
 <meta name="twitter:image" content="assets/img/PIA21895_final_image.png">
 <link rel="stylesheet" href="assets/css/main.css">
 <style>
-  /* ---------- Compact Header & Mode HUD ---------- */
+  /* ---------- Streamlined Header & Mode HUD ---------- */
   .explore-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 8px 14px;
-    margin: 14px 0 8px;
-    padding-bottom: 8px;
+    gap: 6px 12px;
+    margin: 8px 0 4px;
+    padding-bottom: 4px;
     border-bottom: 1px solid var(--line-subtle);
   }
   .explore-title-row {
     display: flex;
     align-items: baseline;
-    gap: 10px;
+    gap: 8px;
     flex-wrap: wrap;
   }
   .explore-page-title {
     margin: 0;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 800;
     color: #fff;
     letter-spacing: -0.2px;
   }
   .explore-page-sub {
-    font-size: 13px;
+    font-size: 12px;
+    color: var(--fg-muted);
+  }
+  .explore-header-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-sidebar-toggle {
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid var(--line);
     color: var(--fg-dim);
+    padding: 3px 10px;
+    border-radius: 999px;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.18s ease;
+    min-height: 28px;
+  }
+  .btn-sidebar-toggle:hover {
+    color: #fff;
+    border-color: var(--accent);
+    background: rgba(56, 189, 248, 0.12);
   }
   .explore-mode-badge {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 3px 12px;
+    padding: 2px 10px;
     border-radius: 999px;
-    font-size: 12px;
+    font-size: 11.5px;
     font-weight: 600;
     background: rgba(56, 189, 248, 0.1);
     border: 1px solid rgba(56, 189, 248, 0.28);
@@ -57,8 +83,8 @@
     transition: all 0.2s ease;
   }
   .mode-dot {
-    width: 7px;
-    height: 7px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
     background: var(--accent);
     box-shadow: 0 0 8px var(--accent-glow);
@@ -73,31 +99,42 @@
     box-shadow: 0 0 8px var(--accent-2-glow);
   }
 
+  /* Distinct UI state: In theater mode, hide roam header, preset bar & tip to eliminate noise and maximize 3D viewport */
+  .theater-active-mode .explore-header {
+    display: none !important;
+  }
+  .theater-active-mode .preset-bar-wrap {
+    display: none !important;
+  }
+  .theater-active-mode .user-guide-tip {
+    display: none !important;
+  }
+
   /* ---------- Streamlined Preset Bar ---------- */
   .preset-bar-wrap {
-    margin: 6px 0 8px;
+    margin: 4px 0 6px;
   }
   .preset-bar {
     display: flex;
     align-items: center;
-    gap: 6px;
-    padding: 2px 0 4px;
+    gap: 5px;
+    padding: 1px 0 3px;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
   }
   .preset-bar::-webkit-scrollbar { display: none; }
   .preset-bar-label {
-    font-size: 12.5px;
+    font-size: 12px;
     color: var(--fg-muted);
     white-space: nowrap;
     flex-shrink: 0;
   }
   .preset-bar .chip {
     flex-shrink: 0;
-    padding: 5px 12px;
-    font-size: 13px;
-    min-height: 36px;
+    padding: 4px 10px;
+    font-size: 12.5px;
+    min-height: 32px;
     display: inline-flex;
     align-items: center;
   }
@@ -106,13 +143,6 @@
     color: #fff;
     background: rgba(56, 189, 248, 0.2);
     box-shadow: 0 0 10px rgba(56, 189, 248, 0.25);
-  }
-  /* Distinct UI state: When theater is active, hide roam preset bar & tip to eliminate dual-toolbar competition and maximize 3D viewport */
-  .theater-active-mode .preset-bar-wrap {
-    display: none;
-  }
-  .theater-active-mode .user-guide-tip {
-    display: none;
   }
 
   /* Story Theater trigger chip styling */
@@ -136,13 +166,13 @@
     align-items: center;
     justify-content: space-between;
     gap: 8px;
-    background: rgba(15, 23, 42, 0.85);
-    border: 1px solid rgba(56, 189, 248, 0.22);
+    background: rgba(15, 23, 42, 0.75);
+    border: 1px solid rgba(56, 189, 248, 0.2);
     border-radius: 6px;
-    padding: 5px 10px;
-    margin: 4px 0 8px;
-    font-size: 12px;
-    line-height: 1.4;
+    padding: 4px 8px;
+    margin: 2px 0 5px;
+    font-size: 11.5px;
+    line-height: 1.35;
   }
   .guide-tip-content {
     display: flex;
@@ -154,9 +184,9 @@
   .guide-tip-badge {
     background: rgba(56, 189, 248, 0.16);
     color: var(--accent);
-    padding: 1px 6px;
+    padding: 1px 5px;
     border-radius: 4px;
-    font-size: 11px;
+    font-size: 10.5px;
     font-weight: 700;
     flex-shrink: 0;
   }
@@ -167,18 +197,6 @@
     text-underline-offset: 2px;
   }
   .guide-tip-link:hover { color: #fff; }
-  .guide-tip-theater-btn {
-    background: transparent;
-    border: 0;
-    padding: 0;
-    color: var(--accent-2);
-    cursor: pointer;
-    font: inherit;
-    font-weight: 600;
-    text-decoration: underline;
-    text-underline-offset: 2px;
-  }
-  .guide-tip-theater-btn:hover { color: #fed7aa; }
   .guide-tip-close {
     background: transparent;
     border: 0;
@@ -200,26 +218,99 @@
     background: rgba(255, 255, 255, 0.1);
   }
 
+  /* Floating exit banner for in-page immersive mode */
+  .immersive-exit-banner {
+    position: fixed;
+    top: 14px;
+    right: 18px;
+    z-index: 100001;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(11, 17, 32, 0.9);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    border-radius: 999px;
+    padding: 5px 6px 5px 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+    color: #fff;
+    font-size: 12.5px;
+    transition: opacity 0.2s ease;
+  }
+  .immersive-status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--ok);
+    box-shadow: 0 0 8px rgba(52, 211, 153, 0.6);
+  }
+  .btn-exit-immersive {
+    background: rgba(239, 68, 68, 0.22);
+    border: 1px solid rgba(239, 68, 68, 0.55);
+    color: #fca5a5;
+    border-radius: 999px;
+    padding: 4px 12px;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    min-height: 32px;
+    transition: all 0.18s ease;
+  }
+  .btn-exit-immersive:hover {
+    background: rgba(239, 68, 68, 0.45);
+    color: #fff;
+  }
+
   /* ---------- Left Sidebar with Collapsible Categories ---------- */
+  .side-header-bar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+  .sidebar-collapse-btn {
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid var(--line);
+    color: var(--fg-muted);
+    border-radius: 6px;
+    padding: 6px 8px;
+    font: inherit;
+    font-size: 11.5px;
+    cursor: pointer;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    transition: all 0.15s ease;
+    flex-shrink: 0;
+  }
+  .sidebar-collapse-btn:hover {
+    color: #fff;
+    border-color: var(--accent);
+    background: rgba(56, 189, 248, 0.12);
+  }
   .btn-home-hero {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
     width: 100%;
-    padding: 9px 14px;
+    padding: 8px 12px;
     border-radius: 8px;
     background: linear-gradient(135deg, rgba(2, 132, 199, 0.8), rgba(56, 189, 248, 0.9));
     border: 1px solid var(--accent);
     color: #fff;
-    font-size: 13.5px;
+    font-size: 13px;
     font-weight: 600;
     cursor: pointer;
     box-shadow: 0 2px 10px var(--accent-glow);
     transition: all 0.2s ease;
-    margin-bottom: 10px;
-    min-height: 44px;
+    min-height: 42px;
     font-family: inherit;
+    flex: 1 1 auto;
   }
   .btn-home-hero:hover {
     transform: translateY(-1px);
@@ -455,18 +546,19 @@
     background: linear-gradient(145deg, rgba(16, 20, 36, 0.96) 0%, rgba(10, 14, 26, 0.98) 100%);
     border: 1px solid rgba(251, 146, 60, 0.38);
     border-radius: var(--r);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.55), 0 0 20px rgba(251, 146, 60, 0.1);
-    padding: 10px 14px 10px;
-    margin-bottom: 10px;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.55), 0 0 16px rgba(251, 146, 60, 0.1);
+    padding: 8px 12px 8px;
+    margin-bottom: 8px;
     position: relative;
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
   }
   .theater-header {
     display: flex;
-    flex-direction: column;
-    gap: 6px;
-    margin-bottom: 8px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 6px;
     padding-bottom: 6px;
     border-bottom: 1px solid rgba(251, 146, 60, 0.16);
   }
@@ -476,11 +568,12 @@
     justify-content: space-between;
     gap: 8px;
     width: 100%;
+    flex-wrap: wrap;
   }
   .theater-title-group {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px 8px;
     flex-wrap: wrap;
     min-width: 0;
   }
@@ -489,10 +582,12 @@
     color: #fdba74;
     border: 1px solid rgba(251, 146, 60, 0.4);
     flex-shrink: 0;
+    font-size: 11px;
+    padding: 2px 7px;
   }
   .theater-title {
     margin: 0;
-    font-size: 15px;
+    font-size: 14.5px;
     font-weight: 700;
     color: #fff;
     white-space: nowrap;
@@ -503,16 +598,16 @@
     flex-shrink: 0;
   }
   .theater-status-strip {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 6px 8px;
     flex-wrap: wrap;
-    font-size: 12px;
+    font-size: 11.5px;
     color: var(--fg-dim);
-    background: rgba(0, 0, 0, 0.25);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 6px;
-    padding: 3px 8px;
+    padding: 2px 8px;
   }
   .theater-status-label {
     font-size: 11px;
@@ -527,6 +622,8 @@
   }
   .theater-status-clock {
     font-weight: 600;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 11.5px;
   }
   .theater-btn-exit {
     background: rgba(255, 255, 255, 0.08);
@@ -534,11 +631,11 @@
     color: var(--fg-dim);
     font: inherit;
     font-size: 12px;
-    padding: 4px 12px;
+    padding: 3px 10px;
     border-radius: 999px;
     cursor: pointer;
     transition: all 0.2s ease;
-    min-height: 32px;
+    min-height: 28px;
     display: inline-flex;
     align-items: center;
     white-space: nowrap;
@@ -987,12 +1084,13 @@
       line-height: 1.35;
     }
     .theater-panel {
-      padding: 8px 8px;
+      padding: 6px 8px;
+      margin-bottom: 6px;
     }
     .theater-header {
-      gap: 5px;
-      margin-bottom: 6px;
-      padding-bottom: 5px;
+      gap: 4px;
+      margin-bottom: 4px;
+      padding-bottom: 4px;
     }
     .theater-top-row {
       display: flex;
@@ -1001,23 +1099,26 @@
       gap: 6px;
       width: 100%;
     }
+    .badge-theater-tag {
+      display: none;
+    }
     .theater-title {
       font-size: 13.5px;
       line-height: 1.25;
       font-weight: 700;
     }
     .theater-btn-exit {
-      min-height: 44px;
-      padding: 6px 12px;
-      font-size: 12px;
+      min-height: 40px;
+      padding: 4px 10px;
+      font-size: 11.5px;
       font-weight: 500;
       flex-shrink: 0;
     }
     .theater-status-strip {
-      font-size: 11px;
-      padding: 3px 6px;
-      gap: 4px 6px;
-      line-height: 1.3;
+      font-size: 10.5px;
+      padding: 2px 6px;
+      gap: 3px 5px;
+      line-height: 1.25;
     }
     .theater-stepper {
       display: grid;
@@ -1085,8 +1186,13 @@
       <h1 class="explore-page-title">3D 太阳系漫游</h1>
       <span class="explore-page-sub">NASA JPL 官方 WebGL 动力学解算驱动</span>
     </div>
-    <div class="explore-mode-badge" id="explore-mode-badge">
-      <span class="mode-dot"></span> 自由漫游模式
+    <div class="explore-header-right">
+      <button type="button" id="sidebar-toggle-btn" class="btn-sidebar-toggle" title="展开/收起天体侧栏 (快捷键 S)">
+        <span id="sidebar-toggle-icon">◀</span> <span id="sidebar-toggle-label">收起侧栏</span>
+      </button>
+      <div class="explore-mode-badge" id="explore-mode-badge">
+        <span class="mode-dot"></span> 自由漫游模式
+      </div>
     </div>
   </div>
 
@@ -1113,13 +1219,11 @@
       <span>左键旋转 · 滚轮缩放 · 右键平移</span>
       <span class="guide-tip-sep">·</span>
       <a href="guide.html" target="_blank" class="guide-tip-link">完整指引 ↗</a>
-      <span class="guide-tip-sep">·</span>
-      <span>🎬 推荐：<button type="button" class="guide-tip-theater-btn" id="guide-tip-theater-btn">卡西尼号剧场</button></span>
     </div>
     <button type="button" class="guide-tip-close" id="guide-tip-close" aria-label="关闭指引" title="暂时隐藏指引">✕</button>
   </div>
 
-  <div class="explore-layout">
+  <div class="explore-layout" id="explore-layout">
     <!-- 移动端抽屉展开按钮 -->
     <div class="side-mobile-toggle-bar">
       <button type="button" id="side-toggle-btn" class="side-toggle-btn" aria-expanded="false">
@@ -1128,11 +1232,14 @@
       </button>
     </div>
 
-    <!-- 左侧快捷导航侧栏 -->
+    <!-- 左侧快捷导航侧栏 (支持桌面一键收起) -->
     <aside class="side">
-      <button class="btn-home-hero" id="side-home-btn" type="button" aria-current="true">
-        🌌 返回太阳系全景 (全览模式)
-      </button>
+      <div class="side-header-bar">
+        <button class="btn-home-hero" id="side-home-btn" type="button" aria-current="true">
+          🌌 返回太阳系全景 (全览模式)
+        </button>
+        <button type="button" id="sidebar-collapse-btn" class="sidebar-collapse-btn" title="收起侧栏以最大化 3D 舞台 (快捷键 S)" aria-label="收起侧栏">◀ 收起</button>
+      </div>
 
       <div class="search-box-wrap">
         <input type="search" id="jump-search" placeholder="输入天体/航天器中文名搜索…" aria-label="跳转到天体或航天器" autocomplete="off">
@@ -1170,26 +1277,28 @@
       </details>
     </aside>
 
-    <section class="stage-section">
+    <section class="stage-section" id="stage-section">
+      <!-- 侧栏收起后的悬浮唤出按钮 -->
+      <button type="button" id="sidebar-reopen-btn" class="sidebar-reopen-btn" aria-label="展开天体目录 (S)" title="展开天体目录 (快捷键 S)">📂 展开天体目录</button>
+
       <!-- Story Theater 紧凑控制面板 -->
       <section id="story-theater-panel" class="theater-panel" style="display:none" aria-label="探索剧场：卡西尼号土星大结局">
         <div class="theater-header">
           <div class="theater-top-row">
             <div class="theater-title-group">
               <span class="badge badge-theater-tag">🎬 探索剧场</span>
-              <h3 class="theater-title">卡西尼号：土星大结局 (Grand Finale)</h3>
+              <h3 class="theater-title">卡西尼号：土星大结局</h3>
+              <div class="theater-status-strip">
+                <span id="theater-scene-idx-text" class="meta-val theater-status-idx">第 1 / 3 幕</span>
+                <span class="theater-status-sep">·</span>
+                <span id="theater-rate-badge" class="badge common">60x (1 分钟 / 秒)</span>
+                <span class="theater-status-sep">·</span>
+                <span id="theater-sim-clock-val" class="meta-val theater-status-clock" style="color:#67e8f9">推演运行中</span>
+              </div>
             </div>
             <div class="theater-header-actions">
               <button type="button" class="theater-btn-exit" id="theater-exit-btn" title="退出剧场并恢复普通探索">✕ 退出剧场</button>
             </div>
-          </div>
-          <div class="theater-status-strip">
-            <span class="theater-status-label">实时状态：</span>
-            <span id="theater-scene-idx-text" class="meta-val theater-status-idx">第 1 / 3 幕</span>
-            <span class="theater-status-sep">·</span>
-            <span id="theater-rate-badge" class="badge common">60x (1 分钟 / 秒)</span>
-            <span class="theater-status-sep">·</span>
-            <span id="theater-sim-clock-val" class="meta-val theater-status-clock" style="color:#67e8f9">推演运行中</span>
           </div>
         </div>
 
@@ -1241,6 +1350,13 @@
 
       <!-- 3D 舞台区域 (页面的视觉主体) -->
       <div class="stage" id="stage-wrapper">
+        <!-- 沉浸模式悬浮退出胶囊 -->
+        <div id="immersive-exit-banner" class="immersive-exit-banner" style="display:none">
+          <span class="immersive-status-dot"></span>
+          <span class="immersive-label">🪐 沉浸观测中</span>
+          <button type="button" id="exit-immersive-btn" class="btn-exit-immersive" title="退出沉浸模式 (Esc)">✕ 退出沉浸 (Esc)</button>
+        </div>
+
         <!-- 加载与恢复指示遮罩 -->
         <div id="stage-overlay" class="stage-overlay">
           <div id="stage-loading-box" style="display:flex;flex-direction:column;align-items:center;gap:12px">
@@ -1270,11 +1386,14 @@
             <span>当前视线：<strong id="current-label">太阳系全景 (全览模式)</strong></span>
             <span id="current-note"></span>
           </div>
-          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
             <button class="btn-fs" id="reset-home-btn" type="button" style="color:var(--accent);border-color:var(--accent)">
               ⟲ 返回全览模式
             </button>
-            <button class="btn-fs" id="fullscreen-btn" type="button">
+            <button class="btn-fs" id="immersive-mode-btn" type="button" title="进入沉浸式全屏观测 (快捷键 I)">
+              🪐 沉浸模式
+            </button>
+            <button class="btn-fs" id="fullscreen-btn" type="button" title="浏览器系统级全屏">
               ⛶ 全屏视口
             </button>
             <a id="open-raw" href="https://eyes.nasa.gov/apps/solar-system/" target="_blank" rel="noopener">在新标签页打开官方站点 ↗</a>
@@ -1715,6 +1834,76 @@ document.getElementById('fullscreen-btn').addEventListener('click', () => {
     document.exitFullscreen();
   }
 });
+
+// In-Page Immersive Mode (沉浸式观测模式 · 轻量纯前端全景)
+const immersiveBtn = document.getElementById('immersive-mode-btn');
+const exitImmersiveBtn = document.getElementById('exit-immersive-btn');
+const immersiveBanner = document.getElementById('immersive-exit-banner');
+
+function enterImmersiveMode() {
+  document.body.classList.add('stage-immersive-mode');
+  if (immersiveBanner) immersiveBanner.style.display = 'flex';
+}
+
+function exitImmersiveMode() {
+  document.body.classList.remove('stage-immersive-mode');
+  if (immersiveBanner) immersiveBanner.style.display = 'none';
+}
+
+immersiveBtn?.addEventListener('click', enterImmersiveMode);
+exitImmersiveBtn?.addEventListener('click', exitImmersiveMode);
+
+// Desktop Sidebar Collapsing & Progressive Disclosure
+const exploreLayout = document.getElementById('explore-layout');
+const sidebarToggleBtn = document.getElementById('sidebar-toggle-btn');
+const sidebarToggleIcon = document.getElementById('sidebar-toggle-icon');
+const sidebarToggleLabel = document.getElementById('sidebar-toggle-label');
+const sidebarCollapseBtn = document.getElementById('sidebar-collapse-btn');
+const sidebarReopenBtn = document.getElementById('sidebar-reopen-btn');
+
+function setSidebarCollapsed(collapsed) {
+  if (collapsed) {
+    exploreLayout?.classList.add('sidebar-collapsed');
+    if (sidebarToggleIcon) sidebarToggleIcon.textContent = '📂';
+    if (sidebarToggleLabel) sidebarToggleLabel.textContent = '展开侧栏';
+    sidebarToggleBtn?.setAttribute('title', '展开天体侧栏 (快捷键 S)');
+    sessionStorage.setItem('explore-sidebar-collapsed', '1');
+  } else {
+    exploreLayout?.classList.remove('sidebar-collapsed');
+    if (sidebarToggleIcon) sidebarToggleIcon.textContent = '◀';
+    if (sidebarToggleLabel) sidebarToggleLabel.textContent = '收起侧栏';
+    sidebarToggleBtn?.setAttribute('title', '收起天体侧栏以最大化 3D 舞台 (快捷键 S)');
+    sessionStorage.removeItem('explore-sidebar-collapsed');
+  }
+}
+
+function toggleSidebar() {
+  const isCurrentlyCollapsed = exploreLayout?.classList.contains('sidebar-collapsed');
+  setSidebarCollapsed(!isCurrentlyCollapsed);
+}
+
+sidebarToggleBtn?.addEventListener('click', toggleSidebar);
+sidebarCollapseBtn?.addEventListener('click', () => setSidebarCollapsed(true));
+sidebarReopenBtn?.addEventListener('click', () => setSidebarCollapsed(false));
+
+// Global Keyboard Shortcuts (Esc exits immersive; S toggles sidebar; I toggles immersive)
+window.addEventListener('keydown', (e) => {
+  const isTyping = ['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName);
+  if (e.key === 'Escape' && document.body.classList.contains('stage-immersive-mode')) {
+    exitImmersiveMode();
+  } else if (!isTyping) {
+    if (e.key === 's' || e.key === 'S') {
+      toggleSidebar();
+    } else if (e.key === 'i' || e.key === 'I') {
+      if (document.body.classList.contains('stage-immersive-mode')) exitImmersiveMode();
+      else enterImmersiveMode();
+    }
+  }
+});
+
+if (sessionStorage.getItem('explore-sidebar-collapsed') === '1') {
+  setSidebarCollapsed(true);
+}
 
 // Interactive Search with rich feedback
 const searchInput = document.getElementById('jump-search');

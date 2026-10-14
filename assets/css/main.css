@@ -713,11 +713,18 @@ a.card:hover {
 .explore-layout {
   display: grid;
   grid-template-columns: 280px 1fr;
-  gap: 22px;
+  gap: 20px;
   align-items: start;
+  transition: grid-template-columns 0.22s cubic-bezier(0.4, 0, 0.2, 1), gap 0.22s ease;
+  position: relative;
+}
+.explore-layout.sidebar-collapsed {
+  grid-template-columns: 0px 1fr;
+  gap: 0;
 }
 @media (max-width: 990px) {
   .explore-layout { grid-template-columns: 1fr; }
+  .explore-layout.sidebar-collapsed { grid-template-columns: 1fr; }
 }
 .side {
   position: sticky;
@@ -727,6 +734,119 @@ a.card:hover {
   padding-right: 6px;
   scrollbar-width: thin;
   scrollbar-color: var(--line) transparent;
+  transition: opacity 0.2s ease, width 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.explore-layout.sidebar-collapsed .side {
+  width: 0;
+  max-width: 0;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
+  overflow: hidden;
+  border: none;
+}
+
+/* Floating button to reopen sidebar when collapsed on desktop */
+.sidebar-reopen-btn {
+  display: none;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 50;
+  background: rgba(11, 17, 32, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--accent);
+  color: #fff;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5), 0 0 10px var(--accent-glow);
+  transition: all 0.2s ease;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+}
+.sidebar-reopen-btn:hover {
+  background: rgba(14, 165, 233, 0.25);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6), 0 0 16px var(--accent-glow);
+  transform: translateY(-1px);
+}
+.explore-layout.sidebar-collapsed .sidebar-reopen-btn {
+  display: inline-flex;
+}
+
+/* In-Page Immersive Mode */
+body.stage-immersive-mode {
+  overflow: hidden !important;
+}
+body.stage-immersive-mode .site-header,
+body.stage-immersive-mode footer,
+body.stage-immersive-mode .explore-header,
+body.stage-immersive-mode .preset-bar-wrap,
+body.stage-immersive-mode .user-guide-tip,
+body.stage-immersive-mode .side,
+body.stage-immersive-mode .side-mobile-toggle-bar,
+body.stage-immersive-mode .theater-narrative-panel,
+body.stage-immersive-mode .sop-tip-box,
+body.stage-immersive-mode .guided-section,
+body.stage-immersive-mode #cosmic-canvas {
+  display: none !important;
+}
+body.stage-immersive-mode .wrap {
+  max-width: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+body.stage-immersive-mode .explore-layout {
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+body.stage-immersive-mode .stage-section {
+  width: 100vw !important;
+  height: 100vh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+body.stage-immersive-mode .stage {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 99999 !important;
+  border-radius: 0 !important;
+  border: none !important;
+  margin: 0 !important;
+  box-shadow: none !important;
+  background: #000 !important;
+}
+body.stage-immersive-mode .stage iframe {
+  width: 100vw !important;
+  height: 100vh !important;
+  border: none !important;
+}
+body.stage-immersive-mode .stage-bar {
+  position: fixed !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 100000 !important;
+  background: rgba(5, 7, 14, 0.88) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+  padding: 8px 16px !important;
+  transform: translateY(calc(100% - 6px));
+  transition: transform 0.25s ease !important;
+}
+body.stage-immersive-mode .stage-bar:hover,
+body.stage-immersive-mode .stage-bar:focus-within {
+  transform: translateY(0) !important;
 }
 .side h3 {
   font-size: 12.5px;
