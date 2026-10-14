@@ -188,7 +188,7 @@ function switchView(routeKey) {
   const v = views[routeKey] || views.mars;
   const url = embedUrl({ route: v.route, featured: 'false', hd: 'true' });
   if (frame.src !== url) {
-    loader?.show();
+    if (!frame.getAttribute('src')) loader?.show();
     frame.src = url;
   }
   rawLink.href = url;

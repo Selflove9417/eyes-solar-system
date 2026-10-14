@@ -75,13 +75,19 @@ export function initStageLoader(frameEl, stageContainer = frameEl?.parentElement
   );
   stageContainer.prepend(overlay);
 
-  const hide = () => overlay.classList.add('hidden');
-  const show = () => overlay.classList.remove('hidden');
+  let timer = null;
+  const hide = () => {
+    if (timer) { clearTimeout(timer); timer = null; }
+    overlay.classList.add('hidden');
+  };
+  const show = (timeoutMs = 10000) => {
+    if (timer) clearTimeout(timer);
+    overlay.classList.remove('hidden');
+    timer = setTimeout(hide, timeoutMs);
+  };
 
   frameEl.addEventListener('load', hide);
-
-  // Safety fallback: auto-hide after 10s if load event was muffled by cross-origin
-  setTimeout(hide, 10000);
+  show(10000);
 
   return { show, hide };
 }

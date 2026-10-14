@@ -1178,7 +1178,7 @@ for (const [key, label, onByDefault] of OPTS) {
 document.getElementById('apply-time').addEventListener('click', () => {
   detachTheater({ resetTime: false });
   const raw = document.getElementById('time-input').value;
-  state.time = raw ? raw + ':00.000Z' : '';
+  state.time = raw ? (raw.length === 16 ? raw + ':00.000Z' : raw + '.000Z') : '';
   state.rate = document.getElementById('rate-input').value;
   refresh();
   if (theaterState.active && storyData) {

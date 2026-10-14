@@ -34,7 +34,8 @@ function render(q = '') {
   const needle = q.trim().toLowerCase();
   const hits = bodies.bodies.filter((b) => {
     if (!needle) return true;
-    return [b.zh, b.en, b.cat, b.id].join(' ').toLowerCase().includes(needle);
+    const entry = names.entities[b.id];
+    return [b.zh, entry?.en, b.en, b.cat, names.categories[b.cat], b.id].join(' ').toLowerCase().includes(needle);
   });
   count.textContent = `显示 ${hits.length} / ${bodies.bodies.length} 条`;
   list.replaceChildren(...hits.map((b) => {

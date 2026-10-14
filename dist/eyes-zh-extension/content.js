@@ -99,16 +99,31 @@
       }
     }
 
-    // 3. The detail panel's expand button splits its label across a bare text node
-    //    and a span (<button>"Read "<span>"More"</span></button>) and the app swaps
-    //    that span's text node out, so phrase reconstruction cannot recover it.
-    //    Match on the button identity instead. Verified DOM shape 2026-10-11.
-    for (const btn of root.querySelectorAll?.('button.more-button') || []) {
-      const t = clean(btn.textContent);
-      if (/^Read\s+More\b/i.test(t)) {
-        btn.textContent = uiMap['Read More'] || '阅读更多';
-      } else if (/^Read\s+Less\b/i.test(t) || /^Less\b/i.test(t)) {
-        btn.textContent = uiMap['Read Less'] || '收起';
+    // 3. Handle detail panel expand/collapse button (<button>"Read "<span>"More"</span></button>)
+    //    without destroying the inner <span> element that the host app mutates.
+    const moreBtns = new Set([
+      ...(root.matches?.('button.more-button') ? [root] : []),
+      ...(root.closest?.('button.more-button') ? [root.closest('button.more-button')] : []),
+      ...(root.querySelectorAll?.('button.more-button') || []),
+    ]);
+    for (const btn of moreBtns) {
+      for (const n of btn.childNodes) {
+        if (n.nodeType === Node.TEXT_NODE && /^\s*Read\s*$/i.test(n.nodeValue)) {
+          written.add(n);
+          n.nodeValue = '';
+        }
+      }
+      const span = btn.querySelector('span');
+      const target = span || btn;
+      const t = clean(target.textContent);
+      if (/^(Read\s+)?(More|更多)$/i.test(t) && t !== (uiMap['Read More'] || '阅读更多')) {
+        for (const n of target.childNodes) {
+          if (n.nodeType === Node.TEXT_NODE) replaceText(n, uiMap['Read More'] || '阅读更多');
+        }
+      } else if (/^(Read\s+)?(Less|收起)$/i.test(t) && t !== (uiMap['Read Less'] || '收起')) {
+        for (const n of target.childNodes) {
+          if (n.nodeType === Node.TEXT_NODE) replaceText(n, uiMap['Read Less'] || '收起');
+        }
       }
     }
   }

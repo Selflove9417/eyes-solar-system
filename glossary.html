@@ -115,7 +115,7 @@ function renderMissing() {
   const q = document.getElementById('f-mis').value.trim().toLowerCase();
   const rows = [...entityById.values()]
     .filter((e) => !names.entities[e.id])
-    .filter((e) => !q || [e.displayName || e.iauName, e.category, e.id].join(' ').toLowerCase().includes(q))
+    .filter((e) => !q || [e.displayName || e.iauName, e.category, names.categories[e.category], e.id].join(' ').toLowerCase().includes(q))
     .sort((a, b) => (a.category || '').localeCompare(b.category || '') ||
       (a.displayName || a.iauName || '').localeCompare(b.displayName || b.iauName || ''));
   tbody('t-mis').replaceChildren(...rows.map((e) => el('tr', {},
