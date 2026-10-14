@@ -37,6 +37,10 @@ jobs:
       - name: Build Extension Package
         run: node tools/pack-extension.mjs
 
+      - name: Prune Non-Production Directories
+        run: |
+          rm -rf research tools
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 

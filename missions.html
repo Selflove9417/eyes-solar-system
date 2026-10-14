@@ -30,8 +30,13 @@ const count = document.getElementById('count');
 
 function render(q = '') {
   const needle = q.trim().toLowerCase();
-  const hits = missions.missions.filter((m) =>
-    !needle || [m.zh, m.en, m.id].join(' ').toLowerCase().includes(needle));
+  const normNeedle = needle.replace(/韦布/g, '韦伯');
+  const hits = missions.missions.filter((m) => {
+    if (!needle) return true;
+    const str = [m.zh, m.en, m.id, m.zhBlurb].join(' ').toLowerCase();
+    const strNorm = str.replace(/韦布/g, '韦伯');
+    return str.includes(needle) || strNorm.includes(normNeedle);
+  });
   count.textContent = `显示 ${hits.length} / ${missions.missions.length} 条`;
   list.replaceChildren(...hits.map((m) => {
     const entry = names.entities[m.id];

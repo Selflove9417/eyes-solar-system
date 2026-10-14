@@ -14,6 +14,12 @@
     margin: 18px 0 16px;
     align-items: center;
   }
+  .preset-bar .chip[aria-pressed="true"] {
+    border-color: var(--accent);
+    color: #fff;
+    background: rgba(56, 189, 248, 0.2);
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.25);
+  }
   .btn-fs {
     background: rgba(15, 23, 42, 0.7);
     border: 1px solid var(--line);
@@ -647,7 +653,7 @@
 
   <div class="preset-bar">
     <span style="font-size:13.5px;color:var(--fg-dim);font-weight:500">快捷航线：</span>
-    <button class="chip" data-quick="home" type="button" style="border-color:var(--accent);color:#fff;background:rgba(56,189,248,0.2)">🌌 太阳系全览</button>
+    <button class="chip" data-quick="home" type="button" aria-pressed="true">🌌 太阳系全览</button>
     <button class="chip" data-quick="sun" type="button">☀️ 太阳</button>
     <button class="chip" data-quick="earth" type="button">🌍 地球</button>
     <button class="chip" data-quick="mars" type="button">🔴 火星</button>
@@ -689,6 +695,8 @@
         <label class="sr" for="rate-input">流速</label>
         <select id="rate-input" style="background:var(--bg-soft);border:1px solid var(--line);border-radius:6px;color:var(--fg);padding:7px 10px;font:inherit">
           <option value="">实时流速 (真实速度)</option>
+          <option value="1">1 秒 / 秒 (1x 标准流速)</option>
+          <option value="0">0 (暂停时间推演)</option>
           <option value="60">1 分钟 / 秒</option>
           <option value="3600">1 小时 / 秒</option>
           <option value="86400">1 天 / 秒</option>
@@ -982,6 +990,10 @@ function refresh() {
         ? '<span class="badge en-left">未收录中文</span>'
         : '';
   }
+  document.querySelectorAll('[data-quick]').forEach((b) => {
+    const isHit = !theaterState.active && b.getAttribute('data-quick') === state.route;
+    b.setAttribute('aria-pressed', String(isHit));
+  });
   history.replaceState(null, '', '#' + state.route);
 }
 
@@ -1069,23 +1081,37 @@ function renderSearch(query) {
     resultsPanel.style.display = 'none';
     return;
   }
-  const hits = Object.entries(names.entities).filter(([id, e]) =>
-    e.zh.toLowerCase().includes(q) ||
-    e.en.toLowerCase().includes(q) ||
-    id.toLowerCase().includes(q) ||
-    (e.cat && e.cat.toLowerCase().includes(q))
-  ).slice(0, 12);
+  const normQ = q.replace(/韦布/g, '韦伯');
+  const hits = Object.entries(names.entities).filter(([id, e]) => {
+    const zhNorm = (e.zh || '').replace(/韦布/g, '韦伯').toLowerCase();
+    const aliases = (e.aliases || []).join(' ').toLowerCase();
+    const catZh = (names.categories[e.cat] || '').toLowerCase();
+    return zhNorm.includes(normQ) ||
+      (e.zh && e.zh.toLowerCase().includes(q)) ||
+      (e.en && e.en.toLowerCase().includes(q)) ||
+      id.toLowerCase().includes(q) ||
+      aliases.includes(q) ||
+      (e.cat && e.cat.toLowerCase().includes(q)) ||
+      catZh.includes(q);
+  }).slice(0, 12);
 
   resultsPanel.style.display = 'flex';
   if (!hits.length) {
-    resultsPanel.innerHTML = '<div class="search-no-results">未找到包含 “' + CSS.escape(query) + '” 的天体或航天器<br><small style="color:var(--fg-dim)">可尝试搜索“火星”、“土星”、“旅行者”或小行星编号</small></div>';
+    resultsPanel.replaceChildren(
+      el('div', { class: 'search-no-results' },
+        `未找到包含 “${query}” 的天体或航天器`,
+        el('br'),
+        el('small', { style: 'color:var(--fg-dim)' }, '可尝试搜索“火星”、“土星”、“旅行者”或小行星编号')
+      )
+    );
     return;
   }
 
   resultsPanel.replaceChildren(...hits.map(([id, e]) => {
+    const catLabel = names.categories[e.cat] || e.cat || (e.status === 'std' ? '规范译名' : '已收录');
     const btn = el('button', { class: 'search-result-item', type: 'button' },
       el('div', {}, el('strong', {}, e.zh), el('span', { class: 'en', style: 'margin-left:8px' }, e.en)),
-      el('span', { class: 'badge ' + (e.status || 'keep') }, e.cat || (e.status === 'std' ? '规范译名' : '已收录'))
+      el('span', { class: 'badge ' + (e.status || 'keep') }, catLabel)
     );
     btn.addEventListener('click', () => {
       detachTheater();
@@ -1257,7 +1283,13 @@ function scheduleSceneAutoEnd() {
         theaterState.sceneAccumulatedSimMs = 62000;
         state.rate = 0;
         const currentSimMs = theaterState.sceneBaseEpoch + 62000;
-        state.time = new Date(currentSimMs).toISOString();
+        const currentSimIso = new Date(currentSimMs).toISOString();
+        state.time = currentSimIso;
+        const timeInput = document.getElementById('time-input');
+        if (timeInput) timeInput.value = currentSimIso.slice(0, 16);
+        const rateInput = document.getElementById('rate-input');
+        if (rateInput) rateInput.value = '0';
+        refresh();
         if (storyData) renderTheaterUI(storyData);
       }
     }, remainingWallMs);
@@ -1380,7 +1412,10 @@ function renderTheaterUI(story) {
 
   document.getElementById('theater-scene-title').textContent = scene.title;
   document.getElementById('theater-scene-subtitle').textContent = scene.subtitle;
-  document.getElementById('theater-scene-narrative').innerHTML = `<p>${scene.narrative}</p>`;
+  const narrativeBox = document.getElementById('theater-scene-narrative');
+  narrativeBox.replaceChildren(
+    ...String(scene.narrative || '').split(/\n\n+/).map((para) => el('p', {}, para))
+  );
   document.getElementById('theater-scene-focus').textContent = scene.visualFocus;
 
   if (scene.historicReference) {

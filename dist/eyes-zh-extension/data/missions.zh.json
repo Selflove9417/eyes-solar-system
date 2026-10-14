@@ -80,11 +80,11 @@
     },
     {
       "id": "sc_jwst",
-      "zh": "詹姆斯·韦布空间望远镜",
+      "zh": "詹姆斯·韦伯空间望远镜",
       "en": "James Webb Space Telescope",
       "src": "https://eyes.nasa.gov/apps/solar-system/descriptions/sc_jwst.json",
       "enBlurb": "The James Webb Space Telescope (JWST) is a large infrared telescope with an approximately 6.5 meter primary mirror.",
-      "zhBlurb": "詹姆斯·韦布空间望远镜（JWST）是一台大型红外望远镜，主镜口径约 6.5 米。"
+      "zhBlurb": "詹姆斯·韦伯空间望远镜（JWST，亦称韦布空间望远镜）是一台大型红外望远镜，主镜口径约 6.5 米。"
     },
     {
       "id": "sc_hubble_space_telescope",

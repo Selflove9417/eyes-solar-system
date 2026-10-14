@@ -105,9 +105,11 @@
     //    Match on the button identity instead. Verified DOM shape 2026-10-11.
     for (const btn of root.querySelectorAll?.('button.more-button') || []) {
       const t = clean(btn.textContent);
-      if (!/^Read\b/.test(t) || t.length > 24) continue;
-      written.add(btn);
-      btn.textContent = uiMap['Read More'] || '阅读更多';
+      if (/^Read\s+More\b/i.test(t)) {
+        btn.textContent = uiMap['Read More'] || '阅读更多';
+      } else if (/^Read\s+Less\b/i.test(t) || /^Less\b/i.test(t)) {
+        btn.textContent = uiMap['Read Less'] || '收起';
+      }
     }
   }
 
@@ -183,7 +185,15 @@
     const stripTags = (s) => (s || '').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
     const addDesc = (en, zh) => {
       const a = stripTags(en), b = stripTags(zh);
-      if (a && b) descMap[a] = b;
+      if (!a || !b) return;
+      if (a.includes('##')) {
+        const escaped = a.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+                         .replace(/\\\[##\w+##\\\]|##\w+##/g, '(\\d+)');
+        const tpl = b.replace(/\[##\w+##\]|##\w+##/g, '$1');
+        patterns.push({ re: new RegExp('^' + escaped + '$'), tpl });
+      } else {
+        descMap[a] = b;
+      }
     };
     for (const e of bodies.bodies) addDesc(e.en, e.zhl);
     for (const e of missions.missions) addDesc(e.enBlurb, e.zhBlurb);

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>詹姆斯·韦伯空间望远镜特写 · 深空之眼 · 深空之眸</title>
-<meta name="description" content="詹姆斯·韦伯空间望远镜 (JWST) 核心参数、日地 L2 拉格朗日点晕轮轨道与 3D 展开姿态解析。">
+<meta name="description" content="詹姆斯·韦伯空间望远镜 (JWST) 核心参数、日地 L2 拉格朗日点晕轨道与 3D 展开姿态解析。">
 <link rel="stylesheet" href="assets/css/main.css">
 <style>
   .jwst-specs {
@@ -25,14 +25,14 @@
       詹姆斯·韦伯空间望远镜 (JWST)
     </h1>
     <p class="lede">
-      驻守在距地球约 150 万公里的日地拉格朗日 L2 点晕轮轨道，透过金光闪耀的 6.5 米六边形铍镜面，穿透星际尘埃，捕捉 135 亿年前宇宙第一批星系的光芒。
+      驻守在距地球约 150 万公里的日地拉格朗日 L2 点晕轨道，透过金光闪耀的 6.5 米六边形铍镜面，穿透星际尘埃，捕捉 135 亿年前宇宙第一批星系的光芒。
     </p>
   </div>
 
   <section class="big" id="stats">
     <div class="stat purple">
       <div class="n">150<small>万公里</small></div>
-      <div class="k">距地球距离（约地月距离的 4 倍，驻留在日地 L2 晕轮轨道）</div>
+      <div class="k">距地球距离（约地月距离的 4 倍，驻留在日地 L2 晕轨道）</div>
     </div>
     <div class="stat accent">
       <div class="n">6.5<small>米</small></div>
@@ -52,7 +52,7 @@
   <div class="stage">
     <iframe id="eyes" title="韦伯望远镜在 NASA Eyes 官方 3D 太阳系中的实时位置与姿态" allow="fullscreen"></iframe>
     <div class="stage-bar">
-      <span>当前位置：<strong>詹姆斯·韦伯空间望远镜 (James Webb Space Telescope)</strong> · 日地 L2 晕轮轨道</span>
+      <span>当前位置：<strong>詹姆斯·韦伯空间望远镜 (James Webb Space Telescope)</strong> · 日地 L2 晕轨道</span>
       <a id="raw" href="https://eyes.nasa.gov/apps/solar-system/#/sc_jwst" target="_blank" rel="noopener">在官方站点中打开 ↗</a>
     </div>
   </div>
@@ -100,7 +100,7 @@
       <tbody>
         <tr><td>主镜直径</td><td>2.4 米 (单块硼硅酸盐玻璃)</td><td><strong>6.5 米</strong> (18 块镀金铍金属六边形镜面，聚光面积达 6.25 倍)</td></tr>
         <tr><td>主要观测波段</td><td>紫外线、可见光、微量近红外 (0.1 ~ 1.0 μm)</td><td><strong>红外线为主</strong> (0.6 ~ 28.8 μm，深空红外穿透力绝佳)</td></tr>
-        <tr><td>运行轨道位置</td><td>低地球轨道 (LEO，高度约 540 公里)</td><td><strong>日地 L2 拉格朗日点</strong> (距离地球约 150 万公里晕轮轨道)</td></tr>
+        <tr><td>运行轨道位置</td><td>低地球轨道 (LEO，高度约 540 公里)</td><td><strong>日地 L2 拉格朗日点</strong> (距离地球约 150 万公里晕轨道)</td></tr>
         <tr><td>宇航员在轨维修</td><td>支持（曾由航天飞机执行 5 次在轨维修）</td><td><strong>不支持在轨人工维护</strong>（距离遥远，全靠自检与地面微调控制）</td></tr>
         <tr><td>发射时间</td><td>1990 年 4 月 24 日</td><td>2021 年 12 月 25 日（阿丽亚娜 5 号火箭精准入轨）</td></tr>
       </tbody>
@@ -132,11 +132,14 @@
 </main>
 
 <script type="module">
-import { renderChrome, embedUrl } from './assets/js/site.js';
+import { renderChrome, embedUrl, initStageLoader } from './assets/js/site.js';
 renderChrome('jwst.html');
 
+const frame = document.getElementById('eyes');
+initStageLoader(frame, document.querySelector('.stage'));
+
 const url = embedUrl({ route: 'sc_jwst', featured: 'false', hd: 'true' });
-document.getElementById('eyes').src = url;
+frame.src = url;
 document.getElementById('raw').href = url;
 </script>
 </body>

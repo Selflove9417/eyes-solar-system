@@ -151,7 +151,7 @@
 </main>
 
 <script type="module">
-import { renderChrome, embedUrl } from './assets/js/site.js';
+import { renderChrome, embedUrl, initStageLoader } from './assets/js/site.js';
 renderChrome('saturn.html');
 
 const views = {
@@ -166,11 +166,15 @@ const frame = document.getElementById('eyes');
 const rawLink = document.getElementById('raw');
 const stageCur = document.getElementById('stage-cur');
 const buttons = document.querySelectorAll('#view-buttons button');
+const loader = initStageLoader(frame, document.querySelector('.stage'));
 
 function switchView(routeKey) {
   const v = views[routeKey] || views.saturn;
   const url = embedUrl({ route: v.route, featured: 'false', hd: 'true' });
-  frame.src = url;
+  if (frame.src !== url) {
+    loader?.show();
+    frame.src = url;
+  }
   rawLink.href = url;
   stageCur.textContent = v.label;
 

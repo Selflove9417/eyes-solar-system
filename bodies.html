@@ -39,9 +39,11 @@ function render(q = '') {
   count.textContent = `显示 ${hits.length} / ${bodies.bodies.length} 条`;
   list.replaceChildren(...hits.map((b) => {
     const entry = names.entities[b.id];
+    const catZh = names.categories[b.cat] || b.cat || names.categories[entry?.cat] || entry?.cat || '';
+    const enTitle = entry?.en || b.id;
     const card = el('article', { class: 'card' },
       el('h3', {}, b.zh || b.id, entry ? statusBadge(entry.status) : null),
-      el('div', { class: 'en' }, (b.cat || entry?.cat || '') + ' · ' + (b.en || entry?.en || '')),
+      el('div', { class: 'en' }, (catZh ? catZh + ' · ' : '') + enTitle),
       el('p', { style: 'margin-top:8px' }, b.zhl || '官方未提供该条目的简介文本。'),
       b.src
         ? el('details', { style: 'margin-top:8px' },

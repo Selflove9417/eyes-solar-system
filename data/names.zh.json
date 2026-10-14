@@ -756,10 +756,11 @@
       "cat": "Spacecraft"
     },
     "sc_jwst": {
-      "zh": "詹姆斯·韦布空间望远镜",
+      "zh": "詹姆斯·韦伯空间望远镜",
       "en": "James Webb Space Telescope",
       "status": "std",
-      "cat": "Spacecraft"
+      "cat": "Spacecraft",
+      "aliases": ["詹姆斯·韦布空间望远镜", "韦布望远镜", "韦伯望远镜", "JWST"]
     },
     "sc_hubble_space_telescope": {
       "zh": "哈勃空间望远镜",

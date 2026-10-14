@@ -63,6 +63,29 @@ export function embedUrl({ route = 'home', time, rate, ...flags } = {}) {
   return `${NASA_APP}#/${route}${qs ? '?' + qs : ''}`;
 }
 
+// Initialize stage loading overlay for 3D simulation frames
+export function initStageLoader(frameEl, stageContainer = frameEl?.parentElement) {
+  if (!frameEl || !stageContainer) return null;
+  stageContainer.style.position = 'relative';
+
+  const overlay = el('div', { class: 'stage-overlay' },
+    el('div', { class: 'stage-spinner' }),
+    el('div', { class: 'stage-loading-text' }, '正在连接 NASA Eyes 官方 3D 服务…'),
+    el('div', { class: 'stage-loading-sub' }, '正在载入轨道动力学模型与太阳系 3D 场景…')
+  );
+  stageContainer.prepend(overlay);
+
+  const hide = () => overlay.classList.add('hidden');
+  const show = () => overlay.classList.remove('hidden');
+
+  frameEl.addEventListener('load', hide);
+
+  // Safety fallback: auto-hide after 10s if load event was muffled by cross-origin
+  setTimeout(hide, 10000);
+
+  return { show, hide };
+}
+
 // Initialize subtle cosmic starry canvas
 function initStarfield() {
   if (document.getElementById('cosmic-canvas')) return;
@@ -151,7 +174,7 @@ export function renderChrome(active) {
             深空档案 <span style="font-size:10px;opacity:0.7">▾</span>
           </button>
           <div class="nav-dropdown">
-            <a href="bodies.html"${active === 'bodies.html' ? ' aria-current="page"' : ''}>🪐 700+ 天体全库</a>
+            <a href="bodies.html"${active === 'bodies.html' ? ' aria-current="page"' : ''}>🗺️ 700+ 天体全库</a>
             <a href="missions.html"${active === 'missions.html' ? ' aria-current="page"' : ''}>🛰️ 航天任务探索</a>
             <a href="glossary.html"${active === 'glossary.html' ? ' aria-current="page"' : ''}>📖 中英术语对照</a>
             <a href="guide.html"${active === 'guide.html' ? ' aria-current="page"' : ''}>🕹️ 模拟器操作技巧</a>

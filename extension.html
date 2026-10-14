@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>安装中文汉化扩展 · 太阳系中文探索</title>
+<title>安装中文汉化扩展 · 深空之眸</title>
 <meta name="description" content="在 Chrome 或 Edge 桌面浏览器中安装非官方汉化扩展，直接在 NASA 官方站点内把界面与 3D 天体标签替换为简体中文。">
 <link rel="stylesheet" href="assets/css/main.css">
 </head>
@@ -17,6 +17,14 @@
     它不采集也不上传任何数据，不申请任何主机权限以外的能力，只在
     <code>eyes.nasa.gov/apps/solar-system/</code> 上运行；
     不下载、不缓存、不重新分发 NASA 的任何程序或素材。3D 计算与画面完全由官方站点产生。
+  </div>
+
+  <div style="margin:24px 0 28px;padding:20px 24px;background:rgba(56,189,248,0.08);border:1px solid rgba(56,189,248,0.3);border-radius:var(--r);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">
+    <div>
+      <div style="font-size:16px;font-weight:700;color:#fff;margin-bottom:4px">📦 离线安装扩展包已就绪</div>
+      <div style="font-size:13.5px;color:var(--fg-dim)">无需配置开发环境，下载解压后即可按下方指引在 Chrome 或 Edge 中一键载入。</div>
+    </div>
+    <a class="btn btn-primary" href="dist/eyes-zh-extension.zip" download="eyes-zh-extension.zip">📥 下载汉化扩展包 (.zip)</a>
   </div>
 
   <h2>它会汉化什么</h2>
@@ -40,14 +48,14 @@
   <h2>安装步骤</h2>
   <h3>Chrome（桌面）</h3>
   <ol>
-    <li>在项目目录执行 <code>node tools/pack-extension.mjs</code>，生成 <code>dist/eyes-zh-extension/</code>。</li>
+    <li>下载并解压上方 <code>eyes-zh-extension.zip</code> 压缩包（或在本地源码目录执行 <code>node tools/pack-extension.mjs</code>）。</li>
     <li>地址栏打开 <code>chrome://extensions</code>，开启右上角<strong>开发者模式</strong>。</li>
     <li>点<strong>加载已解压的扩展程序</strong>，选择 <code>dist/eyes-zh-extension</code> 文件夹。</li>
     <li>访问 <a href="https://eyes.nasa.gov/apps/solar-system/#/home" target="_blank" rel="noopener">官方站点</a>，标签与界面即为中文。</li>
   </ol>
   <h3>Edge（桌面）</h3>
   <ol>
-    <li>同样先执行 <code>node tools/pack-extension.mjs</code>。</li>
+    <li>同样先下载并解压 <code>eyes-zh-extension.zip</code> 离线包。</li>
     <li>地址栏打开 <code>edge://extensions</code>，开启左下角<strong>开发人员模式</strong>。</li>
     <li>点<strong>加载解压缩的扩展</strong>，选择 <code>dist/eyes-zh-extension</code> 文件夹。</li>
   </ol>

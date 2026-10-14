@@ -81,8 +81,11 @@
 </main>
 
 <script type="module">
-import { renderChrome, embedUrl, el } from './assets/js/site.js';
+import { renderChrome, embedUrl, el, initStageLoader } from './assets/js/site.js';
 renderChrome('voyager-1.html');
+
+const frame = document.getElementById('eyes');
+initStageLoader(frame, document.querySelector('.stage'));
 
 try {
   const controller = new AbortController();
@@ -93,29 +96,41 @@ try {
   const d = await res.json();
   const { raw, derived: dv, meta } = d;
 
+  // Real-time linear extrapolation based on speed from Horizons baseline
+  const asOfTime = new Date(meta.asOf).getTime();
+  const now = Date.now();
+  const dtSeconds = Math.max(0, (now - asOfTime) / 1000);
+  const curRangeKm = dv.rangeKm + dtSeconds * (raw.rangeRateKmS || 16.8816);
+  const curRangeAU = curRangeKm / 149597870.7;
+  const curLightTimeS = curRangeKm / 299792.458;
+  const curHours = Math.floor(curLightTimeS / 3600);
+  const curMins = Math.floor((curLightTimeS % 3600) / 60);
+  const curSecs = Math.floor(curLightTimeS % 60);
+  const curLightTimeText = `${curHours} 小时 ${curMins} 分 ${curSecs} 秒`;
+
   document.getElementById('stats').replaceChildren(
     el('div', { class: 'stat accent' },
-      el('div', { class: 'n' }, (dv.rangeKm / 1e8).toFixed(2), el('small', {}, '亿公里')),
-      el('div', { class: 'k' }, '此刻离地球实际直线距离')),
+      el('div', { class: 'n' }, (curRangeKm / 1e8).toFixed(2), el('small', {}, '亿公里')),
+      el('div', { class: 'k' }, '此刻离地球实际直线距离（动态实时解算）')),
     el('div', { class: 'stat' },
-      el('div', { class: 'n' }, dv.oneWayLightTimeText.replace(/\s/g, ' ')),
+      el('div', { class: 'n' }, curLightTimeText),
       el('div', { class: 'k' }, '一条指令光速发过去需要（单程光时）')),
     el('div', { class: 'stat cyan' },
-      el('div', { class: 'n' }, raw.rangeAU.toFixed(2), el('small', {}, 'AU')),
-      el('div', { class: 'k' }, `相当于日地平均距离的 ${raw.rangeAU.toFixed(0)} 倍`)),
+      el('div', { class: 'n' }, curRangeAU.toFixed(2), el('small', {}, 'AU')),
+      el('div', { class: 'k' }, `相当于日地平均距离的 ${curRangeAU.toFixed(0)} 倍`)),
     el('div', { class: 'stat purple' },
       el('div', { class: 'n' }, dv.kmPerSecond.toFixed(2), el('small', {}, 'km/s')),
       el('div', { class: 'k' }, `远离太阳的速度（每年远行约 ${dv.rangeAuPerYear.toFixed(2)} AU）`)),
   );
 
   document.getElementById('asof').textContent =
-    `数据观测时刻：${meta.asOf.replace('T', ' ').replace('Z', ' UTC')} · 观测基准点：地球质心 · 数据源：${meta.source}`;
+    `观测基准时刻：${meta.asOf.replace('T', ' ').replace('Z', ' UTC')}（已基于 ${raw.rangeRateKmS.toFixed(2)} km/s 退行速度实时外推至此刻） · 观测基准点：地球质心 · 数据源：${meta.source}`;
 
   const AU_MIN = 8.317;
   const rows = [
     ['太阳光直达地球表面', AU_MIN, '约 8 分 20 秒'],
     ['太阳光行至海王星轨道 (约 30 AU)', 30 * AU_MIN, '约 4 小时 10 分'],
-    ['人类射电信号抵达旅行者 1 号', dv.oneWayLightTimeS / 60, dv.oneWayLightTimeText],
+    ['人类射电信号抵达旅行者 1 号', curLightTimeS / 60, curLightTimeText],
   ];
   const maxMin = Math.max(...rows.map((r) => r[1]));
   document.getElementById('scale').replaceChildren(...rows.map(([label, min, txt]) =>
@@ -128,7 +143,7 @@ try {
     `实时距离与航向速度源自 JPL Horizons API 权威返回数据 ` +
     `（<code>COMMAND=${meta.horizonsCommand}</code>，<code>CENTER=${meta.observer}</code>，` +
     `目标校对：<code>${meta.horizonsTargetLine}</code>）。` +
-    `公里数与信号光时由物理常数换算。数据抓取于 ${meta.retrievedAt}。`;
+    `公里数与信号光时由物理常数换算。基准数据抓取于 ${meta.retrievedAt}。`;
 } catch (err) {
   console.error('Voyager-1 ephemeris load failed:', err);
   document.getElementById('stats').replaceChildren(
@@ -142,7 +157,7 @@ try {
 }
 
 const url = embedUrl({ route: 'sc_voyager_1', featured: 'false', hd: 'true' });
-document.getElementById('eyes').src = url;
+frame.src = url;
 document.getElementById('raw').href = url;
 </script>
 </body>

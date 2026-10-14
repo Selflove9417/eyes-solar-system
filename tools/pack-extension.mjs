@@ -3,6 +3,7 @@
 //   node tools/pack-extension.mjs        -> dist/eyes-zh-extension/
 import { cpSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { execSync } from 'node:child_process';
 
 const root = new URL('..', import.meta.url).pathname.replace(/^\/(\w:)/, '$1');
 const out = join(root, 'dist', 'eyes-zh-extension');
@@ -32,3 +33,10 @@ writeFileSync(join(out, 'README.txt'), [
 ].join('\n'));
 
 console.log('packed -> ' + out);
+
+try {
+  execSync(`tar -a -c -f "${join(root, 'dist', 'eyes-zh-extension.zip')}" -C "${join(root, 'dist')}" eyes-zh-extension`);
+  console.log('zipped -> ' + join(root, 'dist', 'eyes-zh-extension.zip'));
+} catch (e) {
+  console.warn('Zip creation failed:', e.message);
+}
