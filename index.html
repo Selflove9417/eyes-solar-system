@@ -15,18 +15,44 @@
 <meta name="twitter:image" content="assets/img/PIA21895_final_image.png">
 <link rel="stylesheet" href="assets/css/main.css">
 <style>
+  /* ---------- Streamlined Hero Section ---------- */
   .hero-container {
-    padding: 52px 0 24px;
+    padding: 38px 0 16px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
   }
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 12px;
+    border-radius: 999px;
+    background: rgba(56, 189, 248, 0.1);
+    border: 1px solid rgba(56, 189, 248, 0.28);
+    color: var(--accent);
+    font-size: 12.5px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .hero-container h1 {
+    margin: 4px 0 10px;
+    font-size: clamp(26px, 4vw, 38px);
+    line-height: 1.22;
+  }
+  .hero-lede {
+    color: var(--fg-dim);
+    font-size: 15.5px;
+    line-height: 1.65;
+    margin: 0 0 16px;
+    max-width: 760px;
+  }
   .hero-pillars {
     display: flex;
     flex-wrap: wrap;
-    gap: 16px 24px;
-    margin: 18px 0 6px;
-    font-size: 13.5px;
+    gap: 8px 18px;
+    margin: 0 0 18px;
+    font-size: 13px;
     color: var(--fg-dim);
   }
   .hero-pillar-item {
@@ -34,39 +60,101 @@
     align-items: center;
     gap: 6px;
   }
-  .hero-actions {
+  /* Two primary action entries */
+  .hero-actions-primary {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 14px;
-    margin: 24px 0 12px;
+    gap: 12px;
+    margin: 6px 0 12px;
+    width: 100%;
   }
-  .notice-statement {
-    border: 1px solid rgba(251, 146, 60, 0.25);
-    border-left: 4px solid var(--accent-2);
-    background: rgba(30, 20, 10, 0.45);
-    backdrop-filter: blur(10px);
-    border-radius: var(--r);
-    padding: 14px 20px;
-    margin: 18px 0 28px;
-    font-size: 13.5px;
-    color: #fed7aa;
-    line-height: 1.6;
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
+  .hero-btn-theater {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 12px 22px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(234, 88, 12, 0.92) 0%, rgba(251, 146, 60, 0.96) 100%);
+    border: 1px solid rgba(251, 146, 60, 0.7);
+    color: #fff;
+    box-shadow: 0 6px 20px rgba(234, 88, 12, 0.35);
+    font-size: 16px;
+    font-weight: 700;
+    transition: all 0.2s ease;
+    min-height: 52px;
+    text-decoration: none;
+    line-height: 1.25;
   }
-  .notice-statement a {
-    color: #fba65a;
+  .hero-btn-theater:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(234, 88, 12, 0.45);
+    background: linear-gradient(135deg, rgba(249, 115, 22, 0.98), rgba(251, 146, 60, 1));
+    color: #fff;
+    text-decoration: none;
+  }
+  .hero-btn-theater .btn-sub {
+    font-size: 11.5px;
+    font-weight: 400;
+    color: #ffedd5;
+    margin-top: 2px;
+  }
+  .hero-btn-roam {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 22px;
+    border-radius: 12px;
+    background: rgba(15, 23, 42, 0.85);
+    border: 1px solid var(--accent);
+    color: #fff;
+    font-size: 15.5px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    min-height: 52px;
+    box-shadow: 0 4px 16px var(--accent-glow);
+    text-decoration: none;
+  }
+  .hero-btn-roam:hover {
+    background: rgba(30, 41, 59, 0.95);
+    border-color: #7dd3fc;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px var(--accent-glow);
+    color: #fff;
+    text-decoration: none;
+  }
+  /* Secondary links */
+  .hero-sublinks {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 14px;
+    margin-top: 4px;
+    font-size: 13px;
+    color: var(--fg-muted);
+  }
+  .hero-sublink {
+    color: var(--fg-dim);
+    transition: color 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .hero-sublink:hover {
+    color: var(--accent);
     text-decoration: underline;
   }
 
-  /* Story Theater Showcase on Home Page */
+  /* ---------- Exquisite Story Theater Showcase Card ---------- */
   .theater-showcase {
-    background: linear-gradient(135deg, rgba(20, 15, 30, 0.92) 0%, rgba(11, 17, 32, 0.96) 50%, rgba(30, 20, 15, 0.9) 100%);
-    border: 1px solid rgba(251, 146, 60, 0.38);
+    background: linear-gradient(140deg, rgba(20, 16, 32, 0.94) 0%, rgba(11, 17, 32, 0.98) 60%, rgba(35, 22, 16, 0.92) 100%);
+    border: 1px solid rgba(251, 146, 60, 0.32);
     border-radius: var(--r);
-    padding: 28px 32px;
-    margin: 24px 0 32px;
-    box-shadow: 0 16px 44px rgba(0, 0, 0, 0.55), 0 0 30px rgba(251, 146, 60, 0.1);
+    padding: 22px 24px;
+    margin: 18px 0 28px;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5), 0 0 24px rgba(251, 146, 60, 0.08);
     position: relative;
     overflow: hidden;
   }
@@ -77,238 +165,419 @@
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(90deg, #fb923c, #f43f5e, #38bdf8);
+    background: linear-gradient(90deg, #ea580c, #fb923c, #38bdf8);
+  }
+  .theater-showcase-grid {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 22px;
+    align-items: center;
+  }
+  .theater-thumb-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .theater-thumb-img {
+    width: 140px;
+    height: 105px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid rgba(251, 146, 60, 0.35);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+  }
+  .theater-thumb-caption {
+    font-size: 11px;
+    color: var(--fg-muted);
+    text-align: center;
+    line-height: 1.35;
+  }
+  .theater-content-col {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .theater-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
   }
   .theater-badge-tag {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    padding: 4px 12px;
+    gap: 5px;
+    padding: 3px 10px;
     border-radius: 999px;
-    font-size: 12.5px;
+    font-size: 12px;
     font-weight: 700;
-    background: rgba(251, 146, 60, 0.18);
+    background: rgba(251, 146, 60, 0.16);
     color: #fed7aa;
-    border: 1px solid rgba(251, 146, 60, 0.4);
-    margin-bottom: 12px;
+    border: 1px solid rgba(251, 146, 60, 0.35);
   }
   .theater-showcase-title {
-    font-size: 25px;
+    font-size: 21px;
     font-weight: 800;
     color: #fff;
-    margin: 0 0 8px;
-    letter-spacing: -0.3px;
+    margin: 0;
+    letter-spacing: -0.2px;
   }
   .theater-showcase-desc {
-    font-size: 14.5px;
-    line-height: 1.7;
-    color: #e2e8f0;
-    max-width: 860px;
-    margin: 0 0 18px;
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: #cbd5e1;
+    margin: 0;
   }
-  .theater-feature-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px 14px;
-    margin-bottom: 22px;
-    font-size: 12.5px;
-    color: var(--fg-dim);
-  }
-  .theater-feature-tag-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    background: rgba(255, 255, 255, 0.04);
-    padding: 4px 10px;
-    border-radius: 6px;
-    border: 1px solid var(--line-subtle);
-  }
-  .theater-scenes-preview-grid {
+  /* Compact 3-Act Mini Progression */
+  .theater-acts-summary-strip {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin-bottom: 22px;
+    gap: 10px;
+    background: rgba(5, 7, 14, 0.55);
+    border: 1px solid var(--line-subtle);
+    border-radius: 8px;
+    padding: 10px 12px;
   }
-  .theater-scene-preview-card {
-    background: rgba(15, 23, 42, 0.65);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 10px;
-    padding: 14px 15px;
+  .act-mini-item {
     display: flex;
     flex-direction: column;
-    gap: 5px;
-    transition: transform 0.2s, border-color 0.2s;
+    gap: 2px;
+    border-left: 2px solid rgba(251, 146, 60, 0.4);
+    padding-left: 8px;
   }
-  .theater-scene-preview-card:hover {
-    transform: translateY(-2px);
-    border-color: rgba(251, 146, 60, 0.4);
-  }
-  .preview-step-num {
+  .act-mini-num {
     font-size: 11px;
     font-weight: 700;
     color: var(--accent-2);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
   }
-  .preview-step-title {
-    font-size: 14px;
+  .act-mini-title {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .act-mini-rate {
+    font-size: 11px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    color: #7dd3fc;
+  }
+  .theater-showcase-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 2px;
+  }
+  .theater-showcase-actions .btn {
+    min-height: 40px;
+    padding: 8px 18px;
+    font-size: 13.5px;
+  }
+
+  /* ---------- Unified Flagship Cards ---------- */
+  .flagship-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+    margin: 16px 0 32px;
+  }
+  .flagship-card {
+    background: var(--panel);
+    border: 1px solid var(--line-subtle);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--r);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 200px;
+    text-decoration: none;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .flagship-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent);
+    box-shadow: 0 10px 28px -4px var(--accent-glow);
+    text-decoration: none;
+  }
+  .flagship-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .flagship-icon {
+    font-size: 24px;
+    line-height: 1;
+  }
+  .flagship-highlight {
+    font-size: 11px;
+    padding: 2px 7px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--line-subtle);
+    color: var(--fg-dim);
+  }
+  .flagship-title {
+    font-size: 16.5px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+  }
+  .flagship-desc {
+    color: var(--fg-dim);
+    font-size: 13px;
+    line-height: 1.55;
+    margin: 0;
+    flex-grow: 1;
+  }
+  .flagship-meta {
+    margin-top: 14px;
+    padding-top: 10px;
+    border-top: 1px solid var(--line-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12.5px;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* ---------- Compact Tools Directory ---------- */
+  .tools-compact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 16px 0 28px;
+  }
+  .tool-compact-card {
+    background: var(--panel);
+    border: 1px solid var(--line-subtle);
+    border-radius: var(--r);
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  .tool-compact-card:hover {
+    background: var(--panel-hover);
+    border-color: var(--line-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px -4px var(--accent-glow);
+    text-decoration: none;
+  }
+  .tool-compact-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+  }
+  .tool-compact-title {
+    font-size: 14.5px;
     font-weight: 700;
     color: #fff;
   }
-  .preview-step-time {
-    font-size: 11px;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    color: #38bdf8;
-  }
-  .preview-step-desc {
+  .tool-compact-desc {
     font-size: 12.5px;
+    color: var(--fg-dim);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* ---------- Compact Disclaimer Notice ---------- */
+  .notice-statement-compact {
+    border: 1px solid rgba(251, 146, 60, 0.2);
+    border-left: 3px solid var(--accent-2);
+    background: rgba(22, 16, 10, 0.4);
+    border-radius: 8px;
+    padding: 10px 16px;
+    margin: 20px 0 32px;
+    font-size: 12.5px;
+    color: #fed7aa;
     line-height: 1.55;
-    color: var(--fg-dim);
   }
-  .theater-showcase-bottom {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 14px;
-    padding-top: 18px;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  .notice-statement-compact a {
+    color: #fba65a;
+    text-decoration: underline;
   }
-  .theater-archive-thumb-box {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .theater-thumb-img {
-    width: 68px;
-    height: 48px;
-    object-fit: cover;
-    border-radius: 6px;
-    border: 1px solid rgba(251, 146, 60, 0.35);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-  }
-  .theater-thumb-text {
-    font-size: 12px;
-    color: var(--fg-dim);
-    line-height: 1.45;
+
+  /* ---------- Responsive Breakpoints ---------- */
+  @media (max-width: 900px) {
+    .tools-compact-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
   @media (max-width: 768px) {
-    .theater-showcase {
-      padding: 20px 16px;
-      margin: 18px 0 24px;
+    .hero-container {
+      padding: 24px 0 12px;
     }
-    .theater-showcase-title {
-      font-size: 20px;
-    }
-    .theater-scenes-preview-grid {
-      grid-template-columns: 1fr;
-      gap: 10px;
-    }
-    .theater-showcase-bottom {
+    .hero-actions-primary {
       flex-direction: column;
       align-items: stretch;
+    }
+    .hero-btn-theater, .hero-btn-roam {
+      width: 100%;
+      text-align: center;
+      align-items: center;
+      min-height: 48px;
+    }
+    .theater-showcase {
+      padding: 16px 14px;
+    }
+    .theater-showcase-grid {
+      grid-template-columns: 88px 1fr;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .theater-thumb-col {
+      display: flex;
+    }
+    .theater-thumb-img {
+      width: 88px;
+      height: 66px;
+      border-radius: 6px;
+    }
+    .theater-thumb-caption {
+      display: none;
+    }
+    .theater-showcase-title {
+      font-size: 17px;
+    }
+    .theater-showcase-desc {
+      font-size: 12.5px;
+      line-height: 1.5;
+    }
+    .theater-acts-summary-strip {
+      grid-template-columns: 1fr;
+      gap: 6px;
+      padding: 8px 10px;
+    }
+    .theater-showcase-actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .theater-showcase-actions .btn {
+      width: 100%;
+      text-align: center;
+      justify-content: center;
+    }
+    .tools-compact-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 390px) {
+    .hero-container h1 {
+      font-size: 23px;
+    }
+    .hero-lede {
+      font-size: 13.5px;
+      line-height: 1.55;
+    }
+    .hero-pillars {
+      gap: 6px 12px;
+      font-size: 12px;
     }
   }
 </style>
 </head>
 <body>
 <main class="wrap">
+  <!-- Streamlined Hero -->
   <div class="hero-container">
     <div class="hero-tag">✨ 3D 太阳系动力学 · NASA Eyes 中文观测站</div>
     <h1 class="gradient-title">探索太阳系的每个角落</h1>
-    <p class="lede">
-      基于 NASA/JPL 官方 Eyes on the Solar System 原版 3D 动力学模型，专为中文用户打造的深空观测站。实时追踪行星与探测器航迹，探索四大旗舰专题与权威中文天体档案。
+    <p class="hero-lede">
+      基于 NASA/JPL 官方 3D 动力学模型，实时追踪行星与探测器航迹，探索深空旗舰特写与中文天体档案。
     </p>
 
+    <!-- 精简为最重要的两项特色 -->
     <div class="hero-pillars">
-      <span class="hero-pillar-item">🪐 官方 3D 动力学解算</span>
-      <span class="hero-pillar-item">🎬 卡西尼号探索剧场</span>
-      <span class="hero-pillar-item">🔴 旗舰深空任务特写</span>
-      <span class="hero-pillar-item">🗺️ 719 官方实体 · 392 中文对照</span>
-      <span class="hero-pillar-item">⚡ 中英术语精准对照</span>
+      <span class="hero-pillar-item">🪐 NASA 官方 3D 动力学解算</span>
+      <span class="hero-pillar-item">🎬 卡西尼号沉浸探索剧场</span>
     </div>
 
-    <div class="hero-actions">
-      <!-- 醒目的首屏主要行动入口：突出探索剧场 -->
-      <a class="btn-hero-primary" href="explore.html?story=cassini" style="background:linear-gradient(135deg, rgba(234, 88, 12, 0.9), rgba(251, 146, 60, 0.95));border-color:rgba(251, 146, 60, 0.6)">
+    <!-- 醒目的两个主要行动入口 -->
+    <div class="hero-actions-primary">
+      <a class="btn-hero-primary hero-btn-theater" href="explore.html?story=cassini">
         <span>🎬 卡西尼号探索剧场</span>
         <span class="btn-sub">土星大结局 · 沉浸式 3 幕时空推演</span>
       </a>
-      <a class="btn btn-secondary" href="explore.html">🪐 3D 太阳系自由漫游</a>
-      <a class="btn btn-secondary" href="guide.html">🕹️ 操作技巧指引</a>
-      <a class="btn btn-secondary" href="bodies.html">🗺️ 天体全库</a>
+      <a class="hero-btn-roam" href="explore.html">
+        🪐 3D 太阳系自由漫游
+      </a>
+    </div>
+
+    <!-- 操作技巧与天体全库降为次级链接 -->
+    <div class="hero-sublinks">
+      <span>快捷导航：</span>
+      <a class="hero-sublink" href="guide.html">🕹️ 操作技巧指引</a>
+      <span>·</span>
+      <a class="hero-sublink" href="bodies.html">🗺️ 天体全库</a>
+      <span>·</span>
+      <a class="hero-sublink" href="glossary.html">⚡ 天文中英术语对照</a>
     </div>
   </div>
 
-  <!-- 核心卖点突出：Story Theater 沉浸式历史探索剧场专区 -->
+  <!-- 精致特色卡片：Story Theater 沉浸式历史探索剧场专区 -->
   <section class="theater-showcase" aria-label="探索剧场：卡西尼号土星大结局">
-    <div class="theater-badge-tag">🎬 核心亮点 · 沉浸式 NASA 3D 探索剧场 (Story Theater)</div>
-    <h2 class="theater-showcase-title">卡西尼号：土星大结局 (Grand Finale)</h2>
-    <p class="theater-showcase-desc">
-      不仅仅是查看静态 3D 模型！探索剧场将 NASA 官方高精轨迹星历、堪培拉深空站通信时差（ERT）与任务绝版历史遥测整合成完整的剧情流。带您亲历十三年传奇航程的最后时刻：从狭窄环缝的极速穿掠，到扎入金色大气的阻力对抗，最终定格在永恒的通信绝唱。
-    </p>
-
-    <div class="theater-feature-tags">
-      <span class="theater-feature-tag-item">⏱️ 预计体验时长：约 2-3 分钟</span>
-      <span class="theater-feature-tag-item">🛰️ NASA Eyes 官方航天器 3D 姿态解算</span>
-      <span class="theater-feature-tag-item">📡 地球深空站 DSS-43 接收时间 (ERT) 对照</span>
-      <span class="theater-feature-tag-item">📸 搭载绝版 PIA21895 入轨前广角相机真实影像</span>
-      <span class="theater-feature-tag-item">🕹️ 支持暂停推演、自由旋转与重播</span>
-    </div>
-
-    <div class="theater-scenes-preview-grid">
-      <div class="theater-scene-preview-card">
-        <span class="preview-step-num">第 1 幕 · 穿环航道</span>
-        <span class="preview-step-title">绝版内缝飞越</span>
-        <span class="preview-step-time">2017-09-09 00:09 UTC (60x 加速)</span>
-        <span class="preview-step-desc">
-          第 22 次近星公转，卡西尼号最后一次穿过土星云顶与内侧 D 环之间仅 2000 公里的狭窄缝隙，极速掠过金色光环。
-        </span>
-      </div>
-
-      <div class="theater-scene-preview-card">
-        <span class="preview-step-num">第 2 幕 · 扎入金色大气</span>
-        <span class="preview-step-title">高层大气切入飞行</span>
-        <span class="preview-step-time">2017-09-15 10:31:48 UTC (1x 真实速度)</span>
-        <span class="preview-step-desc">
-          以约 12 万公里/小时的高速切入高层稀薄大气，姿控推进器点火逐步攀升，顽强对抗剧增的气动阻力以对准地球。
-        </span>
-      </div>
-
-      <div class="theater-scene-preview-card">
-        <span class="preview-step-num">第 3 幕 · 终曲与永恒</span>
-        <span class="preview-step-title">极限输出与通信绝唱</span>
-        <span class="preview-step-time">2017-09-15 10:32:06 UTC (终章定格)</span>
-        <span class="preview-step-desc">
-          推进器达到 100% 极限输出，天线失锁导致信号永久中断。晨昏线前历史永久定格，十三年深空巡航圆满谢幕。
-        </span>
-      </div>
-    </div>
-
-    <div class="theater-showcase-bottom">
-      <div class="theater-archive-thumb-box">
+    <div class="theater-showcase-grid">
+      <div class="theater-thumb-col">
         <img class="theater-thumb-img" src="assets/img/PIA21895_final_image.png" alt="PIA21895: 卡西尼号最后影像">
-        <div class="theater-thumb-text">
-          <strong style="color:#fff">绝版最后影像考证 (PIA21895)</strong><br>
-          广角相机进入大气前夕拍摄，完整收录于剧场第三幕
-        </div>
+        <span class="theater-thumb-caption">PIA21895 广角影像</span>
       </div>
-      <div style="display:flex;gap:12px;flex-wrap:wrap">
-        <a class="btn btn-primary" href="explore.html?story=cassini" style="background:linear-gradient(135deg, #ea580c, #fb923c);border-color:#fb923c;box-shadow:0 0 16px rgba(251,146,60,0.4)">
-          🎬 立即进入卡西尼号探索剧场 ↗
-        </a>
-        <a class="btn btn-secondary" href="saturn.html">📖 阅读土星与环系特写</a>
+
+      <div class="theater-content-col">
+        <div class="theater-header-row">
+          <div class="theater-badge-tag">🎬 沉浸式 3D 探索剧场 (Story Theater)</div>
+        </div>
+
+        <h2 class="theater-showcase-title">卡西尼号：土星大结局 (Grand Finale)</h2>
+        <p class="theater-showcase-desc">
+          高精星历、深空通信时差（ERT）与绝版历史遥测联动。亲历卡西尼号最后绝唱：穿过狭窄光环内缝、切入金色大气并抗阻对准地球，直至信号永久定格。
+        </p>
+
+        <!-- 三幕简要信息 -->
+        <div class="theater-acts-summary-strip">
+          <div class="act-mini-item">
+            <span class="act-mini-num">第 1 幕 · 穿环</span>
+            <span class="act-mini-title">内缝极速飞越</span>
+            <span class="act-mini-rate">2017-09-09 · 60x 模拟</span>
+          </div>
+          <div class="act-mini-item">
+            <span class="act-mini-num">第 2 幕 · 切入</span>
+            <span class="act-mini-title">高层大气切入</span>
+            <span class="act-mini-rate">2017-09-15 · 1x 实时</span>
+          </div>
+          <div class="act-mini-item">
+            <span class="act-mini-num">第 3 幕 · 终曲</span>
+            <span class="act-mini-title">通信绝唱定格</span>
+            <span class="act-mini-rate">10:32:06 · 历史定格</span>
+          </div>
+        </div>
+
+        <div class="theater-showcase-actions">
+          <a class="btn btn-primary" href="explore.html?story=cassini" style="background:linear-gradient(135deg, #ea580c, #fb923c);border-color:#fb923c;box-shadow:0 0 16px rgba(251,146,60,0.4)">
+            🎬 立即进入卡西尼号探索剧场 ↗
+          </a>
+          <a class="btn btn-secondary" href="saturn.html">
+            📖 阅读土星特写
+          </a>
+        </div>
       </div>
     </div>
   </section>
 
-  <div class="notice-statement">
-    <strong>非官方项目声明：</strong>
-    本站为独立非官方中文科普项目，与 NASA / JPL 无官方隶属关系。3D 天体轨道与航天器轨迹均直接由
-    <a href="https://eyes.nasa.gov/apps/solar-system/" target="_blank" rel="noopener">NASA JPL Eyes on the Solar System</a>
-    官方 3D 动力学模型在客户端通过 WebGL 实时驱动解算，本站不擅自修改任何物理规律与专有程序。
-  </div>
-
+  <!-- 四大旗舰科普特写 · 统一卡片高度与间距 -->
   <h2>🌟 旗舰科普特写 · 3D 视线联动</h2>
   <div class="flagship-grid">
     <a class="flagship-card mars" href="mars.html">
@@ -330,7 +599,7 @@
           <span class="flagship-highlight">日地 L2 点 150万km</span>
         </div>
         <div class="flagship-title">詹姆斯·韦伯空间望远镜 <span class="badge new">深空之眼</span></div>
-        <p class="flagship-desc">人类最宏伟的太空观测设施：驻守日地 L2 晕轨道、6.5 米镀金铍镜、40K/7K 深冷探测与展开式 3D 结构解析。</p>
+        <p class="flagship-desc">人类最宏伟的太空观测设施：驻守日地 L2 晕轨道、6.5 米镀金铍镜、深冷探测与展开式 3D 结构解析。</p>
       </div>
       <div class="flagship-meta"><span>进入特写与 3D 视角</span> <span>→</span></div>
     </a>
@@ -360,47 +629,64 @@
     </a>
   </div>
 
-  <h2>🧭 全景探索板块</h2>
-  <div class="grid cols-3">
-    <a class="card" href="explore.html">
-      <h3>3D 实时模拟漫游 <span class="badge std">核心工具</span></h3>
-      <p>官方 3D 太阳系模拟器嵌入区，支持中文侧栏一键跳转行星、卫星与航天器，自由调整时间流速与观察视角。</p>
+  <!-- 紧凑探索工具导航区（避免内容重复） -->
+  <h2>🧭 全景探索工具导航</h2>
+  <div class="tools-compact-grid">
+    <a class="tool-compact-card" href="explore.html">
+      <div class="tool-compact-head">
+        <span class="tool-compact-title">🪐 3D 实时模拟漫游</span>
+        <span class="badge std">核心工具</span>
+      </div>
+      <p class="tool-compact-desc">NASA 官方 3D 动力学嵌入区，中文侧栏快速跳转，自由调节流速与视角。</p>
     </a>
-    <a class="card" href="bodies.html">
-      <h3>天体中文名与知识库</h3>
-      <p>八大行星、矮行星、小行星及数百颗卫星的规范中文对照，附带官方逐条科普来源追溯。</p>
+
+    <a class="tool-compact-card" href="bodies.html">
+      <div class="tool-compact-head">
+        <span class="tool-compact-title">🗺️ 天体中文名与知识库</span>
+        <span class="badge common">719 实体</span>
+      </div>
+      <p class="tool-compact-desc">八大行星、矮行星与卫星的权威规范中文对照，附带官方逐条科普溯源。</p>
     </a>
-    <a class="card" href="missions.html">
-      <h3>航天任务与探测器库</h3>
-      <p>涵盖阿尔忒弥斯、旅行者号、卡西尼号、新视野号、帕克太阳探测器等重要人类太空探索任务档案。</p>
+
+    <a class="tool-compact-card" href="missions.html">
+      <div class="tool-compact-head">
+        <span class="tool-compact-title">🛰️ 航天任务与探测器库</span>
+        <span class="badge common">47 任务</span>
+      </div>
+      <p class="tool-compact-desc">涵盖阿尔忒弥斯、旅行者号、新视野号、帕克探测器等人类深空探索档案。</p>
     </a>
-    <a class="card" href="glossary.html">
-      <h3>中英天文学术语对照</h3>
-      <p>收录 719 个 NASA 官方实体，其中 392 个已建立规范/通用中文对照，未收录条目严格保留官方英文。</p>
+
+    <a class="tool-compact-card" href="glossary.html">
+      <div class="tool-compact-head">
+        <span class="tool-compact-title">⚡ 中英天文学术语对照</span>
+        <span class="badge code">权威对照</span>
+      </div>
+      <p class="tool-compact-desc">精准对照 719 个官方实体中英命名，规范/通用/代号严格分级标记。</p>
     </a>
-    <a class="card" href="extension.html">
-      <h3>浏览器汉化扩展程序</h3>
-      <p>一键汉化 NASA 官方 3D 模拟器内部的全部 DOM 标签与菜单文字，体验原生全中文界面。</p>
+
+    <a class="tool-compact-card" href="extension.html">
+      <div class="tool-compact-head">
+        <span class="tool-compact-title">🧩 浏览器汉化扩展程序</span>
+        <span class="badge std">即装即用</span>
+      </div>
+      <p class="tool-compact-desc">一键汉化 NASA 官方 3D 模拟器内部的全部原生 DOM 标签与菜单界面。</p>
     </a>
-    <a class="card" href="guide.html">
-      <h3>模拟器操作技巧指引</h3>
-      <p>键盘快捷键、鼠标视角缩放、光照阴影调节与时间机器功能详解，快速掌握专业级探索姿势。</p>
+
+    <a class="tool-compact-card" href="guide.html">
+      <div class="tool-compact-head">
+        <span class="tool-compact-title">🕹️ 模拟器操作技巧指引</span>
+        <span class="badge code">快速上手</span>
+      </div>
+      <p class="tool-compact-desc">视角旋转、滚轮缩放、右键平移、时间机器流速与光照快捷键全指南。</p>
     </a>
   </div>
 
-  <h2>🚀 开启你的太阳系探索之旅</h2>
-  <div class="card" style="background:linear-gradient(135deg, rgba(16, 27, 54, 0.85), rgba(9, 13, 24, 0.95));border:1px solid var(--line);border-top:1px solid rgba(56,189,248,0.3);padding:28px 30px;margin:22px 0 10px">
-    <h3 style="font-size:21px;color:#fff;margin-bottom:10px">浩瀚宇宙，触手可及</h3>
-    <p style="font-size:15px;line-height:1.75;color:var(--fg-dim);margin-bottom:22px;max-width:820px">
-      从水星灼热的荒原到冥王星冰封的心脏，从巡航火星的漫游车到突破日球层顶的星际信使。
-      无需复杂的天文学背景，通过直观的 3D 动力学与深度中文特写，探索八大行星、数十颗卫星与上百个深空航天任务。
-    </p>
-    <div style="display:flex;flex-wrap:wrap;gap:12px">
-      <a class="btn btn-primary" href="explore.html">🪐 进入 3D 模拟器</a>
-      <a class="btn btn-secondary" href="bodies.html">🗺️ 查阅天体全库</a>
-      <a class="btn btn-secondary" href="guide.html">📖 快捷操作指引</a>
-      <a class="btn btn-secondary" href="about.html">ℹ️ 关于与合规声明</a>
-    </div>
+  <!-- 压缩视觉占用的大段非官方合规声明 -->
+  <div class="notice-statement-compact">
+    <strong>非官方项目声明：</strong>
+    本站为独立非官方中文科普项目，与 NASA / JPL 无官方隶属关系。3D 天体轨道与航天器轨迹均直接由
+    <a href="https://eyes.nasa.gov/apps/solar-system/" target="_blank" rel="noopener">NASA JPL Eyes on the Solar System</a>
+    官方 3D 动力学模型在客户端通过 WebGL 实时驱动解算，本站不擅自修改任何物理规律与专有程序。
   </div>
 </main>
 

@@ -15,11 +15,90 @@
 <meta name="twitter:image" content="assets/img/PIA21895_final_image.png">
 <link rel="stylesheet" href="assets/css/main.css">
 <style>
+  /* ---------- Compact Header & Mode HUD ---------- */
+  .explore-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px 14px;
+    margin: 14px 0 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--line-subtle);
+  }
+  .explore-title-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .explore-page-title {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.2px;
+  }
+  .explore-page-sub {
+    font-size: 13px;
+    color: var(--fg-dim);
+  }
+  .explore-mode-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    background: rgba(56, 189, 248, 0.1);
+    border: 1px solid rgba(56, 189, 248, 0.28);
+    color: var(--accent);
+    transition: all 0.2s ease;
+  }
+  .mode-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent-glow);
+  }
+  .theater-active-mode .explore-mode-badge {
+    background: rgba(251, 146, 60, 0.15);
+    border-color: rgba(251, 146, 60, 0.4);
+    color: #fed7aa;
+  }
+  .theater-active-mode .mode-dot {
+    background: var(--accent-2);
+    box-shadow: 0 0 8px var(--accent-2-glow);
+  }
+
+  /* ---------- Streamlined Preset Bar ---------- */
+  .preset-bar-wrap {
+    margin: 6px 0 8px;
+  }
   .preset-bar {
     display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin: 18px 0 16px;
+    align-items: center;
+    gap: 6px;
+    padding: 2px 0 4px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .preset-bar::-webkit-scrollbar { display: none; }
+  .preset-bar-label {
+    font-size: 12.5px;
+    color: var(--fg-muted);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .preset-bar .chip {
+    flex-shrink: 0;
+    padding: 5px 12px;
+    font-size: 13px;
+    min-height: 36px;
+    display: inline-flex;
     align-items: center;
   }
   .preset-bar .chip[aria-pressed="true"] {
@@ -28,48 +107,124 @@
     background: rgba(56, 189, 248, 0.2);
     box-shadow: 0 0 10px rgba(56, 189, 248, 0.25);
   }
-  .btn-fs {
-    background: rgba(15, 23, 42, 0.7);
-    border: 1px solid var(--line);
-    color: var(--fg);
+  /* Distinct UI state: When theater is active, hide roam preset bar & tip to eliminate dual-toolbar competition and maximize 3D viewport */
+  .theater-active-mode .preset-bar-wrap {
+    display: none;
+  }
+  .theater-active-mode .user-guide-tip {
+    display: none;
+  }
+
+  /* Story Theater trigger chip styling */
+  .chip-theater {
+    border-color: var(--accent-2) !important;
+    color: #fff !important;
+    background: rgba(251, 146, 60, 0.18) !important;
+    font-weight: 600;
+    box-shadow: 0 0 10px rgba(251, 146, 60, 0.18);
+    transition: all 0.2s ease;
+  }
+  .chip-theater:hover {
+    background: rgba(251, 146, 60, 0.3) !important;
+    box-shadow: 0 0 16px rgba(251, 146, 60, 0.3);
+    transform: translateY(-1px);
+  }
+
+  /* User Quick Guide Tip Strip */
+  .user-guide-tip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    background: rgba(15, 23, 42, 0.85);
+    border: 1px solid rgba(56, 189, 248, 0.22);
     border-radius: 6px;
-    padding: 6px 14px;
+    padding: 5px 10px;
+    margin: 4px 0 8px;
+    font-size: 12px;
+    line-height: 1.4;
+  }
+  .guide-tip-content {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    color: var(--fg);
+  }
+  .guide-tip-badge {
+    background: rgba(56, 189, 248, 0.16);
+    color: var(--accent);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .guide-tip-sep { color: var(--fg-muted); }
+  .guide-tip-link {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .guide-tip-link:hover { color: #fff; }
+  .guide-tip-theater-btn {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    color: var(--accent-2);
+    cursor: pointer;
+    font: inherit;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .guide-tip-theater-btn:hover { color: #fed7aa; }
+  .guide-tip-close {
+    background: transparent;
+    border: 0;
+    color: var(--fg-muted);
     font-size: 13px;
     cursor: pointer;
-    transition: all 0.2s ease;
+    padding: 2px 4px;
+    border-radius: 4px;
+    line-height: 1;
+    min-height: 24px;
+    min-width: 24px;
     display: inline-flex;
     align-items: center;
-    gap: 5px;
-    min-height: 36px;
+    justify-content: center;
+    flex-shrink: 0;
   }
-  .btn-fs:hover {
-    border-color: var(--accent);
+  .guide-tip-close:hover {
     color: #fff;
-    background: var(--panel);
+    background: rgba(255, 255, 255, 0.1);
   }
+
+  /* ---------- Left Sidebar with Collapsible Categories ---------- */
   .btn-home-hero {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
     width: 100%;
-    padding: 11px 16px;
-    border-radius: 10px;
-    background: linear-gradient(135deg, rgba(2, 132, 199, 0.75), rgba(56, 189, 248, 0.85));
+    padding: 9px 14px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, rgba(2, 132, 199, 0.8), rgba(56, 189, 248, 0.9));
     border: 1px solid var(--accent);
     color: #fff;
-    font-size: 14.5px;
+    font-size: 13.5px;
     font-weight: 600;
     cursor: pointer;
-    box-shadow: 0 4px 14px var(--accent-glow);
+    box-shadow: 0 2px 10px var(--accent-glow);
     transition: all 0.2s ease;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
+    min-height: 44px;
     font-family: inherit;
   }
   .btn-home-hero:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px var(--accent-glow);
-    background: linear-gradient(135deg, rgba(3, 105, 161, 0.9), rgba(14, 165, 233, 0.95));
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px var(--accent-glow);
+    background: linear-gradient(135deg, rgba(3, 105, 161, 0.95), rgba(14, 165, 233, 1));
   }
   .btn-home-hero[aria-current="true"] {
     outline: 2px solid #fff;
@@ -77,7 +232,7 @@
   }
   .search-box-wrap {
     position: relative;
-    margin: 0 0 12px;
+    margin: 0 0 10px;
   }
   .search-results-panel {
     position: absolute;
@@ -109,9 +264,10 @@
     color: var(--fg);
     cursor: pointer;
     font: inherit;
-    font-size: 13.5px;
+    font-size: 13px;
     text-align: left;
     width: 100%;
+    min-height: 44px;
     transition: background 0.15s ease;
   }
   .search-result-item:hover, .search-result-item:focus {
@@ -125,14 +281,158 @@
     font-size: 13px;
     line-height: 1.5;
   }
+
+  /* Collapsible Category Accordions */
+  .side-cat-group {
+    margin-bottom: 5px;
+    border: 1px solid var(--line-subtle);
+    border-radius: 8px;
+    background: rgba(15, 23, 42, 0.35);
+    overflow: hidden;
+    transition: border-color 0.18s ease;
+  }
+  .side-cat-group[open] {
+    border-color: rgba(56, 189, 248, 0.28);
+    background: rgba(15, 23, 42, 0.6);
+  }
+  .side-cat-summary {
+    padding: 7px 10px;
+    cursor: pointer;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+    user-select: none;
+    transition: background 0.15s;
+    min-height: 38px;
+  }
+  .side-cat-summary::-webkit-details-marker { display: none; }
+  .side-cat-summary:hover {
+    background: rgba(56, 189, 248, 0.08);
+    color: var(--accent);
+  }
+  .side-cat-summary::after {
+    content: '▾';
+    font-size: 11px;
+    color: var(--fg-muted);
+    transition: transform 0.18s ease;
+  }
+  .side-cat-group[open] .side-cat-summary::after {
+    transform: rotate(180deg);
+    color: var(--accent);
+  }
+  .side-cat-count {
+    font-size: 11px;
+    padding: 1px 6px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--fg-muted);
+    margin-left: auto;
+    margin-right: 8px;
+  }
+  .side-cat-group .list {
+    padding: 4px 6px 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+  }
+  .side-cat-group .list button {
+    font-size: 13px;
+    padding: 6px 10px;
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    text-align: left;
+    background: rgba(15, 23, 42, 0.4);
+    border: 1px solid transparent;
+    color: var(--fg);
+    cursor: pointer;
+    border-radius: 6px;
+    font-family: inherit;
+    transition: all 0.15s ease;
+  }
+  .side-cat-group .list button:hover {
+    background: var(--panel);
+    border-color: var(--line-subtle);
+  }
+  .side-cat-group .list button[aria-current="true"] {
+    background: linear-gradient(135deg, rgba(2, 132, 199, 0.8), rgba(56, 189, 248, 0.85));
+    color: #fff;
+    border-color: var(--accent);
+    box-shadow: 0 2px 10px var(--accent-glow);
+  }
+  .side-cat-group .list button .en {
+    color: var(--fg-muted);
+    font-size: 11.5px;
+    margin-left: auto;
+  }
+  .side-cat-group .list button[aria-current="true"] .en {
+    color: #e0f2fe;
+  }
+
+  /* Advanced Settings Collapsible */
+  .side-advanced-group {
+    margin-top: 12px;
+    border: 1px solid var(--line-subtle);
+    border-radius: 8px;
+    background: rgba(10, 15, 28, 0.55);
+    overflow: hidden;
+  }
+  .side-advanced-summary {
+    padding: 8px 10px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--fg-dim);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+    user-select: none;
+    min-height: 38px;
+  }
+  .side-advanced-summary::-webkit-details-marker { display: none; }
+  .side-advanced-summary:hover {
+    color: #fff;
+    background: rgba(56, 189, 248, 0.08);
+  }
+  .side-advanced-summary::after {
+    content: '▾';
+    font-size: 11px;
+    color: var(--fg-muted);
+    transition: transform 0.18s ease;
+  }
+  .side-advanced-group[open] .side-advanced-summary::after {
+    transform: rotate(180deg);
+  }
+  .side-advanced-content {
+    padding: 10px;
+    border-top: 1px solid var(--line-subtle);
+    background: rgba(5, 7, 14, 0.4);
+  }
+  .side-subhead {
+    font-size: 11px;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 6px;
+  }
+
+  /* Mobile drawer button */
   .side-mobile-toggle-bar {
     display: none;
-    margin-bottom: 14px;
+    margin-bottom: 10px;
   }
   .side-toggle-btn {
     width: 100%;
-    padding: 12px 18px;
-    border-radius: 10px;
+    padding: 10px 16px;
+    border-radius: 8px;
     background: rgba(15, 23, 42, 0.85);
     border: 1px solid var(--line);
     color: #fff;
@@ -140,112 +440,108 @@
     align-items: center;
     justify-content: space-between;
     font-weight: 600;
-    font-size: 14.5px;
+    font-size: 14px;
     cursor: pointer;
+    min-height: 44px;
     transition: all 0.2s ease;
   }
   .side-toggle-btn:hover {
     border-color: var(--accent);
     background: rgba(22, 33, 58, 0.95);
   }
-  @media (max-width: 990px) {
-    .side-mobile-toggle-bar { display: block; }
-    .side {
-      display: none;
-      position: static;
-      max-height: 55vh;
-      border: 1px solid var(--line);
-      border-radius: var(--r);
-      background: rgba(11, 17, 32, 0.9);
-      padding: 16px;
-      margin-bottom: 24px;
-    }
-    .side.open {
-      display: block;
-    }
-    .explore-layout {
-      display: flex;
-      flex-direction: column;
-    }
-    .explore-layout > .stage-section {
-      order: 1;
-      width: 100%;
-    }
-    .explore-layout > .side-mobile-toggle-bar {
-      order: 2;
-      width: 100%;
-      margin-top: 14px;
-    }
-    .explore-layout > .side {
-      order: 3;
-      width: 100%;
-    }
-    .explore-layout > .guided-section {
-      order: 4;
-      width: 100%;
-    }
-  }
 
-  /* Story Theater Styles */
-  .chip-theater {
-    border-color: var(--accent-2) !important;
-    color: #fff !important;
-    background: rgba(251, 146, 60, 0.18) !important;
-    font-weight: 600;
-    box-shadow: 0 0 12px rgba(251, 146, 60, 0.2);
-    transition: all 0.2s ease;
-  }
-  .chip-theater:hover {
-    background: rgba(251, 146, 60, 0.3) !important;
-    box-shadow: 0 0 18px rgba(251, 146, 60, 0.35);
-    transform: translateY(-1px);
-  }
-
+  /* ---------- Compact Story Theater HUD Panel ---------- */
   .theater-panel {
-    background: linear-gradient(180deg, rgba(15, 23, 42, 0.96) 0%, rgba(11, 17, 32, 0.98) 100%);
-    border: 1px solid rgba(251, 146, 60, 0.35);
+    background: linear-gradient(145deg, rgba(16, 20, 36, 0.96) 0%, rgba(10, 14, 26, 0.98) 100%);
+    border: 1px solid rgba(251, 146, 60, 0.38);
     border-radius: var(--r);
-    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6), 0 0 24px rgba(251, 146, 60, 0.12);
-    padding: 16px 20px 14px;
-    margin-bottom: 14px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.55), 0 0 20px rgba(251, 146, 60, 0.1);
+    padding: 10px 14px 10px;
+    margin-bottom: 10px;
     position: relative;
-    overflow: hidden;
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
   }
   .theater-header {
     display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(251, 146, 60, 0.16);
+  }
+  .theater-top-row {
+    display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 12px;
-    border-bottom: 1px solid rgba(251, 146, 60, 0.15);
-    padding-bottom: 10px;
+    gap: 8px;
+    width: 100%;
   }
   .theater-title-group {
     display: flex;
     align-items: center;
     gap: 8px;
     flex-wrap: wrap;
+    min-width: 0;
+  }
+  .badge-theater-tag {
+    background: rgba(251, 146, 60, 0.2);
+    color: #fdba74;
+    border: 1px solid rgba(251, 146, 60, 0.4);
+    flex-shrink: 0;
   }
   .theater-title {
     margin: 0;
-    font-size: 16.5px;
+    font-size: 15px;
     font-weight: 700;
     color: #fff;
-    letter-spacing: -0.3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .theater-header-actions {
+    flex-shrink: 0;
+  }
+  .theater-status-strip {
+    display: flex;
+    align-items: center;
+    gap: 6px 8px;
+    flex-wrap: wrap;
+    font-size: 12px;
+    color: var(--fg-dim);
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 6px;
+    padding: 3px 8px;
+  }
+  .theater-status-label {
+    font-size: 11px;
+    color: var(--fg-muted);
+  }
+  .theater-status-idx {
+    font-weight: 700;
+    color: #fed7aa;
+  }
+  .theater-status-sep {
+    color: rgba(255, 255, 255, 0.2);
+  }
+  .theater-status-clock {
+    font-weight: 600;
   }
   .theater-btn-exit {
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid var(--line-subtle);
     color: var(--fg-dim);
     font: inherit;
-    font-size: 12.5px;
-    padding: 5px 12px;
+    font-size: 12px;
+    padding: 4px 12px;
     border-radius: 999px;
     cursor: pointer;
     transition: all 0.2s ease;
+    min-height: 32px;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
   }
   .theater-btn-exit:hover {
     background: rgba(248, 113, 113, 0.2);
@@ -258,13 +554,13 @@
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 8px;
     background: rgba(234, 179, 8, 0.12);
     border: 1px solid rgba(234, 179, 8, 0.35);
-    border-radius: 8px;
-    padding: 8px 12px;
-    margin-bottom: 12px;
-    font-size: 12.5px;
+    border-radius: 6px;
+    padding: 6px 10px;
+    margin-bottom: 8px;
+    font-size: 12px;
     color: #fef08a;
   }
   .theater-btn-resume {
@@ -272,10 +568,11 @@
     border: 1px solid rgba(234, 179, 8, 0.5);
     color: #fff;
     font: inherit;
-    font-size: 12px;
-    padding: 4px 10px;
-    border-radius: 6px;
+    font-size: 11.5px;
+    padding: 3px 8px;
+    border-radius: 5px;
     cursor: pointer;
+    min-height: 30px;
   }
   .theater-btn-resume:hover {
     background: rgba(234, 179, 8, 0.45);
@@ -285,31 +582,41 @@
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: var(--fg-dim);
     font: inherit;
-    font-size: 12px;
-    padding: 4px 10px;
-    border-radius: 6px;
+    font-size: 11.5px;
+    padding: 3px 8px;
+    border-radius: 5px;
     cursor: pointer;
+    min-height: 30px;
   }
 
-  .theater-stepper {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+  /* Compact Integrated Row: Stepper + Controls */
+  .theater-toolbar-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     gap: 8px;
-    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+  .theater-stepper {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex: 1 1 340px;
   }
   .theater-step-btn {
+    flex: 1 1 0;
     background: var(--bg-soft);
     border: 1px solid var(--line-subtle);
-    border-radius: 8px;
-    padding: 8px 10px;
+    border-radius: 6px;
+    padding: 5px 8px;
     color: var(--fg-dim);
     font: inherit;
     cursor: pointer;
     display: flex;
-    flex-direction: column;
-    gap: 2px;
-    text-align: left;
-    transition: all 0.2s ease;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.18s ease;
+    min-height: 38px;
   }
   .theater-step-btn:hover {
     border-color: rgba(251, 146, 60, 0.4);
@@ -317,86 +624,54 @@
     color: #fff;
   }
   .theater-step-btn.active {
-    background: rgba(251, 146, 60, 0.14);
+    background: rgba(251, 146, 60, 0.16);
     border-color: var(--accent-2);
     color: #fff;
-    box-shadow: 0 0 16px rgba(251, 146, 60, 0.2);
+    box-shadow: 0 0 10px rgba(251, 146, 60, 0.2);
   }
   .theater-step-btn .step-num {
     font-size: 10.5px;
-    text-transform: uppercase;
-    color: var(--accent-2);
     font-weight: 700;
-    letter-spacing: 0.5px;
+    color: var(--accent-2);
+    white-space: nowrap;
   }
   .theater-step-btn .step-title {
-    font-size: 12.5px;
+    font-size: 11.5px;
     font-weight: 600;
-    line-height: 1.35;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
-  .theater-meta-bar {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px 14px;
-    background: rgba(5, 7, 14, 0.6);
-    border: 1px solid var(--line-subtle);
-    border-radius: 8px;
-    padding: 8px 12px;
-    margin-bottom: 12px;
-    font-size: 12px;
-  }
-  .theater-meta-bar .meta-item {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    flex-wrap: wrap;
-  }
-  .theater-meta-bar .meta-label {
-    color: var(--fg-muted);
-  }
-  .theater-meta-bar .meta-val {
-    color: var(--fg);
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  }
-  .theater-meta-bar .meta-val.accent {
-    color: var(--accent-2);
-    font-weight: 600;
-  }
-  .theater-meta-bar .meta-val.dim {
-    color: var(--fg-dim);
-  }
-
   .theater-controls-bar {
     display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 0;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
   }
   .btn-theater-ctrl {
     background: var(--bg-soft);
     border: 1px solid var(--line);
     color: #fff;
-    padding: 7px 14px;
-    border-radius: 8px;
+    padding: 6px 12px;
+    border-radius: 6px;
     font: inherit;
-    font-size: 13px;
+    font-size: 12.5px;
     font-weight: 500;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
-    gap: 5px;
+    gap: 4px;
     transition: all 0.18s ease;
+    min-height: 38px;
+    white-space: nowrap;
   }
   .btn-theater-ctrl:hover:not(:disabled) {
     background: rgba(56, 189, 248, 0.15);
     border-color: var(--accent);
   }
   .btn-theater-ctrl:disabled {
-    opacity: 0.4;
+    opacity: 0.35;
     cursor: not-allowed;
   }
   .btn-theater-ctrl.btn-theater-accent {
@@ -407,111 +682,117 @@
   }
   .btn-theater-ctrl.btn-theater-accent:hover:not(:disabled) {
     background: rgba(251, 146, 60, 0.35);
-    box-shadow: 0 0 14px rgba(251, 146, 60, 0.3);
+    box-shadow: 0 0 12px rgba(251, 146, 60, 0.3);
   }
 
-  /* Narrative & Archive Panel (below 3D Stage) */
-  .theater-narrative-panel {
-    background: linear-gradient(180deg, rgba(15, 23, 42, 0.95) 0%, rgba(11, 17, 32, 0.98) 100%);
-    border: 1px solid rgba(251, 146, 60, 0.28);
-    border-radius: var(--r);
-    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
-    padding: 18px 20px;
-    margin-top: 14px;
-    margin-bottom: 20px;
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-  }
-  .theater-narrative-card {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
-  .narrative-title {
-    margin: 0 0 4px;
-    font-size: 16px;
-    font-weight: 700;
-    color: #fff;
-  }
-  .narrative-subtitle {
-    margin: 0 0 10px;
-    font-size: 13px;
-    color: var(--accent-2);
-  }
-  .narrative-body {
-    font-size: 14px;
-    line-height: 1.7;
-    color: var(--fg);
-  }
-  .narrative-body p {
-    margin: 0 0 8px;
-  }
-  .narrative-focus-box {
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-    background: rgba(56, 189, 248, 0.08);
-    border: 1px solid rgba(56, 189, 248, 0.2);
-    border-radius: 8px;
-    padding: 10px 14px;
-    font-size: 13px;
-    color: #e0f2fe;
-    line-height: 1.6;
-  }
-  .historic-archive-box {
-    background: rgba(5, 7, 14, 0.7);
-    border: 1px solid var(--line-subtle);
-    border-radius: 8px;
-    padding: 12px 14px;
-    font-size: 12.5px;
-  }
-  .archive-header {
+  /* Telemetry & Timing Bar (with collapsible details) */
+  .theater-telemetry-strip {
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 8px;
+    gap: 6px 14px;
+    margin-top: 8px;
+    padding-top: 6px;
+    border-top: 1px dashed rgba(251, 146, 60, 0.16);
+    font-size: 11.5px;
+  }
+  .telemetry-primary-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .meta-val {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    color: var(--fg);
+  }
+  .meta-val.accent {
+    color: var(--accent-2);
     font-weight: 600;
+  }
+  .meta-val.dim {
     color: var(--fg-dim);
-  }
-  .archive-body {
-    color: var(--fg-dim);
-    line-height: 1.6;
-  }
-  .archive-image-wrap {
-    margin-top: 12px;
-    padding: 12px;
-    background: rgba(0, 0, 0, 0.55);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 8px;
-  }
-  .archive-image-container {
-    text-align: center;
-    margin-bottom: 8px;
-  }
-  .archive-image-container img {
-    max-width: 100%;
-    max-height: 280px;
-    border-radius: 6px;
-    border: 1px solid var(--line-subtle);
-    display: inline-block;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.5);
   }
 
-  /* Theater Workflow Guide */
+  /* Secondary telemetry expandable */
+  .theater-tech-details {
+    display: inline-block;
+  }
+  .theater-tech-summary {
+    cursor: pointer;
+    color: var(--accent);
+    font-size: 11.5px;
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    transition: background 0.15s ease;
+    user-select: none;
+  }
+  .theater-tech-summary::-webkit-details-marker { display: none; }
+  .theater-tech-summary:hover {
+    background: rgba(56, 189, 248, 0.1);
+    color: #7dd3fc;
+  }
+  .theater-tech-expanded {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+    padding: 4px 8px;
+    background: rgba(5, 7, 14, 0.6);
+    border: 1px solid var(--line-subtle);
+    border-radius: 5px;
+    font-size: 11px;
+  }
+
+  /* ---------- 3D Stage & Bottom Bar ---------- */
+  .btn-fs {
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid var(--line);
+    color: var(--fg);
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 12.5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    min-height: 36px;
+  }
+  .btn-fs:hover {
+    border-color: var(--accent);
+    color: #fff;
+    background: var(--panel);
+  }
+
+  /* ---------- 2-Column Narrative & Archive (Below 3D Stage) ---------- */
+  .theater-narrative-panel {
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.95) 0%, rgba(11, 17, 32, 0.98) 100%);
+    border: 1px solid rgba(251, 146, 60, 0.25);
+    border-radius: var(--r);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    padding: 14px 18px;
+    margin-top: 12px;
+    margin-bottom: 16px;
+  }
   .theater-workflow-guide {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     flex-wrap: wrap;
-    padding: 9px 14px;
-    background: rgba(251, 146, 60, 0.08);
-    border: 1px dashed rgba(251, 146, 60, 0.35);
-    border-radius: 8px;
-    font-size: 12.5px;
+    padding: 6px 10px;
+    background: rgba(251, 146, 60, 0.06);
+    border: 1px dashed rgba(251, 146, 60, 0.28);
+    border-radius: 6px;
+    font-size: 12px;
     color: var(--fg);
-    margin-bottom: 14px;
+    margin-bottom: 12px;
   }
   .workflow-step {
     color: #fed7aa;
@@ -520,240 +801,320 @@
   .workflow-arrow {
     color: var(--accent-2);
     font-weight: 700;
-    font-size: 11px;
+    font-size: 10px;
   }
-
-  /* User Quick Guide Tip Banner */
-  .user-guide-tip {
+  .theater-narrative-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 16px;
+    align-items: start;
+  }
+  .narrative-title {
+    margin: 0 0 4px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .narrative-subtitle {
+    margin: 0 0 8px;
+    font-size: 12.5px;
+    color: var(--accent-2);
+  }
+  .narrative-body {
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--fg);
+  }
+  .narrative-body p {
+    margin: 0 0 6px;
+  }
+  .narrative-focus-box {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    background: rgba(56, 189, 248, 0.08);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 12.5px;
+    color: #e0f2fe;
+    line-height: 1.5;
+    margin-top: 10px;
+  }
+  .historic-archive-box {
+    background: rgba(5, 7, 14, 0.7);
+    border: 1px solid var(--line-subtle);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+  .archive-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 12px;
-    background: linear-gradient(90deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.85));
-    border: 1px solid rgba(56, 189, 248, 0.28);
-    border-radius: var(--r);
-    padding: 10px 16px;
-    margin: 12px 0 16px;
-    font-size: 13px;
-    line-height: 1.5;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
-  }
-  .guide-tip-content {
-    display: flex;
-    align-items: center;
-    gap: 10px;
     flex-wrap: wrap;
-    color: var(--fg);
+    gap: 6px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--fg-dim);
   }
-  .guide-tip-badge {
-    background: rgba(56, 189, 248, 0.18);
-    color: var(--accent);
-    border: 1px solid rgba(56, 189, 248, 0.35);
-    padding: 2px 8px;
+  .archive-body {
+    color: var(--fg-dim);
+    line-height: 1.55;
+  }
+  .archive-image-wrap {
+    margin-top: 10px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 6px;
-    font-size: 11.5px;
-    font-weight: 700;
-    white-space: nowrap;
   }
-  .guide-tip-sep {
-    color: var(--fg-muted);
+  .archive-image-container {
+    text-align: center;
+    margin-bottom: 6px;
   }
-  .guide-tip-close {
-    background: transparent;
-    border: 0;
-    color: var(--fg-muted);
-    font-size: 16px;
-    cursor: pointer;
-    padding: 4px 8px;
-    border-radius: 4px;
-    transition: color 0.15s, background 0.15s;
-    line-height: 1;
+  .archive-image-container img {
+    max-width: 100%;
+    max-height: 220px;
+    border-radius: 5px;
+    border: 1px solid var(--line-subtle);
+    display: inline-block;
   }
-  .guide-tip-close:hover {
-    color: #fff;
-    background: rgba(255, 255, 255, 0.1);
+
+  .sop-tip-box {
+    font-size: 12.5px;
+    color: var(--fg-dim);
+    background: rgba(15, 23, 42, 0.4);
+    border: 1px solid var(--line-subtle);
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin-top: 8px;
+    line-height: 1.55;
+  }
+
+  /* ---------- Responsive Adjustments ---------- */
+  @media (max-width: 990px) {
+    .side-mobile-toggle-bar { display: block; }
+    .side {
+      display: none;
+      position: static;
+      max-height: 55vh;
+      border: 1px solid var(--line);
+      border-radius: var(--r);
+      background: rgba(11, 17, 32, 0.95);
+      padding: 14px;
+      margin-bottom: 16px;
+    }
+    .side.open { display: block; }
+    .explore-layout {
+      display: flex;
+      flex-direction: column;
+    }
+    .explore-layout > .stage-section {
+      order: 1;
+      width: 100%;
+    }
+    .explore-layout > .side-mobile-toggle-bar {
+      order: 2;
+      width: 100%;
+      margin-top: 12px;
+    }
+    .explore-layout > .side {
+      order: 3;
+      width: 100%;
+    }
+    .explore-layout > .guided-section {
+      order: 4;
+      width: 100%;
+    }
+    .theater-narrative-grid {
+      grid-template-columns: 1fr;
+    }
   }
 
   @media (max-width: 768px) {
+    .theater-panel {
+      padding: 8px 10px;
+    }
     .theater-stepper {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 6px;
-      margin-bottom: 10px;
+      flex: 1 1 100%;
+      gap: 4px;
     }
     .theater-step-btn {
-      padding: 6px 6px;
-    }
-    .theater-step-btn .step-num {
-      font-size: 10px;
-    }
-    .theater-step-btn .step-title {
-      font-size: 11px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .theater-meta-bar {
-      gap: 4px 10px;
-      padding: 6px 10px;
-      font-size: 11.5px;
-      margin-bottom: 10px;
+      padding: 6px 4px;
+      min-height: 44px;
+      justify-content: center;
     }
     .theater-controls-bar {
+      width: 100%;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 6px;
+      gap: 4px;
+      margin-top: 4px;
     }
     .btn-theater-ctrl {
-      padding: 6px 4px;
-      font-size: 12px;
+      min-height: 44px;
+      padding: 6px 2px;
+      font-size: 11.5px;
       justify-content: center;
+    }
+    .btn-fs {
+      min-height: 44px;
+      padding: 8px 12px;
+    }
+    .theater-telemetry-strip {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
     }
   }
 
   @media (max-width: 480px) {
+    .explore-header {
+      margin: 8px 0 4px;
+      padding-bottom: 4px;
+    }
+    .explore-page-title {
+      font-size: 17px;
+    }
+    .explore-page-sub {
+      display: none;
+    }
+    .user-guide-tip {
+      padding: 4px 8px;
+      margin: 2px 0 6px;
+      font-size: 11.5px;
+      line-height: 1.35;
+    }
     .theater-panel {
-      padding: 8px 10px 8px;
-      margin-bottom: 10px;
+      padding: 8px 8px;
     }
     .theater-header {
+      gap: 5px;
+      margin-bottom: 6px;
+      padding-bottom: 5px;
+    }
+    .theater-top-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 6px;
-      margin-bottom: 6px;
-      padding-bottom: 6px;
-    }
-    .theater-title-group {
-      gap: 4px;
-      flex-wrap: nowrap;
-      min-width: 0;
-      flex: 1;
+      width: 100%;
     }
     .theater-title {
-      font-size: 13px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .theater-title-group .badge {
-      font-size: 10px;
-      padding: 1px 5px;
-      flex-shrink: 0;
-    }
-    .theater-header-actions {
-      flex-shrink: 0;
+      font-size: 13.5px;
+      line-height: 1.25;
+      font-weight: 700;
     }
     .theater-btn-exit {
-      padding: 8px 12px;
-      font-size: 12px;
-      font-weight: 600;
       min-height: 44px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      white-space: nowrap;
-      box-sizing: border-box;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 500;
+      flex-shrink: 0;
     }
-    .theater-btn-resume,
-    .theater-btn-mini-exit {
-      min-height: 44px;
-      padding: 8px 12px;
-      font-size: 12px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      box-sizing: border-box;
+    .theater-status-strip {
+      font-size: 11px;
+      padding: 3px 6px;
+      gap: 4px 6px;
+      line-height: 1.3;
     }
     .theater-stepper {
-      gap: 6px;
-      margin-bottom: 8px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px;
+      margin-bottom: 6px;
+      flex: 1 1 100%;
     }
     .theater-step-btn {
       min-height: 44px;
-      padding: 6px 4px;
-      display: flex;
+      padding: 4px 2px;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      gap: 2px;
+      line-height: 1.2;
     }
     .theater-step-btn .step-num {
-      font-size: 10px;
-      line-height: 1.2;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--accent-2);
     }
     .theater-step-btn .step-title {
-      font-size: 11px;
+      font-size: 11.5px;
+      font-weight: 600;
       line-height: 1.2;
-    }
-    .theater-meta-bar {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      padding: 5px 8px;
-      font-size: 11px;
-      margin-bottom: 8px;
-    }
-    .theater-meta-bar .meta-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 4px;
-      flex-wrap: nowrap;
-    }
-    .theater-meta-bar .meta-val {
-      font-size: 10.5px;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
     }
     .theater-controls-bar {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 6px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 4px;
     }
     .btn-theater-ctrl {
-      padding: 8px 6px;
-      font-size: 12.5px;
-      font-weight: 600;
-      justify-content: center;
       min-height: 44px;
+      font-size: 12px;
+      padding: 4px 2px;
+      justify-content: center;
+      line-height: 1.2;
+      display: flex;
+      align-items: center;
+    }
+    .theater-btn-resume, .theater-btn-mini-exit {
+      min-height: 44px;
+      padding: 6px 10px;
+      font-size: 12px;
     }
     .theater-narrative-panel {
-      padding: 12px 10px;
-      margin-top: 10px;
+      padding: 10px 12px;
     }
   }
 </style>
 </head>
 <body>
 <main class="wrap">
-  <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px;margin-top:28px">
-    <div>
-      <h1 style="margin:0 0 6px">3D 太阳系实时漫游</h1>
-      <p class="lede" style="margin:0">
-        画面基于 NASA/JPL 官方轨道动力学模型在客户端 WebGL 实时解算驱动。左侧中文导航可一键直达指定天体与航天器。
-      </p>
+  <!-- 简洁低矮的页眉区 -->
+  <div class="explore-header">
+    <div class="explore-title-row">
+      <h1 class="explore-page-title">3D 太阳系漫游</h1>
+      <span class="explore-page-sub">NASA JPL 官方 WebGL 动力学解算驱动</span>
     </div>
-    <div style="font-size:13px;color:var(--fg-dim);background:rgba(56,189,248,0.08);border:1px solid rgba(56,189,248,0.2);padding:6px 14px;border-radius:999px">
-      💡 点击列表或快捷航线可指挥 3D 视角直达天体
+    <div class="explore-mode-badge" id="explore-mode-badge">
+      <span class="mode-dot"></span> 自由漫游模式
     </div>
   </div>
 
-  <div class="preset-bar">
-    <span style="font-size:13.5px;color:var(--fg-dim);font-weight:500">快捷航线：</span>
-    <button class="chip" data-quick="home" type="button" aria-pressed="true">🌌 太阳系全览</button>
-    <button class="chip" data-quick="sun" type="button">☀️ 太阳</button>
-    <button class="chip" data-quick="earth" type="button">🌍 地球</button>
-    <button class="chip" data-quick="mars" type="button">🔴 火星</button>
-    <button class="chip" data-quick="sc_jwst" type="button">🔭 韦伯望远镜</button>
-    <button class="chip" data-quick="saturn" type="button">🪐 土星</button>
-    <button class="chip" data-quick="sc_voyager_1" type="button">🚀 旅行者 1 号</button>
-    <button class="chip" data-quick="sc_mars_2020" type="button">🤖 毅力号火星车</button>
-    <button class="chip chip-theater" id="theater-trigger-btn" type="button" aria-expanded="false">🎬 探索剧场：卡西尼号 Grand Finale</button>
+  <!-- 紧凑快捷航线栏 -->
+  <div class="preset-bar-wrap">
+    <div class="preset-bar">
+      <span class="preset-bar-label">快捷航线：</span>
+      <button class="chip" data-quick="home" type="button" aria-pressed="true">🌌 太阳系全览</button>
+      <button class="chip" data-quick="sun" type="button">☀️ 太阳</button>
+      <button class="chip" data-quick="earth" type="button">🌍 地球</button>
+      <button class="chip" data-quick="mars" type="button">🔴 火星</button>
+      <button class="chip" data-quick="sc_jwst" type="button">🔭 韦伯望远镜</button>
+      <button class="chip" data-quick="saturn" type="button">🪐 土星</button>
+      <button class="chip" data-quick="sc_voyager_1" type="button">🚀 旅行者 1 号</button>
+      <button class="chip" data-quick="sc_mars_2020" type="button">🤖 毅力号火星车</button>
+      <button class="chip chip-theater" id="theater-trigger-btn" type="button" aria-expanded="false">🎬 探索剧场：卡西尼号 Grand Finale</button>
+    </div>
   </div>
 
-  <!-- 新手快速指引与体验建议横幅 -->
+  <!-- 紧凑操作贴士条 -->
   <div class="user-guide-tip" id="user-guide-tip">
     <div class="guide-tip-content">
-      <span class="guide-tip-badge">💡 快速指引</span>
-      <span><strong>推荐体验</strong>：点击上方橙色【🎬 探索剧场：卡西尼号 Grand Finale】沉浸体验三幕历史时空复现。</span>
-      <span class="guide-tip-sep">|</span>
-      <span><strong>3D 操控</strong>：鼠标左键旋转视角 · 滚轮缩放景深 · 右键平移画面。</span>
+      <span class="guide-tip-badge">💡 提示</span>
+      <span>左键旋转 · 滚轮缩放 · 右键平移</span>
+      <span class="guide-tip-sep">·</span>
+      <a href="guide.html" target="_blank" class="guide-tip-link">完整指引 ↗</a>
+      <span class="guide-tip-sep">·</span>
+      <span>🎬 推荐：<button type="button" class="guide-tip-theater-btn" id="guide-tip-theater-btn">卡西尼号剧场</button></span>
     </div>
     <button type="button" class="guide-tip-close" id="guide-tip-close" aria-label="关闭指引" title="暂时隐藏指引">✕</button>
   </div>
@@ -767,8 +1128,8 @@
       </button>
     </div>
 
+    <!-- 左侧快捷导航侧栏 -->
     <aside class="side">
-      <!-- 显眼的全览重置按钮 -->
       <button class="btn-home-hero" id="side-home-btn" type="button" aria-current="true">
         🌌 返回太阳系全景 (全览模式)
       </button>
@@ -779,97 +1140,115 @@
       </div>
       <nav id="side-nav" aria-label="天体快捷导航"></nav>
 
-      <h3>官方嵌入控制</h3>
-      <div id="embed-opts" style="display:flex;flex-direction:column;gap:7px"></div>
+      <!-- 高级设置区域：默认折叠，保留所有原有时间机器与嵌入选项 -->
+      <details class="side-advanced-group" id="side-advanced-details">
+        <summary class="side-advanced-summary">⚙️ 模拟器高级设置 (流速与嵌入) ▾</summary>
+        <div class="side-advanced-content">
+          <h4 class="side-subhead">官方嵌入选项</h4>
+          <div id="embed-opts" style="display:flex;flex-direction:column;gap:7px"></div>
 
-      <h3>时间机器与流速</h3>
-      <div style="display:flex;flex-direction:column;gap:8px">
-        <div style="font-size:12px;color:var(--accent);line-height:1.4">
-          🌐 设定时间为 <strong>UTC (协调世界时)</strong>，比北京时间慢 8 小时
+          <h4 class="side-subhead" style="margin-top:14px">时间机器与流速</h4>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="font-size:11.5px;color:var(--accent);line-height:1.4">
+              🌐 设定时间为 <strong>UTC (协调世界时)</strong>
+            </div>
+            <label class="sr" for="time-input">时间 (UTC)</label>
+            <input type="datetime-local" id="time-input" title="设定 UTC 协调世界时" placeholder="UTC 时间" style="background:var(--bg-soft);border:1px solid var(--line);border-radius:6px;color:var(--fg);padding:6px 8px;font:inherit;font-size:13px">
+            <label class="sr" for="rate-input">流速</label>
+            <select id="rate-input" style="background:var(--bg-soft);border:1px solid var(--line);border-radius:6px;color:var(--fg);padding:6px 8px;font:inherit;font-size:13px">
+              <option value="">实时流速 (真实速度)</option>
+              <option value="1">1 秒 / 秒 (1x 标准流速)</option>
+              <option value="0">0 (暂停时间推演)</option>
+              <option value="60">1 分钟 / 秒</option>
+              <option value="3600">1 小时 / 秒</option>
+              <option value="86400">1 天 / 秒</option>
+              <option value="604800">1 周 / 秒</option>
+            </select>
+            <button class="chip" id="apply-time" type="button" style="width:100%;margin-top:2px">应用时间与速率</button>
+          </div>
         </div>
-        <label class="sr" for="time-input">时间 (UTC)</label>
-        <input type="datetime-local" id="time-input" title="设定 UTC 协调世界时" placeholder="UTC 时间" style="background:var(--bg-soft);border:1px solid var(--line);border-radius:6px;color:var(--fg);padding:7px 10px;font:inherit">
-        <label class="sr" for="rate-input">流速</label>
-        <select id="rate-input" style="background:var(--bg-soft);border:1px solid var(--line);border-radius:6px;color:var(--fg);padding:7px 10px;font:inherit">
-          <option value="">实时流速 (真实速度)</option>
-          <option value="1">1 秒 / 秒 (1x 标准流速)</option>
-          <option value="0">0 (暂停时间推演)</option>
-          <option value="60">1 分钟 / 秒</option>
-          <option value="3600">1 小时 / 秒</option>
-          <option value="86400">1 天 / 秒</option>
-          <option value="604800">1 周 / 秒</option>
-        </select>
-        <button class="chip" id="apply-time" type="button">应用时间与速率</button>
-      </div>
+      </details>
     </aside>
 
     <section class="stage-section">
-      <!-- Story Theater 面板 -->
+      <!-- Story Theater 紧凑控制面板 -->
       <section id="story-theater-panel" class="theater-panel" style="display:none" aria-label="探索剧场：卡西尼号土星大结局">
         <div class="theater-header">
-          <div class="theater-title-group">
-            <span class="badge" style="background:rgba(251,146,60,0.2);color:#fdba74;border:1px solid rgba(251,146,60,0.4)">🎬 探索剧场 MVP</span>
-            <h3 class="theater-title">卡西尼号：土星大结局 (Grand Finale)</h3>
+          <div class="theater-top-row">
+            <div class="theater-title-group">
+              <span class="badge badge-theater-tag">🎬 探索剧场</span>
+              <h3 class="theater-title">卡西尼号：土星大结局 (Grand Finale)</h3>
+            </div>
+            <div class="theater-header-actions">
+              <button type="button" class="theater-btn-exit" id="theater-exit-btn" title="退出剧场并恢复普通探索">✕ 退出剧场</button>
+            </div>
           </div>
-          <div class="theater-header-actions">
-            <button type="button" class="theater-btn-exit" id="theater-exit-btn" title="退出剧场并恢复普通探索">✕ 退出剧场</button>
+          <div class="theater-status-strip">
+            <span class="theater-status-label">实时状态：</span>
+            <span id="theater-scene-idx-text" class="meta-val theater-status-idx">第 1 / 3 幕</span>
+            <span class="theater-status-sep">·</span>
+            <span id="theater-rate-badge" class="badge common">60x (1 分钟 / 秒)</span>
+            <span class="theater-status-sep">·</span>
+            <span id="theater-sim-clock-val" class="meta-val theater-status-clock" style="color:#67e8f9">推演运行中</span>
           </div>
         </div>
 
         <div id="theater-detached-banner" class="theater-detached-banner" style="display:none">
           <span>💡 <strong>自由探索中</strong>：您已手动切换视角或时间，剧场已暂停跟随。</span>
-          <div style="display:flex;gap:8px">
+          <div style="display:flex;gap:6px">
             <button type="button" class="theater-btn-resume" id="theater-resume-scene-btn">⟲ 恢复当前幕</button>
             <button type="button" class="theater-btn-mini-exit" id="theater-resume-exit-btn">退出剧场</button>
           </div>
         </div>
 
-        <div class="theater-stepper" id="theater-stepper" role="tablist"></div>
-
-        <div class="theater-meta-bar" id="theater-meta-bar">
-          <div class="meta-item">
-            <span class="meta-label">幕次：</span>
-            <strong id="theater-scene-idx-text" class="meta-val">第 1 / 3 幕</strong>
-          </div>
-          <div class="meta-item">
-            <span class="meta-label">本幕起点 (SCET)：</span>
-            <strong id="theater-scet-text" class="meta-val accent">2017-09-09 00:09:00 UTC</strong>
-          </div>
-          <div class="meta-item">
-            <span class="meta-label">地球接收 (ERT)：</span>
-            <span id="theater-ert-text" class="meta-val dim">2017-09-09 01:32:00 UTC</span>
-          </div>
-          <div class="meta-item">
-            <span class="meta-label">单程光时：</span>
-            <span id="theater-light-text" class="meta-val">约 83 分钟</span>
-          </div>
-          <div class="meta-item">
-            <span class="meta-label">流速状态：</span>
-            <span id="theater-rate-badge" class="badge common">60x (1 分钟 / 秒)</span>
-          </div>
-          <div class="meta-item" id="theater-sim-clock-wrap">
-            <span class="meta-label">推演计时：</span>
-            <span id="theater-sim-clock-val" class="meta-val" style="color:#67e8f9">推演运行中</span>
+        <!-- 紧凑工具栏行：三幕步进器 + 播放控制器 -->
+        <div class="theater-toolbar-row">
+          <div class="theater-stepper" id="theater-stepper" role="tablist"></div>
+          <div class="theater-controls-bar">
+            <button type="button" class="btn-theater-ctrl" id="theater-prev-btn" title="切换到上一幕">⏪ 上一幕</button>
+            <button type="button" class="btn-theater-ctrl btn-theater-accent" id="theater-pause-toggle-btn" title="暂停或恢复推演">⏸ 暂停推演</button>
+            <button type="button" class="btn-theater-ctrl" id="theater-next-btn" title="切换到下一幕">下一幕 ⏩</button>
+            <button type="button" class="btn-theater-ctrl" id="theater-replay-btn" title="重新从本幕起点与初始流速开始">🔁 重播</button>
           </div>
         </div>
 
-        <div class="theater-controls-bar">
-          <button type="button" class="btn-theater-ctrl" id="theater-prev-btn" title="切换到上一幕">⏪ 上一幕</button>
-          <button type="button" class="btn-theater-ctrl" id="theater-replay-btn" title="重新从本幕起点与初始流速开始">🔁 重播本幕</button>
-          <button type="button" class="btn-theater-ctrl btn-theater-accent" id="theater-pause-toggle-btn" title="暂停或恢复推演">⏸ 暂停推演</button>
-          <button type="button" class="btn-theater-ctrl" id="theater-next-btn" title="切换到下一幕">下一幕 ⏩</button>
+        <!-- 遥测与时间行（次要信息可折叠展开） -->
+        <div class="theater-telemetry-strip" id="theater-meta-bar">
+          <div class="telemetry-primary-group">
+            <div class="meta-item">
+              <span class="meta-label">本幕起点 (SCET)：</span>
+              <strong id="theater-scet-text" class="meta-val accent">2017-09-09 00:09:00 UTC</strong>
+            </div>
+          </div>
+
+          <details class="theater-tech-details" id="theater-tech-details">
+            <summary class="theater-tech-summary">
+              <span>📡 查看深空通信与光时详情</span> ▾
+            </summary>
+            <div class="theater-tech-expanded">
+              <div class="meta-item">
+                <span class="meta-label">地球接收 (ERT)：</span>
+                <span id="theater-ert-text" class="meta-val dim">2017-09-09 01:32:00 UTC</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">单程光时：</span>
+                <span id="theater-light-text" class="meta-val">约 83 分钟</span>
+              </div>
+            </div>
+          </details>
         </div>
       </section>
 
+      <!-- 3D 舞台区域 (页面的视觉主体) -->
       <div class="stage" id="stage-wrapper">
-        <!-- 优雅的加载与恢复指示遮罩 -->
+        <!-- 加载与恢复指示遮罩 -->
         <div id="stage-overlay" class="stage-overlay">
           <div id="stage-loading-box" style="display:flex;flex-direction:column;align-items:center;gap:12px">
             <div class="stage-spinner"></div>
             <div class="stage-loading-text" id="stage-status-title">正在连接 NASA JPL 官方 3D 动力学服务…</div>
             <div class="stage-loading-sub" id="stage-status-desc" style="max-width:540px;line-height:1.6">
               正在从加州 JPL 服务器实时载入天体轨道数据与 WebGL 着色器。<br>
-              💡 首次加载需下载数兆字节的 3D 几何模型与高精度星历，受跨洋网络影响可能需要数秒，请耐心稍候。
+              💡 首次加载需下载 3D 几何模型与高精度星历，受跨洋网络影响可能需要数秒，请耐心稍候。
             </div>
           </div>
           <div id="stage-error-box" class="stage-recovery" style="display:none">
@@ -903,20 +1282,21 @@
         </div>
       </div>
 
-      <!-- Story Theater 深度剧情与历史档案 (位于 3D 舞台下方) -->
+      <!-- Story Theater 深度剧情与历史档案 (清晰 2 栏折叠布局，避免长距离滚动) -->
       <section id="theater-narrative-section" class="theater-narrative-panel" style="display:none" aria-label="剧情解说与历史档案">
-        <div class="theater-workflow-guide">
-          <span style="font-weight:600;color:var(--accent-2)">🎬 沉浸观影指引：</span>
-          <span class="workflow-step">① 3D 视口观察航天器姿态与运动</span>
+        <div class="theater-workflow-guide" id="theater-workflow-guide">
+          <span style="font-weight:600;color:var(--accent-2)">🎬 观影指引：</span>
+          <span class="workflow-step">① 3D 视口观察姿态运动</span>
           <span class="workflow-arrow">➔</span>
-          <span class="workflow-step">② 阅读下方科学解说与任务遥测</span>
+          <span class="workflow-step">② 阅读下方科学解说与遥测</span>
           <span class="workflow-arrow">➔</span>
-          <span class="workflow-step">③ 查看绝版历史影像与仪器档案</span>
+          <span class="workflow-step">③ 查看权威绝版影像档案</span>
           <span class="workflow-arrow">➔</span>
           <span class="workflow-step">④ 点击【下一幕 ⏩】推进历史时刻</span>
         </div>
 
-        <div class="theater-narrative-card">
+        <div class="theater-narrative-grid">
+          <!-- 左栏：剧情解说与 3D 视角聚焦 -->
           <div class="narrative-main">
             <h4 id="theater-scene-title" class="narrative-title">第一幕：最后的穿环航道</h4>
             <p id="theater-scene-subtitle" class="narrative-subtitle">第 22 次近星公转，人类探测器绝版的内缝飞越</p>
@@ -930,6 +1310,7 @@
             </div>
           </div>
 
+          <!-- 右栏：权威历史档案与绝版影像考证 -->
           <div class="historic-archive-box">
             <div class="archive-header">
               <span>📜 权威历史档案与影像考证</span>
@@ -939,14 +1320,16 @@
           </div>
         </div>
       </section>
-      <p style="font-size:13px;color:var(--fg-dim);margin-top:10px;line-height:1.6">
+
+      <!-- 紧凑操作贴士条 -->
+      <div class="sop-tip-box">
         💡 <strong>操作提示</strong>：在左侧列表中点击任一天体即可指挥 3D 视角直达。由于浏览器跨域同源安全保护（SOP），在 3D 视窗内自由点击旋转时，外层页面无法获知视窗内的内部点击；若探索完毕想回到太阳系全貌，随时点击上方的【⟲ 返回全览模式】即可瞬间复位！
-      </p>
+      </div>
 
       <!-- 新手探索引导入口 -->
-      <div class="guided-section" style="margin-top: 36px">
+      <div class="guided-section" style="margin-top: 28px">
         <h2>🧭 新手引导探索路线 · 经典视角</h2>
-        <p class="lede" style="margin-bottom: 16px">精选三条适合初学者的经典探索航线，一键直达成倍缩短探索门槛，附深度科普档案：</p>
+        <p class="lede" style="margin-bottom: 14px">精选三条适合初学者的经典探索航线，一键直达成倍缩短探索门槛，附深度科普档案：</p>
         <div class="guided-grid">
           <div class="guided-card" title="环系巡航：观察土星光环">
             <div class="guided-card-header">
@@ -1064,7 +1447,7 @@ function updateSimClockDisplay() {
       clockEl.textContent = `到达通信中断点 (+18s) · 自动定格`;
       clockEl.style.color = '#fb923c';
     } else {
-      clockEl.textContent = `已暂停推演 (+${elapsedSimSec}s)`;
+      clockEl.textContent = `推演已暂停 (+${elapsedSimSec}s)`;
       clockEl.style.color = '#fdba74';
     }
   } else if (theaterState.currentScene === 1) {
@@ -1073,11 +1456,11 @@ function updateSimClockDisplay() {
       clockEl.textContent = `到达通信中断点 (+18s) · 自动定格`;
       clockEl.style.color = '#fb923c';
     } else {
-      clockEl.textContent = `1x 俯冲推演 (+${elapsedSimSec}s)`;
+      clockEl.textContent = `1x 实时推演 (+${elapsedSimSec}s) · 逼近通信中断`;
       clockEl.style.color = '#67e8f9';
     }
   } else {
-    clockEl.textContent = `推演进行中 (+${elapsedSimSec}s)`;
+    clockEl.textContent = `推演进行中 (+${elapsedSimSec}s) · 指令已同步`;
     clockEl.style.color = '#67e8f9';
   }
 }
@@ -1183,8 +1566,8 @@ function startLoading() {
 function finishLoading() {
   if (loadTimeout) clearTimeout(loadTimeout);
   isInitialLoad = false;
-  statusTitle.textContent = '3D 动力学场景已就绪';
-  statusDesc.textContent = '正在同步视角与物理轨道渲染…';
+  statusTitle.textContent = '已连接 NASA JPL 官方服务';
+  statusDesc.textContent = '时空指令已同步 · 客户端 WebGL 正解算渲染 3D 动力学模型…';
   setTimeout(() => {
     overlay.classList.add('hidden');
   }, 600);
@@ -1246,30 +1629,43 @@ function refresh() {
   history.replaceState(null, '', '#' + state.route);
 }
 
+// 侧栏天体分类以折叠方式渲染（默认展开太阳与行星）
 const nav = document.getElementById('side-nav');
-for (const [title, ids] of GROUPS) {
+for (const [idx, [title, ids]] of GROUPS.entries()) {
   const known = ids.filter((id) => names.entities[id]);
   if (!known.length) continue;
-  nav.append(
-    el('h3', {}, title),
-    el('div', { class: 'list' }, ...known.map((id) => {
-      const e = names.entities[id];
-      const b = el('button', { type: 'button', 'data-route': id },
-        e.zh, el('span', { class: 'en' }, e.en));
-      b.addEventListener('click', () => {
-        detachTheater();
-        state.route = id;
-        markActive(b);
-        refresh();
-      });
-      return b;
-    })),
+  const groupDetails = el('details', { class: 'side-cat-group' });
+  if (idx === 0) groupDetails.open = true;
+
+  const summary = el('summary', { class: 'side-cat-summary' },
+    el('span', {}, title),
+    el('span', { class: 'side-cat-count' }, String(known.length))
   );
+
+  const list = el('div', { class: 'list' }, ...known.map((id) => {
+    const e = names.entities[id];
+    const b = el('button', { type: 'button', 'data-route': id },
+      e.zh, el('span', { class: 'en' }, e.en));
+    b.addEventListener('click', () => {
+      detachTheater();
+      state.route = id;
+      markActive(b);
+      refresh();
+    });
+    return b;
+  }));
+
+  groupDetails.append(summary, list);
+  nav.append(groupDetails);
 }
 
 function markActive(btn) {
   nav.querySelectorAll('button').forEach((b) => b.removeAttribute('aria-current'));
-  btn?.setAttribute('aria-current', 'true');
+  if (btn) {
+    btn.setAttribute('aria-current', 'true');
+    const parentDetails = btn.closest('details.side-cat-group');
+    if (parentDetails) parentDetails.open = true;
+  }
 }
 
 // Home Overview triggers
@@ -1515,6 +1911,12 @@ async function activateTheater(sceneIndex = 0) {
     rateInput.value = String(scene.rate !== undefined ? scene.rate : '');
   }
 
+  document.body.classList.add('theater-active-mode');
+  const modeBadge = document.getElementById('explore-mode-badge');
+  if (modeBadge) {
+    modeBadge.innerHTML = '<span class="mode-dot"></span> 🎬 探索剧场推演中';
+  }
+
   refresh();
   renderTheaterUI(story);
 
@@ -1658,6 +2060,12 @@ function exitTheater() {
   theaterTriggerBtn.style.borderColor = 'var(--accent-2)';
   theaterTriggerBtn.setAttribute('aria-expanded', 'false');
 
+  document.body.classList.remove('theater-active-mode');
+  const modeBadge = document.getElementById('explore-mode-badge');
+  if (modeBadge) {
+    modeBadge.innerHTML = '<span class="mode-dot"></span> 自由漫游模式';
+  }
+
   if (state.route === 'home') {
     sideHomeBtn?.setAttribute('aria-current', 'true');
     nav.querySelectorAll('button').forEach((b) => b.removeAttribute('aria-current'));
@@ -1747,6 +2155,10 @@ if (sessionStorage.getItem('hide-explore-guide') === '1') {
 guideTipClose?.addEventListener('click', () => {
   if (guideTip) guideTip.style.display = 'none';
   sessionStorage.setItem('hide-explore-guide', '1');
+});
+document.getElementById('guide-tip-theater-btn')?.addEventListener('click', () => {
+  activateTheater(0);
+  theaterPanel?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 });
 
 // 支持外部（如首页）通过 URL 或 hash 直达剧场
