@@ -323,3 +323,129 @@ Scene 3 Transition Timestamp Analysis:
   - 度量数据：[`artifacts/ui_phase2/after/phase2-after-metrics.json`](file:///E:/NASA/artifacts/ui_phase2/after/phase2-after-metrics.json)
   - 基线度量数据：[`artifacts/ui_phase2/baseline/phase2-baseline-metrics.json`](file:///E:/NASA/artifacts/ui_phase2/baseline/phase2-baseline-metrics.json)
   - 优化后全景截图（包含 192px 移动端 HUD）：[`artifacts/ui_phase2/after/phase2-after-explore-theater-390.png`](file:///E:/NASA/artifacts/ui_phase2/after/phase2-after-explore-theater-390.png)
+  - 3D 渲染完成真实截图：[`artifacts/ui_phase2/final_3d_loaded/`](file:///E:/NASA/artifacts/ui_phase2/final_3d_loaded/)
+
+---
+
+## 十、封版补充证据一：NASA 3D 完全加载渲染后的真实物理截图
+
+通过 [`tools/capture-nasa-3d-fully-loaded.mjs`](file:///E:/NASA/tools/capture-nasa-3d-fully-loaded.mjs) 驱动真实 Chrome WebGL 模拟器（`SwiftShader/ANGLE`），在网络星历与 3D 几何着色器完全加载稳定后采样（非加载中/非占位遮罩）：
+
+### 1. 桌面漫游 (1280 × 800) 3D 完全渲染
+![桌面漫游 3D 完全渲染](file:///C:/Users/lenovo/.gemini/antigravity/brain/b1b8a890-db19-4087-bc0d-51de747efbad/final_3d_loaded/nasa-3d-desktop-roam-1280.png)
+- **状态证明**：太阳系八大行星轨道椭圆线、太阳光球、实时推演绿点（REAL RATE / LIVE）及 3I/ATLAS 轨道均完整呈现在 WebGL 画布中，无任何加载白屏或等待占位遮罩。
+
+### 2. 桌面卡西尼探索剧场 (1280 × 800) 3D 完全渲染
+![桌面剧场 3D 完全渲染](file:///C:/Users/lenovo/.gemini/antigravity/brain/b1b8a890-db19-4087-bc0d-51de747efbad/final_3d_loaded/nasa-3d-desktop-theater-1280.png)
+- **状态证明**：卡西尼号探测器 3D 高精度几何模型（高增益天线、金色隔热毯、放射性同位素热电机 RTG、磁强计吊杆）及背景土星金黄大气环缝完全渲染呈现；上方 134px 单行极简 HUD 严整贴合，完全消除了原漫游页眉挤压。
+
+### 3. 手机端卡西尼探索剧场 (390 × 844) 3D 完全渲染
+![手机剧场 3D 完全渲染](file:///C:/Users/lenovo/.gemini/antigravity/brain/b1b8a890-db19-4087-bc0d-51de747efbad/final_3d_loaded/nasa-3d-mobile-theater-390.png)
+- **状态证明**：实测 192px 紧凑 HUD 完整展示“幕次/流速/时钟/步进器/播放条/SCET折叠行”；下放 3D 视口内卡西尼号飞船在土星环背景下清晰可辨，触控目标清晰且首屏 3D 视野毫无遮挡。
+
+---
+
+## 十一、封版补充证据二：5bba33f 至 34e4af3 `explore.html` 完整内联 JavaScript 代码审计
+
+对 `5bba33f`（Phase 2 起始节点）至 `34e4af3`（当前封版 HEAD）期间 `explore.html` 中 `<script type="module">` 进行全量逐行审计：
+
+### 1. 变动代码块 1：纯前端沉浸模式与侧栏折叠状态管理（新增）
+```javascript
+// In-Page Immersive Mode (沉浸式观测模式 · 轻量纯前端全景)
+const immersiveBtn = document.getElementById('immersive-mode-btn');
+const exitImmersiveBtn = document.getElementById('exit-immersive-btn');
+const immersiveBanner = document.getElementById('immersive-exit-banner');
+
+function enterImmersiveMode() {
+  document.body.classList.add('stage-immersive-mode');
+  if (immersiveBanner) immersiveBanner.style.display = 'flex';
+}
+
+function exitImmersiveMode() {
+  document.body.classList.remove('stage-immersive-mode');
+  if (immersiveBanner) immersiveBanner.style.display = 'none';
+}
+
+immersiveBtn?.addEventListener('click', enterImmersiveMode);
+exitImmersiveBtn?.addEventListener('click', exitImmersiveMode);
+
+// Desktop Sidebar Collapsing & Progressive Disclosure
+const exploreLayout = document.getElementById('explore-layout');
+const sidebarToggleBtn = document.getElementById('sidebar-toggle-btn');
+const sidebarToggleIcon = document.getElementById('sidebar-toggle-icon');
+const sidebarToggleLabel = document.getElementById('sidebar-toggle-label');
+const sidebarCollapseBtn = document.getElementById('sidebar-collapse-btn');
+const sidebarReopenBtn = document.getElementById('sidebar-reopen-btn');
+
+function setSidebarCollapsed(collapsed) {
+  if (collapsed) {
+    exploreLayout?.classList.add('sidebar-collapsed');
+    if (sidebarToggleIcon) sidebarToggleIcon.textContent = '📂';
+    if (sidebarToggleLabel) sidebarToggleLabel.textContent = '展开侧栏';
+    sidebarToggleBtn?.setAttribute('title', '展开天体侧栏 (快捷键 S)');
+    sessionStorage.setItem('explore-sidebar-collapsed', '1');
+  } else {
+    exploreLayout?.classList.remove('sidebar-collapsed');
+    if (sidebarToggleIcon) sidebarToggleIcon.textContent = '◀';
+    if (sidebarToggleLabel) sidebarToggleLabel.textContent = '收起侧栏';
+    sidebarToggleBtn?.setAttribute('title', '收起天体侧栏以最大化 3D 舞台 (快捷键 S)');
+    sessionStorage.removeItem('explore-sidebar-collapsed');
+  }
+}
+
+function toggleSidebar() {
+  const isCurrentlyCollapsed = exploreLayout?.classList.contains('sidebar-collapsed');
+  setSidebarCollapsed(!isCurrentlyCollapsed);
+}
+
+sidebarToggleBtn?.addEventListener('click', toggleSidebar);
+sidebarCollapseBtn?.addEventListener('click', () => setSidebarCollapsed(true));
+sidebarReopenBtn?.addEventListener('click', () => setSidebarCollapsed(false));
+
+// Global Keyboard Shortcuts (Esc exits immersive; S toggles sidebar; I toggles immersive)
+window.addEventListener('keydown', (e) => {
+  const isTyping = ['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName);
+  if (e.key === 'Escape' && document.body.classList.contains('stage-immersive-mode')) {
+    exitImmersiveMode();
+  } else if (!isTyping) {
+    if (e.key === 's' || e.key === 'S') {
+      toggleSidebar();
+    } else if (e.key === 'i' || e.key === 'I') {
+      if (document.body.classList.contains('stage-immersive-mode')) exitImmersiveMode();
+      else enterImmersiveMode();
+    }
+  }
+});
+
+if (sessionStorage.getItem('explore-sidebar-collapsed') === '1') {
+  setSidebarCollapsed(true);
+}
+```
+- **审计结论**：该代码段仅操作 `document.body` 的样式类与侧栏折叠状态持久化，未触碰 `theaterState`、`state.time`、`state.rate`、`state.route`，对既有剧场时钟和事件无任何干涉；快捷键已做 `isTyping` 严格保护。
+
+### 2. 变动代码块 2：`renderTheaterUI` 次级时间摘要赋值（增强）
+```javascript
+  document.getElementById('theater-scene-idx-text').textContent = `第 ${theaterState.currentScene + 1} / ${story.totalScenes} 幕`;
++ const formattedScet = scene.timeDisplay || scene.time;
+  document.getElementById('theater-scet-text').textContent = formattedScet;
++ const scetSummaryEl = document.getElementById('theater-scet-summary');
++ if (scetSummaryEl) scetSummaryEl.textContent = formattedScet;
+  document.getElementById('theater-ert-text').textContent = scene.ertDisplay || '—';
+  document.getElementById('theater-light-text').textContent = scene.lightTimeNote || '单程光行时间约 83 分钟';
+```
+- **审计结论**：仅在渲染折叠抽屉摘要文本时，同步将 `formattedScet` 赋予 `#theater-scet-summary` 元素，原有 `theater-scet-text`、`theater-ert-text`、`theater-light-text` 保持完全一致，无状态机、无定时器、无计算逻辑变动。
+
+### 3. 剧场核心函数零改动审计确认
+经 Git Diff 核实，以下全部剧场核心函数与变量在 Phase 2 期间**保持 0 行改动**：
+- `theaterState` 状态定义：0 改动；
+- `startSimClockTicker()`：0 改动；
+- `stopSimClockTicker()`：0 改动；
+- `updateSimClockDisplay()`：0 改动；
+- `scheduleSceneBoundaryTimer()`：0 改动；
+- `clearBoundaryTimer()`：0 改动；
+- `activateTheater()`：0 改动；
+- `detachTheater()`：0 改动；
+- `loadStory()`：0 改动；
+- `refresh()`：0 改动；
+- 边界 18000ms 定格与 0ms 连续切换逻辑：0 改动。
+
