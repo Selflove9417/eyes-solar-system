@@ -171,6 +171,464 @@
       width: 100%;
     }
   }
+
+  /* Story Theater Styles */
+  .chip-theater {
+    border-color: var(--accent-2) !important;
+    color: #fff !important;
+    background: rgba(251, 146, 60, 0.18) !important;
+    font-weight: 600;
+    box-shadow: 0 0 12px rgba(251, 146, 60, 0.2);
+    transition: all 0.2s ease;
+  }
+  .chip-theater:hover {
+    background: rgba(251, 146, 60, 0.3) !important;
+    box-shadow: 0 0 18px rgba(251, 146, 60, 0.35);
+    transform: translateY(-1px);
+  }
+
+  .theater-panel {
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.96) 0%, rgba(11, 17, 32, 0.98) 100%);
+    border: 1px solid rgba(251, 146, 60, 0.35);
+    border-radius: var(--r);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6), 0 0 24px rgba(251, 146, 60, 0.12);
+    padding: 16px 20px 14px;
+    margin-bottom: 14px;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  .theater-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid rgba(251, 146, 60, 0.15);
+    padding-bottom: 10px;
+  }
+  .theater-title-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .theater-title {
+    margin: 0;
+    font-size: 16.5px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.3px;
+  }
+  .theater-btn-exit {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--line-subtle);
+    color: var(--fg-dim);
+    font: inherit;
+    font-size: 12.5px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .theater-btn-exit:hover {
+    background: rgba(248, 113, 113, 0.2);
+    border-color: var(--warn);
+    color: #fff;
+  }
+
+  .theater-detached-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    background: rgba(234, 179, 8, 0.12);
+    border: 1px solid rgba(234, 179, 8, 0.35);
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin-bottom: 12px;
+    font-size: 12.5px;
+    color: #fef08a;
+  }
+  .theater-btn-resume {
+    background: rgba(234, 179, 8, 0.25);
+    border: 1px solid rgba(234, 179, 8, 0.5);
+    color: #fff;
+    font: inherit;
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .theater-btn-resume:hover {
+    background: rgba(234, 179, 8, 0.45);
+  }
+  .theater-btn-mini-exit {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--fg-dim);
+    font: inherit;
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .theater-stepper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .theater-step-btn {
+    background: var(--bg-soft);
+    border: 1px solid var(--line-subtle);
+    border-radius: 8px;
+    padding: 8px 10px;
+    color: var(--fg-dim);
+    font: inherit;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    text-align: left;
+    transition: all 0.2s ease;
+  }
+  .theater-step-btn:hover {
+    border-color: rgba(251, 146, 60, 0.4);
+    background: rgba(22, 33, 58, 0.7);
+    color: #fff;
+  }
+  .theater-step-btn.active {
+    background: rgba(251, 146, 60, 0.14);
+    border-color: var(--accent-2);
+    color: #fff;
+    box-shadow: 0 0 16px rgba(251, 146, 60, 0.2);
+  }
+  .theater-step-btn .step-num {
+    font-size: 10.5px;
+    text-transform: uppercase;
+    color: var(--accent-2);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .theater-step-btn .step-title {
+    font-size: 12.5px;
+    font-weight: 600;
+    line-height: 1.35;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .theater-meta-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+    background: rgba(5, 7, 14, 0.6);
+    border: 1px solid var(--line-subtle);
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin-bottom: 12px;
+    font-size: 12px;
+  }
+  .theater-meta-bar .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-wrap: wrap;
+  }
+  .theater-meta-bar .meta-label {
+    color: var(--fg-muted);
+  }
+  .theater-meta-bar .meta-val {
+    color: var(--fg);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  }
+  .theater-meta-bar .meta-val.accent {
+    color: var(--accent-2);
+    font-weight: 600;
+  }
+  .theater-meta-bar .meta-val.dim {
+    color: var(--fg-dim);
+  }
+
+  .theater-controls-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 0;
+  }
+  .btn-theater-ctrl {
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    color: #fff;
+    padding: 7px 14px;
+    border-radius: 8px;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.18s ease;
+  }
+  .btn-theater-ctrl:hover:not(:disabled) {
+    background: rgba(56, 189, 248, 0.15);
+    border-color: var(--accent);
+  }
+  .btn-theater-ctrl:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  .btn-theater-ctrl.btn-theater-accent {
+    background: rgba(251, 146, 60, 0.2);
+    border-color: var(--accent-2);
+    color: #fff;
+    font-weight: 600;
+  }
+  .btn-theater-ctrl.btn-theater-accent:hover:not(:disabled) {
+    background: rgba(251, 146, 60, 0.35);
+    box-shadow: 0 0 14px rgba(251, 146, 60, 0.3);
+  }
+
+  /* Narrative & Archive Panel (below 3D Stage) */
+  .theater-narrative-panel {
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.95) 0%, rgba(11, 17, 32, 0.98) 100%);
+    border: 1px solid rgba(251, 146, 60, 0.28);
+    border-radius: var(--r);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
+    padding: 18px 20px;
+    margin-top: 14px;
+    margin-bottom: 20px;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  .theater-narrative-card {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .narrative-title {
+    margin: 0 0 4px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .narrative-subtitle {
+    margin: 0 0 10px;
+    font-size: 13px;
+    color: var(--accent-2);
+  }
+  .narrative-body {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--fg);
+  }
+  .narrative-body p {
+    margin: 0 0 8px;
+  }
+  .narrative-focus-box {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    background: rgba(56, 189, 248, 0.08);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #e0f2fe;
+    line-height: 1.6;
+  }
+  .historic-archive-box {
+    background: rgba(5, 7, 14, 0.7);
+    border: 1px solid var(--line-subtle);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 12.5px;
+  }
+  .archive-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--fg-dim);
+  }
+  .archive-body {
+    color: var(--fg-dim);
+    line-height: 1.6;
+  }
+  .archive-image-wrap {
+    margin-top: 12px;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+  }
+  .archive-image-container {
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  .archive-image-container img {
+    max-width: 100%;
+    max-height: 280px;
+    border-radius: 6px;
+    border: 1px solid var(--line-subtle);
+    display: inline-block;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+  }
+
+  @media (max-width: 768px) {
+    .theater-stepper {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .theater-step-btn {
+      padding: 6px 6px;
+    }
+    .theater-step-btn .step-num {
+      font-size: 10px;
+    }
+    .theater-step-btn .step-title {
+      font-size: 11px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .theater-meta-bar {
+      gap: 4px 10px;
+      padding: 6px 10px;
+      font-size: 11.5px;
+      margin-bottom: 10px;
+    }
+    .theater-controls-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+    }
+    .btn-theater-ctrl {
+      padding: 6px 4px;
+      font-size: 12px;
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .theater-panel {
+      padding: 8px 10px 8px;
+      margin-bottom: 10px;
+    }
+    .theater-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      margin-bottom: 6px;
+      padding-bottom: 6px;
+    }
+    .theater-title-group {
+      gap: 4px;
+      flex-wrap: nowrap;
+      min-width: 0;
+      flex: 1;
+    }
+    .theater-title {
+      font-size: 13px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .theater-title-group .badge {
+      font-size: 10px;
+      padding: 1px 5px;
+      flex-shrink: 0;
+    }
+    .theater-header-actions {
+      flex-shrink: 0;
+    }
+    .theater-btn-exit {
+      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+      box-sizing: border-box;
+    }
+    .theater-btn-resume,
+    .theater-btn-mini-exit {
+      min-height: 44px;
+      padding: 8px 12px;
+      font-size: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+    }
+    .theater-stepper {
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+    .theater-step-btn {
+      min-height: 44px;
+      padding: 6px 4px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .theater-step-btn .step-num {
+      font-size: 10px;
+      line-height: 1.2;
+    }
+    .theater-step-btn .step-title {
+      font-size: 11px;
+      line-height: 1.2;
+    }
+    .theater-meta-bar {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding: 5px 8px;
+      font-size: 11px;
+      margin-bottom: 8px;
+    }
+    .theater-meta-bar .meta-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 4px;
+      flex-wrap: nowrap;
+    }
+    .theater-meta-bar .meta-val {
+      font-size: 10.5px;
+    }
+    .theater-controls-bar {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
+    }
+    .btn-theater-ctrl {
+      padding: 8px 6px;
+      font-size: 12.5px;
+      font-weight: 600;
+      justify-content: center;
+      min-height: 44px;
+    }
+    .theater-narrative-panel {
+      padding: 12px 10px;
+      margin-top: 10px;
+    }
+  }
 </style>
 </head>
 <body>
@@ -197,6 +655,7 @@
     <button class="chip" data-quick="saturn" type="button">🪐 土星</button>
     <button class="chip" data-quick="sc_voyager_1" type="button">🚀 旅行者 1 号</button>
     <button class="chip" data-quick="sc_mars_2020" type="button">🤖 毅力号火星车</button>
+    <button class="chip chip-theater" id="theater-trigger-btn" type="button" aria-expanded="false">🎬 探索剧场：卡西尼号 Grand Finale</button>
   </div>
 
   <div class="explore-layout">
@@ -240,6 +699,59 @@
     </aside>
 
     <section class="stage-section">
+      <!-- Story Theater 面板 -->
+      <section id="story-theater-panel" class="theater-panel" style="display:none" aria-label="探索剧场：卡西尼号土星大结局">
+        <div class="theater-header">
+          <div class="theater-title-group">
+            <span class="badge" style="background:rgba(251,146,60,0.2);color:#fdba74;border:1px solid rgba(251,146,60,0.4)">🎬 探索剧场 MVP</span>
+            <h3 class="theater-title">卡西尼号：土星大结局 (Grand Finale)</h3>
+          </div>
+          <div class="theater-header-actions">
+            <button type="button" class="theater-btn-exit" id="theater-exit-btn" title="退出剧场并恢复普通探索">✕ 退出剧场</button>
+          </div>
+        </div>
+
+        <div id="theater-detached-banner" class="theater-detached-banner" style="display:none">
+          <span>💡 <strong>自由探索中</strong>：您已手动切换视角或时间，剧场已暂停跟随。</span>
+          <div style="display:flex;gap:8px">
+            <button type="button" class="theater-btn-resume" id="theater-resume-scene-btn">⟲ 恢复当前幕</button>
+            <button type="button" class="theater-btn-mini-exit" id="theater-resume-exit-btn">退出剧场</button>
+          </div>
+        </div>
+
+        <div class="theater-stepper" id="theater-stepper" role="tablist"></div>
+
+        <div class="theater-meta-bar" id="theater-meta-bar">
+          <div class="meta-item">
+            <span class="meta-label">幕次：</span>
+            <strong id="theater-scene-idx-text" class="meta-val">第 1 / 3 幕</strong>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">航天器时间 (SCET)：</span>
+            <strong id="theater-scet-text" class="meta-val accent">2017-09-09 00:09:00 UTC</strong>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">地球接收 (ERT)：</span>
+            <span id="theater-ert-text" class="meta-val dim">2017-09-09 01:32:00 UTC</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">无线电光时：</span>
+            <span id="theater-light-text" class="meta-val">约 83 分钟 (单程)</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">流速状态：</span>
+            <span id="theater-rate-badge" class="badge common">60x (1 分钟 / 秒)</span>
+          </div>
+        </div>
+
+        <div class="theater-controls-bar">
+          <button type="button" class="btn-theater-ctrl" id="theater-prev-btn" title="切换到上一幕">⏪ 上一幕</button>
+          <button type="button" class="btn-theater-ctrl" id="theater-replay-btn" title="重新从本幕起点与初始流速开始">🔁 重播本幕</button>
+          <button type="button" class="btn-theater-ctrl btn-theater-accent" id="theater-pause-toggle-btn" title="暂停或恢复推演">⏸ 暂停剧情</button>
+          <button type="button" class="btn-theater-ctrl" id="theater-next-btn" title="切换到下一幕">下一幕 ⏩</button>
+        </div>
+      </section>
+
       <div class="stage" id="stage-wrapper">
         <!-- 优雅的加载与恢复指示遮罩 -->
         <div id="stage-overlay" class="stage-overlay">
@@ -280,6 +792,32 @@
           </div>
         </div>
       </div>
+
+      <!-- Story Theater 深度剧情与历史档案 (位于 3D 舞台下方) -->
+      <section id="theater-narrative-section" class="theater-narrative-panel" style="display:none" aria-label="剧情解说与历史档案">
+        <div class="theater-narrative-card">
+          <div class="narrative-main">
+            <h4 id="theater-scene-title" class="narrative-title">第一幕：最后的穿环航道</h4>
+            <p id="theater-scene-subtitle" class="narrative-subtitle">第 22 次近星公转，人类探测器绝版的内缝飞越</p>
+            <div id="theater-scene-narrative" class="narrative-body"></div>
+            <div class="narrative-focus-box">
+              <span class="focus-icon">🔭</span>
+              <div>
+                <strong>3D 视口观察建议：</strong>
+                <span id="theater-scene-focus"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="historic-archive-box">
+            <div class="archive-header">
+              <span>📜 权威历史档案与影像考证</span>
+              <span id="theater-archive-source" class="badge code"></span>
+            </div>
+            <div id="theater-archive-desc" class="archive-body"></div>
+          </div>
+        </div>
+      </section>
       <p style="font-size:13px;color:var(--fg-dim);margin-top:10px;line-height:1.6">
         💡 <strong>操作提示</strong>：在左侧列表中点击任一天体即可指挥 3D 视角直达。由于浏览器跨域同源安全保护（SOP），在 3D 视窗内自由点击旋转时，外层页面无法获知视窗内的内部点击；若探索完毕想回到太阳系全貌，随时点击上方的【⟲ 返回全览模式】即可瞬间复位！
       </p>
@@ -331,7 +869,7 @@
 </main>
 
 <script type="module">
-import { renderChrome, getData, embedUrl, el } from './assets/js/site.js';
+import { renderChrome, getData, embedUrl, el, assetUrl } from './assets/js/site.js';
 renderChrome('explore.html');
 const { names, entityById } = await getData();
 
@@ -410,7 +948,9 @@ retryBtn.addEventListener('click', () => {
 });
 
 function refresh() {
-  const url = embedUrl({ route: state.route, time: state.time || undefined, rate: state.rate || undefined, ...state.opts });
+  const timeVal = (state.time !== '' && state.time !== undefined && state.time !== null) ? state.time : undefined;
+  const rateVal = (state.rate !== '' && state.rate !== undefined && state.rate !== null) ? state.rate : undefined;
+  const url = embedUrl({ route: state.route, time: timeVal, rate: rateVal, ...state.opts });
   const cur = frame.src;
   if (!cur || cur !== url) {
     if (isInitialLoad) {
@@ -428,6 +968,8 @@ function refresh() {
     nav.querySelectorAll('button').forEach((b) => b.removeAttribute('aria-current'));
   } else {
     sideHomeBtn.removeAttribute('aria-current');
+    const navBtn = nav.querySelector(`[data-route="${CSS.escape(state.route)}"]`);
+    markActive(navBtn);
     const hit = names.entities[state.route];
     const real = entityById.get(state.route);
     const en = hit?.en || real?.displayName || real?.iauName || state.route;
@@ -454,6 +996,7 @@ for (const [title, ids] of GROUPS) {
       const b = el('button', { type: 'button', 'data-route': id },
         e.zh, el('span', { class: 'en' }, e.en));
       b.addEventListener('click', () => {
+        detachTheater();
         state.route = id;
         markActive(b);
         refresh();
@@ -470,6 +1013,7 @@ function markActive(btn) {
 
 // Home Overview triggers
 function goHome() {
+  detachTheater();
   state.route = 'home';
   refresh();
 }
@@ -479,6 +1023,7 @@ document.getElementById('reset-home-btn').addEventListener('click', goHome);
 // Preset buttons
 document.querySelectorAll('[data-quick]').forEach((btn) => {
   btn.addEventListener('click', () => {
+    detachTheater();
     const id = btn.getAttribute('data-quick');
     if (id === 'home') {
       goHome();
@@ -494,6 +1039,7 @@ document.querySelectorAll('[data-quick]').forEach((btn) => {
 // Guided exploration routes
 document.querySelectorAll('[data-guide-route]').forEach((btn) => {
   btn.addEventListener('click', () => {
+    detachTheater();
     const route = btn.getAttribute('data-guide-route');
     state.route = route;
     const navBtn = nav.querySelector(`[data-route="${CSS.escape(route)}"]`);
@@ -542,6 +1088,7 @@ function renderSearch(query) {
       el('span', { class: 'badge ' + (e.status || 'keep') }, e.cat || (e.status === 'std' ? '规范译名' : '已收录'))
     );
     btn.addEventListener('click', () => {
+      detachTheater();
       state.route = id;
       const navBtn = nav.querySelector(`[data-route="${CSS.escape(id)}"]`);
       markActive(navBtn);
@@ -603,10 +1150,14 @@ for (const [key, label, onByDefault] of OPTS) {
 }
 
 document.getElementById('apply-time').addEventListener('click', () => {
+  detachTheater({ resetTime: false });
   const raw = document.getElementById('time-input').value;
   state.time = raw ? raw + ':00.000Z' : '';
   state.rate = document.getElementById('rate-input').value;
   refresh();
+  if (theaterState.active && storyData) {
+    renderTheaterUI(storyData);
+  }
 });
 
 const initial = decodeURIComponent(location.hash.slice(1));
@@ -619,6 +1170,7 @@ refresh();
 window.addEventListener('hashchange', () => {
   const h = decodeURIComponent(location.hash.slice(1));
   if (h && h !== state.route) {
+    detachTheater();
     if (h === 'home') {
       goHome();
     } else if (names.entities[h] || entityById.has(h)) {
@@ -628,6 +1180,352 @@ window.addEventListener('hashchange', () => {
     }
   }
 });
+
+// ==========================================
+// Story Theater (探索剧场 · MVP)
+// ==========================================
+const theaterPanel = document.getElementById('story-theater-panel');
+const theaterNarrativeSection = document.getElementById('theater-narrative-section');
+const theaterTriggerBtn = document.getElementById('theater-trigger-btn');
+const theaterStepper = document.getElementById('theater-stepper');
+const theaterDetachedBanner = document.getElementById('theater-detached-banner');
+const theaterResumeBtn = document.getElementById('theater-resume-scene-btn');
+const theaterResumeExitBtn = document.getElementById('theater-resume-exit-btn');
+const theaterExitBtn = document.getElementById('theater-exit-btn');
+const theaterPrevBtn = document.getElementById('theater-prev-btn');
+const theaterNextBtn = document.getElementById('theater-next-btn');
+const theaterReplayBtn = document.getElementById('theater-replay-btn');
+const theaterPauseBtn = document.getElementById('theater-pause-toggle-btn');
+
+let storyData = null;
+const theaterState = {
+  active: false,
+  currentScene: 0,
+  isPaused: false,
+  mode: 'following', // 'following' | 'detached'
+  routeBeforeTheater: 'home',
+  sceneBaseEpoch: 0,
+  scenePlayStartWallMs: 0,
+  sceneAccumulatedSimMs: 0,
+};
+
+function detachTheater({ resetTime = true } = {}) {
+  if (!theaterState.active) return;
+  theaterState.mode = 'detached';
+  clearAutoEndTimer();
+  if (resetTime) {
+    state.time = '';
+    state.rate = '';
+    const timeInput = document.getElementById('time-input');
+    if (timeInput) timeInput.value = '';
+    const rateInput = document.getElementById('rate-input');
+    if (rateInput) rateInput.value = '';
+  }
+  if (theaterDetachedBanner) {
+    theaterDetachedBanner.style.display = 'flex';
+  }
+}
+
+async function loadStory() {
+  if (!storyData) {
+    const res = await fetch(assetUrl('data/stories/cassini.zh.json'));
+    storyData = await res.json();
+  }
+  return storyData;
+}
+
+let sceneAutoEndTimer = null;
+function clearAutoEndTimer() {
+  if (sceneAutoEndTimer) {
+    clearTimeout(sceneAutoEndTimer);
+    sceneAutoEndTimer = null;
+  }
+}
+
+function scheduleSceneAutoEnd() {
+  clearAutoEndTimer();
+  if (!theaterState.active || theaterState.currentScene !== 1 || theaterState.isPaused) {
+    return;
+  }
+  const remainingSimMs = Math.max(0, 62000 - theaterState.sceneAccumulatedSimMs);
+  const activeRate = (state.rate !== undefined && state.rate !== '') ? Number(state.rate) : 1;
+  const remainingWallMs = activeRate > 0 ? (remainingSimMs / activeRate) : 0;
+  if (remainingWallMs > 0) {
+    sceneAutoEndTimer = setTimeout(() => {
+      if (theaterState.active && theaterState.currentScene === 1 && !theaterState.isPaused) {
+        theaterState.isPaused = true;
+        theaterState.sceneAccumulatedSimMs = 62000;
+        state.rate = 0;
+        const currentSimMs = theaterState.sceneBaseEpoch + 62000;
+        state.time = new Date(currentSimMs).toISOString();
+        if (storyData) renderTheaterUI(storyData);
+      }
+    }, remainingWallMs);
+  }
+}
+
+async function activateTheater(sceneIndex = 0) {
+  const story = await loadStory();
+  if (!theaterState.active) {
+    theaterState.routeBeforeTheater = (state.route && state.route !== 'home') ? state.route : 'home';
+  }
+  theaterState.active = true;
+  theaterState.currentScene = Math.max(0, Math.min(sceneIndex, story.scenes.length - 1));
+  theaterState.isPaused = false;
+  theaterState.mode = 'following';
+
+  const scene = story.scenes[theaterState.currentScene];
+  state.route = scene.route;
+  state.time = scene.time;
+  state.rate = scene.rate;
+
+  theaterState.sceneBaseEpoch = scene.time ? new Date(scene.time).getTime() : 0;
+  theaterState.scenePlayStartWallMs = Date.now();
+  theaterState.sceneAccumulatedSimMs = 0;
+
+  clearAutoEndTimer();
+  scheduleSceneAutoEnd();
+
+  const navBtn = nav.querySelector(`[data-route="${CSS.escape(scene.route)}"]`);
+  markActive(navBtn);
+  if (sideHomeBtn) sideHomeBtn.removeAttribute('aria-current');
+
+  const timeInput = document.getElementById('time-input');
+  if (timeInput && scene.time) {
+    timeInput.value = scene.time.slice(0, 16);
+  }
+  const rateInput = document.getElementById('rate-input');
+  if (rateInput) {
+    rateInput.value = String(scene.rate !== undefined ? scene.rate : '');
+  }
+
+  refresh();
+  renderTheaterUI(story);
+
+  theaterPanel.style.display = 'block';
+  if (theaterNarrativeSection) theaterNarrativeSection.style.display = 'block';
+  theaterTriggerBtn.style.background = 'rgba(251,146,60,0.35)';
+  theaterTriggerBtn.style.borderColor = 'var(--accent-2)';
+  theaterTriggerBtn.setAttribute('aria-expanded', 'true');
+}
+
+function renderTheaterUI(story) {
+  if (!story) return;
+  const scene = story.scenes[theaterState.currentScene];
+  if (!scene) return;
+
+  theaterStepper.replaceChildren(...story.scenes.map((s, idx) => {
+    const isCur = idx === theaterState.currentScene;
+    const btn = el('button', {
+      type: 'button',
+      class: 'theater-step-btn' + (isCur ? ' active' : ''),
+      'aria-selected': isCur ? 'true' : 'false'
+    },
+      el('span', { class: 'step-num' }, `第 ${idx + 1} 幕`),
+      el('span', { class: 'step-title' }, s.title.replace(/^第.*?幕[：:]/, ''))
+    );
+    btn.addEventListener('click', () => {
+      activateTheater(idx);
+    });
+    return btn;
+  }));
+
+  if (theaterState.mode === 'detached') {
+    theaterDetachedBanner.style.display = 'flex';
+  } else {
+    theaterDetachedBanner.style.display = 'none';
+  }
+
+  document.getElementById('theater-scene-idx-text').textContent = `第 ${theaterState.currentScene + 1} / ${story.totalScenes} 幕`;
+  document.getElementById('theater-scet-text').textContent = scene.timeDisplay || scene.time;
+  document.getElementById('theater-ert-text').textContent = scene.ertDisplay || '—';
+  document.getElementById('theater-light-text').textContent = scene.lightTimeNote || '单程光行时间约 83 分钟';
+
+  const isStaticScene = scene.rate === 0;
+  const isScene2Finished = theaterState.currentScene === 1 && theaterState.sceneAccumulatedSimMs >= 62000;
+
+  const rateBadge = document.getElementById('theater-rate-badge');
+  if (isStaticScene) {
+    rateBadge.className = 'badge keep';
+    rateBadge.textContent = '终章历史定格 (rate=0)';
+    theaterPauseBtn.disabled = true;
+    theaterPauseBtn.innerHTML = '⏸ 终章历史定格';
+    theaterPauseBtn.classList.remove('btn-theater-accent');
+    theaterPauseBtn.setAttribute('title', '卡西尼号受控坠入土星大气，任务在此刻终结（已达 NASA 轨迹终点 Cannot Exceed Mission End），历史时刻永久定格');
+  } else if (isScene2Finished) {
+    rateBadge.className = 'badge keep';
+    rateBadge.textContent = '已达终点定格 (62秒飞行完成)';
+    theaterPauseBtn.disabled = false;
+    theaterPauseBtn.innerHTML = '下一幕：终章 ⏩';
+    theaterPauseBtn.classList.add('btn-theater-accent');
+    theaterPauseBtn.setAttribute('title', '卡西尼号已完成最后 62 秒切入飞行，点击进入大结局终章');
+  } else if (theaterState.isPaused || state.rate === 0) {
+    rateBadge.className = 'badge keep';
+    rateBadge.textContent = '已暂停推演 (rate=0)';
+    theaterPauseBtn.disabled = false;
+    theaterPauseBtn.innerHTML = '▶ 继续推演';
+    theaterPauseBtn.classList.add('btn-theater-accent');
+    theaterPauseBtn.setAttribute('title', `恢复本幕流速推演 (${scene.rate}x)`);
+  } else {
+    rateBadge.className = 'badge common';
+    rateBadge.textContent = scene.rateLabel || (scene.rate + 'x');
+    theaterPauseBtn.disabled = false;
+    theaterPauseBtn.innerHTML = '⏸ 暂停剧情';
+    theaterPauseBtn.classList.remove('btn-theater-accent');
+    theaterPauseBtn.setAttribute('title', '定格历史时刻 (rate=0)');
+  }
+
+  theaterPrevBtn.disabled = theaterState.currentScene === 0;
+  theaterNextBtn.disabled = theaterState.currentScene === story.scenes.length - 1;
+
+  document.getElementById('theater-scene-title').textContent = scene.title;
+  document.getElementById('theater-scene-subtitle').textContent = scene.subtitle;
+  document.getElementById('theater-scene-narrative').innerHTML = `<p>${scene.narrative}</p>`;
+  document.getElementById('theater-scene-focus').textContent = scene.visualFocus;
+
+  if (scene.historicReference) {
+    document.getElementById('theater-archive-source').textContent = scene.historicReference.source;
+    let archiveHtml = `
+      <strong>${scene.historicReference.title}</strong>：${scene.historicReference.description}
+      ${scene.historicReference.instrument ? `<div style="margin-top:4px;font-size:12px;color:var(--fg-dim)"><strong>关键仪器</strong>：<code>${scene.historicReference.instrument}</code></div>` : ''}
+    `;
+    if (scene.historicReference.image) {
+      const meta = scene.historicReference.imageMeta || {};
+      archiveHtml += `
+        <div class="archive-image-wrap">
+          <div class="archive-image-container">
+            <img id="theater-historic-img" src="${scene.historicReference.image}" alt="${scene.historicReference.imageCaption || '权威历史影像'}" loading="eager">
+          </div>
+          <div style="font-size:12.5px;color:#fff;font-weight:600;margin-bottom:6px;text-align:center">${scene.historicReference.imageCaption || ''}</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:5px 12px;font-size:11.5px;color:var(--fg-dim);background:rgba(255,255,255,0.03);padding:8px 10px;border-radius:6px">
+            ${meta.captureTime ? `<div>拍摄时间：<strong style="color:var(--fg)">${meta.captureTime}</strong></div>` : ''}
+            ${meta.distance ? `<div>拍摄距离：<strong style="color:var(--fg)">${meta.distance}</strong></div>` : ''}
+            ${meta.instrument ? `<div>搭载仪器：<strong style="color:var(--fg)">${meta.instrument}</strong></div>` : ''}
+            ${meta.credit ? `<div>图像来源：<strong style="color:var(--fg)">${meta.credit}</strong></div>` : ''}
+            ${meta.license ? `<div>版权授权：<strong style="color:#6ee7b7">${meta.license}</strong></div>` : ''}
+          </div>
+        </div>
+      `;
+    }
+    document.getElementById('theater-archive-desc').innerHTML = archiveHtml;
+  }
+}
+
+function exitTheater() {
+  clearAutoEndTimer();
+  const wasFollowing = theaterState.mode === 'following';
+  const restoreRoute = wasFollowing ? (theaterState.routeBeforeTheater || 'home') : state.route;
+
+  theaterState.active = false;
+  theaterState.mode = 'following';
+  theaterState.isPaused = false;
+  theaterState.sceneAccumulatedSimMs = 0;
+
+  state.route = restoreRoute;
+  state.time = '';
+  state.rate = '';
+
+  const timeInput = document.getElementById('time-input');
+  if (timeInput) timeInput.value = '';
+  const rateInput = document.getElementById('rate-input');
+  if (rateInput) rateInput.value = '';
+
+  theaterPanel.style.display = 'none';
+  if (theaterNarrativeSection) theaterNarrativeSection.style.display = 'none';
+  if (theaterDetachedBanner) theaterDetachedBanner.style.display = 'none';
+  theaterTriggerBtn.style.background = 'rgba(251,146,60,0.18)';
+  theaterTriggerBtn.style.borderColor = 'var(--accent-2)';
+  theaterTriggerBtn.setAttribute('aria-expanded', 'false');
+
+  if (state.route === 'home') {
+    sideHomeBtn?.setAttribute('aria-current', 'true');
+    nav.querySelectorAll('button').forEach((b) => b.removeAttribute('aria-current'));
+  } else {
+    sideHomeBtn?.removeAttribute('aria-current');
+    const navBtn = nav.querySelector(`[data-route="${CSS.escape(state.route)}"]`);
+    markActive(navBtn);
+  }
+
+  refresh();
+}
+
+function togglePauseScene() {
+  if (!theaterState.active || !storyData) return;
+  const scene = storyData.scenes[theaterState.currentScene];
+  if (scene.rate === 0) return; // Static freeze-frame scenes have no ongoing playback
+
+  // If Scene 2 (index 1) has completed its 62s plunge, this button acts as "下一幕：终章 ⏩"
+  if (theaterState.currentScene === 1 && theaterState.sceneAccumulatedSimMs >= 62000) {
+    activateTheater(2);
+    return;
+  }
+
+  if (theaterState.isPaused || state.rate === 0) {
+    // Resume simulation from where it was paused
+    theaterState.scenePlayStartWallMs = Date.now();
+    const currentSimMs = theaterState.sceneBaseEpoch + theaterState.sceneAccumulatedSimMs;
+    const currentSimIso = new Date(currentSimMs).toISOString();
+    state.time = currentSimIso;
+    state.rate = scene.rate || 1;
+    theaterState.isPaused = false;
+    scheduleSceneAutoEnd();
+  } else {
+    // Pause simulation at the mathematically computed elapsed moment
+    clearAutoEndTimer();
+    const elapsedWallMs = Math.max(0, Date.now() - theaterState.scenePlayStartWallMs);
+    const activeRate = (state.rate !== undefined && state.rate !== '') ? Number(state.rate) : (scene.rate || 1);
+    theaterState.sceneAccumulatedSimMs += elapsedWallMs * activeRate;
+    if (theaterState.currentScene === 1 && theaterState.sceneAccumulatedSimMs > 62000) {
+      theaterState.sceneAccumulatedSimMs = 62000;
+    }
+    const currentSimMs = theaterState.sceneBaseEpoch + theaterState.sceneAccumulatedSimMs;
+    const currentSimIso = new Date(currentSimMs).toISOString();
+    state.time = currentSimIso;
+    state.rate = 0;
+    theaterState.isPaused = true;
+
+    const timeInput = document.getElementById('time-input');
+    if (timeInput) timeInput.value = currentSimIso.slice(0, 16);
+  }
+  refresh();
+  renderTheaterUI(storyData);
+}
+
+theaterTriggerBtn.addEventListener('click', () => {
+  if (theaterState.active) {
+    theaterPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  } else {
+    activateTheater(0);
+    theaterPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+});
+theaterExitBtn.addEventListener('click', exitTheater);
+theaterResumeExitBtn.addEventListener('click', exitTheater);
+theaterResumeBtn.addEventListener('click', () => {
+  activateTheater(theaterState.currentScene);
+});
+theaterPrevBtn.addEventListener('click', () => {
+  if (theaterState.currentScene > 0) activateTheater(theaterState.currentScene - 1);
+});
+theaterNextBtn.addEventListener('click', () => {
+  if (storyData && theaterState.currentScene < storyData.scenes.length - 1) {
+    activateTheater(theaterState.currentScene + 1);
+  }
+});
+theaterReplayBtn.addEventListener('click', () => {
+  activateTheater(theaterState.currentScene);
+});
+theaterPauseBtn.addEventListener('click', togglePauseScene);
+
+window.__theater = {
+  theaterState,
+  state,
+  activateTheater,
+  exitTheater,
+  togglePauseScene,
+  renderTheaterUI,
+  getStoryData: () => storyData
+};
 </script>
 </body>
 </html>

@@ -57,8 +57,8 @@ export function embedUrl({ route = 'home', time, rate, ...flags } = {}) {
     if (v === undefined || v === null || v === false) continue;
     q.set(k, v === true ? 'true' : String(v));
   }
-  if (time) q.set('time', time);
-  if (rate) q.set('rate', String(rate));
+  if (time !== undefined && time !== null && time !== '') q.set('time', String(time));
+  if (rate !== undefined && rate !== null && rate !== '') q.set('rate', String(rate));
   const qs = q.toString();
   return `${NASA_APP}#/${route}${qs ? '?' + qs : ''}`;
 }

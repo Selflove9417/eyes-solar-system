@@ -1,0 +1,81 @@
+{
+  "id": "cassini",
+  "title": "卡西尼号：土星大结局 (Grand Finale)",
+  "subtitle": "十三年传奇巡航的壮丽绝唱：穿环、俯冲与永恒",
+  "target": "sc_cassini",
+  "totalScenes": 3,
+  "scenes": [
+    {
+      "sceneIndex": 1,
+      "title": "第一幕：最后的穿环航道",
+      "subtitle": "第 22 次近星公转，人类探测器绝版的内缝飞越",
+      "route": "sc_cassini",
+      "time": "2017-09-09T00:09:00.000Z",
+      "timeDisplay": "2017-09-09 00:09:00 UTC",
+      "timeType": "SCET (航天器事件时间)",
+      "ertDisplay": "2017-09-09 01:32:00 UTC (ERT 地球接收)",
+      "lightTimeNote": "单程光行时间约 83 分钟",
+      "rate": 60,
+      "rateLabel": "1 分钟 / 秒 (加速推演)",
+      "narrative": "2017 年 9 月 8 日 20:09 EDT（即 9 月 9 日 00:09 UTC），卡西尼号迎来其第 22 次近星公转，也是任务历史上最后一次穿越土星云顶与最内侧 D 环之间仅 2000 公里的狭窄缝隙（Final Ring Crossing）。航天器以约 12.2 万公里/小时的高速掠过，距云顶最近约 1680 公里。在这次穿环后，卡西尼号在土卫六引力助推下正式切入无可逆转的撞击轨道。",
+      "visualFocus": "在 3D 视角中可观察卡西尼号掠过壮丽环缝内缘的姿态，金色星盘与密集光环在背景中展现极其宏伟的空间几何关系。",
+      "historicReference": {
+        "title": "穿越遥测与绝版环境探测",
+        "description": "卡西尼号穿越主环缝隙时，无线电科学仪器测量土星引力场高阶谐波，RPWS 等离子体波仪记录环缝微粒撞击音，证实该缝隙异常洁净（几乎无大颗粒尘埃）。",
+        "instrument": "RPWS / RSS / INMS",
+        "source": "NASA JPL Cassini Grand Finale Orbit 292 Timeline"
+      }
+    },
+    {
+      "sceneIndex": 2,
+      "title": "第二幕：扎入金色大气",
+      "subtitle": "卡西尼号最后的 62 秒真实飞行，推进器攀升对抗气动力",
+      "route": "sc_cassini",
+      "time": "2017-09-15T10:31:48.000Z",
+      "timeDisplay": "2017-09-15 10:31:48 UTC (3D 场景定位时刻 / 官方标称 10:31 UTC)",
+      "timeType": "SCET (航天器事件时间)",
+      "ertDisplay": "2017-09-15 11:55:28 UTC (标称 11:54 UTC)",
+      "lightTimeNote": "单程光行时间约 83 分钟 · 本幕持续 62 秒真实飞行推演",
+      "rate": 1,
+      "rateLabel": "1x (实时真实速度)",
+      "narrative": "根据 NASA 官方任务时间表，卡西尼号切入土星稀薄大气（距 1 bar 云顶约 1910 公里）已确认的官方事件时间为标称 10:31 UTC（SCET，地球接收时间 ERT 11:54 UTC）。本幕采用 10:31:48 UTC 作为 3D 模拟器历史场景定位时刻（近似值），以对准虚拟空间中的切入轨迹点。\n\n⏱️【推演时长说明】：从 10:31:48 UTC 切入高层大气到 10:32:50 UTC 探测器完全解体，卡西尼号在历史真实中仅剩最后 62 秒的生命。在 1x 真实速度下，推演运行满 62 秒后将到达 NASA 动力学星历终点并自动定格在 10:32:50 UTC。届时请点击【下一幕 ⏩】进入第三幕终曲大结局。\n\n面对急剧增强的气动阻力，卡西尼号姿控推进器点火输出从初始的 10% 逐步攀升，顽强地将高增益天线对准地球，以 27 kbps 的速率进行实时遥测回传。离子与中性质谱仪（INMS）直接嗅探土星大气分子成分。",
+      "visualFocus": "在 1x 真实速度下可沉浸观察卡西尼号最后的 62 秒真实俯冲。高增益天线稳定对准地球，62 秒推演完成后将自动定格在任务终点，即可点击【下一幕 ⏩】。",
+      "historicReference": {
+        "title": "大气采样与最后数据流",
+        "description": "NASA 官方公布的大气切入事件时间为标称 10:31 UTC（SCET）。场景中的 10:31:48 UTC 标为 3D 模拟器场景定位时刻（近似值），并非已由独立传感器确认的秒级任务重建结果。",
+        "instrument": "INMS / CDA / RPWS / MAG",
+        "source": "NASA JPL Cassini Grand Finale Mission Overview"
+      }
+    },
+    {
+      "sceneIndex": 3,
+      "title": "第三幕：终曲与永恒",
+      "subtitle": "推进器极限输出、天线失锁与星尘熔融",
+      "route": "sc_cassini",
+      "time": "2017-09-15T10:32:06.000Z",
+      "timeDisplay": "2017-09-15 10:32:06 UTC (3D 场景定位时刻 / 官方标称 10:32 UTC)",
+      "timeType": "SCET (航天器事件时间)",
+      "ertDisplay": "2017-09-15 11:55:46 UTC (地球端实测最后信号中断)",
+      "lightTimeNote": "单程光行时间约 83 分钟",
+      "rate": 0,
+      "rateLabel": "终章历史定格 (Pause)",
+      "narrative": "卡西尼号进入大气后，推进器逐步提升输出。NASA 官方确认的航天器端事件时间为标称 10:32 UTC（SCET），推进器达到 100% 极限输出导致天线偏离地球指向；地球端堪培拉深空站 DSS-43 于 11:55:46 UTC（ERT）实测确认最后载波信号中断（Loss of Signal）。结合约 83 分钟单程光行时间，3D 模拟器将历史场景定位时刻定为 10:32:06 UTC（近似定位值），不可称为已确认的秒级任务重建结果。气动扭矩彻底压倒极限推进器导致航天器失控翻滚，天线偏离地球后通信永远中断。信号丢失数十秒后，急剧攀升的气动动压与极端摩擦高温摧毁了探测器机械结构，卡西尼号化为土星大气的一缕星尘。十三年传奇巡航圆满谢幕。",
+      "visualFocus": "卡西尼号在此刻定格于最后的通信中断坐标，背景为壮丽的土星晨昏线与金色云顶。因卡西尼号受控坠入土星大气终结任务，NASA Eyes 官方动力学轨迹在此刻达到终点（若手动推演至末尾会提示 CANNOT EXCEED MISSION END），历史时刻永久定格。如需观察大气切入飞行动态，可点击【⏪ 上一幕】或【🔁 重播本幕】。",
+      "historicReference": {
+        "title": "通信丢失 vs 结构摧毁与绝版影像考证",
+        "description": "NASA 官方确认的航天器端通信丢失时间为标称 10:32 UTC（SCET），地球端堪培拉深空站确认的最后载波中断记录为 11:55:46 UTC（ERT）。10:32:06 UTC 属 3D 模拟器历史场景定位时刻（由 ERT 结合光时估算的近似值），不可称为已确认的秒级任务重建结果。科学界严谨区分推进器达到极限导致通信中断时刻与数秒至数十秒后的结构机械解体气化。下方展示卡西尼号在进入大气前夕拍摄的最后一张历史照片（PIA21895）。",
+        "instrument": "DSN DSS-43 (堪培拉 70 米天线) / ISS-WAC (广角相机)",
+        "source": "NASA/JPL End of Mission Timeline & Cassini Imaging Team",
+        "image": "assets/img/PIA21895_final_image.png",
+        "imageCaption": "PIA21895: 卡西尼号成像相机在进入大气层前夕拍摄的绝版最后影像",
+        "imageMeta": {
+          "captureTime": "2017-09-14 19:59 UTC (入轨前约 14.5 小时)",
+          "distance": "距土星约 63.4 万公里 (394,000 英里)",
+          "instrument": "ISS-WAC (可见光广角相机，Clear 滤镜，非热红外)",
+          "credit": "NASA/JPL-Caltech/Space Science Institute",
+          "license": "NASA 官方公有领域 (Public Domain)"
+        }
+      }
+    }
+  ]
+}
