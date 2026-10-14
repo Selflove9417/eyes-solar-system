@@ -150,13 +150,22 @@ async function measurePage(name, action = null) {
       scrollWidth: scrollW,
       isSidebarCollapsed,
       isImmersive,
+      // Outer Stage Container
       stageTop: sRect ? Math.round(sRect.top + window.scrollY) : null,
       stageHeight: sRect ? Math.round(sRect.height) : null,
       stageWidth: sRect ? Math.round(sRect.width) : null,
-      stageVisibleHeight: sRect ? Math.round(Math.min(vh, sRect.bottom) - Math.max(0, sRect.top)) : null,
-      stageVisibleWidth: sRect ? Math.round(Math.min(vw, sRect.right) - Math.max(0, sRect.left)) : null,
+      stageVisibleHeight: sRect ? Math.max(0, Math.round(Math.min(vh, sRect.bottom) - Math.max(0, sRect.top))) : null,
+      stageVisibleWidth: sRect ? Math.max(0, Math.round(Math.min(vw, sRect.right) - Math.max(0, sRect.left))) : null,
+      stageViewportRatio: sRect ? +(((Math.max(0, Math.min(vh, sRect.bottom) - Math.max(0, sRect.top)) * Math.max(0, Math.min(vw, sRect.right) - Math.max(0, sRect.left))) / (vw * vh)) * 100).toFixed(1) : null,
+
+      // NASA Iframe (Actual 3D Simulator visible area)
+      iframeTop: ifRect ? Math.round(ifRect.top + window.scrollY) : null,
       iframeHeight: ifRect ? Math.round(ifRect.height) : null,
       iframeWidth: ifRect ? Math.round(ifRect.width) : null,
+      iframeVisibleHeight: ifRect ? Math.max(0, Math.round(Math.min(vh, ifRect.bottom) - Math.max(0, ifRect.top))) : null,
+      iframeVisibleWidth: ifRect ? Math.max(0, Math.round(Math.min(vw, ifRect.right) - Math.max(0, ifRect.left))) : null,
+      iframeViewportRatio: ifRect ? +(((Math.max(0, Math.min(vh, ifRect.bottom) - Math.max(0, ifRect.top)) * Math.max(0, Math.min(vw, ifRect.right) - Math.max(0, ifRect.left))) / (vw * vh)) * 100).toFixed(1) : null,
+
       theaterDisplay: theater ? getComputedStyle(theater).display : 'none',
       theaterHeight: theater && getComputedStyle(theater).display !== 'none' ? Math.round(theater.getBoundingClientRect().height) : 0,
       tipDisplay: tip ? getComputedStyle(tip).display : 'none',
