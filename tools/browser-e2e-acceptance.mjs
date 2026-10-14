@@ -13,6 +13,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const root = path.resolve(__dirname, '..');
 
+const args = process.argv.slice(2);
+const runAll = args.includes('--all');
+const runAB = args.includes('--ab') || runAll;
+const runHotfix = args.includes('--hotfix') || !args.includes('--ab');
+
 const HTTP_PORT = 8899;
 const CDP_PORT = 9444;
 const CHROME_PATH = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
@@ -130,6 +135,7 @@ await sendCdp('Runtime.enable');
 await sendCdp('Page.enable');
 await sendCdp('Emulation.setDeviceMetricsOverride', { width: 1440, height: 900, deviceScaleFactor: 1, mobile: false });
 
+if (runAB) {
 console.log('\n======================================================');
 console.log('🧪 TEST B: Homepage Direct Entry to Story Theater');
 console.log('======================================================\n');
@@ -396,10 +402,230 @@ if (deltaMs < 0) {
 } else {
   console.log(`  ➡️ Time progressed forward by ${deltaMs / 1000}s.`);
 }
+} // end if (runAB)
 
-console.log('\n======================================================');
+if (runHotfix) {
+  console.log('\n======================================================');
+  console.log('🧪 TEST C: Mid-scene Detach to Mars & Old Timer Neutralization');
+  console.log('======================================================\n');
+
+  // 1. Navigate to explore.html?story=cassini
+  await sendCdp('Page.navigate', { url: `http://127.0.0.1:${HTTP_PORT}/explore.html?story=cassini` });
+  await sleep(2500);
+
+  // 2. Activate Scene 2 directly
+  console.log('1. Starting Scene 2 at 10:31:48 UTC (rate = 1x)...');
+  await evaluate(`window.__theater.activateTheater(1)`);
+  await sleep(1000);
+
+  // 3. Wait ~5 seconds
+  console.log('2. Allowing Scene 2 to run for ~5 seconds...');
+  await sleep(4000);
+
+  const midSceneSnapshot = await evaluate(`(() => {
+    const t = window.__theater;
+    return {
+      scene: t?.theaterState?.currentScene,
+      mode: t?.theaterState?.mode,
+      route: t?.state?.route,
+      time: t?.state?.time,
+      rate: t?.state?.rate,
+    };
+  })()`);
+  console.log('3. Mid-Scene 2 Snapshot (at ~5s):', midSceneSnapshot);
+  if (midSceneSnapshot.route !== 'sc_cassini' || midSceneSnapshot.mode !== 'following') {
+    throw new Error('Scene 2 did not initialize properly in following mode');
+  }
+
+  // 4. Switch to Mars via sidebar navigation button
+  console.log('4. Clicking Mars navigation button (detach into free exploration)...');
+  await evaluate(`(() => {
+    const marsBtn = document.querySelector('[data-route="mars"]');
+    if (!marsBtn) throw new Error('Mars nav button [data-route="mars"] not found');
+    marsBtn.click();
+  })()`);
+  await sleep(1000);
+
+  const postSwitchSnapshot = await evaluate(`(() => {
+    const t = window.__theater;
+    const iframe = document.getElementById('stage');
+    const detachedBanner = document.getElementById('theater-detached-banner');
+    return {
+      route: t?.state?.route,
+      mode: t?.theaterState?.mode,
+      time: t?.state?.time,
+      rate: t?.state?.rate,
+      timeInput: document.getElementById('time-input')?.value,
+      rateInput: document.getElementById('rate-input')?.value,
+      detachedBannerDisplay: detachedBanner ? getComputedStyle(detachedBanner).display : 'none',
+      iframeSrc: iframe?.src,
+    };
+  })()`);
+  console.log('5. Immediate State after Switching to Mars:', postSwitchSnapshot);
+
+  if (postSwitchSnapshot.route !== 'mars' || postSwitchSnapshot.mode !== 'detached') {
+    throw new Error('Switching to Mars failed to detach theater mode');
+  }
+  if (postSwitchSnapshot.time !== '' || postSwitchSnapshot.rate !== '') {
+    throw new Error(`State time/rate not reset upon detaching: time=${postSwitchSnapshot.time}, rate=${postSwitchSnapshot.rate}`);
+  }
+
+  // 5. Wait for 15 more seconds (total ~20s since Scene 2 start, exceeding the 18s boundary)
+  console.log('6. Waiting 15s to elapse beyond original 18s boundary (total ~20s elapsed)...');
+  await sleep(15000);
+
+  // 6. Verify state at 20s
+  const pastBoundarySnapshot = await evaluate(`(() => {
+    const t = window.__theater;
+    const iframe = document.getElementById('stage');
+    const detachedBanner = document.getElementById('theater-detached-banner');
+    return {
+      route: t?.state?.route,
+      mode: t?.theaterState?.mode,
+      time: t?.state?.time,
+      rate: t?.state?.rate,
+      timeInput: document.getElementById('time-input')?.value,
+      rateInput: document.getElementById('rate-input')?.value,
+      detachedBannerDisplay: detachedBanner ? getComputedStyle(detachedBanner).display : 'none',
+      iframeSrc: iframe?.src,
+    };
+  })()`);
+
+  console.log('\n7. Snapshot Past the 18s Boundary (>20s total elapsed):', pastBoundarySnapshot);
+
+  // Verify Parent Page Clock & State Isolation
+  console.log('\n--- [Clock & State Isolation Verification: Parent Page] ---');
+  if (pastBoundarySnapshot.route !== 'mars') {
+    throw new Error(`❌ PARENT STATE OVERWRITTEN: Route reverted to '${pastBoundarySnapshot.route}' (expected 'mars')`);
+  }
+  if (pastBoundarySnapshot.time !== '') {
+    throw new Error(`❌ PARENT TIME OVERWRITTEN: Time was set to '${pastBoundarySnapshot.time}' by old boundary timer!`);
+  }
+  if (pastBoundarySnapshot.rate !== '') {
+    throw new Error(`❌ PARENT RATE OVERWRITTEN: Rate was set to '${pastBoundarySnapshot.rate}' by old boundary timer!`);
+  }
+  if (pastBoundarySnapshot.mode !== 'detached') {
+    throw new Error(`❌ THEATER MODE CORRUPTED: Mode is '${pastBoundarySnapshot.mode}' (expected 'detached')`);
+  }
+  if (pastBoundarySnapshot.timeInput !== '' || pastBoundarySnapshot.rateInput !== '') {
+    throw new Error('❌ Input boxes were overwritten by old boundary timer!');
+  }
+  console.log('  ✅ Parent Page State: Route is strictly "mars", time/rate remain empty, detached banner active.');
+
+  // Verify NASA iframe Communication & Clock Boundary
+  console.log('--- [NASA iframe Parameter & Clock Boundary Verification] ---');
+  if (pastBoundarySnapshot.iframeSrc.includes('sc_cassini')) {
+    throw new Error(`❌ IFRAME OVERWRITTEN: iframe URL reverted to Cassini: ${pastBoundarySnapshot.iframeSrc}`);
+  }
+  if (pastBoundarySnapshot.iframeSrc.includes('10%3A32%3A06') || pastBoundarySnapshot.iframeSrc.includes('10:32:06')) {
+    throw new Error(`❌ IFRAME TIME OVERWRITTEN: Cassini freeze-frame timestamp sent to iframe: ${pastBoundarySnapshot.iframeSrc}`);
+  }
+  if (pastBoundarySnapshot.iframeSrc.includes('rate=0')) {
+    throw new Error(`❌ IFRAME RATE OVERWRITTEN: rate=0 sent to iframe: ${pastBoundarySnapshot.iframeSrc}`);
+  }
+  console.log('  ✅ NASA iframe URL: Strictly points to Mars without Cassini timestamps or rate=0 overrides.');
+  console.log('  ℹ️ Clock Boundary Distinction: Parent page acts as authoritative control surface. Under browser SOP, cross-origin NASA Eyes iframe DOM is sandbox-isolated; iframe.src verifies that no rogue Cassini commands were dispatched.');
+  console.log('✅ TEST C PASSED: Mid-scene detach to Mars successfully cleared boundary timer with ZERO timer overwrite!\n');
+
+  console.log('======================================================');
+  console.log('🧪 TEST D: Manual Time Machine Setting During Scene 2');
+  console.log('======================================================\n');
+
+  // 1. Activate Scene 2 again
+  console.log('1. Starting Scene 2 at 10:31:48 UTC (rate = 1x)...');
+  await evaluate(`window.__theater.activateTheater(1)`);
+  await sleep(1000);
+
+  // 2. Allow to run for ~3 seconds
+  console.log('2. Allowing Scene 2 to run for ~3 seconds...');
+  await sleep(3000);
+
+  // 3. User manually inputs custom time & rate into Time Machine
+  const customTimeInput = '2020-01-01T00:00';
+  const expectedIso = '2020-01-01T00:00:00.000Z';
+  const customRateInput = '60';
+
+  console.log(`3. User sets Time Machine: time=${customTimeInput}, rate=${customRateInput} and clicks 【前往指定时空】...`);
+  await evaluate(`(() => {
+    const timeInput = document.getElementById('time-input');
+    const rateInput = document.getElementById('rate-input');
+    const applyBtn = document.getElementById('apply-time');
+    if (!timeInput || !rateInput || !applyBtn) throw new Error('Time machine controls not found');
+    timeInput.value = '${customTimeInput}';
+    rateInput.value = '${customRateInput}';
+    applyBtn.click();
+  })()`);
+  await sleep(1000);
+
+  const immediateManualSnapshot = await evaluate(`(() => {
+    const t = window.__theater;
+    const iframe = document.getElementById('stage');
+    return {
+      mode: t?.theaterState?.mode,
+      time: t?.state?.time,
+      rate: t?.state?.rate,
+      timeInput: document.getElementById('time-input')?.value,
+      rateInput: document.getElementById('rate-input')?.value,
+      iframeSrc: iframe?.src,
+    };
+  })()`);
+
+  console.log('4. Immediate State After Manual Time Machine Apply:', immediateManualSnapshot);
+  if (immediateManualSnapshot.mode !== 'detached') {
+    throw new Error('Manual time apply failed to detach theater mode');
+  }
+  if (immediateManualSnapshot.time !== expectedIso || String(immediateManualSnapshot.rate) !== customRateInput) {
+    throw new Error(`Custom time/rate not applied correctly: time=${immediateManualSnapshot.time}, rate=${immediateManualSnapshot.rate}`);
+  }
+
+  // 4. Wait 16 seconds (exceeding original 18s boundary)
+  console.log('5. Waiting 16s past original 18s boundary (total ~19s elapsed)...');
+  await sleep(16000);
+
+  const pastManualSnapshot = await evaluate(`(() => {
+    const t = window.__theater;
+    const iframe = document.getElementById('stage');
+    return {
+      mode: t?.theaterState?.mode,
+      time: t?.state?.time,
+      rate: t?.state?.rate,
+      timeInput: document.getElementById('time-input')?.value,
+      rateInput: document.getElementById('rate-input')?.value,
+      iframeSrc: iframe?.src,
+    };
+  })()`);
+
+  console.log('\n6. Snapshot Past the 18s Boundary (>19s total elapsed):', pastManualSnapshot);
+
+  // Verify Parent Page State & Time Machine
+  console.log('\n--- [Clock & State Isolation Verification: Parent Page] ---');
+  if (pastManualSnapshot.time !== expectedIso) {
+    throw new Error(`❌ USER TIME OVERWRITTEN! Expected '${expectedIso}', got '${pastManualSnapshot.time}'`);
+  }
+  if (String(pastManualSnapshot.rate) !== customRateInput) {
+    throw new Error(`❌ USER RATE OVERWRITTEN! Expected '${customRateInput}', got '${pastManualSnapshot.rate}'`);
+  }
+  if (pastManualSnapshot.timeInput !== customTimeInput || pastManualSnapshot.rateInput !== customRateInput) {
+    throw new Error('❌ Time Machine inputs were overwritten by old boundary timer!');
+  }
+  console.log(`  ✅ Parent Page State: Time strictly preserved at ${expectedIso}, rate strictly preserved at ${customRateInput}.`);
+
+  // Verify NASA iframe Communication
+  console.log('--- [NASA iframe Parameter Verification] ---');
+  if (!pastManualSnapshot.iframeSrc.includes('2020-01-01T00%3A00%3A00.000Z') || !pastManualSnapshot.iframeSrc.includes('rate=60')) {
+    throw new Error(`❌ IFRAME DOES NOT REFLECT USER SETTINGS: ${pastManualSnapshot.iframeSrc}`);
+  }
+  if (pastManualSnapshot.iframeSrc.includes('2017-09-15T10%3A32%3A06.000Z') || pastManualSnapshot.iframeSrc.includes('rate=0')) {
+    throw new Error(`❌ IFRAME OVERWRITTEN BY CASSINI BOUNDARY: ${pastManualSnapshot.iframeSrc}`);
+  }
+  console.log('  ✅ NASA iframe URL: Accurately loaded with user custom timestamp & rate (2020-01-01 / rate=60).');
+  console.log('✅ TEST D PASSED: Manual Time Machine inputs are completely immune to old timer overrides!\n');
+}
+
+console.log('======================================================');
 console.log('📊 Browser Acceptance Test Summary');
 console.log('======================================================');
+console.log(`Executed Suites: ${[runAB ? 'A/B (Baseline E2E)' : null, runHotfix ? 'C/D (Detach & Hotfix)' : null].filter(Boolean).join(', ')}`);
 console.log(`Total Console / Page Errors: ${consoleErrors.length}`);
 if (consoleErrors.length > 0) {
   console.error('Console Errors encountered:', consoleErrors);
@@ -408,7 +634,7 @@ if (consoleErrors.length > 0) {
   console.log('✅ Clean Console: Zero ReferenceErrors, zero unhandled rejections.');
 }
 
-console.log('\n🎉 ALL BROWSER-LEVEL ACCEPTANCE CRITERIA (TEST A & TEST B) PASSED!\n');
+console.log('\n🎉 ALL EXECUTED BROWSER-LEVEL ACCEPTANCE SUITES PASSED!\n');
 
 ws.close();
 chromeProcess.kill();

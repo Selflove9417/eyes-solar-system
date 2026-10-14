@@ -1092,8 +1092,8 @@ function clearBoundaryTimer() {
 
 function scheduleSceneBoundaryTimer() {
   clearBoundaryTimer();
-  // 仅在第二幕（索引 1）未暂停且有效运行时应用边界控制
-  if (!theaterState.active || theaterState.currentScene !== 1 || theaterState.isPaused) {
+  // 仅在第二幕（索引 1）未暂停、有效运行且处于跟随模式（following）时应用边界控制
+  if (!theaterState.active || theaterState.mode !== 'following' || theaterState.currentScene !== 1 || theaterState.isPaused) {
     return;
   }
   // 第二幕（10:31:48）推进到第三幕连接点（10:32:06）为 18000ms
@@ -1103,7 +1103,7 @@ function scheduleSceneBoundaryTimer() {
   
   if (remainingWallMs > 0) {
     sceneBoundaryTimer = setTimeout(() => {
-      if (theaterState.active && theaterState.currentScene === 1 && !theaterState.isPaused) {
+      if (theaterState.active && theaterState.mode === 'following' && theaterState.currentScene === 1 && !theaterState.isPaused) {
         theaterState.isPaused = true;
         theaterState.sceneAccumulatedSimMs = 18000;
         state.rate = 0;
@@ -1135,6 +1135,7 @@ function detachTheater({ resetTime = true } = {}) {
   if (!theaterState.active) return;
   theaterState.mode = 'detached';
   clearSimClockTicker();
+  clearBoundaryTimer();
   if (resetTime) {
     state.time = '';
     state.rate = '';

@@ -95,6 +95,15 @@ assert(!exploreContent.includes('62000 - theaterState.sceneAccumulatedSimMs'), '
 // Verify direct URL triggers exist
 assert(exploreContent.includes('urlParams.get(\'story\')'), 'Supports ?story=cassini URL query parameter');
 
+// Verify detachTheater clears boundary timer to prevent timer overwrite in detached mode
+const detachFnMatch = exploreContent.match(/function detachTheater\([^\)]*\)\s*\{([\s\S]*?)\n\}/);
+assert(detachFnMatch && detachFnMatch[1].includes('clearBoundaryTimer()'), 'detachTheater() properly invokes clearBoundaryTimer()');
+
+// Verify scheduleSceneBoundaryTimer checks theaterState.mode === "following"
+const scheduleFnMatch = exploreContent.match(/function scheduleSceneBoundaryTimer\([^\)]*\)\s*\{([\s\S]*?)\n\}/);
+assert(scheduleFnMatch && scheduleFnMatch[1].includes("theaterState.mode !== 'following'"), 'scheduleSceneBoundaryTimer() guards on mode !== "following"');
+assert(scheduleFnMatch && scheduleFnMatch[1].includes("theaterState.mode === 'following'"), 'Boundary timer callback guards on mode === "following"');
+
 console.log(`\nResults: ${passCount} Passed, ${failCount} Failed.`);
 
 if (failCount > 0) {
