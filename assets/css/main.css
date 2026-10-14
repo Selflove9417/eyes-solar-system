@@ -150,7 +150,9 @@ a:hover {
   gap: 4px;
   font-family: inherit;
 }
-.nav a:hover, .nav-dropdown-btn:hover {
+.nav a:hover, .nav-dropdown-btn:hover,
+.nav-item:hover .nav-dropdown-btn,
+.nav-item.open .nav-dropdown-btn {
   color: #fff;
   background: rgba(255, 255, 255, 0.08);
 }
@@ -176,15 +178,33 @@ a:hover {
   border-radius: 12px;
   padding: 6px;
   min-width: 200px;
-  display: none;
+  display: flex;
   flex-direction: column;
   gap: 3px;
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.65);
   z-index: 200;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.16s ease, transform 0.16s ease, visibility 0.16s ease;
+}
+/* Invisible hover bridge covering the gap between the button and dropdown */
+.nav-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -14px;
+  left: -12px;
+  right: -12px;
+  height: 18px;
+  background: transparent;
 }
 .nav-item:hover .nav-dropdown,
+.nav-item.open .nav-dropdown,
 .nav-item:focus-within .nav-dropdown {
-  display: flex;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(4px);
 }
 .nav-dropdown a {
   padding: 8px 14px;
@@ -263,10 +283,17 @@ a:hover {
     position: static;
     transform: none;
     display: flex;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
     background: transparent;
     border: none;
     padding-left: 18px;
     box-shadow: none;
+    transition: none;
+  }
+  .nav-dropdown::before {
+    display: none;
   }
   .nav a, .nav-dropdown-btn {
     padding: 10px 16px;
