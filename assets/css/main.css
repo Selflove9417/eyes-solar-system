@@ -186,16 +186,16 @@ a:hover {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity 0.16s ease, transform 0.16s ease, visibility 0.16s ease;
+  transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.22s;
 }
-/* Invisible hover bridge covering the gap between the button and dropdown */
+/* Generous invisible hover bridge covering the entire path between button and dropdown */
 .nav-dropdown::before {
   content: '';
   position: absolute;
-  top: -14px;
-  left: -12px;
-  right: -12px;
-  height: 18px;
+  top: -24px;
+  left: -32px;
+  right: -32px;
+  height: 28px;
   background: transparent;
 }
 .nav-item:hover .nav-dropdown,

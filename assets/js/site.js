@@ -218,7 +218,7 @@ export function renderChrome(active) {
     });
   }
 
-  // Dropdown click toggle & outside click dismissal
+  // Dropdown hover with grace timer, click toggle & outside click dismissal
   const dropdownItems = header.querySelectorAll('.nav-item');
   dropdownItems.forEach((item) => {
     const btn = item.querySelector('.nav-dropdown-btn');
@@ -226,18 +226,54 @@ export function renderChrome(active) {
     btn.setAttribute('aria-haspopup', 'true');
     btn.setAttribute('aria-expanded', 'false');
 
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const isOpen = item.classList.contains('open');
+    let leaveTimer = null;
+
+    const openMenu = () => {
+      if (leaveTimer) {
+        clearTimeout(leaveTimer);
+        leaveTimer = null;
+      }
       dropdownItems.forEach((other) => {
         if (other !== item) {
           other.classList.remove('open');
           other.querySelector('.nav-dropdown-btn')?.setAttribute('aria-expanded', 'false');
         }
       });
-      item.classList.toggle('open', !isOpen);
-      btn.setAttribute('aria-expanded', String(!isOpen));
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+    };
+
+    const closeMenu = (delay = 0) => {
+      if (leaveTimer) {
+        clearTimeout(leaveTimer);
+        leaveTimer = null;
+      }
+      if (delay > 0) {
+        leaveTimer = setTimeout(() => {
+          item.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+          leaveTimer = null;
+        }, delay);
+      } else {
+        item.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+      }
+    };
+
+    // Smooth hover with grace delay (320ms safe window prevents accidental menu vanish)
+    item.addEventListener('mouseenter', () => openMenu());
+    item.addEventListener('mouseleave', () => closeMenu(320));
+
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (item.classList.contains('open')) {
+        closeMenu(0);
+      } else {
+        openMenu();
+      }
     });
+
+    item.dataset.closeMenu = closeMenu;
   });
 
   document.addEventListener('click', (e) => {
