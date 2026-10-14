@@ -168,6 +168,7 @@ export function renderChrome(active) {
             深度特写 <span style="font-size:10px;opacity:0.7">▾</span>
           </button>
           <div class="nav-dropdown">
+            <a href="explore.html?story=cassini" style="color:#fdba74;font-weight:600">🎬 探索剧场 · 卡西尼号</a>
             <a href="mars.html"${active === 'mars.html' ? ' aria-current="page"' : ''}>🔴 火星与漫游车</a>
             <a href="jwst.html"${active === 'jwst.html' ? ' aria-current="page"' : ''}>🔭 韦伯空间望远镜</a>
             <a href="saturn.html"${active === 'saturn.html' ? ' aria-current="page"' : ''}>🪐 土星与环系奇观</a>

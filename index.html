@@ -4,11 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>深空之眸 · NASA Eyes 中文观测站</title>
-<meta name="description" content="基于 NASA/JPL Eyes on the Solar System 官方 3D 模拟器的非官方中文观测站：深空旗舰特写、天体中文名、航天任务介绍与中英术语对照。">
+<meta name="description" content="基于 NASA/JPL Eyes on the Solar System 官方 3D 动力学模拟器的中文观测站：卡西尼号土星大结局 3D 探索剧场、深空旗舰特写、天体中文名与术语对照。">
+<meta property="og:title" content="深空之眸 · NASA Eyes 中文观测站 & 探索剧场">
+<meta property="og:description" content="基于 NASA/JPL 官方 3D 动力学模型，体验卡西尼号土星大结局沉浸式三幕探索剧场与四大深空旗舰特写。">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/img/PIA21895_final_image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="深空之眸 · NASA Eyes 中文观测站 & 探索剧场">
+<meta name="twitter:description" content="卡西尼号土星大结局 3D 探索剧场现已上线，体验沉浸式历史时空推演。">
+<meta name="twitter:image" content="assets/img/PIA21895_final_image.png">
 <link rel="stylesheet" href="assets/css/main.css">
 <style>
   .hero-container {
-    padding: 52px 0 28px;
+    padding: 52px 0 24px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -40,7 +48,7 @@
     backdrop-filter: blur(10px);
     border-radius: var(--r);
     padding: 14px 20px;
-    margin: 18px 0 32px;
+    margin: 18px 0 28px;
     font-size: 13.5px;
     color: #fed7aa;
     line-height: 1.6;
@@ -49,6 +57,157 @@
   .notice-statement a {
     color: #fba65a;
     text-decoration: underline;
+  }
+
+  /* Story Theater Showcase on Home Page */
+  .theater-showcase {
+    background: linear-gradient(135deg, rgba(20, 15, 30, 0.92) 0%, rgba(11, 17, 32, 0.96) 50%, rgba(30, 20, 15, 0.9) 100%);
+    border: 1px solid rgba(251, 146, 60, 0.38);
+    border-radius: var(--r);
+    padding: 28px 32px;
+    margin: 24px 0 32px;
+    box-shadow: 0 16px 44px rgba(0, 0, 0, 0.55), 0 0 30px rgba(251, 146, 60, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+  .theater-showcase::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #fb923c, #f43f5e, #38bdf8);
+  }
+  .theater-badge-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 12.5px;
+    font-weight: 700;
+    background: rgba(251, 146, 60, 0.18);
+    color: #fed7aa;
+    border: 1px solid rgba(251, 146, 60, 0.4);
+    margin-bottom: 12px;
+  }
+  .theater-showcase-title {
+    font-size: 25px;
+    font-weight: 800;
+    color: #fff;
+    margin: 0 0 8px;
+    letter-spacing: -0.3px;
+  }
+  .theater-showcase-desc {
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: #e2e8f0;
+    max-width: 860px;
+    margin: 0 0 18px;
+  }
+  .theater-feature-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 14px;
+    margin-bottom: 22px;
+    font-size: 12.5px;
+    color: var(--fg-dim);
+  }
+  .theater-feature-tag-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(255, 255, 255, 0.04);
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--line-subtle);
+  }
+  .theater-scenes-preview-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 22px;
+  }
+  .theater-scene-preview-card {
+    background: rgba(15, 23, 42, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 14px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .theater-scene-preview-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(251, 146, 60, 0.4);
+  }
+  .preview-step-num {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent-2);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .preview-step-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .preview-step-time {
+    font-size: 11px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    color: #38bdf8;
+  }
+  .preview-step-desc {
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: var(--fg-dim);
+  }
+  .theater-showcase-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .theater-archive-thumb-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .theater-thumb-img {
+    width: 68px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid rgba(251, 146, 60, 0.35);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  }
+  .theater-thumb-text {
+    font-size: 12px;
+    color: var(--fg-dim);
+    line-height: 1.45;
+  }
+  @media (max-width: 768px) {
+    .theater-showcase {
+      padding: 20px 16px;
+      margin: 18px 0 24px;
+    }
+    .theater-showcase-title {
+      font-size: 20px;
+    }
+    .theater-scenes-preview-grid {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .theater-showcase-bottom {
+      flex-direction: column;
+      align-items: stretch;
+    }
   }
 </style>
 </head>
@@ -63,21 +222,85 @@
 
     <div class="hero-pillars">
       <span class="hero-pillar-item">🪐 官方 3D 动力学解算</span>
+      <span class="hero-pillar-item">🎬 卡西尼号探索剧场</span>
       <span class="hero-pillar-item">🔴 旗舰深空任务特写</span>
       <span class="hero-pillar-item">🗺️ 719 官方实体 · 392 中文对照</span>
       <span class="hero-pillar-item">⚡ 中英术语精准对照</span>
     </div>
 
     <div class="hero-actions">
-      <!-- 醒目的首屏主要行动入口 -->
-      <a class="btn-hero-primary" href="explore.html">
-        <span>🪐 开始 3D 太阳系漫游</span>
-        <span class="btn-sub">官方实时视窗 · 中文天体直达</span>
+      <!-- 醒目的首屏主要行动入口：突出探索剧场 -->
+      <a class="btn-hero-primary" href="explore.html?story=cassini" style="background:linear-gradient(135deg, rgba(234, 88, 12, 0.9), rgba(251, 146, 60, 0.95));border-color:rgba(251, 146, 60, 0.6)">
+        <span>🎬 卡西尼号探索剧场</span>
+        <span class="btn-sub">土星大结局 · 沉浸式 3 幕时空推演</span>
       </a>
+      <a class="btn btn-secondary" href="explore.html">🪐 3D 太阳系自由漫游</a>
       <a class="btn btn-secondary" href="guide.html">🕹️ 操作技巧指引</a>
-      <a class="btn btn-secondary" href="bodies.html">🗺️ 查阅天体全库</a>
+      <a class="btn btn-secondary" href="bodies.html">🗺️ 天体全库</a>
     </div>
   </div>
+
+  <!-- 核心卖点突出：Story Theater 沉浸式历史探索剧场专区 -->
+  <section class="theater-showcase" aria-label="探索剧场：卡西尼号土星大结局">
+    <div class="theater-badge-tag">🎬 核心亮点 · 沉浸式 NASA 3D 探索剧场 (Story Theater)</div>
+    <h2 class="theater-showcase-title">卡西尼号：土星大结局 (Grand Finale)</h2>
+    <p class="theater-showcase-desc">
+      不仅仅是查看静态 3D 模型！探索剧场将 NASA 官方高精轨迹星历、堪培拉深空站通信时差（ERT）与任务绝版历史遥测整合成完整的剧情流。带您亲历十三年传奇航程的最后时刻：从狭窄环缝的极速穿掠，到扎入金色大气的阻力对抗，最终定格在永恒的通信绝唱。
+    </p>
+
+    <div class="theater-feature-tags">
+      <span class="theater-feature-tag-item">⏱️ 预计体验时长：约 2-3 分钟</span>
+      <span class="theater-feature-tag-item">🛰️ NASA Eyes 官方航天器 3D 姿态解算</span>
+      <span class="theater-feature-tag-item">📡 地球深空站 DSS-43 接收时间 (ERT) 对照</span>
+      <span class="theater-feature-tag-item">📸 搭载绝版 PIA21895 入轨前广角相机真实影像</span>
+      <span class="theater-feature-tag-item">🕹️ 支持暂停推演、自由旋转与重播</span>
+    </div>
+
+    <div class="theater-scenes-preview-grid">
+      <div class="theater-scene-preview-card">
+        <span class="preview-step-num">第 1 幕 · 穿环航道</span>
+        <span class="preview-step-title">绝版内缝飞越</span>
+        <span class="preview-step-time">2017-09-09 00:09 UTC (60x 加速)</span>
+        <span class="preview-step-desc">
+          第 22 次近星公转，卡西尼号最后一次穿过土星云顶与内侧 D 环之间仅 2000 公里的狭窄缝隙，极速掠过金色光环。
+        </span>
+      </div>
+
+      <div class="theater-scene-preview-card">
+        <span class="preview-step-num">第 2 幕 · 扎入金色大气</span>
+        <span class="preview-step-title">高层大气切入飞行</span>
+        <span class="preview-step-time">2017-09-15 10:31:48 UTC (1x 真实速度)</span>
+        <span class="preview-step-desc">
+          以约 12 万公里/小时的高速切入高层稀薄大气，姿控推进器点火逐步攀升，顽强对抗剧增的气动阻力以对准地球。
+        </span>
+      </div>
+
+      <div class="theater-scene-preview-card">
+        <span class="preview-step-num">第 3 幕 · 终曲与永恒</span>
+        <span class="preview-step-title">极限输出与通信绝唱</span>
+        <span class="preview-step-time">2017-09-15 10:32:06 UTC (终章定格)</span>
+        <span class="preview-step-desc">
+          推进器达到 100% 极限输出，天线失锁导致信号永久中断。晨昏线前历史永久定格，十三年深空巡航圆满谢幕。
+        </span>
+      </div>
+    </div>
+
+    <div class="theater-showcase-bottom">
+      <div class="theater-archive-thumb-box">
+        <img class="theater-thumb-img" src="assets/img/PIA21895_final_image.png" alt="PIA21895: 卡西尼号最后影像">
+        <div class="theater-thumb-text">
+          <strong style="color:#fff">绝版最后影像考证 (PIA21895)</strong><br>
+          广角相机进入大气前夕拍摄，完整收录于剧场第三幕
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a class="btn btn-primary" href="explore.html?story=cassini" style="background:linear-gradient(135deg, #ea580c, #fb923c);border-color:#fb923c;box-shadow:0 0 16px rgba(251,146,60,0.4)">
+          🎬 立即进入卡西尼号探索剧场 ↗
+        </a>
+        <a class="btn btn-secondary" href="saturn.html">📖 阅读土星与环系特写</a>
+      </div>
+    </div>
+  </section>
 
   <div class="notice-statement">
     <strong>非官方项目声明：</strong>

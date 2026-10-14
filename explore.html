@@ -4,7 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>3D 漫游 · 深空之眸</title>
-<meta name="description" content="嵌入 NASA/JPL 官方 Eyes on the Solar System 3D 动力学模拟器，提供中文快捷导航、探索引导与全景视口。">
+<meta name="description" content="嵌入 NASA/JPL 官方 Eyes on the Solar System 3D 动力学模拟器，体验卡西尼号土星大结局沉浸式三幕探索剧场，提供中文快捷导航、探索引导与全景视口。">
+<meta property="og:title" content="3D 漫游与探索剧场 · NASA Eyes 中文观测站">
+<meta property="og:description" content="基于 NASA 官方 3D 动力学模型，体验卡西尼号土星大结局沉浸式三幕探索剧场，支持行星、卫星与航天器中文导航。">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/img/PIA21895_final_image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="3D 漫游与探索剧场 · NASA Eyes 中文观测站">
+<meta name="twitter:description" content="基于 NASA 官方 3D 动力学模型，体验卡西尼号土星大结局沉浸式三幕探索剧场。">
+<meta name="twitter:image" content="assets/img/PIA21895_final_image.png">
 <link rel="stylesheet" href="assets/css/main.css">
 <style>
   .preset-bar {
@@ -491,6 +499,81 @@
     box-shadow: 0 4px 16px rgba(0,0,0,0.5);
   }
 
+  /* Theater Workflow Guide */
+  .theater-workflow-guide {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding: 9px 14px;
+    background: rgba(251, 146, 60, 0.08);
+    border: 1px dashed rgba(251, 146, 60, 0.35);
+    border-radius: 8px;
+    font-size: 12.5px;
+    color: var(--fg);
+    margin-bottom: 14px;
+  }
+  .workflow-step {
+    color: #fed7aa;
+    font-weight: 500;
+  }
+  .workflow-arrow {
+    color: var(--accent-2);
+    font-weight: 700;
+    font-size: 11px;
+  }
+
+  /* User Quick Guide Tip Banner */
+  .user-guide-tip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    background: linear-gradient(90deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.85));
+    border: 1px solid rgba(56, 189, 248, 0.28);
+    border-radius: var(--r);
+    padding: 10px 16px;
+    margin: 12px 0 16px;
+    font-size: 13px;
+    line-height: 1.5;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+  }
+  .guide-tip-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    color: var(--fg);
+  }
+  .guide-tip-badge {
+    background: rgba(56, 189, 248, 0.18);
+    color: var(--accent);
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 11.5px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .guide-tip-sep {
+    color: var(--fg-muted);
+  }
+  .guide-tip-close {
+    background: transparent;
+    border: 0;
+    color: var(--fg-muted);
+    font-size: 16px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: color 0.15s, background 0.15s;
+    line-height: 1;
+  }
+  .guide-tip-close:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
   @media (max-width: 768px) {
     .theater-stepper {
       grid-template-columns: repeat(3, 1fr);
@@ -664,6 +747,17 @@
     <button class="chip chip-theater" id="theater-trigger-btn" type="button" aria-expanded="false">🎬 探索剧场：卡西尼号 Grand Finale</button>
   </div>
 
+  <!-- 新手快速指引与体验建议横幅 -->
+  <div class="user-guide-tip" id="user-guide-tip">
+    <div class="guide-tip-content">
+      <span class="guide-tip-badge">💡 快速指引</span>
+      <span><strong>推荐体验</strong>：点击上方橙色【🎬 探索剧场：卡西尼号 Grand Finale】沉浸体验三幕历史时空复现。</span>
+      <span class="guide-tip-sep">|</span>
+      <span><strong>3D 操控</strong>：鼠标左键旋转视角 · 滚轮缩放景深 · 右键平移画面。</span>
+    </div>
+    <button type="button" class="guide-tip-close" id="guide-tip-close" aria-label="关闭指引" title="暂时隐藏指引">✕</button>
+  </div>
+
   <div class="explore-layout">
     <!-- 移动端抽屉展开按钮 -->
     <div class="side-mobile-toggle-bar">
@@ -690,8 +784,11 @@
 
       <h3>时间机器与流速</h3>
       <div style="display:flex;flex-direction:column;gap:8px">
-        <label class="sr" for="time-input">时间</label>
-        <input type="datetime-local" id="time-input" style="background:var(--bg-soft);border:1px solid var(--line);border-radius:6px;color:var(--fg);padding:7px 10px;font:inherit">
+        <div style="font-size:12px;color:var(--accent);line-height:1.4">
+          🌐 设定时间为 <strong>UTC (协调世界时)</strong>，比北京时间慢 8 小时
+        </div>
+        <label class="sr" for="time-input">时间 (UTC)</label>
+        <input type="datetime-local" id="time-input" title="设定 UTC 协调世界时" placeholder="UTC 时间" style="background:var(--bg-soft);border:1px solid var(--line);border-radius:6px;color:var(--fg);padding:7px 10px;font:inherit">
         <label class="sr" for="rate-input">流速</label>
         <select id="rate-input" style="background:var(--bg-soft);border:1px solid var(--line);border-radius:6px;color:var(--fg);padding:7px 10px;font:inherit">
           <option value="">实时流速 (真实速度)</option>
@@ -735,7 +832,7 @@
             <strong id="theater-scene-idx-text" class="meta-val">第 1 / 3 幕</strong>
           </div>
           <div class="meta-item">
-            <span class="meta-label">航天器时间 (SCET)：</span>
+            <span class="meta-label">本幕起点 (SCET)：</span>
             <strong id="theater-scet-text" class="meta-val accent">2017-09-09 00:09:00 UTC</strong>
           </div>
           <div class="meta-item">
@@ -743,19 +840,23 @@
             <span id="theater-ert-text" class="meta-val dim">2017-09-09 01:32:00 UTC</span>
           </div>
           <div class="meta-item">
-            <span class="meta-label">无线电光时：</span>
-            <span id="theater-light-text" class="meta-val">约 83 分钟 (单程)</span>
+            <span class="meta-label">单程光时：</span>
+            <span id="theater-light-text" class="meta-val">约 83 分钟</span>
           </div>
           <div class="meta-item">
             <span class="meta-label">流速状态：</span>
             <span id="theater-rate-badge" class="badge common">60x (1 分钟 / 秒)</span>
+          </div>
+          <div class="meta-item" id="theater-sim-clock-wrap">
+            <span class="meta-label">推演计时：</span>
+            <span id="theater-sim-clock-val" class="meta-val" style="color:#67e8f9">推演运行中</span>
           </div>
         </div>
 
         <div class="theater-controls-bar">
           <button type="button" class="btn-theater-ctrl" id="theater-prev-btn" title="切换到上一幕">⏪ 上一幕</button>
           <button type="button" class="btn-theater-ctrl" id="theater-replay-btn" title="重新从本幕起点与初始流速开始">🔁 重播本幕</button>
-          <button type="button" class="btn-theater-ctrl btn-theater-accent" id="theater-pause-toggle-btn" title="暂停或恢复推演">⏸ 暂停剧情</button>
+          <button type="button" class="btn-theater-ctrl btn-theater-accent" id="theater-pause-toggle-btn" title="暂停或恢复推演">⏸ 暂停推演</button>
           <button type="button" class="btn-theater-ctrl" id="theater-next-btn" title="切换到下一幕">下一幕 ⏩</button>
         </div>
       </section>
@@ -765,9 +866,10 @@
         <div id="stage-overlay" class="stage-overlay">
           <div id="stage-loading-box" style="display:flex;flex-direction:column;align-items:center;gap:12px">
             <div class="stage-spinner"></div>
-            <div class="stage-loading-text" id="stage-status-title">正在连接 NASA Eyes 官方 3D 动力学服务…</div>
-            <div class="stage-loading-sub" id="stage-status-desc">
-              正在初始化行星轨道模型与太阳系空间数据（首次加载星图可能需要数秒）…
+            <div class="stage-loading-text" id="stage-status-title">正在连接 NASA JPL 官方 3D 动力学服务…</div>
+            <div class="stage-loading-sub" id="stage-status-desc" style="max-width:540px;line-height:1.6">
+              正在从加州 JPL 服务器实时载入天体轨道数据与 WebGL 着色器。<br>
+              💡 首次加载需下载数兆字节的 3D 几何模型与高精度星历，受跨洋网络影响可能需要数秒，请耐心稍候。
             </div>
           </div>
           <div id="stage-error-box" class="stage-recovery" style="display:none">
@@ -803,6 +905,17 @@
 
       <!-- Story Theater 深度剧情与历史档案 (位于 3D 舞台下方) -->
       <section id="theater-narrative-section" class="theater-narrative-panel" style="display:none" aria-label="剧情解说与历史档案">
+        <div class="theater-workflow-guide">
+          <span style="font-weight:600;color:var(--accent-2)">🎬 沉浸观影指引：</span>
+          <span class="workflow-step">① 3D 视口观察航天器姿态与运动</span>
+          <span class="workflow-arrow">➔</span>
+          <span class="workflow-step">② 阅读下方科学解说与任务遥测</span>
+          <span class="workflow-arrow">➔</span>
+          <span class="workflow-step">③ 查看绝版历史影像与仪器档案</span>
+          <span class="workflow-arrow">➔</span>
+          <span class="workflow-step">④ 点击【下一幕 ⏩】推进历史时刻</span>
+        </div>
+
         <div class="theater-narrative-card">
           <div class="narrative-main">
             <h4 id="theater-scene-title" class="narrative-title">第一幕：最后的穿环航道</h4>
@@ -900,6 +1013,141 @@ const state = {
   time: '',
   rate: ''
 };
+
+// Story Theater 提前声明（彻底杜绝 refresh() 初始化 TDZ 暂存死区错误）
+let storyData = null;
+const theaterState = {
+  active: false,
+  currentScene: 0,
+  isPaused: false,
+  mode: 'following', // 'following' | 'detached'
+  routeBeforeTheater: 'home',
+  sceneBaseEpoch: 0,
+  scenePlayStartWallMs: 0,
+  sceneAccumulatedSimMs: 0,
+};
+
+let simClockInterval = null;
+function clearSimClockTicker() {
+  if (simClockInterval) {
+    clearInterval(simClockInterval);
+    simClockInterval = null;
+  }
+}
+
+function updateSimClockDisplay() {
+  const clockEl = document.getElementById('theater-sim-clock-val');
+  if (!clockEl || !theaterState.active) return;
+  if (!storyData) return;
+  const scene = storyData.scenes[theaterState.currentScene];
+  if (!scene) return;
+
+  if (scene.rate === 0) {
+    clockEl.textContent = '历史定格 (rate=0)';
+    clockEl.style.color = '#94a3b8';
+    return;
+  }
+
+  const activeRate = (theaterState.isPaused || state.rate === 0)
+    ? 0
+    : ((state.rate !== undefined && state.rate !== '') ? Number(state.rate) : (scene.rate || 1));
+
+  const currentSimElapsedMs = theaterState.isPaused
+    ? theaterState.sceneAccumulatedSimMs
+    : (theaterState.sceneAccumulatedSimMs + Math.max(0, Date.now() - theaterState.scenePlayStartWallMs) * activeRate);
+
+  const rawElapsedSimSec = Math.floor(currentSimElapsedMs / 1000);
+  const elapsedSimSec = (theaterState.currentScene === 1) ? Math.min(18, rawElapsedSimSec) : rawElapsedSimSec;
+
+  if (theaterState.isPaused || state.rate === 0) {
+    if (theaterState.currentScene === 1 && elapsedSimSec >= 18) {
+      clockEl.textContent = `到达通信中断点 (+18s) · 自动定格`;
+      clockEl.style.color = '#fb923c';
+    } else {
+      clockEl.textContent = `已暂停推演 (+${elapsedSimSec}s)`;
+      clockEl.style.color = '#fdba74';
+    }
+  } else if (theaterState.currentScene === 1) {
+    // Scene 2: 1x atmospheric entry (切入到通信中断约 18 秒)
+    if (elapsedSimSec >= 18) {
+      clockEl.textContent = `到达通信中断点 (+18s) · 自动定格`;
+      clockEl.style.color = '#fb923c';
+    } else {
+      clockEl.textContent = `1x 俯冲推演 (+${elapsedSimSec}s)`;
+      clockEl.style.color = '#67e8f9';
+    }
+  } else {
+    clockEl.textContent = `推演进行中 (+${elapsedSimSec}s)`;
+    clockEl.style.color = '#67e8f9';
+  }
+}
+
+let sceneBoundaryTimer = null;
+function clearBoundaryTimer() {
+  if (sceneBoundaryTimer) {
+    clearTimeout(sceneBoundaryTimer);
+    sceneBoundaryTimer = null;
+  }
+}
+
+function scheduleSceneBoundaryTimer() {
+  clearBoundaryTimer();
+  // 仅在第二幕（索引 1）未暂停且有效运行时应用边界控制
+  if (!theaterState.active || theaterState.currentScene !== 1 || theaterState.isPaused) {
+    return;
+  }
+  // 第二幕（10:31:48）推进到第三幕连接点（10:32:06）为 18000ms
+  const remainingSimMs = Math.max(0, 18000 - theaterState.sceneAccumulatedSimMs);
+  const activeRate = (state.rate !== undefined && state.rate !== '') ? Number(state.rate) : 1;
+  const remainingWallMs = activeRate > 0 ? (remainingSimMs / activeRate) : 0;
+  
+  if (remainingWallMs > 0) {
+    sceneBoundaryTimer = setTimeout(() => {
+      if (theaterState.active && theaterState.currentScene === 1 && !theaterState.isPaused) {
+        theaterState.isPaused = true;
+        theaterState.sceneAccumulatedSimMs = 18000;
+        state.rate = 0;
+        const targetIso = '2017-09-15T10:32:06.000Z';
+        state.time = targetIso;
+        const timeInput = document.getElementById('time-input');
+        if (timeInput) timeInput.value = targetIso.slice(0, 16);
+        const rateInput = document.getElementById('rate-input');
+        if (rateInput) rateInput.value = '0';
+        refresh();
+        if (storyData) renderTheaterUI(storyData);
+      }
+    }, remainingWallMs);
+  } else {
+    theaterState.isPaused = true;
+    theaterState.sceneAccumulatedSimMs = 18000;
+    state.rate = 0;
+    state.time = '2017-09-15T10:32:06.000Z';
+  }
+}
+
+function startSimClockTicker() {
+  clearSimClockTicker();
+  updateSimClockDisplay();
+  simClockInterval = setInterval(updateSimClockDisplay, 500);
+}
+
+function detachTheater({ resetTime = true } = {}) {
+  if (!theaterState.active) return;
+  theaterState.mode = 'detached';
+  clearSimClockTicker();
+  if (resetTime) {
+    state.time = '';
+    state.rate = '';
+    const timeInput = document.getElementById('time-input');
+    if (timeInput) timeInput.value = '';
+    const rateInput = document.getElementById('rate-input');
+    if (rateInput) rateInput.value = '';
+  }
+  const theaterDetachedBanner = document.getElementById('theater-detached-banner');
+  if (theaterDetachedBanner) {
+    theaterDetachedBanner.style.display = 'flex';
+  }
+}
 
 const frame = document.getElementById('stage');
 const currentLabel = document.getElementById('current-label');
@@ -1208,7 +1456,7 @@ window.addEventListener('hashchange', () => {
 });
 
 // ==========================================
-// Story Theater (探索剧场 · MVP)
+// Story Theater (探索剧场 · 控制器与事件挂载)
 // ==========================================
 const theaterPanel = document.getElementById('story-theater-panel');
 const theaterNarrativeSection = document.getElementById('theater-narrative-section');
@@ -1223,77 +1471,12 @@ const theaterNextBtn = document.getElementById('theater-next-btn');
 const theaterReplayBtn = document.getElementById('theater-replay-btn');
 const theaterPauseBtn = document.getElementById('theater-pause-toggle-btn');
 
-let storyData = null;
-const theaterState = {
-  active: false,
-  currentScene: 0,
-  isPaused: false,
-  mode: 'following', // 'following' | 'detached'
-  routeBeforeTheater: 'home',
-  sceneBaseEpoch: 0,
-  scenePlayStartWallMs: 0,
-  sceneAccumulatedSimMs: 0,
-};
-
-function detachTheater({ resetTime = true } = {}) {
-  if (!theaterState.active) return;
-  theaterState.mode = 'detached';
-  clearAutoEndTimer();
-  if (resetTime) {
-    state.time = '';
-    state.rate = '';
-    const timeInput = document.getElementById('time-input');
-    if (timeInput) timeInput.value = '';
-    const rateInput = document.getElementById('rate-input');
-    if (rateInput) rateInput.value = '';
-  }
-  if (theaterDetachedBanner) {
-    theaterDetachedBanner.style.display = 'flex';
-  }
-}
-
 async function loadStory() {
   if (!storyData) {
     const res = await fetch(assetUrl('data/stories/cassini.zh.json'));
     storyData = await res.json();
   }
   return storyData;
-}
-
-let sceneAutoEndTimer = null;
-function clearAutoEndTimer() {
-  if (sceneAutoEndTimer) {
-    clearTimeout(sceneAutoEndTimer);
-    sceneAutoEndTimer = null;
-  }
-}
-
-function scheduleSceneAutoEnd() {
-  clearAutoEndTimer();
-  if (!theaterState.active || theaterState.currentScene !== 1 || theaterState.isPaused) {
-    return;
-  }
-  const remainingSimMs = Math.max(0, 62000 - theaterState.sceneAccumulatedSimMs);
-  const activeRate = (state.rate !== undefined && state.rate !== '') ? Number(state.rate) : 1;
-  const remainingWallMs = activeRate > 0 ? (remainingSimMs / activeRate) : 0;
-  if (remainingWallMs > 0) {
-    sceneAutoEndTimer = setTimeout(() => {
-      if (theaterState.active && theaterState.currentScene === 1 && !theaterState.isPaused) {
-        theaterState.isPaused = true;
-        theaterState.sceneAccumulatedSimMs = 62000;
-        state.rate = 0;
-        const currentSimMs = theaterState.sceneBaseEpoch + 62000;
-        const currentSimIso = new Date(currentSimMs).toISOString();
-        state.time = currentSimIso;
-        const timeInput = document.getElementById('time-input');
-        if (timeInput) timeInput.value = currentSimIso.slice(0, 16);
-        const rateInput = document.getElementById('rate-input');
-        if (rateInput) rateInput.value = '0';
-        refresh();
-        if (storyData) renderTheaterUI(storyData);
-      }
-    }, remainingWallMs);
-  }
 }
 
 async function activateTheater(sceneIndex = 0) {
@@ -1315,8 +1498,8 @@ async function activateTheater(sceneIndex = 0) {
   theaterState.scenePlayStartWallMs = Date.now();
   theaterState.sceneAccumulatedSimMs = 0;
 
-  clearAutoEndTimer();
-  scheduleSceneAutoEnd();
+  startSimClockTicker();
+  scheduleSceneBoundaryTimer();
 
   const navBtn = nav.querySelector(`[data-route="${CSS.escape(scene.route)}"]`);
   markActive(navBtn);
@@ -1374,23 +1557,23 @@ function renderTheaterUI(story) {
   document.getElementById('theater-light-text').textContent = scene.lightTimeNote || '单程光行时间约 83 分钟';
 
   const isStaticScene = scene.rate === 0;
-  const isScene2Finished = theaterState.currentScene === 1 && theaterState.sceneAccumulatedSimMs >= 62000;
-
+  const isScene2BoundaryHit = theaterState.currentScene === 1 && theaterState.sceneAccumulatedSimMs >= 18000;
   const rateBadge = document.getElementById('theater-rate-badge');
+
   if (isStaticScene) {
     rateBadge.className = 'badge keep';
     rateBadge.textContent = '终章历史定格 (rate=0)';
     theaterPauseBtn.disabled = true;
-    theaterPauseBtn.innerHTML = '⏸ 终章历史定格';
+    theaterPauseBtn.innerHTML = '⏸ 终章定格中';
     theaterPauseBtn.classList.remove('btn-theater-accent');
-    theaterPauseBtn.setAttribute('title', '卡西尼号受控坠入土星大气，任务在此刻终结（已达 NASA 轨迹终点 Cannot Exceed Mission End），历史时刻永久定格');
-  } else if (isScene2Finished) {
+    theaterPauseBtn.setAttribute('title', '卡西尼号受控坠入土星大气，任务在此刻终结，历史时刻永久定格');
+  } else if (isScene2BoundaryHit) {
     rateBadge.className = 'badge keep';
-    rateBadge.textContent = '已达终点定格 (62秒飞行完成)';
+    rateBadge.textContent = '已达通信中断定位时刻定格 (10:32:06 UTC)';
     theaterPauseBtn.disabled = false;
     theaterPauseBtn.innerHTML = '下一幕：终章 ⏩';
     theaterPauseBtn.classList.add('btn-theater-accent');
-    theaterPauseBtn.setAttribute('title', '卡西尼号已完成最后 62 秒切入飞行，点击进入大结局终章');
+    theaterPauseBtn.setAttribute('title', '已推进至通信中断场景定位时刻 (10:32:06 UTC)，点击进入大结局终章');
   } else if (theaterState.isPaused || state.rate === 0) {
     rateBadge.className = 'badge keep';
     rateBadge.textContent = '已暂停推演 (rate=0)';
@@ -1402,7 +1585,7 @@ function renderTheaterUI(story) {
     rateBadge.className = 'badge common';
     rateBadge.textContent = scene.rateLabel || (scene.rate + 'x');
     theaterPauseBtn.disabled = false;
-    theaterPauseBtn.innerHTML = '⏸ 暂停剧情';
+    theaterPauseBtn.innerHTML = '⏸ 暂停推演';
     theaterPauseBtn.classList.remove('btn-theater-accent');
     theaterPauseBtn.setAttribute('title', '定格历史时刻 (rate=0)');
   }
@@ -1444,10 +1627,12 @@ function renderTheaterUI(story) {
     }
     document.getElementById('theater-archive-desc').innerHTML = archiveHtml;
   }
+  updateSimClockDisplay();
 }
 
 function exitTheater() {
-  clearAutoEndTimer();
+  clearSimClockTicker();
+  clearBoundaryTimer();
   const wasFollowing = theaterState.mode === 'following';
   const restoreRoute = wasFollowing ? (theaterState.routeBeforeTheater || 'home') : state.route;
 
@@ -1487,31 +1672,31 @@ function exitTheater() {
 function togglePauseScene() {
   if (!theaterState.active || !storyData) return;
   const scene = storyData.scenes[theaterState.currentScene];
-  if (scene.rate === 0) return; // Static freeze-frame scenes have no ongoing playback
+  if (scene.rate === 0) return; // 静态定格幕不执行暂停切换
 
-  // If Scene 2 (index 1) has completed its 62s plunge, this button acts as "下一幕：终章 ⏩"
-  if (theaterState.currentScene === 1 && theaterState.sceneAccumulatedSimMs >= 62000) {
+  // 如果第二幕已推进至通信中断点（18秒），点击此按钮直接顺畅进入第三幕终章
+  if (theaterState.currentScene === 1 && theaterState.sceneAccumulatedSimMs >= 18000) {
     activateTheater(2);
     return;
   }
 
   if (theaterState.isPaused || state.rate === 0) {
-    // Resume simulation from where it was paused
+    // 恢复推演
     theaterState.scenePlayStartWallMs = Date.now();
     const currentSimMs = theaterState.sceneBaseEpoch + theaterState.sceneAccumulatedSimMs;
     const currentSimIso = new Date(currentSimMs).toISOString();
     state.time = currentSimIso;
     state.rate = scene.rate || 1;
     theaterState.isPaused = false;
-    scheduleSceneAutoEnd();
+    scheduleSceneBoundaryTimer();
   } else {
-    // Pause simulation at the mathematically computed elapsed moment
-    clearAutoEndTimer();
+    // 暂停推演：精准计算经过的历史流逝时间，定格当前时刻
+    clearBoundaryTimer();
     const elapsedWallMs = Math.max(0, Date.now() - theaterState.scenePlayStartWallMs);
     const activeRate = (state.rate !== undefined && state.rate !== '') ? Number(state.rate) : (scene.rate || 1);
     theaterState.sceneAccumulatedSimMs += elapsedWallMs * activeRate;
-    if (theaterState.currentScene === 1 && theaterState.sceneAccumulatedSimMs > 62000) {
-      theaterState.sceneAccumulatedSimMs = 62000;
+    if (theaterState.currentScene === 1 && theaterState.sceneAccumulatedSimMs > 18000) {
+      theaterState.sceneAccumulatedSimMs = 18000;
     }
     const currentSimMs = theaterState.sceneBaseEpoch + theaterState.sceneAccumulatedSimMs;
     const currentSimIso = new Date(currentSimMs).toISOString();
@@ -1551,6 +1736,29 @@ theaterReplayBtn.addEventListener('click', () => {
   activateTheater(theaterState.currentScene);
 });
 theaterPauseBtn.addEventListener('click', togglePauseScene);
+
+// 新手操作小贴士横幅逻辑
+const guideTip = document.getElementById('user-guide-tip');
+const guideTipClose = document.getElementById('guide-tip-close');
+if (sessionStorage.getItem('hide-explore-guide') === '1') {
+  if (guideTip) guideTip.style.display = 'none';
+}
+guideTipClose?.addEventListener('click', () => {
+  if (guideTip) guideTip.style.display = 'none';
+  sessionStorage.setItem('hide-explore-guide', '1');
+});
+
+// 支持外部（如首页）通过 URL 或 hash 直达剧场
+const urlParams = new URLSearchParams(location.search);
+const storyParam = urlParams.get('story') || urlParams.get('theater');
+const hashVal = decodeURIComponent(location.hash.slice(1));
+const isDirectTheater = storyParam === 'cassini' || hashVal === 'theater' || hashVal === 'cassini';
+if (isDirectTheater) {
+  setTimeout(() => {
+    activateTheater(0);
+    theaterPanel?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 160);
+}
 
 window.__theater = {
   theaterState,

@@ -34,6 +34,9 @@ jobs:
       - name: Lint Chinese Dictionaries
         run: node tools/lint-zh.mjs
 
+      - name: Test Story Theater & Timeline Continuity
+        run: node tools/test-stories.mjs
+
       - name: Build Extension Package
         run: node tools/pack-extension.mjs
 
