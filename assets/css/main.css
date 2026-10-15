@@ -1997,6 +1997,156 @@ kbd {
   color: #fff;
 }
 
+/* Feature Content Columns (解读区无盒子纯文字块，左上 24px*2px 主题色指示线，小标题加粗纯白，正文灰色) */
+.col-grid {
+  display: grid;
+  gap: 32px 36px;
+  margin: 20px 0 40px;
+}
+.col-grid.cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+.col-grid.cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+.col-grid.cols-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+@media (max-width: 900px) {
+  .col-grid.cols-3,
+  .col-grid.cols-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 640px) {
+  .col-grid.cols-2,
+  .col-grid.cols-3,
+  .col-grid.cols-4 {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
+
+.text-block {
+  display: flex;
+  flex-direction: column;
+}
+.text-block-swatch {
+  width: 24px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--page-tint, var(--accent));
+  margin-bottom: 12px;
+}
+.text-block-title {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: #fff;
+  margin: 0 0 8px;
+}
+.text-block-sub {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--fg-muted);
+  margin-left: 6px;
+}
+.text-block-content {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--fg-dim);
+  margin: 0;
+}
+
+/* Feature Narrative & Theater Row */
+.feature-narrative {
+  max-width: 70ch;
+  line-height: 1.7;
+  color: var(--fg-dim);
+  font-size: 15px;
+  margin: 0 0 24px;
+}
+.theater-launch-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+  padding: 18px 0;
+  margin: 12px 0 36px;
+  border-top: 1px solid var(--line-subtle);
+  border-bottom: 1px solid var(--line-subtle);
+}
+.theater-launch-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+}
+.theater-launch-desc {
+  font-size: 13px;
+  color: var(--fg-muted);
+  line-height: 1.5;
+}
+.btn-theater-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent);
+  color: #0f172a !important;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 10px 20px;
+  border-radius: 6px;
+  min-height: 44px;
+  white-space: nowrap;
+  box-shadow: none !important;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  text-decoration: none;
+}
+.btn-theater-primary:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+.btn-theater-primary:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+/* Feature Page Table & Scale list Unboxing */
+.feature-page .table-container {
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  margin: 16px 0 36px;
+  padding: 0;
+}
+.feature-page table {
+  border-collapse: collapse;
+}
+.feature-page th {
+  border-bottom: 1px solid var(--line);
+  color: var(--fg-muted);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 14px;
+  background: transparent;
+}
+.feature-page td {
+  border-bottom: 1px solid var(--line-subtle);
+  color: var(--fg-dim);
+  font-size: 13.5px;
+  padding: 12px 14px;
+  background: transparent;
+}
+.feature-page .scale li {
+  background: transparent;
+  border: none;
+  border-top: 1px solid var(--line-subtle);
+  border-radius: 0;
+  padding: 12px 0;
+}
+
 /* ---------- Minimalist Footer ---------- */
 footer, .site-footer {
   margin-top: var(--space-6);
