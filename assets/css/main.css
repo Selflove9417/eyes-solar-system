@@ -1242,7 +1242,7 @@ body.drawer-open .drawer-backdrop {
   z-index: 950;
   transform: translateX(-100%);
   visibility: hidden;
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
   box-shadow: 8px 0 32px rgba(0, 0, 0, 0.7);
