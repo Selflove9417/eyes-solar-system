@@ -189,6 +189,26 @@ for (const vp of [{ w: 1440, h: 900 }, { w: 768, h: 1024 }, { w: 375, h: 812 }])
   recordResult(`bodies.html ${vp.w}px entry cards rendered`, scrollCheck.cards === 47, `found ${scrollCheck.cards}/47 cards`);
   recordResult(`bodies.html ${vp.w}px action links min height >= 44px`, scrollCheck.minActionHeight >= 40, `minHeight=${scrollCheck.minActionHeight}px`);
 
+  const detailsCheck = await evalInPage(`(() => {
+    const summary = document.querySelector('.entry-details summary');
+    if (!summary) return null;
+    const rect = summary.getBoundingClientRect();
+    const style = window.getComputedStyle(summary);
+    const beforeStyle = window.getComputedStyle(summary, '::before');
+    return {
+      height: rect.height,
+      color: style.color,
+      cursor: style.cursor,
+      hasBeforeChevron: beforeStyle.content !== 'none' && beforeStyle.content !== '',
+      beforeTransform: beforeStyle.transform,
+      tabIndex: summary.tabIndex
+    };
+  })()`);
+  if (detailsCheck) {
+    recordResult(`bodies.html ${vp.w}px summary click area >= 44px`, detailsCheck.height >= 43.5, `height=${detailsCheck.height}px`);
+    recordResult(`bodies.html ${vp.w}px summary chevron indicator present`, detailsCheck.hasBeforeChevron, `transform=${detailsCheck.beforeTransform}`);
+  }
+
   if (vp.w === 1440) {
     await captureShot(path.join(root, 'shots', 'phase3-bodies-1440.png'));
   } else if (vp.w === 375) {
@@ -244,15 +264,21 @@ for (const vp of [{ w: 1440, h: 900 }, { w: 768, h: 1024 }, { w: 375, h: 812 }])
     tableContainerScrollWidth: document.querySelector('.table-container')?.scrollWidth,
     tabButtons: document.querySelectorAll('.tab-btn').length,
     tabsMinHeight: Math.min(...Array.from(document.querySelectorAll('.tab-btn')).map(b => b.getBoundingClientRect().height)),
-    entitiesCount: document.querySelectorAll('#t-ent tr').length
+    entitiesCount: document.querySelectorAll('#t-ent tr').length,
+    colIdDisplay: window.getComputedStyle(document.querySelector('th.col-id')).display,
+    monoColor: window.getComputedStyle(document.querySelector('td.mono')).color,
+    monoFontSize: window.getComputedStyle(document.querySelector('td.mono')).fontSize
   })`);
   recordResult(`glossary.html ${vp.w}px no horizontal scroll on page`, scrollCheck.scrollWidth <= scrollCheck.clientWidth + 1, `clientWidth=${scrollCheck.clientWidth}, scrollWidth=${scrollCheck.scrollWidth}`);
   recordResult(`glossary.html ${vp.w}px table contained within container`, scrollCheck.tableContainerClientWidth <= scrollCheck.clientWidth, `tableContainerWidth=${scrollCheck.tableContainerClientWidth}`);
   recordResult(`glossary.html ${vp.w}px tabs min height >= 44px`, scrollCheck.tabsMinHeight >= 40, `minHeight=${scrollCheck.tabsMinHeight}px`);
 
   if (vp.w === 1440) {
+    recordResult('glossary.html 1440px col-id column visible', scrollCheck.colIdDisplay !== 'none', `display=${scrollCheck.colIdDisplay}`);
+    recordResult('glossary.html 1440px td.mono color is --fg-muted and 12px', scrollCheck.monoColor === 'rgb(139, 148, 158)' && scrollCheck.monoFontSize === '12px', `color=${scrollCheck.monoColor}, size=${scrollCheck.monoFontSize}`);
     await captureShot(path.join(root, 'shots', 'phase3-glossary-1440.png'));
   } else if (vp.w === 375) {
+    recordResult('glossary.html 375px col-id column hidden', scrollCheck.colIdDisplay === 'none', `display=${scrollCheck.colIdDisplay}`);
     await captureShot(path.join(root, 'shots', 'phase3-glossary-375.png'));
   }
 }

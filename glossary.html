@@ -13,7 +13,7 @@
 <meta name="twitter:title" content="中英术语对照 · 深空之眸">
 <meta name="twitter:description" content="NASA Eyes 实体库与界面字符串的中英术语对照表，标明每条译名的依据等级与未汉化范围。">
 <meta name="twitter:image" content="assets/img/PIA21895_final_image.png">
-<link rel="stylesheet" href="assets/css/main.css?v=20261015p3">
+<link rel="stylesheet" href="assets/css/main.css?v=20261015p3b">
 </head>
 <body>
 <main class="wrap">
@@ -48,7 +48,7 @@
       <span id="c-ent" style="color:var(--fg-dim);font-size:13.5px"></span>
     </div>
     <div class="table-container">
-      <table><thead><tr><th>中文</th><th>站点英文名</th><th>类别</th><th>id（稳定键名）</th><th>依据</th></tr></thead>
+      <table><thead><tr><th>中文</th><th>站点英文名</th><th>类别</th><th class="col-id">id（稳定键名）</th><th>依据</th></tr></thead>
       <tbody id="t-ent"></tbody></table>
     </div>
   </div>
@@ -72,12 +72,12 @@
       <span id="c-mis" style="color:var(--fg-dim);font-size:13.5px"></span>
     </div>
     <div class="table-container">
-      <table><thead><tr><th>英文名</th><th>类别</th><th>id</th></tr></thead><tbody id="t-mis"></tbody></table>
+      <table><thead><tr><th>英文名</th><th>类别</th><th class="col-id">id</th></tr></thead><tbody id="t-mis"></tbody></table>
     </div>
   </div>
 </main>
 <script type="module">
-import { renderChrome, getData, el } from './assets/js/site.js?v=20261015p3';
+import { renderChrome, getData, el } from './assets/js/site.js?v=20261015p3b';
 renderChrome('glossary.html');
 const { names, ui, entityById } = await getData();
 
@@ -118,7 +118,7 @@ function renderEnt() {
     .sort((a, b) => (a[1].cat || '').localeCompare(b[1].cat || '') || a[1].zh.localeCompare(b[1].zh, 'zh'));
   tbody('t-ent').replaceChildren(...rows.map(([id, e]) => el('tr', {},
     el('td', {}, e.zh), el('td', {}, e.en), el('td', {}, names.categories[e.cat] || e.cat || ''),
-    el('td', { class: 'mono' }, id), el('td', {}, statusLabel(e.status)))));
+    el('td', { class: 'mono col-id' }, id), el('td', {}, statusLabel(e.status)))));
   document.getElementById('c-ent').textContent = `显示 ${rows.length} / ${covered} 条`;
 }
 
@@ -143,7 +143,7 @@ function renderMissing() {
       (a.displayName || a.iauName || '').localeCompare(b.displayName || b.iauName || ''));
   tbody('t-mis').replaceChildren(...rows.map((e) => el('tr', {},
     el('td', {}, e.displayName || e.iauName || e.id),
-    el('td', {}, names.categories[e.category] || e.category || ''), el('td', { class: 'mono' }, e.id))));
+    el('td', {}, names.categories[e.category] || e.category || ''), el('td', { class: 'mono col-id' }, e.id))));
   document.getElementById('c-mis').textContent = `显示 ${rows.length} / ${[...entityById.values()].filter((e) => !names.entities[e.id]).length} 条`;
 }
 
