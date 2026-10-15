@@ -72,11 +72,12 @@
   <p>因此：<strong>本次调查未发现任何允许再分发 NASA Eyes 程序或素材的许可声明，本项目不作"NASA 软件已开源"的断言</strong>，也不复制其任何程序或数据资源。
   中文简介译自官方公开提供的 <code>descriptions/&lt;id&gt;.json</code> 文本，逐条附来源 URL，属于对公开事实性文本的转译并注明出处；如需扩大使用范围，请直接向 NASA/JPL 确认。</p>
 
-  <h2>素材与数据来源</h2>
+  <h2 id="sources">素材与数据来源</h2>
   <dl class="kv">
     <dt>3D 模拟与渲染</dt><dd>NASA/JPL <em>Eyes on the Solar System</em>，<a href="https://eyes.nasa.gov/apps/solar-system/" target="_blank" rel="noopener">eyes.nasa.gov/apps/solar-system</a></dd>
-    <dt>实体名称与 id</dt><dd>该应用运行时实体库导出的快照，存档于 <code>data/source/entities.en.json</code>（719 条，导出于 2026-10-11）</dd>
-    <dt>天体与任务英文原文</dt><dd>该应用公开的 <code>descriptions/&lt;id&gt;.json</code>，存档于 <code>data/source/descriptions.en.json</code>（93 条）</dd>
+    <dt>实体名称与 id</dt><dd>该应用运行时实体库导出的快照，存档于 <code>data/source/entities.en.json</code>（719 条，导出于 2026-10-11）；英文键名取自实体库的稳定 slug。</dd>
+    <dt>天体与任务简介文本</dt><dd>逐条译自该应用公开的 <code>descriptions/&lt;id&gt;.json</code> 的 <code>blurb</code> 字段，数字与单位保持原样，存档于 <code>data/source/descriptions.en.json</code>（93 条）。</dd>
+    <dt>术语与界面对照驱动</dt><dd>由 <code>data/names.zh.json</code> 与 <code>data/ui.zh.json</code> 共同驱动，站点与浏览器汉化扩展共用同一套术语对照表。</dd>
     <dt>界面字符串</dt><dd>加载完成页面的 DOM 实测采集，存档于 <code>research/harvest_mars.json</code></dd>
     <dt>轨道与历表数据</dt><dd>JPL Solar System Dynamics（<a href="https://ssd.jpl.nasa.gov" target="_blank" rel="noopener">ssd.jpl.nasa.gov</a>）、CNEOS（<a href="https://cneos.jpl.nasa.gov" target="_blank" rel="noopener">cneos.jpl.nasa.gov</a>）——由官方服务自行调用，本项目不接触</dd>
     <dt>中文译名依据</dt><dd>全国科学技术名词审定委员会《天文学名词》通行译法；无可靠译名者保留原文并标注</dd>

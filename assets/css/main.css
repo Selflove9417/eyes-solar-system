@@ -510,6 +510,20 @@ h3 {
   margin: 0 0 18px;
   max-width: 780px;
 }
+.lede-link {
+  display: inline-flex;
+  align-items: center;
+  font-size: 13.5px;
+  color: var(--fg-muted);
+  margin-left: 10px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color var(--transition);
+}
+.lede-link:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
 
 /* Gradient Titles */
 .gradient-title {
