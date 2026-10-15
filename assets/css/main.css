@@ -169,7 +169,29 @@ a:hover {
 .nav-link[aria-current="page"],
 .nav-dropdown-btn[aria-current="page"] {
   color: #fff;
-  background: rgba(56, 189, 248, 0.14);
+  background: transparent;
+  font-weight: 600;
+  position: relative;
+}
+.nav-link[aria-current="page"]::after {
+  content: '';
+  position: absolute;
+  bottom: 6px;
+  left: 14px;
+  right: 14px;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 1px;
+}
+.nav-dropdown-btn[aria-current="page"]::after {
+  content: '';
+  position: absolute;
+  bottom: 6px;
+  left: 14px;
+  right: 28px;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 1px;
 }
 .nav-arrow {
   transition: transform var(--transition);
@@ -234,7 +256,7 @@ a:hover {
 }
 .nav-dropdown a[aria-current="page"] {
   color: var(--accent);
-  background: rgba(56, 189, 248, 0.12);
+  background: transparent;
   font-weight: 600;
 }
 
@@ -296,6 +318,13 @@ a:hover {
     min-height: 44px;
     width: 100%;
     justify-content: flex-start;
+  }
+  .nav-link[aria-current="page"]::after,
+  .nav-dropdown-btn[aria-current="page"]::after {
+    left: 16px;
+    width: 24px;
+    right: auto;
+    bottom: 8px;
   }
 }
 
@@ -473,11 +502,11 @@ a:hover {
 
 /* ---------- Typography & Headings ---------- */
 h1 {
-  font-size: clamp(28px, 4.5vw, 44px);
-  line-height: 1.22;
-  margin: 36px 0 10px;
-  font-weight: 800;
-  letter-spacing: -0.02em;
+  font-size: clamp(26px, 3.4vw, 36px);
+  line-height: 1.25;
+  margin: 32px 0 8px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
 }
 h2 {
   font-size: 22px;
