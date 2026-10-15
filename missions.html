@@ -18,23 +18,30 @@
 <body>
 <main class="wrap">
   <h1>航天器与任务介绍</h1>
-  <p class="lede">官方实体库共有 169 个航天器条目。本页收录已核对官方原文的重点任务；发射日期、距离与纪录数字一律照原文保留。</p>
+  <p class="lede">本页收录 47 个已核对官方原文的重点任务，官方实体库共 169 个航天器条目；发射日期、距离与纪录数字一律照原文保留。<a href="about.html#sources" class="lede-link">数据说明 ↗</a></p>
   <div class="toolbar">
     <input type="search" id="filter" placeholder="按任务名、代号或关键词筛选…" aria-label="筛选任务">
     <span id="count" style="color:var(--fg-dim);font-size:13.5px"></span>
   </div>
-  <div class="grid cols-3" id="list"></div>
-  <p style="margin-top:26px;color:var(--fg-dim);font-size:13.5px">
+  <p style="color:var(--fg-muted);font-size:13px;margin:8px 0 20px">注：未特别标注的任务均采用国家审定规范译名；标注「通用译名」为中文出版物通行译名，「代号保留」为国际编号原文。</p>
+  <div class="entry-grid" id="list"></div>
+  <p style="margin-top:40px;color:var(--fg-muted);font-size:13.5px;border-top:1px solid var(--line-subtle);padding-top:20px">
     未收录的航天器（如 <code>TDRS-11</code>、<code>CYGNSS 5</code>、<code>GRACE-FO2</code> 等任务代号）在模拟器中保留英文，
-    完整名单见<a href="glossary.html">中英术语对照</a>。
+    完整名单见<a href="glossary.html" style="color:var(--fg-dim);text-decoration:underline">中英术语对照</a>。
   </p>
 </main>
 <script type="module">
-import { renderChrome, getData, el, statusBadge } from './assets/js/site.js?v=20261015';
+import { renderChrome, getData, el } from './assets/js/site.js?v=20261015';
 renderChrome('missions.html');
 const { missions, names } = await getData();
 const list = document.getElementById('list');
 const count = document.getElementById('count');
+
+function statusTag(status) {
+  if (status === 'common') return el('span', { class: 'entry-status-note' }, '通用译名');
+  if (status === 'code') return el('span', { class: 'entry-status-note' }, '代号保留');
+  return null;
+}
 
 function render(q = '') {
   const needle = q.trim().toLowerCase();
@@ -48,19 +55,20 @@ function render(q = '') {
   count.textContent = `显示 ${hits.length} / ${missions.missions.length} 条`;
   list.replaceChildren(...hits.map((m) => {
     const entry = names.entities[m.id];
-    return el('article', { class: 'card' },
-      el('h3', {}, m.zh, entry ? statusBadge(entry.status) : null),
-      el('div', { class: 'en' }, m.en),
-      el('p', { style: 'margin-top:8px' }, m.zhBlurb || '官方未提供该条目的简介文本。'),
+    return el('article', { class: 'entry-card' },
+      el('div', { class: 'entry-swatch swatch-mission' }),
+      el('h3', { class: 'entry-title' }, m.zh, entry ? statusTag(entry.status) : null),
+      el('div', { class: 'entry-en' }, m.en),
+      el('p', { class: 'entry-desc' }, m.zhBlurb || '官方未提供该条目的简介文本。'),
       m.src
-        ? el('details', { style: 'margin-top:8px' },
-            el('summary', { style: 'font-size:12.5px;color:var(--fg-dim);cursor:pointer' }, '英文原文'),
-            el('p', { style: 'font-size:12.5px;color:var(--fg-dim)' }, m.enBlurb))
+        ? el('details', { class: 'entry-details' },
+            el('summary', {}, '英文原文'),
+            el('p', {}, m.enBlurb))
         : null,
-      el('p', { style: 'margin-top:10px;display:flex;gap:12px;flex-wrap:wrap;align-items:center' },
-        m.src ? el('a', { href: m.src, target: '_blank', rel: 'noopener', style: 'font-size:12.5px;color:var(--fg-dim)' }, '官方来源 ↗') : null,
-        el('a', { href: `explore.html#${m.id}`, style: 'font-size:13.5px' }, '在 3D 探索中打开 →'),
-        MISSION_TOPICS[m.id] ? el('a', { href: MISSION_TOPICS[m.id].url, style: 'font-size:13.5px;color:var(--accent-2);font-weight:600' }, MISSION_TOPICS[m.id].text) : null),
+      el('div', { class: 'entry-actions' },
+        el('a', { href: `explore.html#${m.id}`, class: 'entry-action-primary' }, '在 3D 探索中打开 →'),
+        MISSION_TOPICS[m.id] ? el('a', { href: MISSION_TOPICS[m.id].url, class: 'entry-action-secondary' }, MISSION_TOPICS[m.id].text) : null,
+        m.src ? el('a', { href: m.src, target: '_blank', rel: 'noopener', class: 'entry-action-source' }, '官方来源 ↗') : null),
     );
   }));
 }

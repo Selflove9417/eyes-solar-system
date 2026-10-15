@@ -23,20 +23,33 @@
     <input type="search" id="filter" placeholder="按中文名、英文名或类别筛选…" aria-label="筛选天体">
     <span id="count" style="color:var(--fg-dim);font-size:13.5px"></span>
   </div>
-  <div class="grid cols-3" id="list"></div>
-  <p style="margin-top:26px;color:var(--fg-dim);font-size:13.5px">
-    徽标含义：<span class="badge std">规范译名</span> 采用天文学规范术语；
-    <span class="badge common">通用译名</span> 中文出版物通用但非审定术语；
-    <span class="badge code">代号保留</span> 编号或任务代号按惯例保留原文。
-    未列出的天体（官方库共 719 条，其中卫星 451 条）暂无可靠中文译名，在模拟器中保留英文。
+  <p style="color:var(--fg-muted);font-size:13px;margin:8px 0 20px">注：未特别标注的天体均采用国家审定规范译名；标注「通用译名」为中文出版物通行译名，「代号保留」为国际编号原文。</p>
+  <div class="entry-grid" id="list"></div>
+  <p style="margin-top:40px;color:var(--fg-muted);font-size:13.5px;border-top:1px solid var(--line-subtle);padding-top:20px">
+    未收录的天体（官方实体库共 719 条，其中卫星 451 条）暂无可靠中文译名，在模拟器中保留英文。完整名单见<a href="glossary.html" style="color:var(--fg-dim);text-decoration:underline">中英术语对照</a>。
   </p>
 </main>
 <script type="module">
-import { renderChrome, getData, el, statusBadge } from './assets/js/site.js?v=20261015';
+import { renderChrome, getData, el } from './assets/js/site.js?v=20261015';
 renderChrome('bodies.html');
 const { bodies, names } = await getData();
 const list = document.getElementById('list');
 const count = document.getElementById('count');
+
+function getSwatchClass(cat) {
+  if (cat === 'Planet') return 'swatch-planet';
+  if (cat === 'Moon') return 'swatch-moon';
+  if (cat === 'Dwarf Planet') return 'swatch-dwarf';
+  if (cat === 'Star') return 'swatch-star';
+  if (cat === 'Asteroid' || cat === 'Comet') return 'swatch-smallbody';
+  return 'swatch-planet';
+}
+
+function statusTag(status) {
+  if (status === 'common') return el('span', { class: 'entry-status-note' }, '通用译名');
+  if (status === 'code') return el('span', { class: 'entry-status-note' }, '代号保留');
+  return null;
+}
 
 function render(q = '') {
   const needle = q.trim().toLowerCase();
@@ -50,19 +63,20 @@ function render(q = '') {
     const entry = names.entities[b.id];
     const catZh = names.categories[b.cat] || b.cat || names.categories[entry?.cat] || entry?.cat || '';
     const enTitle = entry?.en || b.id;
-    const card = el('article', { class: 'card' },
-      el('h3', {}, b.zh || b.id, entry ? statusBadge(entry.status) : null),
-      el('div', { class: 'en' }, (catZh ? catZh + ' · ' : '') + enTitle),
-      el('p', { style: 'margin-top:8px' }, b.zhl || '官方未提供该条目的简介文本。'),
+    const card = el('article', { class: 'entry-card' },
+      el('div', { class: `entry-swatch ${getSwatchClass(b.cat)}` }),
+      el('h3', { class: 'entry-title' }, b.zh || b.id, entry ? statusTag(entry.status) : null),
+      el('div', { class: 'entry-en' }, (catZh ? catZh + ' · ' : '') + enTitle),
+      el('p', { class: 'entry-desc' }, b.zhl || '官方未提供该条目的简介文本。'),
       b.src
-        ? el('details', { style: 'margin-top:8px' },
-            el('summary', { style: 'font-size:12.5px;color:var(--fg-dim);cursor:pointer' }, '英文原文'),
-            el('p', { style: 'font-size:12.5px;color:var(--fg-dim)' }, b.en))
+        ? el('details', { class: 'entry-details' },
+            el('summary', {}, '英文原文'),
+            el('p', {}, b.en))
         : null,
-      el('p', { style: 'margin-top:10px;display:flex;gap:12px;flex-wrap:wrap;align-items:center' },
-        b.src ? el('a', { href: b.src, target: '_blank', rel: 'noopener', style: 'font-size:12.5px;color:var(--fg-dim)' }, '官方来源 ↗') : null,
-        el('a', { href: `explore.html#${b.id}`, style: 'font-size:13.5px' }, '在 3D 探索中打开 →'),
-        SPECIAL_TOPICS[b.id] ? el('a', { href: SPECIAL_TOPICS[b.id].url, style: 'font-size:13.5px;color:var(--accent-2);font-weight:600' }, SPECIAL_TOPICS[b.id].text) : null),
+      el('div', { class: 'entry-actions' },
+        el('a', { href: `explore.html#${b.id}`, class: 'entry-action-primary' }, '在 3D 探索中打开 →'),
+        SPECIAL_TOPICS[b.id] ? el('a', { href: SPECIAL_TOPICS[b.id].url, class: 'entry-action-secondary' }, SPECIAL_TOPICS[b.id].text) : null,
+        b.src ? el('a', { href: b.src, target: '_blank', rel: 'noopener', class: 'entry-action-source' }, '官方来源 ↗') : null),
     );
     return card;
   }));
