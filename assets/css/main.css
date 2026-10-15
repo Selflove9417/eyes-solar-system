@@ -114,6 +114,7 @@ a:hover {
 .brand {
   display: inline-flex;
   align-items: center;
+  min-height: 44px;
   gap: var(--space-2);
   color: var(--fg);
   text-decoration: none;
@@ -2174,6 +2175,9 @@ kbd {
   text-decoration: underline;
   text-underline-offset: 2px;
   transition: color 0.15s ease;
+  display: inline-block;
+  padding: 12px 2px;
+  margin: -12px -2px;
 }
 .feature-src a:hover {
   color: var(--accent);
