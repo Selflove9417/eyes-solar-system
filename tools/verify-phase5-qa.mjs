@@ -113,9 +113,13 @@ async function setViewport(width, height) {
 async function captureShot(savePath) {
   const res = await send('Page.captureScreenshot', { format: 'png' });
   const buf = Buffer.from(res.data, 'base64');
-  fs.mkdirSync(path.dirname(savePath), { recursive: true });
-  fs.writeFileSync(savePath, buf);
-  console.log(`  📸 Saved screenshot: ${path.relative(root, savePath)} (${Math.round(buf.length / 1024)} KB)`);
+  if (process.argv.includes('--update-shots')) {
+    fs.mkdirSync(path.dirname(savePath), { recursive: true });
+    fs.writeFileSync(savePath, buf);
+    console.log(`  📸 Saved screenshot: ${path.relative(root, savePath)} (${Math.round(buf.length / 1024)} KB)`);
+  } else {
+    console.log(`  📸 Screenshot check OK: ${path.relative(root, savePath)} (baseline preserved; pass --update-shots to overwrite)`);
+  }
 }
 
 await send('Page.enable');

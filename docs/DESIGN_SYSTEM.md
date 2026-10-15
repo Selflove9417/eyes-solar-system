@@ -280,3 +280,14 @@
    - `node tools/check-all-links.mjs`
    - `node tools/verify-phase4-qa.mjs`
    - `node tools/verify-phase5-qa.mjs`
+
+---
+
+## 六、已知例外与审计备忘 (Known Audit Exceptions)
+
+1. **Lighthouse 最佳实践第三方 Cookie 扣分豁免**：
+   - **涉及页面**：`explore.html`（探索漫游页，Best Practices: 77）、`saturn.html`（土星特写页，Best Practices: 77）。
+   - **扣分原因**：页面中嵌入的 NASA Eyes 官方 WebGL 模拟器及 YouTube 关联媒体资源包含第三方 Cookie 策略扣分（`third-party-cookies`，实测命中 3 个外部 Cookie）。
+   - **处理原则**：属于外部上游依赖不可控行为。本项目为纯前端静态科普观测站，严格遵循免责声明与上游功能完整性约束，不修改官方 iframe 嵌入逻辑与剧场回放。此项作为**已知第三方审计例外**豁免记录；全站自研代码与页面可访问性（Accessibility: 100）、SEO（100）及性能（96~100）均达到基准。
+2. **Phase 4～5 历史验收截图基线保护**：
+   - `shots/phase4-explore-*.png` 与 `shots/phase5-*.png` 为阶段验收正式基线截图，已固化保留历史原始 SHA。自动化测试脚本 `tools/verify-phase4-qa.mjs` 与 `tools/verify-phase5-qa.mjs` 在常规回归时不覆盖已有基线文件，仅在显式传入 `--update-shots` 参数时才重新写入。

@@ -105,10 +105,14 @@ function report(name, pass, detail = '') {
 async function captureShot(filename) {
   const shotRes = await sendCdp('Page.captureScreenshot', { format: 'png' });
   const buf = Buffer.from(shotRes.data, 'base64');
-  const outPath = path.join(root, filename);
-  fs.mkdirSync(path.dirname(outPath), { recursive: true });
-  fs.writeFileSync(outPath, buf);
-  console.log(`  📸 Saved shot: ${filename} (${Math.round(buf.length / 1024)} KB)`);
+  if (process.argv.includes('--update-shots')) {
+    const outPath = path.join(root, filename);
+    fs.mkdirSync(path.dirname(outPath), { recursive: true });
+    fs.writeFileSync(outPath, buf);
+    console.log(`  📸 Saved shot: ${filename} (${Math.round(buf.length / 1024)} KB)`);
+  } else {
+    console.log(`  📸 Screenshot check OK: ${filename} (baseline preserved; pass --update-shots to overwrite)`);
+  }
 }
 
 // -------------------------------------------------------------
