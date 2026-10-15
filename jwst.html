@@ -13,7 +13,7 @@
 <meta name="twitter:title" content="詹姆斯·韦伯空间望远镜特写 · 深空之眸">
 <meta name="twitter:description" content="詹姆斯·韦伯空间望远镜 (JWST) 核心参数、日地 L2 拉格朗日点晕轨道与 3D 展开姿态解析。">
 <meta name="twitter:image" content="assets/img/PIA21895_final_image.png">
-<link rel="stylesheet" href="assets/css/main.css?v=20261015p4b">
+<link rel="stylesheet" href="assets/css/main.css?v=20261015p5">
 </head>
 <body class="feature-page" style="--page-tint: #0284c7;">
 <main class="wrap">
@@ -117,31 +117,42 @@
   </div>
 
   <h2>探索其他旗舰特写</h2>
-  <div class="grid cols-3" style="margin-bottom:30px">
-    <a class="card" href="mars.html">
-      <h3>火星探索与漫游车先驱 <span class="badge common">深度特写</span></h3>
-      <p>奥林匹斯山、水手号峡谷，以及毅力号、好奇号火星车的 3D 视角联动。</p>
+  <div class="flagship-grid feature-more-grid">
+    <a class="flagship-card" href="mars.html">
+      <div class="flagship-swatch swatch-mars"></div>
+      <div class="flagship-body">
+        <div class="flagship-name">火星探索与漫游车先驱</div>
+        <p class="flagship-desc">奥林匹斯山、水手号峡谷，以及毅力号、好奇号火星车的 3D 视角联动。</p>
+      </div>
     </a>
-    <a class="card" href="saturn.html">
-      <h3>土星与环系奇观 <span class="badge common">环系巨星</span></h3>
-      <p>横跨 28 万公里的壮丽冰质光环，拥有甲烷湖泊的泰坦与地下温水冰海的土卫二。</p>
+    <a class="flagship-card" href="saturn.html">
+      <div class="flagship-swatch swatch-saturn"></div>
+      <div class="flagship-body">
+        <div class="flagship-name">土星与环系奇观</div>
+        <p class="flagship-desc">横跨 28 万公里的壮丽冰质光环，拥有甲烷湖泊的泰坦与地下温水冰海的土卫二。</p>
+      </div>
     </a>
-    <a class="card" href="voyager-1.html">
-      <h3>旅行者 1 号星际穿越 <span class="badge std">实时星历</span></h3>
-      <p>飞出太阳系的星际信使，实时追踪其 250+ 亿公里外的退行速度与射电延迟。</p>
+    <a class="flagship-card" href="voyager-1.html">
+      <div class="flagship-swatch swatch-voyager"></div>
+      <div class="flagship-body">
+        <div class="flagship-name">旅行者 1 号星际穿越</div>
+        <p class="flagship-desc">飞出太阳系的星际信使，实时追踪其 250+ 亿公里外的退行速度与射电延迟。</p>
+      </div>
     </a>
   </div>
 
-  <h2>数据出处与署名</h2>
-  <p class="src">
-    3D 模型与姿态：<a href="https://eyes.nasa.gov/apps/solar-system/#/sc_jwst" target="_blank" rel="noopener">NASA JPL Eyes on the Solar System</a>。<br>
-    科学载荷与轨道数据：NASA Goddard Space Flight Center / Space Telescope Science Institute (STScI) / ESA / CSA。<br>
-    本页面为<strong>深空之眸 · NASA Eyes 中文观测站</strong>非官方深度科普特写。
-  </p>
+  <section class="feature-source">
+    <h2>数据出处与署名</h2>
+    <p class="src feature-src">
+      3D 模型与姿态：<a href="https://eyes.nasa.gov/apps/solar-system/#/sc_jwst" target="_blank" rel="noopener">NASA JPL Eyes on the Solar System</a>。<br>
+      科学载荷与轨道数据：NASA Goddard Space Flight Center / Space Telescope Science Institute (STScI) / ESA / CSA。<br>
+      本页面为<strong>深空之眸 · NASA Eyes 中文观测站</strong>非官方深度科普特写。
+    </p>
+  </section>
 </main>
 
 <script type="module">
-import { renderChrome, embedUrl, initStageLoader } from './assets/js/site.js?v=20261015p4b';
+import { renderChrome, embedUrl, initStageLoader } from './assets/js/site.js?v=20261015p5';
 renderChrome('jwst.html');
 
 const frame = document.getElementById('eyes');

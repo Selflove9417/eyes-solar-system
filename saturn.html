@@ -13,7 +13,7 @@
 <meta name="twitter:title" content="土星与环系奇观 · 深空之眸">
 <meta name="twitter:description" content="土星壮丽光环、卡西尼号探测器、土卫六泰坦与土卫二地下冰海。基于 NASA/JPL Eyes 官方 3D 动力学解算。">
 <meta name="twitter:image" content="assets/img/PIA21895_final_image.png">
-<link rel="stylesheet" href="assets/css/main.css?v=20261015p4b">
+<link rel="stylesheet" href="assets/css/main.css?v=20261015p5">
 </head>
 <body class="feature-page" style="--page-tint: #ca8a04;">
 <main class="wrap">
@@ -118,31 +118,42 @@
   </div>
 
   <h2>探索其他旗舰特写</h2>
-  <div class="grid cols-3" style="margin-bottom:30px">
-    <a class="card" href="mars.html">
-      <h3>火星探索与漫游车先驱 <span class="badge common">深度特写</span></h3>
-      <p>奥林匹斯山、水手号峡谷，以及毅力号、好奇号火星车的 3D 视角联动。</p>
+  <div class="flagship-grid feature-more-grid">
+    <a class="flagship-card" href="mars.html">
+      <div class="flagship-swatch swatch-mars"></div>
+      <div class="flagship-body">
+        <div class="flagship-name">火星探索与漫游车先驱</div>
+        <p class="flagship-desc">奥林匹斯山、水手号峡谷，以及毅力号、好奇号火星车的 3D 视角联动。</p>
+      </div>
     </a>
-    <a class="card" href="jwst.html">
-      <h3>韦伯空间望远镜 <span class="badge new">深空之眼</span></h3>
-      <p>驻守日地 L2 点的红外天文望远镜，穿透宇宙尘埃回溯百亿年前的第一代星系。</p>
+    <a class="flagship-card" href="jwst.html">
+      <div class="flagship-swatch swatch-jwst"></div>
+      <div class="flagship-body">
+        <div class="flagship-name">韦伯空间望远镜</div>
+        <p class="flagship-desc">驻守日地 L2 点的红外天文望远镜，穿透宇宙尘埃回溯百亿年前的第一代星系。</p>
+      </div>
     </a>
-    <a class="card" href="voyager-1.html">
-      <h3>旅行者 1 号星际穿越 <span class="badge std">实时星历</span></h3>
-      <p>飞出太阳系的星际信使，实时追踪其 250+ 亿公里外的退行速度与射电延迟。</p>
+    <a class="flagship-card" href="voyager-1.html">
+      <div class="flagship-swatch swatch-voyager"></div>
+      <div class="flagship-body">
+        <div class="flagship-name">旅行者 1 号星际穿越</div>
+        <p class="flagship-desc">飞出太阳系的星际信使，实时追踪其 250+ 亿公里外的退行速度与射电延迟。</p>
+      </div>
     </a>
   </div>
 
-  <h2>数据出处与署名</h2>
-  <p class="src">
-    3D 模型与物理动力学：<a href="https://eyes.nasa.gov/apps/solar-system/#/saturn" target="_blank" rel="noopener">NASA JPL Eyes on the Solar System</a>。<br>
-    任务数据：NASA Cassini-Huygens Mission / JPL Planetary Science Directorate / ESA / ASI。<br>
-    本页面为<strong>深空之眸 · NASA Eyes 中文观测站</strong>非官方深度科普特写。
-  </p>
+  <section class="feature-source">
+    <h2>数据出处与署名</h2>
+    <p class="src feature-src">
+      3D 模型与物理动力学：<a href="https://eyes.nasa.gov/apps/solar-system/#/saturn" target="_blank" rel="noopener">NASA JPL Eyes on the Solar System</a>。<br>
+      任务数据：NASA Cassini-Huygens Mission / JPL Planetary Science Directorate / ESA / ASI。<br>
+      本页面为<strong>深空之眸 · NASA Eyes 中文观测站</strong>非官方深度科普特写。
+    </p>
+  </section>
 </main>
 
 <script type="module">
-import { renderChrome, embedUrl, initStageLoader } from './assets/js/site.js?v=20261015p4b';
+import { renderChrome, embedUrl, initStageLoader } from './assets/js/site.js?v=20261015p5';
 renderChrome('saturn.html');
 
 const views = {

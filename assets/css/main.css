@@ -2147,6 +2147,49 @@ kbd {
   padding: 12px 0;
 }
 
+/* Feature Cross-links (探索其他旗舰特写：3列响应式网格，无盒子发光，短线悬停延长) */
+.feature-more-grid {
+  margin: 16px 0 44px;
+}
+@media (min-width: 1025px) {
+  .feature-more-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Feature Attribution & Source Section (降噪灰色小字，链接hover强调) */
+.feature-source {
+  margin: 44px 0 24px;
+  border-top: 1px solid var(--line-subtle);
+  padding-top: 14px;
+}
+.feature-src {
+  font-size: 12.5px;
+  color: var(--fg-muted);
+  line-height: 1.65;
+  margin: 8px 0;
+}
+.feature-src a {
+  color: var(--fg-muted);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.15s ease;
+}
+.feature-src a:hover {
+  color: var(--accent);
+}
+.feature-src strong {
+  color: var(--fg-dim);
+  font-weight: 600;
+}
+.feature-src code {
+  color: var(--fg-dim);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-size: 11.5px;
+}
+
 /* ---------- Minimalist Footer ---------- */
 footer, .site-footer {
   margin-top: var(--space-6);
