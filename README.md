@@ -76,6 +76,7 @@ flowchart TD
 - **移动端优先视口适配**：针对 390px 典型手机竖屏，3D 视口置顶优先呈现，天体目录折叠为交互抽屉；
 - **排版防溢出设计**：探索引导卡片弹性折行，全站数据表格统一采用 `.table-container` 横向平滑滚动；
 - **全方位无障碍保障**：满足 WCAG 2.1 AA 对比度、所有可交互元素提供清晰 `:focus-visible` 焦点环，触控热区 $\ge 44\text{px}$，尊重系统的 `prefers-reduced-motion` 动效减弱偏好。
+- **极简设计规范系统**：详见 [docs/DESIGN_SYSTEM.md](docs/DESIGN_SYSTEM.md)，沉淀了去盒子化、3D 为主角、单主动作、令牌间距阶梯与无障碍合规基准。
 
 ---
 
@@ -129,6 +130,10 @@ e:\NASA/
 ├── guide.html                   # NASA Eyes 官方 3D 模拟器高阶操作技巧指南
 ├── about.html                   # 项目背景、数据来源追溯与非官方合规声明
 ├── extension.html               # 浏览器汉化扩展程序使用说明与离线包下载指引
+│
+├── docs/
+│   ├── DESIGN_SYSTEM.md         # 极简设计规范系统与组件指南
+│   └── technical-report.md      # 官方技术调查与取证复核报告
 │
 ├── assets/
 │   ├── css/main.css             # 全局设计规范：深空科技主题、响应式断点、无障碍与抽屉样式
