@@ -301,11 +301,11 @@ a:hover {
 
 /* ---------- Hero Section ---------- */
 .hero-section {
-  padding: var(--space-6) 0 calc(var(--space-6) + 8vh);
+  padding: var(--space-6) 0 calc(var(--space-6) + 6vh);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  min-height: 88vh;
+  min-height: calc(100vh - 60px);
   justify-content: center;
   box-sizing: border-box;
 }
@@ -345,62 +345,97 @@ a:hover {
   font-size: 15px;
   font-weight: 600;
   text-decoration: none;
-  transition: background var(--transition);
   border: 1px solid transparent;
+  box-shadow: none;
+  transition: background 150ms ease;
 }
 .btn-primary:hover {
   background: var(--accent-hover);
   color: #030712;
   text-decoration: none;
+  box-shadow: none;
+  transform: none;
 }
 .hero-secondary-link {
   display: inline-flex;
   align-items: center;
+  gap: 6px;
   min-height: 44px;
   color: var(--fg-dim);
   font-size: 14px;
   text-decoration: none;
-  transition: color var(--transition);
+  transition: color 150ms ease;
 }
-.hero-secondary-link:hover {
+.hero-secondary-link .arrow {
+  display: inline-block;
+  transition: transform 150ms ease;
+}
+.hero-secondary-link:hover,
+.hero-secondary-link:focus-visible {
   color: var(--accent);
-  text-decoration: underline;
+  text-decoration: none;
+}
+.hero-secondary-link:hover .arrow,
+.hero-secondary-link:focus-visible .arrow {
+  transform: translateX(3px);
 }
 
-/* ---------- Flagship Section ---------- */
+/* ---------- Flagship Section (Minimalist Unboxed) ---------- */
 .flagship-section {
-  padding: var(--space-4) 0 var(--space-6);
+  padding: var(--space-6) 0 var(--space-6);
 }
-.section-title {
-  font-size: 20px;
+.flagship-section .section-title {
+  font-size: 13px;
   font-weight: 600;
-  color: var(--fg);
+  color: var(--fg-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
   margin: 0 0 var(--space-4);
-  letter-spacing: -0.01em;
+  padding-bottom: 0;
+  border-bottom: none;
+  display: block;
 }
+.flagship-section .section-title::before {
+  display: none;
+}
+
 .flagship-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: var(--space-3);
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-5);
 }
+@media (max-width: 1024px) {
+  .flagship-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+  }
+}
+@media (max-width: 640px) {
+  .flagship-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+}
+
 .flagship-card {
   display: flex;
   flex-direction: column;
-  background: var(--panel);
-  border: 1px solid var(--line);
+  background: transparent;
+  border: none;
+  box-shadow: none;
   border-radius: var(--r);
-  overflow: hidden;
+  padding: var(--space-2) 0;
   text-decoration: none;
-  transition: border-color var(--transition), background var(--transition);
-}
-.flagship-card:hover {
-  border-color: var(--line-hover);
-  background: var(--panel-hover);
-  text-decoration: none;
+  min-height: 44px;
+  cursor: pointer;
+  transition: color 180ms ease;
 }
 .flagship-swatch {
-  height: 4px;
-  width: 100%;
+  width: 24px;
+  height: 2px;
+  border-radius: 1px;
+  margin-bottom: var(--space-3);
+  transition: width 180ms ease;
 }
 .swatch-mars { background: #ea580c; }
 .swatch-jwst { background: #0284c7; }
@@ -408,22 +443,31 @@ a:hover {
 .swatch-voyager { background: #38bdf8; }
 
 .flagship-body {
-  padding: var(--space-4);
+  padding: 0;
   display: flex;
   flex-direction: column;
-  flex: 1;
 }
 .flagship-name {
   margin: 0 0 var(--space-2);
   font-size: 16px;
   font-weight: 600;
   color: var(--fg);
+  transition: color 180ms ease;
 }
 .flagship-desc {
   margin: 0;
   font-size: 13.5px;
-  line-height: 1.55;
+  line-height: 1.6;
   color: var(--fg-dim);
+}
+
+.flagship-card:hover .flagship-swatch,
+.flagship-card:focus-visible .flagship-swatch {
+  width: 48px;
+}
+.flagship-card:hover .flagship-name,
+.flagship-card:focus-visible .flagship-name {
+  color: #ffffff;
 }
 
 /* ---------- Typography & Headings ---------- */
@@ -562,16 +606,17 @@ a.card:hover {
   line-height: 1.2;
 }
 .btn-primary {
-  background: linear-gradient(135deg, #0284c7, #38bdf8);
-  color: #fff;
-  box-shadow: 0 4px 18px var(--accent-glow);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: var(--accent);
+  color: #030712;
+  border: 1px solid transparent;
+  box-shadow: none;
+  transition: background 150ms ease;
 }
 .btn-primary:hover {
-  background: linear-gradient(135deg, #0369a1, #0ea5e9);
-  box-shadow: 0 6px 24px var(--accent-glow);
-  transform: translateY(-2px);
-  color: #fff;
+  background: var(--accent-hover);
+  color: #030712;
+  box-shadow: none;
+  transform: none;
   text-decoration: none;
 }
 .btn-secondary {
@@ -587,134 +632,6 @@ a.card:hover {
   transform: translateY(-2px);
   text-decoration: none;
 }
-.btn-hero-primary {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 4px;
-  padding: 14px 28px;
-  border-radius: 16px;
-  background: linear-gradient(135deg, #0284c7 0%, #0369a1 40%, #0284c7 100%);
-  color: #fff;
-  box-shadow: 0 8px 30px var(--accent-glow);
-  border: 1px solid rgba(56, 189, 248, 0.5);
-  font-size: 17px;
-  font-weight: 700;
-  transition: all 0.22s ease;
-  min-height: 56px;
-  text-decoration: none;
-}
-.btn-hero-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 38px var(--accent-glow);
-  border-color: #7dd3fc;
-  color: #fff;
-  text-decoration: none;
-}
-.btn-hero-primary .btn-sub {
-  font-size: 12px;
-  font-weight: 400;
-  color: #bae6fd;
-}
-
-/* ---------- Flagship Showcase Cards ---------- */
-.flagship-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-  gap: 20px;
-  margin: 20px 0 36px;
-}
-.flagship-card {
-  position: relative;
-  border-radius: var(--r);
-  padding: 24px 22px;
-  background: var(--panel);
-  backdrop-filter: blur(var(--blur));
-  -webkit-backdrop-filter: blur(var(--blur));
-  border: 1px solid var(--line-subtle);
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
-  transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 220px;
-  text-decoration: none;
-  overflow: hidden;
-}
-.flagship-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--accent);
-  opacity: 0.6;
-  transition: opacity 0.2s ease;
-}
-.flagship-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 36px -6px var(--accent-glow);
-  border-color: var(--accent);
-  text-decoration: none;
-}
-.flagship-card:hover::before { opacity: 1; }
-
-.flagship-card.mars::before { background: linear-gradient(90deg, #ea580c, #fb923c); }
-.flagship-card.mars:hover { box-shadow: 0 16px 36px -6px var(--accent-2-glow); border-color: var(--accent-2); }
-
-.flagship-card.jwst::before { background: linear-gradient(90deg, #9333ea, #c084fc, #facc15); }
-.flagship-card.jwst:hover { box-shadow: 0 16px 36px -6px var(--purple-glow); border-color: var(--purple); }
-
-.flagship-card.saturn::before { background: linear-gradient(90deg, #ca8a04, #facc15); }
-.flagship-card.saturn:hover { box-shadow: 0 16px 36px -6px rgba(250, 204, 21, 0.35); border-color: #facc15; }
-
-.flagship-card.voyager::before { background: linear-gradient(90deg, #0284c7, #38bdf8); }
-.flagship-card.voyager:hover { box-shadow: 0 16px 36px -6px var(--accent-glow); border-color: var(--accent); }
-
-.flagship-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 12px;
-}
-.flagship-icon {
-  font-size: 28px;
-  line-height: 1;
-}
-.flagship-highlight {
-  font-size: 11.5px;
-  padding: 3px 8px;
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid var(--line-subtle);
-  color: var(--fg-dim);
-}
-.flagship-title {
-  font-size: 18px;
-  font-weight: 700;
-  color: #fff;
-  margin: 0 0 8px;
-}
-.flagship-desc {
-  color: var(--fg-dim);
-  font-size: 13.5px;
-  line-height: 1.6;
-  margin: 0;
-  flex-grow: 1;
-}
-.flagship-meta {
-  margin-top: 16px;
-  padding-top: 12px;
-  border-top: 1px solid var(--line-subtle);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 13px;
-  color: var(--accent);
-  font-weight: 600;
-}
-
 /* ---------- Chips & Filter Controls ---------- */
 .chips {
   display: flex;

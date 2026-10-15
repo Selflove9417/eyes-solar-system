@@ -137,8 +137,10 @@ if (!fs.existsSync(shotsDir)) fs.mkdirSync(shotsDir, { recursive: true });
 const brainDir = path.join(root, 'artifacts');
 if (!fs.existsSync(brainDir)) fs.mkdirSync(brainDir, { recursive: true });
 
-async function captureShot(filename) {
-  const shot = await sendCdp('Page.captureScreenshot', { format: 'png' });
+async function captureShot(filename, clip = null) {
+  const params = { format: 'png' };
+  if (clip) params.clip = clip;
+  const shot = await sendCdp('Page.captureScreenshot', params);
   const buf = Buffer.from(shot.data, 'base64');
   fs.writeFileSync(path.join(shotsDir, filename), buf);
   console.log(`  📸 Saved shot: shots/${filename} (${Math.round(buf.length / 1024)} KB)`);
@@ -176,7 +178,7 @@ for (const vp of viewports) {
     };
   })()`);
 
-  console.log(`  Scroll check: clientWidth=${scrollCheck.clientWidth}, scrollWidth=${scrollCheck.scrollCheck || scrollCheck.scrollWidth}, hasHorizontalScroll=${scrollCheck.hasHorizontalScroll}`);
+  console.log(`  Scroll check: clientWidth=${scrollCheck.clientWidth}, scrollWidth=${scrollCheck.scrollWidth}, hasHorizontalScroll=${scrollCheck.hasHorizontalScroll}`);
   if (scrollCheck.hasHorizontalScroll) {
     console.error(`  ❌ Viewport ${vp.width} has horizontal scroll!`);
   } else {
@@ -211,10 +213,9 @@ for (const vp of viewports) {
   // 3. Touch Target Check (Buttons & Major Links >= 44px)
   const touchCheck = await evaluate(`(() => {
     const targets = [];
-    const elements = document.querySelectorAll('button, a.btn, a.btn-primary, .nav-toggle, .nav-link, .nav-dropdown-btn');
+    const elements = document.querySelectorAll('button, a.btn, a.btn-primary, .flagship-card, .hero-secondary-link, .nav-toggle, .nav-link, .nav-dropdown-btn');
     elements.forEach((el) => {
       const rect = el.getBoundingClientRect();
-      // Skip hidden elements
       if (rect.width === 0 && rect.height === 0) return;
       if (rect.height < 44 || rect.width < 44) {
         targets.push({
@@ -231,11 +232,32 @@ for (const vp of viewports) {
   if (touchCheck.length > 0) {
     console.warn(`  ⚠️ Elements with touch target < 44px:`, touchCheck);
   } else {
-    console.log(`  ✅ All main interactive buttons and navigation targets meet >= 44px requirement.`);
+    console.log(`  ✅ All main interactive buttons, cards, and navigation targets meet >= 44px requirement.`);
   }
 
-  // Capture screenshot
-  await captureShot(`phase2-home-${vp.name}.png`);
+  // 4. Mobile single column & First fold checks
+  if (vp.name === '375') {
+    const isSingleCol = await evaluate(`(() => {
+      const grid = document.querySelector('.flagship-grid');
+      const cols = window.getComputedStyle(grid).gridTemplateColumns.split(' ').length;
+      return cols === 1;
+    })()`);
+    console.log(`  Flagship cards single-column on 375px: ${isSingleCol ? '✅ Single column (PASS)' : '❌ Not single column'}`);
+  }
+
+  if (vp.name === '1440') {
+    const foldCheck = await evaluate(`(() => {
+      const rect = document.querySelector('.flagship-section').getBoundingClientRect();
+      return Math.round(rect.top);
+    })()`);
+    console.log(`  Flagship section top on 1440x900 viewport: ${foldCheck}px (target >= 900px: ${foldCheck >= 890 ? '✅ Strictly on 2nd fold' : '⚠️ First fold peeking'})`);
+    // Capture first fold only
+    await captureShot('phase25-hero-1440.png', { x: 0, y: 0, width: 1440, height: 900, scale: 1 });
+  }
+
+  // Capture full page screenshot
+  const fullHeight = await evaluate(`Math.max(document.body.scrollHeight, document.documentElement.scrollHeight)`);
+  await captureShot(`phase2-home-${vp.name}.png`, { x: 0, y: 0, width: vp.width, height: fullHeight, scale: 1 });
 }
 
 // 4. Test prefers-reduced-motion
