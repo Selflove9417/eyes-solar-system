@@ -103,22 +103,58 @@ function initStarfield() {
   let width = (canvas.width = window.innerWidth);
   let height = (canvas.height = window.innerHeight);
 
+  function createStars(w, h) {
+    // Mobile scales count down with area; desktop has double density (~170-220 stars)
+    const count = Math.min(220, Math.max(35, Math.floor((w * h) / 7500)));
+    return Array.from({ length: count }, () => {
+      const rand = Math.random();
+      let tier, r, baseAlpha, canTwinkle, twinkleSpeed;
+      if (rand < 0.55) {
+        // 暗星 (Dim, 55%): subtle, distant backdrop
+        tier = 1;
+        r = Math.random() * 0.35 + 0.45;
+        baseAlpha = Math.random() * 0.15 + 0.2;
+        canTwinkle = false;
+        twinkleSpeed = 0;
+      } else if (rand < 0.85) {
+        // 中星 (Medium, 30%): steady mid-layer
+        tier = 2;
+        r = Math.random() * 0.4 + 0.75;
+        baseAlpha = Math.random() * 0.2 + 0.45;
+        canTwinkle = false;
+        twinkleSpeed = 0;
+      } else {
+        // 亮星 (Bright, 15%): subtle foreground beacons with gentle slow breathing twinkle
+        tier = 3;
+        r = Math.random() * 0.5 + 1.15;
+        baseAlpha = Math.random() * 0.2 + 0.75;
+        canTwinkle = true;
+        twinkleSpeed = Math.random() * 0.005 + 0.003;
+      }
+      return {
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.08,
+        vy: (Math.random() - 0.5) * 0.08,
+        r,
+        baseAlpha,
+        canTwinkle,
+        twinkle: Math.random() * Math.PI * 2,
+        twinkleSpeed,
+      };
+    });
+  }
+
+  let stars = createStars(width, height);
+
   window.addEventListener('resize', () => {
     width = canvas.width = window.innerWidth;
     height = canvas.height = window.innerHeight;
+    stars = createStars(width, height);
+    if (mediaQuery.matches) {
+      draw(false);
+    }
   });
-
-  const count = Math.min(100, Math.floor((width * height) / 14000));
-  const stars = Array.from({ length: count }, () => ({
-    x: Math.random() * width,
-    y: Math.random() * height,
-    vx: (Math.random() - 0.5) * 0.12,
-    vy: (Math.random() - 0.5) * 0.12,
-    r: Math.random() * 1.2 + 0.4,
-    alpha: Math.random() * 0.7 + 0.2,
-    speed: Math.random() * 0.01 + 0.004,
-    twinkle: Math.random() * Math.PI * 2,
-  }));
 
   let animId = null;
   function draw(animate = true) {
@@ -127,9 +163,13 @@ function initStarfield() {
       if (animate) {
         s.x = (s.x + s.vx + width) % width;
         s.y = (s.y + s.vy + height) % height;
-        s.twinkle += s.speed;
+        if (s.canTwinkle) {
+          s.twinkle += s.twinkleSpeed;
+        }
       }
-      const curAlpha = s.alpha * (0.6 + 0.4 * Math.sin(s.twinkle));
+      const curAlpha = s.canTwinkle
+        ? s.baseAlpha * (0.85 + 0.15 * Math.sin(s.twinkle))
+        : s.baseAlpha;
       ctx.beginPath();
       ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
       ctx.fillStyle = `rgba(224, 242, 254, ${curAlpha})`;
