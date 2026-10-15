@@ -1097,6 +1097,7 @@ body.stage-immersive-mode .stage-bar:focus-within {
 /* ---------- Tables & Responsive Wrapper ---------- */
 .table-container {
   width: 100%;
+  max-width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   margin: 16px 0;
@@ -1188,9 +1189,38 @@ label.opt input {
   background: var(--panel);
   border: 1px solid var(--line-subtle);
   border-radius: var(--r);
+  max-width: 100%;
+  overflow-x: auto;
 }
 .kv dt { color: var(--accent); font-weight: 500; }
-.kv dd { margin: 0; color: var(--fg); }
+.kv dd { margin: 0; color: var(--fg); min-width: 0; overflow-wrap: break-word; }
+
+@media (max-width: 640px) {
+  .kv {
+    grid-template-columns: 1fr;
+    gap: 4px 0;
+  }
+}
+
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.9em;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 2px 5px;
+  border-radius: 4px;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+pre {
+  max-width: 100%;
+  overflow-x: auto;
+}
+pre code {
+  word-break: normal;
+  overflow-wrap: normal;
+  background: transparent;
+  padding: 0;
+}
 
 kbd {
   display: inline-block;
