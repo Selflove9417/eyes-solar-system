@@ -227,4 +227,33 @@ ws.close();
 chromeProcess.kill();
 server.close();
 try { fs.rmSync(tempProfile, { recursive: true, force: true }); } catch {}
-process.exit(0);
+
+let totalViolations = 0;
+for (const [page, viewports] of Object.entries(auditResults)) {
+  for (const [vpName, check] of Object.entries(viewports)) {
+    if (check.hasHScroll) {
+      console.error(`❌ [${page} @ ${vpName}] Horizontal scroll detected: scrollWidth=${check.scrollWidth}, clientWidth=${check.clientWidth}`);
+      totalViolations++;
+    }
+    if (check.overflowCount > 0) {
+      console.error(`❌ [${page} @ ${vpName}] ${check.overflowCount} overflowing element(s) detected:`, check.overflowingElements);
+      totalViolations++;
+    }
+    if (check.orphanIssues && check.orphanIssues.length > 0) {
+      console.error(`❌ [${page} @ ${vpName}] Single-character orphan line wrap(s) detected:`, check.orphanIssues);
+      totalViolations++;
+    }
+    if (check.smallControls && check.smallControls.length > 0) {
+      console.error(`❌ [${page} @ ${vpName}] Standalone interactive controls smaller than 44px:`, check.smallControls);
+      totalViolations++;
+    }
+  }
+}
+
+if (totalViolations > 0) {
+  console.error(`\n❌ Full 12-page audit failed with ${totalViolations} layout/target violation(s).`);
+  process.exit(1);
+} else {
+  console.log('\n✅ All 12 pages across 375/768/1440 passed all layout, overflow, orphan, and touch target checks!');
+  process.exit(0);
+}

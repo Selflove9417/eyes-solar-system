@@ -372,7 +372,9 @@ export function renderChrome(active) {
       if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
         openMenu();
-        if (links.length > 0) links[0].focus();
+        requestAnimationFrame(() => {
+          if (links.length > 0) links[0].focus();
+        });
       } else if (e.key === 'Escape' && item.classList.contains('open')) {
         e.preventDefault();
         closeMenu(0);

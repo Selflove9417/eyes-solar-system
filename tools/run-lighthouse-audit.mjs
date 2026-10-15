@@ -51,10 +51,38 @@ for (const p of pages) {
     results[p] = { error: err.message };
   }
 }
-
 console.log('\n========================================');
 console.log('LIGHTHOUSE AUDIT SUMMARY:');
 console.log(JSON.stringify(results, null, 2));
 
 const summaryFile = path.join(artifactsDir, 'summary.json');
 fs.writeFileSync(summaryFile, JSON.stringify(results, null, 2), 'utf8');
+
+let totalFailures = 0;
+for (const [p, res] of Object.entries(results)) {
+  if (res.error) {
+    console.error(`❌ [${p}] Lighthouse execution error: ${res.error}`);
+    totalFailures++;
+  } else if (res.scores) {
+    if (res.scores.accessibility < 90) {
+      console.error(`❌ [${p}] Accessibility score below 90: ${res.scores.accessibility}`);
+      totalFailures++;
+    }
+    if (res.scores.bestPractices < 90) {
+      console.error(`❌ [${p}] Best Practices score below 90: ${res.scores.bestPractices}`);
+      totalFailures++;
+    }
+    if (res.scores.seo < 90) {
+      console.error(`❌ [${p}] SEO score below 90: ${res.scores.seo}`);
+      totalFailures++;
+    }
+  }
+}
+
+if (totalFailures > 0) {
+  console.error(`\n❌ Lighthouse audit failed with ${totalFailures} failures.`);
+  process.exit(1);
+} else {
+  console.log('\n✅ Lighthouse audit passed with 0 failures!');
+  process.exit(0);
+}

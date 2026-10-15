@@ -32,11 +32,13 @@
 | `--bg` | `#030712` | 全站全局深黑背景色 | 基准底色 |
 | `--bg-soft` | `#0b1120` | 次级微暗背景色（下拉菜单、浮动导航） | - |
 | `--panel` | `#0d1424` | 内部结构底层色 | - |
-| `--fg` | `#f3f4f6` | 一级主文本（标题、重要正文、高亮数据） | **~16.1:1** (远超 AAA 7:1) |
-| `--fg-dim` | `#9ca3af` | 二级文本（正文说明、次要描述、属性文本） | **~7.3:1** (满足 AAA 7:1) |
-| `--fg-muted` | `#8b949e` | 三级文本（小节分区标记、单位、数据来源注释） | **~5.6:1** (满足 AA 4.5:1) |
-| `--accent` | `#38bdf8` | 核心唯一强调色（深空天蓝，链接与焦点环） | **~9.4:1** (满足 AAA 7:1) |
-| `--accent-hover` | `#7dd3fc` | 强调色悬浮态高光 | **~12.2:1** |
+| `--fg` | `#f3f4f6` | 一级主文本（标题、重要正文、高亮数据） | **18.30:1**（CSS 注释标称 `~16:1`，远超 AAA 7:1） |
+| `--fg-dim` | `#9ca3af` | 二级文本（正文说明、次要描述、属性文本） | **7.93:1**（CSS 注释标称 `~7.3:1`，满足 AAA 7:1） |
+| `--fg-muted` | `#8b949e` | 三级文本（小节分区标记、单位、数据来源注释） | **6.55:1**（CSS 注释标称 `~5.6:1`，满足 AA 4.5:1） |
+| `--accent` | `#38bdf8` | 核心唯一强调色（深空天蓝，链接与焦点环） | **9.40:1**（CSS 注释标称 `~9.3:1`，满足 AAA 7:1） |
+| `--accent-hover` | `#7dd3fc` | 强调色悬浮态高光 | **12.44:1** |
+| `--ok` | `#34d399` | 状态成功 / 在线绿色 | **11.45:1**（满足 AAA 7:1） |
+| `--warn` | `#f87171` | 状态告警 / 警告红色 | **6.52:1**（满足 AA 4.5:1） |
 | `--line` | `rgba(255, 255, 255, 0.08)` | 常规分隔线 | 细致低噪 |
 | `--line-subtle` | `rgba(255, 255, 255, 0.06)` | 次级微弱指示线、数据条顶部细线 | 极致降噪 |
 
@@ -61,10 +63,11 @@
 --space-6: 96px;  /* 巨型留白：Hero 头部与首屏沉浸留白 */
 ```
 
-### 3. 圆角与模糊 (Radii & Blur)
+### 3. 圆角、尺寸与模糊 (Radii, Dimensions & Blur)
 
 ```css
 --r: 8px;         /* 标准全局圆角（视窗、按钮、抽屉） */
+--maxw: 1200px;   /* 内容区域最大限制宽度 */
 --blur: 16px;     /* 毛玻璃背景滤镜模糊半径 */
 ```
 
@@ -114,7 +117,7 @@
 - **规范**：整页唯一实心按钮。天蓝底色加纯黑粗体字，点击热区 $\ge 44\text{px}$，无阴影无浮夸变形。
 
 ```html
-<a class="btn btn-primary" href="dist/eyes-zh-extension.zip" download>
+<a class="btn-primary" href="extension/eyes-zh-extension.zip" download>
   下载汉化扩展包 (.zip)
 </a>
 ```
@@ -202,9 +205,9 @@
 
 ```html
 <div class="drawer-backdrop" id="drawer-backdrop"></div>
-<aside class="explore-drawer" id="explore-drawer" aria-label="天体与探测器目录">
+<aside id="explore-drawer" class="explore-drawer" aria-label="天体与航天器目录" aria-hidden="true" inert>
   <div class="drawer-header">
-    <span class="drawer-title">天体与探测器目录</span>
+    <span class="drawer-title">天体与航天器目录</span>
     <button type="button" id="drawer-close-btn" class="drawer-close-btn" aria-label="关闭天体列表 (Esc)">✕</button>
   </div>
   <div class="drawer-body">...</div>
@@ -268,6 +271,10 @@
    每个页面必须完整具备标准 `<title>`、`<meta name="description">`、`<link rel="canonical">`、完整的 `og:*`（title, desc, type, url, image）以及 `twitter:*`（card, title, desc, image）。
 8. [ ] **版本号一致性与回归执行**：
    全站所有 HTML 页面中引用的 CSS/JS 资源统一带上最新 `?v=<version>` 防缓存参数；在提交前必须全部通过：
+   - `node tools/audit-keyboard-focus.mjs`
+   - `node tools/audit-seo.mjs`
+   - `node tools/audit-full-12-pages.mjs`
+   - `node tools/scan-residuals.mjs`
    - `node tools/lint-zh.mjs`
    - `node tools/test-stories.mjs`
    - `node tools/check-all-links.mjs`

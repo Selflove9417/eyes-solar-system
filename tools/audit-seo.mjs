@@ -9,6 +9,8 @@ const files = [
 
 console.log('=== SEO & Social Sharing Audit ===\n');
 
+let totalErrors = 0;
+
 for (const f of files) {
   const content = fs.readFileSync(f, 'utf8');
   const title = content.match(/<title>([^<]+)<\/title>/)?.[1] || 'MISSING';
@@ -38,10 +40,55 @@ for (const f of files) {
   console.log(`  twitter:description: ${twDesc !== 'MISSING' ? 'OK' : 'MISSING'}`);
   console.log(`  twitter:image: ${twImg}`);
 
-  if (ogImg !== 'MISSING') {
-    const cleanImg = ogImg.replace(/^\//, '');
-    const exists = fs.existsSync(cleanImg);
-    console.log(`  og:image on disk: ${exists ? 'EXISTS (' + cleanImg + ')' : 'NOT FOUND (' + cleanImg + ')'}`);
+  const requiredFields = [
+    ['title', title],
+    ['description', desc],
+    ['canonical', canonical],
+    ['og:title', ogTitle],
+    ['og:description', ogDesc],
+    ['og:type', ogType],
+    ['og:image', ogImg],
+    ['og:url', ogUrl],
+    ['twitter:card', twCard],
+    ['twitter:title', twTitle],
+    ['twitter:description', twDesc],
+    ['twitter:image', twImg]
+  ];
+
+  for (const [name, val] of requiredFields) {
+    if (val === 'MISSING') {
+      console.error(`  ❌ [${f}] Missing required SEO/social tag: ${name}`);
+      totalErrors++;
+    }
   }
+
+  // Validate absolute URL format for social images
+  if (ogImg !== 'MISSING') {
+    if (!ogImg.startsWith('https://')) {
+      console.error(`  ❌ [${f}] og:image must be an absolute URL starting with https:// (got: ${ogImg})`);
+      totalErrors++;
+    }
+    const localRel = ogImg.replace(/^https?:\/\/[^\/]+\/eyes-solar-system\//, '').replace(/^\//, '');
+    const exists = fs.existsSync(localRel);
+    console.log(`  og:image on disk: ${exists ? 'EXISTS (' + localRel + ')' : 'NOT FOUND (' + localRel + ')'}`);
+    if (!exists) {
+      console.error(`  ❌ [${f}] og:image target file does not exist on disk: ${localRel}`);
+      totalErrors++;
+    }
+  }
+
+  if (twImg !== 'MISSING' && !twImg.startsWith('https://')) {
+    console.error(`  ❌ [${f}] twitter:image must be an absolute URL starting with https:// (got: ${twImg})`);
+    totalErrors++;
+  }
+
   console.log('');
+}
+
+if (totalErrors > 0) {
+  console.error(`❌ SEO & social audit failed with ${totalErrors} error(s).`);
+  process.exit(1);
+} else {
+  console.log(`✅ All ${files.length} pages passed SEO and social sharing audit with 0 errors!`);
+  process.exit(0);
 }

@@ -327,6 +327,7 @@ console.log(`  星历时间标签: ${voyagerStats.asof}`);
 // 4. 全站 5 个已完成页面回归检查
 console.log('\n=== 4. 全站其他 5 个已上线页面快速回归 ===');
 const regressionPages = ['index.html', 'bodies.html', 'missions.html', 'glossary.html', 'explore.html'];
+let qaFailures = 0;
 for (const page of regressionPages) {
   await send('Page.navigate', { url: `http://127.0.0.1:${HTTP_PORT}/${page}` });
   await sleep(800);
@@ -337,13 +338,16 @@ for (const page of regressionPages) {
       scrollW: document.documentElement.scrollWidth,
     };
   })()`);
-  console.log(`  ${page}: 标题="${info.title.slice(0, 18)}...", 视口=${info.docW}px, 滚动宽=${info.scrollW}px, 溢出=${info.scrollW > info.docW ? '❌' : '✅ 无'}`);
+  const hasOverflow = info.scrollW > info.docW;
+  if (hasOverflow) qaFailures++;
+  console.log(`  ${page}: 标题="${info.title.slice(0, 18)}...", 视口=${info.docW}px, 滚动宽=${info.scrollW}px, 溢出=${hasOverflow ? '❌' : '✅ 无'}`);
 }
 
 console.log(`\n=== 5. 会话级控制台错误统计 ===`);
 console.log(`  错误数: ${consoleErrors.length}`);
 if (consoleErrors.length > 0) {
   consoleErrors.forEach((e) => console.log('  ⚠️ Error:', e));
+  qaFailures += consoleErrors.length;
 } else {
   console.log('  ✅ 0 控制台错误！');
 }
@@ -356,4 +360,10 @@ try {
   fs.rmSync(tempProfile, { recursive: true, force: true });
 } catch {}
 
-console.log('\n🎉 Phase 5 自动化 QA 实测验证全部完成！');
+if (qaFailures > 0) {
+  console.error(`\n❌ Phase 5 QA verification failed with ${qaFailures} issue(s).`);
+  process.exit(1);
+} else {
+  console.log('\n🎉 Phase 5 自动化 QA 实测验证全部通过，0 错误！');
+  process.exit(0);
+}

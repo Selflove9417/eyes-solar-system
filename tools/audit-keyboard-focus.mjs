@@ -76,7 +76,7 @@ class CDPClient {
   }
   async pressTab(shift = false) {
     await this.send('Input.dispatchKeyEvent', {
-      type: 'keyDown',
+      type: 'rawKeyDown',
       key: 'Tab',
       code: 'Tab',
       windowsVirtualKeyCode: 9,
@@ -93,7 +93,7 @@ class CDPClient {
   }
   async pressKey(key, code, vk) {
     await this.send('Input.dispatchKeyEvent', {
-      type: 'keyDown',
+      type: 'rawKeyDown',
       key,
       code,
       windowsVirtualKeyCode: vk
@@ -120,6 +120,12 @@ await client.connect();
 
 await client.send('Page.enable');
 await client.send('Runtime.enable');
+await client.send('Emulation.setDeviceMetricsOverride', {
+  width: 1440,
+  height: 900,
+  deviceScaleFactor: 1,
+  mobile: false
+});
 
 const auditResults = {};
 
@@ -136,7 +142,6 @@ for (const p of pages) {
     (() => {
       const candidates = document.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), details summary, [tabindex]:not([tabindex="-1"])');
       const visible = Array.from(candidates).filter(el => {
-        // filter out elements inside inert or display none or visibility hidden
         if (el.closest('[inert]')) return false;
         const style = window.getComputedStyle(el);
         if (style.display === 'none' || style.visibility === 'hidden') return false;
@@ -146,24 +151,45 @@ for (const p of pages) {
     })()
   `);
 
-  // Tab through elements and collect sequence
+  // Tab through elements and collect sequence + detect traps
   const tabSequence = [];
+  const visitedUids = [];
   let trapDetected = false;
+  let trapReason = '';
   let lostFocusDetected = false;
 
-  for (let i = 0; i < Math.min(focusableCount + 3, 30); i++) {
+  const stepsToTest = Math.min(focusableCount + 3, 30);
+  for (let i = 0; i < stepsToTest; i++) {
     await client.pressTab();
     const info = await client.evaluate(`
       (() => {
-        const el = document.activeElement;
-        if (!el || el === document.body) return { tag: 'BODY', label: 'lost-focus' };
+        let el = document.activeElement;
+        if (!el || el === document.body) return { tag: 'BODY', label: 'lost-focus', uid: 'BODY' };
+        if (el.tagName === 'IFRAME') {
+          // In headless CDP, cross-origin iframes capture keyboard input without bubbling back to top frame.
+          // To continue auditing the parent page's remaining interactive elements, advance focus past the iframe.
+          const iframeTag = el.tagName;
+          const iframeId = el.id;
+          const all = Array.from(document.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled])'));
+          const idx = all.findIndex(item => el.compareDocumentPosition(item) & Node.DOCUMENT_POSITION_FOLLOWING);
+          if (idx !== -1) {
+            all[idx].focus();
+          }
+          return { tag: iframeTag, id: iframeId, class: '', label: '(iframe-bridged)', uid: 'iframe_' + iframeId };
+        }
+        if (!el.__node_uid) {
+          window.__node_counter = (window.__node_counter || 0) + 1;
+          el.__node_uid = 'node_' + window.__node_counter;
+        }
         let label = el.getAttribute('aria-label') || el.innerText || el.value || el.getAttribute('placeholder') || el.className;
         label = (label || '').trim().replace(/\\s+/g, ' ').slice(0, 30);
+
         return {
           tag: el.tagName,
           id: el.id,
           class: el.className,
-          label
+          label,
+          uid: el.__node_uid
         };
       })()
     `);
@@ -171,47 +197,107 @@ for (const p of pages) {
     if (info.label === 'lost-focus') {
       lostFocusDetected = true;
     }
+
+    // Real Keyboard Trap Detection Check 1:
+    // If consecutive Tab presses are stuck on the exact same DOM node (and there are other focusable elements)
+    if (visitedUids.length > 0 && info.uid !== 'BODY' && focusableCount > 1) {
+      const prevUid = visitedUids[visitedUids.length - 1];
+      if (info.uid === prevUid && i < focusableCount) {
+        trapDetected = true;
+        trapReason = `Focus repeatedly stuck on same element: ${info.tag}${info.id ? '#' + info.id : ''} ("${info.label}")`;
+      }
+    }
+
+    // Real Keyboard Trap Detection Check 2:
+    // Detect micro sub-loop trap (e.g. A -> B -> A -> B) before reaching the rest of the page
+    if (visitedUids.length >= 3 && focusableCount > 4 && i < focusableCount - 2) {
+      const pCurrent = info.uid;
+      const pPrev1 = visitedUids[visitedUids.length - 1];
+      const pPrev2 = visitedUids[visitedUids.length - 2];
+      const pPrev3 = visitedUids[visitedUids.length - 3];
+      if (pCurrent === pPrev2 && pPrev1 === pPrev3 && pCurrent !== pPrev1) {
+        trapDetected = true;
+        trapReason = `Focus trapped in 2-element loop: ${pCurrent} <-> ${pPrev1}`;
+      }
+    }
+
+    visitedUids.push(info.uid);
     tabSequence.push(`${info.tag}${info.id ? '#' + info.id : ''} ("${info.label}")`);
   }
 
-  // Check "更多" dropdown keyboard accessibility
-  let dropdownTest = 'N/A';
-  const hasMoreBtn = await client.evaluate(`!!document.querySelector('.nav-more-btn')`);
-  if (hasMoreBtn) {
-    const moreOpened = await client.evaluate(`
-      (() => {
-        const btn = document.querySelector('.nav-more-btn');
-        btn.focus();
-        btn.click();
-        const menu = document.querySelector('.nav-more-dropdown');
-        const isOpen = menu && menu.classList.contains('open');
-        return { isOpen, ariaExpanded: btn.getAttribute('aria-expanded') };
-      })()
-    `);
-
-    // Press Escape
-    await client.pressKey('Escape', 'Escape', 27);
-    const afterEsc = await client.evaluate(`
-      (() => {
-        const btn = document.querySelector('.nav-more-btn');
-        const menu = document.querySelector('.nav-more-dropdown');
-        const isClosed = !menu || !menu.classList.contains('open');
-        const focusRestored = document.activeElement === btn;
-        return { isClosed, focusRestored };
-      })()
-    `);
-
-    dropdownTest = `Open: ${moreOpened.isOpen && moreOpened.ariaExpanded === 'true' ? 'OK' : 'FAIL'}, Esc Close & Focus Restore: ${afterEsc.isClosed && afterEsc.focusRestored ? 'OK' : 'FAIL'}`;
+  // Reverse traversal test (Shift+Tab) to verify escape backward
+  let reverseOk = true;
+  if (visitedUids.length >= 3) {
+    const beforeShift = await client.evaluate(`document.activeElement?.tagName || 'NONE'`);
+    await client.pressTab(true); // Shift+Tab
+    const afterShift = await client.evaluate(`document.activeElement?.tagName || 'NONE'`);
+    if (afterShift === 'NONE' || afterShift === 'BODY') {
+      reverseOk = false;
+      lostFocusDetected = true;
+    }
   }
 
-  // Check explore drawer keyboard accessibility
+  // Check "更多" dropdown keyboard accessibility using real selectors from site.js
+  // (Trigger: .nav-dropdown-btn, Container: .nav-item, Menu: .nav-dropdown, Sub-links: .nav-dropdown a)
+  let dropdownTest = 'N/A';
+  const hasDropdownBtn = await client.evaluate(`!!document.querySelector('.nav-dropdown-btn')`);
+  if (hasDropdownBtn) {
+    // 1. Focus button and press ArrowDown
+    await client.evaluate(`document.querySelector('.nav-dropdown-btn').focus()`);
+    await client.pressKey('ArrowDown', 'ArrowDown', 40);
+
+    const openCheck = await client.evaluate(`
+      (() => {
+        const btn = document.querySelector('.nav-dropdown-btn');
+        const item = btn?.closest('.nav-item');
+        const isOpen = item && item.classList.contains('open');
+        const ariaExpanded = btn?.getAttribute('aria-expanded');
+        const firstLink = item?.querySelector('.nav-dropdown a');
+        const firstFocused = document.activeElement === firstLink;
+        return { isOpen, ariaExpanded, firstFocused };
+      })()
+    `);
+
+    // 2. Press ArrowDown to advance to second link
+    await client.pressKey('ArrowDown', 'ArrowDown', 40);
+    const advanceCheck = await client.evaluate(`
+      (() => {
+        const item = document.querySelector('.nav-dropdown-btn')?.closest('.nav-item');
+        const secondLink = item?.querySelectorAll('.nav-dropdown a')[1];
+        return document.activeElement === secondLink;
+      })()
+    `);
+
+    // 3. Press Escape to close and restore focus
+    await client.pressKey('Escape', 'Escape', 27);
+    const closeCheck = await client.evaluate(`
+      (() => {
+        const btn = document.querySelector('.nav-dropdown-btn');
+        const item = btn?.closest('.nav-item');
+        const isClosed = item && !item.classList.contains('open');
+        const ariaClosed = btn?.getAttribute('aria-expanded') === 'false';
+        const focusRestored = document.activeElement === btn;
+        return { isClosed, ariaClosed, focusRestored };
+      })()
+    `);
+
+    const openPass = openCheck.isOpen && openCheck.ariaExpanded === 'true' && openCheck.firstFocused;
+    const advancePass = advanceCheck;
+    const closePass = closeCheck.isClosed && closeCheck.ariaClosed && closeCheck.focusRestored;
+
+    dropdownTest = `Open & Focus 1st: ${openPass ? 'OK' : 'FAIL'}, Cycle: ${advancePass ? 'OK' : 'FAIL'}, Esc Close & Restore: ${closePass ? 'OK' : 'FAIL'}`;
+  }
+
+  // Check explore drawer keyboard accessibility (explore.html)
   let drawerTest = 'N/A';
   if (p === 'explore.html') {
+    // 1. Open drawer
+    await client.evaluate(`document.getElementById('drawer-toggle-btn').click()`);
+    await sleep(80);
+
     const drawerOpenResult = await client.evaluate(`
       (() => {
         const btn = document.getElementById('drawer-toggle-btn');
-        btn.focus();
-        btn.click();
         const drawer = document.getElementById('explore-drawer');
         const isOpen = document.body.classList.contains('drawer-open');
         const searchFocused = document.activeElement === document.getElementById('jump-search');
@@ -219,8 +305,20 @@ for (const p of pages) {
       })()
     `);
 
-    // Press Escape to close drawer
+    // 2. Controlled focus trap test inside open drawer:
+    // Tab should wrap within drawer elements
+    await client.pressTab();
+    const trapActiveInsideDrawer = await client.evaluate(`
+      (() => {
+        const drawer = document.getElementById('explore-drawer');
+        return drawer && drawer.contains(document.activeElement);
+      })()
+    `);
+
+    // 3. Press Escape to close drawer and verify trap release + focus restoration
     await client.pressKey('Escape', 'Escape', 27);
+    await sleep(80);
+
     const drawerCloseResult = await client.evaluate(`
       (() => {
         const btn = document.getElementById('drawer-toggle-btn');
@@ -230,13 +328,16 @@ for (const p of pages) {
       })()
     `);
 
-    drawerTest = `Open & Focus Input: ${drawerOpenResult.isOpen && drawerOpenResult.searchFocused ? 'OK' : 'FAIL'}, Esc Close & Focus Restore: ${drawerCloseResult.isClosed && drawerCloseResult.focusRestored ? 'OK' : 'FAIL'}`;
+    const openPass = drawerOpenResult.isOpen && drawerOpenResult.searchFocused;
+    const closePass = drawerCloseResult.isClosed && drawerCloseResult.focusRestored;
+    drawerTest = `Open & Focus: ${openPass ? 'OK' : 'FAIL'}, Esc Close & Restore: ${closePass ? 'OK' : 'FAIL'}, Trap Contained: ${trapActiveInsideDrawer ? 'OK' : 'FAIL'}`;
   }
 
   auditResults[p] = {
     focusableCount,
     lostFocusDetected,
     trapDetected,
+    trapReason,
     dropdownTest,
     drawerTest,
     sampleSequence: tabSequence.slice(0, 8)
@@ -245,8 +346,8 @@ for (const p of pages) {
   console.log(`Page: ${p}`);
   console.log(`  可获得焦点的元素数: ${focusableCount}`);
   console.log(`  焦点丢失: ${lostFocusDetected ? 'YES (FAIL)' : 'NO (PASS)'}`);
-  console.log(`  键盘陷阱: ${trapDetected ? 'YES (FAIL)' : 'NO (PASS)'}`);
-  if (hasMoreBtn) console.log(`  「更多」下拉键盘控制: ${dropdownTest}`);
+  console.log(`  键盘陷阱: ${trapDetected ? `YES (FAIL: ${trapReason})` : 'NO (PASS)'}`);
+  if (hasDropdownBtn) console.log(`  「更多」下拉键盘控制: ${dropdownTest}`);
   if (p === 'explore.html') console.log(`  探索页天体抽屉键盘控制: ${drawerTest}`);
   console.log(`  Tab 顺序示例: ${tabSequence.slice(0, 5).join(' -> ')}`);
   console.log('');
@@ -258,3 +359,32 @@ chromeProc.kill();
 const outPath = path.join(root, 'artifacts', 'keyboard-audit.json');
 fs.writeFileSync(outPath, JSON.stringify(auditResults, null, 2), 'utf8');
 console.log('Saved keyboard audit to:', outPath);
+
+// Exit non-zero if ANY failure occurred
+let totalFailures = 0;
+for (const [pageName, res] of Object.entries(auditResults)) {
+  if (res.lostFocusDetected) {
+    console.error(`❌ [${pageName}] Lost focus detected.`);
+    totalFailures++;
+  }
+  if (res.trapDetected) {
+    console.error(`❌ [${pageName}] Keyboard trap detected: ${res.trapReason}`);
+    totalFailures++;
+  }
+  if (res.dropdownTest.includes('FAIL')) {
+    console.error(`❌ [${pageName}] Dropdown keyboard test failed: ${res.dropdownTest}`);
+    totalFailures++;
+  }
+  if (res.drawerTest.includes('FAIL')) {
+    console.error(`❌ [${pageName}] Drawer keyboard test failed: ${res.drawerTest}`);
+    totalFailures++;
+  }
+}
+
+if (totalFailures > 0) {
+  console.error(`\n❌ Keyboard audit failed with ${totalFailures} failures.`);
+  process.exit(1);
+} else {
+  console.log('\n✅ All keyboard accessibility and focus navigation audits passed with 0 failures!');
+  process.exit(0);
+}
