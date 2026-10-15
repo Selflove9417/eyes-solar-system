@@ -92,7 +92,7 @@ export function initStageLoader(frameEl, stageContainer = frameEl?.parentElement
   return { show, hide };
 }
 
-// Initialize subtle cosmic starry canvas
+// Initialize subtle cosmic starry canvas with slow drift and reduced motion support
 function initStarfield() {
   if (document.getElementById('cosmic-canvas')) return;
   const canvas = document.createElement('canvas');
@@ -108,90 +108,99 @@ function initStarfield() {
     height = canvas.height = window.innerHeight;
   });
 
-  const count = Math.min(110, Math.floor((width * height) / 12000));
+  const count = Math.min(100, Math.floor((width * height) / 14000));
   const stars = Array.from({ length: count }, () => ({
     x: Math.random() * width,
     y: Math.random() * height,
-    r: Math.random() * 1.4 + 0.3,
+    vx: (Math.random() - 0.5) * 0.12,
+    vy: (Math.random() - 0.5) * 0.12,
+    r: Math.random() * 1.2 + 0.4,
     alpha: Math.random() * 0.7 + 0.2,
-    speed: Math.random() * 0.015 + 0.005,
+    speed: Math.random() * 0.01 + 0.004,
     twinkle: Math.random() * Math.PI * 2,
   }));
 
   let animId = null;
-  function draw() {
+  function draw(animate = true) {
     ctx.clearRect(0, 0, width, height);
     for (const s of stars) {
-      s.twinkle += s.speed;
+      if (animate) {
+        s.x = (s.x + s.vx + width) % width;
+        s.y = (s.y + s.vy + height) % height;
+        s.twinkle += s.speed;
+      }
       const curAlpha = s.alpha * (0.6 + 0.4 * Math.sin(s.twinkle));
       ctx.beginPath();
       ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
       ctx.fillStyle = `rgba(224, 242, 254, ${curAlpha})`;
       ctx.fill();
     }
-    animId = requestAnimationFrame(draw);
+    if (animate) {
+      animId = requestAnimationFrame(() => draw(true));
+    }
   }
 
   // Respect battery & reduce motion
   const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-  if (!mediaQuery.matches) {
-    draw();
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) cancelAnimationFrame(animId);
-      else draw();
-    });
+  function updateAnimation() {
+    if (animId) {
+      cancelAnimationFrame(animId);
+      animId = null;
+    }
+    if (mediaQuery.matches) {
+      draw(false);
+    } else {
+      draw(true);
+    }
   }
+
+  updateAnimation();
+  if (typeof mediaQuery.addEventListener === 'function') {
+    mediaQuery.addEventListener('change', updateAnimation);
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden && animId) {
+      cancelAnimationFrame(animId);
+      animId = null;
+    } else if (!document.hidden && !mediaQuery.matches && !animId) {
+      draw(true);
+    }
+  });
 }
 
 export function renderChrome(active) {
   initStarfield();
 
-  const isShowcaseActive = ['mars.html', 'jwst.html', 'saturn.html', 'voyager-1.html'].includes(active);
-  const isArchiveActive = ['bodies.html', 'missions.html', 'glossary.html', 'guide.html', 'about.html'].includes(active);
+  const isMoreActive = ['extension.html', 'guide.html', 'about.html'].includes(active);
 
   const header = document.createElement('header');
   header.className = 'site-header';
   header.innerHTML = `
-    <div class="wrap">
+    <div class="wrap header-wrap">
       <a class="brand" href="index.html">
-        <span class="brand-logo">🪐</span>
-        <span>深空之眸</span>
-        <small>NASA Eyes 中文观测站</small>
+        <span class="brand-text">深空之眸</span>
+        <span class="brand-sub">NASA Eyes 中文观测站</span>
       </a>
-      <button class="nav-toggle" aria-label="切换菜单" aria-expanded="false">☰</button>
+      <button class="nav-toggle" aria-label="切换菜单" aria-expanded="false">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
       <nav class="nav" aria-label="主导航">
-        <a href="index.html"${active === 'index.html' ? ' aria-current="page"' : ''}>首页</a>
-        <a href="explore.html"${active === 'explore.html' ? ' aria-current="page"' : ''}>3D 漫游</a>
-
+        <a href="explore.html" class="nav-link"${active === 'explore.html' ? ' aria-current="page"' : ''}>探索</a>
+        <a href="bodies.html" class="nav-link"${active === 'bodies.html' ? ' aria-current="page"' : ''}>天体</a>
+        <a href="missions.html" class="nav-link"${active === 'missions.html' ? ' aria-current="page"' : ''}>任务</a>
+        <a href="glossary.html" class="nav-link"${active === 'glossary.html' ? ' aria-current="page"' : ''}>术语</a>
         <div class="nav-item">
-          <button class="nav-dropdown-btn"${isShowcaseActive ? ' style="color:#fff;font-weight:600"' : ''}>
-            深度特写 <span style="font-size:10px;opacity:0.7">▾</span>
+          <button class="nav-dropdown-btn"${isMoreActive ? ' aria-current="page"' : ''}>
+            <span>更多</span>
+            <svg class="nav-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5l3 3 3-3"/></svg>
           </button>
           <div class="nav-dropdown">
-            <a href="explore.html?story=cassini" style="color:#fdba74;font-weight:600">🎬 探索剧场 · 卡西尼号</a>
-            <a href="mars.html"${active === 'mars.html' ? ' aria-current="page"' : ''}>🔴 火星与漫游车</a>
-            <a href="jwst.html"${active === 'jwst.html' ? ' aria-current="page"' : ''}>🔭 韦伯空间望远镜</a>
-            <a href="saturn.html"${active === 'saturn.html' ? ' aria-current="page"' : ''}>🪐 土星与环系奇观</a>
-            <a href="voyager-1.html"${active === 'voyager-1.html' ? ' aria-current="page"' : ''}>🚀 旅行者 1 号星际穿越</a>
+            <a href="extension.html"${active === 'extension.html' ? ' aria-current="page"' : ''}>浏览器汉化扩展</a>
+            <a href="guide.html"${active === 'guide.html' ? ' aria-current="page"' : ''}>操作技巧指引</a>
+            <a href="about.html"${active === 'about.html' ? ' aria-current="page"' : ''}>关于与合规声明</a>
           </div>
         </div>
-
-        <div class="nav-item">
-          <button class="nav-dropdown-btn"${isArchiveActive ? ' style="color:#fff;font-weight:600"' : ''}>
-            深空档案 <span style="font-size:10px;opacity:0.7">▾</span>
-          </button>
-          <div class="nav-dropdown">
-            <a href="bodies.html"${active === 'bodies.html' ? ' aria-current="page"' : ''}>🗺️ 700+ 天体全库</a>
-            <a href="missions.html"${active === 'missions.html' ? ' aria-current="page"' : ''}>🛰️ 航天任务探索</a>
-            <a href="glossary.html"${active === 'glossary.html' ? ' aria-current="page"' : ''}>📖 中英术语对照</a>
-            <a href="guide.html"${active === 'guide.html' ? ' aria-current="page"' : ''}>🕹️ 模拟器操作技巧</a>
-            <a href="about.html"${active === 'about.html' ? ' aria-current="page"' : ''}>ℹ️ 关于与合规声明</a>
-          </div>
-        </div>
-
-        <a class="nav-pill-btn" href="extension.html"${active === 'extension.html' ? ' style="background:var(--accent);color:#fff"' : ''}>
-          ⚡ 汉化扩展
-        </a>
       </nav>
     </div>`;
   document.body.prepend(header);
@@ -200,16 +209,18 @@ export function renderChrome(active) {
   const toggleBtn = header.querySelector('.nav-toggle');
   const navMenu = header.querySelector('.nav');
   if (toggleBtn && navMenu) {
+    const iconMenu = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>`;
+    const iconClose = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>`;
     const closeMenu = () => {
       navMenu.classList.remove('open');
       toggleBtn.setAttribute('aria-expanded', 'false');
-      toggleBtn.textContent = '☰';
+      toggleBtn.innerHTML = iconMenu;
     };
     toggleBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       const isOpen = navMenu.classList.toggle('open');
       toggleBtn.setAttribute('aria-expanded', String(isOpen));
-      toggleBtn.textContent = isOpen ? '✕' : '☰';
+      toggleBtn.innerHTML = isOpen ? iconClose : iconMenu;
     });
     document.addEventListener('click', (e) => {
       if (!header.contains(e.target)) closeMenu();
@@ -296,18 +307,12 @@ export function renderChrome(active) {
   });
 
   const footer = document.createElement('footer');
+  footer.className = 'site-footer';
   footer.innerHTML = `
-    <div class="wrap">
-      <div>
-        <strong>深空之眸 · NASA Eyes 中文观测站</strong> · 非官方深空科普项目<br>
-        <span>3D 动力学与天体数据基于 <a href="${NASA_APP}" target="_blank" rel="noopener">NASA/JPL Eyes on the Solar System</a> 官方模型在客户端 WebGL 驱动解算。</span>
-      </div>
-      <div>
-        <span>中文资料逐条译自 NASA 官方开放数据 · </span>
-        <a href="about.html">合规与许可声明</a> · 
-        <a href="extension.html">汉化扩展</a> · 
-        <a href="https://eyes.nasa.gov/" target="_blank" rel="noopener">NASA Eyes 官网 ↗</a>
-      </div>
+    <div class="wrap footer-wrap">
+      <p class="footer-text">
+        深空之眸为独立开源非官方科普项目，与 NASA 及 JPL 无官方隶属或商业背书关系。3D 天体轨道与空间数据基于 <a href="${NASA_APP}" target="_blank" rel="noopener">NASA/JPL Eyes on the Solar System</a> 官方模型在客户端 WebGL 实时驱动解算。
+      </p>
     </div>`;
   document.body.appendChild(footer);
 }
