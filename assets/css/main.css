@@ -325,7 +325,8 @@ a:hover {
   font-size: clamp(15px, 1.35vw, 18px);
   line-height: 1.65;
   color: var(--fg-dim);
-  max-width: 620px;
+  max-width: 780px;
+  text-wrap: balance;
 }
 .hero-actions {
   display: flex;
@@ -382,7 +383,7 @@ a:hover {
 
 /* ---------- Flagship Section (Minimalist Unboxed) ---------- */
 .flagship-section {
-  padding: var(--space-6) 0 var(--space-6);
+  padding: var(--space-6) 0 var(--space-4);
 }
 .flagship-section .section-title {
   font-size: 13px;

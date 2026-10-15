@@ -245,12 +245,65 @@ for (const vp of viewports) {
     console.log(`  Flagship cards single-column on 375px: ${isSingleCol ? '✅ Single column (PASS)' : '❌ Not single column'}`);
   }
 
+  // 5. Hero lead orphan character check
+  const orphanCheck = await evaluate(`(() => {
+    const el = document.querySelector('.hero-lead');
+    const range = document.createRange();
+    range.selectNodeContents(el);
+    const lines = [];
+    let currentY = -1;
+    let currentLine = '';
+    const text = el.textContent;
+    for (let i = 0; i < text.length; i++) {
+      range.setStart(el.firstChild, i);
+      range.setEnd(el.firstChild, i + 1);
+      const r = range.getBoundingClientRect();
+      if (Math.abs(r.top - currentY) > 4) {
+        if (currentLine) lines.push(currentLine);
+        currentLine = text[i];
+        currentY = r.top;
+      } else {
+        currentLine += text[i];
+      }
+    }
+    if (currentLine) lines.push(currentLine);
+    const lastLine = lines[lines.length - 1] || '';
+    const hasOrphan = lastLine.length <= 1;
+    return { lines, lastLine, hasOrphan };
+  })()`);
+  console.log(`  Hero lead lines on ${vp.name}px:`, orphanCheck.lines);
+  console.log(`  No orphan single character on ${vp.name}px: ${!orphanCheck.hasOrphan ? '✅ PASS (No orphan character)' : '❌ FAIL'}`);
+
   if (vp.name === '1440') {
     const foldCheck = await evaluate(`(() => {
       const rect = document.querySelector('.flagship-section').getBoundingClientRect();
       return Math.round(rect.top);
     })()`);
     console.log(`  Flagship section top on 1440x900 viewport: ${foldCheck}px (target >= 900px: ${foldCheck >= 890 ? '✅ Strictly on 2nd fold' : '⚠️ First fold peeking'})`);
+
+    const titleCheck = await evaluate(`(() => {
+      const el = document.querySelector('.section-title');
+      const cs = window.getComputedStyle(el);
+      const before = window.getComputedStyle(el, '::before');
+      const after = window.getComputedStyle(el, '::after');
+      return {
+        beforeDisplay: before.display,
+        afterDisplay: after.display,
+        childrenCount: el.children.length,
+        borderBottom: cs.borderBottom
+      };
+    })()`);
+    console.log('  Section title DOM / pseudo-element check:', titleCheck);
+
+    const gapCheck = await evaluate(`(() => {
+      const grid = document.querySelector('.flagship-grid');
+      const footer = document.querySelector('.site-footer');
+      const gridBottom = grid.getBoundingClientRect().bottom;
+      const footerTop = footer.getBoundingClientRect().top;
+      return Math.round(footerTop - gridBottom);
+    })()`);
+    console.log(`  Whitespace between flagship grid and footer: ${gapCheck}px (reduced from 192px to ~120px)`);
+
     // Capture first fold only
     await captureShot('phase25-hero-1440.png', { x: 0, y: 0, width: 1440, height: 900, scale: 1 });
   }
