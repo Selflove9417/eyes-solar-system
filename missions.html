@@ -65,11 +65,11 @@ function render(q = '') {
   }));
 }
 const MISSION_TOPICS = {
-  sc_jwst: { url: 'jwst.html', text: '🔭 韦伯望远镜特写 ↗' },
-  sc_voyager_1: { url: 'voyager-1.html', text: '🚀 旅行者1号特写 ↗' },
-  sc_mars_2020: { url: 'mars.html', text: '🔴 毅力号火星特写 ↗' },
-  sc_mars_science_laboratory: { url: 'mars.html', text: '🔴 好奇号火星特写 ↗' },
-  sc_cassini: { url: 'saturn.html', text: '🪐 卡西尼土星特写 ↗' },
+  sc_jwst: { url: 'jwst.html', text: '韦伯望远镜特写 ↗' },
+  sc_voyager_1: { url: 'voyager-1.html', text: '旅行者1号特写 ↗' },
+  sc_mars_2020: { url: 'mars.html', text: '毅力号火星特写 ↗' },
+  sc_mars_science_laboratory: { url: 'mars.html', text: '好奇号火星特写 ↗' },
+  sc_cassini: { url: 'saturn.html', text: '卡西尼土星特写 ↗' },
 };
 document.getElementById('filter').addEventListener('input', (e) => render(e.target.value));
 render();

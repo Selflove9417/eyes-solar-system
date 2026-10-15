@@ -68,11 +68,11 @@ function render(q = '') {
   }));
 }
 const SPECIAL_TOPICS = {
-  mars: { url: 'mars.html', text: '🔴 火星深度特写 ↗' },
-  saturn: { url: 'saturn.html', text: '🪐 土星深度特写 ↗' },
-  titan: { url: 'saturn.html', text: '🪐 土卫六特写 ↗' },
-  enceladus: { url: 'saturn.html', text: '🪐 土卫二特写 ↗' },
-  phobos: { url: 'mars.html', text: '🔴 火卫一特写 ↗' },
+  mars: { url: 'mars.html', text: '火星深度特写 ↗' },
+  saturn: { url: 'saturn.html', text: '土星深度特写 ↗' },
+  titan: { url: 'saturn.html', text: '土卫六特写 ↗' },
+  enceladus: { url: 'saturn.html', text: '土卫二特写 ↗' },
+  phobos: { url: 'mars.html', text: '火卫一特写 ↗' },
 };
 document.getElementById('filter').addEventListener('input', (e) => render(e.target.value));
 render();

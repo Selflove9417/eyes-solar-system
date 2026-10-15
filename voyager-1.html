@@ -19,9 +19,9 @@
 <main class="wrap">
   <div class="hero">
     <div class="hero-tag">
-      🚀 飞出太阳系的人类信使 · 星际空间穿越者
+      飞出太阳系的人类信使 · 星际空间穿越者
     </div>
-    <h1 class="gradient-title">旅行者 1 号 <span class="src" style="font-size:22px;vertical-align:middle">Voyager 1</span></h1>
+    <h1>旅行者 1 号 <span class="src" style="font-size:22px;vertical-align:middle">Voyager 1</span></h1>
     <p class="lede">
       人类迄今为止飞行距离最遥远的人造物体。它此刻正携带着刻录人类文明声音与图像的镀金唱片，向深邃的星际空间飞驰。
     </p>
@@ -35,11 +35,11 @@
   </section>
   <p class="src" id="asof"></p>
 
-  <div style="border:1px solid rgba(56,189,248,0.25);border-left:4px solid var(--accent);background:rgba(15,23,42,0.6);border-radius:var(--r);padding:12px 18px;margin:12px 0 24px;font-size:13px;color:var(--fg-dim);line-height:1.6">
-    ℹ️ <strong>数据透明度说明</strong>：上方距离与光时由 NASA JPL Horizons 离线基准星历点，结合探测器退行速度（约 16.9 km/s）在客户端进行<strong>科学线性外推计算</strong>得出。该数值为高精度理论外推估算值，与深空网络（DSN）实测射电信号可能存在微小秒级差异。
+  <div style="border:1px solid var(--line);border-left:4px solid var(--accent);background:var(--panel);border-radius:var(--r);padding:12px 18px;margin:12px 0 24px;font-size:13px;color:var(--fg-dim);line-height:1.6">
+    <strong>数据透明度说明</strong>：上方距离与光时由 NASA JPL Horizons 离线基准星历点，结合探测器退行速度（约 16.9 km/s）在客户端进行<strong>科学线性外推计算</strong>得出。该数值为高精度理论外推估算值，与深空网络（DSN）实测射电信号可能存在微小秒级差异。
   </div>
 
-  <h2>🛰️ 此刻它在太阳系中的实时位置与姿态</h2>
+  <h2>此刻它在太阳系中的实时位置与姿态</h2>
   <div class="stage">
     <iframe id="eyes" title="旅行者 1 号在 NASA Eyes 官方 3D 太阳系中的实时位置" allow="fullscreen"></iframe>
     <div class="stage-bar">
@@ -48,11 +48,11 @@
     </div>
   </div>
 
-  <h2>📏 这些天文数字到底有多夸张？</h2>
+  <h2>这些天文数字到底有多夸张？</h2>
   <p class="lede">把两百多亿公里的极端距离，换算成光速与太阳系尺度的直观感受：</p>
   <ul class="scale" id="scale"></ul>
 
-  <h2>📜 伟大的星际远征简史</h2>
+  <h2>伟大的星际远征简史</h2>
   <div class="grid cols-3">
     <article class="card">
       <h3>1977-09-05 启程发射</h3>
@@ -68,18 +68,18 @@
     </article>
   </div>
 
-  <h2>🚀 探索其他旗舰特写</h2>
+  <h2>探索其他旗舰特写</h2>
   <div class="grid cols-3" style="margin-bottom:30px">
     <a class="card" href="mars.html">
-      <h3>🔴 火星探索与漫游车先驱 <span class="badge common">深度特写</span></h3>
+      <h3>火星探索与漫游车先驱 <span class="badge common">深度特写</span></h3>
       <p>奥林匹斯山、水手号峡谷，以及毅力号、好奇号火星车的 3D 视角联动。</p>
     </a>
     <a class="card" href="jwst.html">
-      <h3>🔭 韦伯空间望远镜 <span class="badge new">深空之眼</span></h3>
+      <h3>韦伯空间望远镜 <span class="badge new">深空之眼</span></h3>
       <p>驻守日地 L2 点的红外天文望远镜，穿透宇宙尘埃回溯百亿年前的第一代星系。</p>
     </a>
     <a class="card" href="saturn.html">
-      <h3>🪐 土星与环系奇观 <span class="badge common">环系巨星</span></h3>
+      <h3>土星与环系奇观 <span class="badge common">环系巨星</span></h3>
       <p>横跨 28 万公里的壮丽冰质光环，拥有甲烷湖泊的泰坦与地下温水冰海的土卫二。</p>
     </a>
   </div>
@@ -160,7 +160,7 @@ try {
   console.error('Voyager-1 ephemeris load failed:', err);
   document.getElementById('stats').replaceChildren(
     el('div', { class: 'stat accent', style: 'grid-column:1/-1;border-left:4px solid var(--accent-2);background:rgba(30,20,10,0.6);' },
-      el('div', { class: 'n', style: 'font-size:22px;color:var(--accent-2);' }, '⚠️ 实时星历数据暂不可用'),
+      el('div', { class: 'n', style: 'font-size:22px;color:var(--accent);' }, '实时星历数据暂不可用'),
       el('div', { class: 'k', style: 'margin-top:6px;font-size:14px;color:var(--fg-dim);' },
         '未能成功连接或加载 JPL Horizons 权威星历数据缓存。您仍可点击下方 3D 视窗查看旅行者 1 号在太阳系中的实时模拟运行。'))
   );
