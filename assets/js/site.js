@@ -64,30 +64,71 @@ export function embedUrl({ route = 'home', time, rate, ...flags } = {}) {
 }
 
 // Initialize stage loading overlay for 3D simulation frames
-export function initStageLoader(frameEl, stageContainer = frameEl?.parentElement) {
+export function initStageLoader(frameEl, stageContainer = frameEl?.parentElement, defaultOfficialUrl = '') {
   if (!frameEl || !stageContainer) return null;
   stageContainer.style.position = 'relative';
 
-  const overlay = el('div', { class: 'stage-overlay' },
-    el('div', { class: 'stage-spinner' }),
-    el('div', { class: 'stage-loading-text' }, '正在连接 NASA Eyes 官方 3D 服务…'),
-    el('div', { class: 'stage-loading-sub' }, '正在载入轨道动力学模型与太阳系 3D 场景…')
-  );
-  stageContainer.prepend(overlay);
+  let overlay = stageContainer.querySelector('.stage-overlay');
+  if (!overlay) {
+    overlay = el('div', { class: 'stage-overlay' },
+      el('div', { class: 'stage-loading-box', style: 'display:flex;flex-direction:column;align-items:center;gap:12px' },
+        el('div', { class: 'stage-pulse-dot' }),
+        el('div', { class: 'stage-loading-text' }, '正在载入 NASA 3D 视图…')
+      ),
+      el('div', { class: 'stage-recovery', style: 'display:none' },
+        el('div', { class: 'stage-error-text' }, '3D 视图加载较慢，可重试或在 NASA 官方站点打开'),
+        el('div', { class: 'stage-error-actions' },
+          el('button', { class: 'btn-stage-retry', type: 'button' }, '重试'),
+          el('a', { class: 'stage-link-official', href: defaultOfficialUrl || 'https://eyes.nasa.gov/apps/solar-system/', target: '_blank', rel: 'noopener' }, '在 NASA 官方站点打开 ↗')
+        )
+      )
+    );
+    stageContainer.prepend(overlay);
+  }
 
-  let timer = null;
+  const loadingBox = overlay.querySelector('.stage-loading-box');
+  const recoveryBox = overlay.querySelector('.stage-recovery');
+  const retryBtn = overlay.querySelector('.btn-stage-retry');
+  const officialLink = overlay.querySelector('.stage-link-official');
+
+  let loadTimeout = null;
+
   const hide = () => {
-    if (timer) { clearTimeout(timer); timer = null; }
-    overlay.classList.add('hidden');
+    if (loadTimeout) {
+      clearTimeout(loadTimeout);
+      loadTimeout = null;
+    }
+    setTimeout(() => {
+      overlay.classList.add('hidden');
+    }, 200);
   };
-  const show = (timeoutMs = 10000) => {
-    if (timer) clearTimeout(timer);
+
+  const show = (officialUrl) => {
+    if (officialUrl && officialLink) {
+      officialLink.href = officialUrl;
+    }
+    if (loadTimeout) clearTimeout(loadTimeout);
     overlay.classList.remove('hidden');
-    timer = setTimeout(hide, timeoutMs);
+    if (loadingBox) loadingBox.style.display = 'flex';
+    if (recoveryBox) recoveryBox.style.display = 'none';
+
+    loadTimeout = setTimeout(() => {
+      if (loadingBox) loadingBox.style.display = 'none';
+      if (recoveryBox) recoveryBox.style.display = 'flex';
+    }, 11000); // 11 秒超时兜底
   };
+
+  if (retryBtn) {
+    retryBtn.addEventListener('click', () => {
+      show(frameEl.src);
+      const cur = frameEl.src;
+      frameEl.src = 'about:blank';
+      setTimeout(() => { frameEl.src = cur; }, 100);
+    });
+  }
 
   frameEl.addEventListener('load', hide);
-  show(10000);
+  show(defaultOfficialUrl);
 
   return { show, hide };
 }

@@ -14,40 +14,6 @@
 <meta name="twitter:description" content="土星壮丽光环、卡西尼号探测器、土卫六泰坦与土卫二地下冰海。基于 NASA/JPL Eyes 官方 3D 动力学解算。">
 <meta name="twitter:image" content="assets/img/PIA21895_final_image.png">
 <link rel="stylesheet" href="assets/css/main.css?v=20261015p4b">
-<style>
-  .saturn-views {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin: 18px 0;
-  }
-  .saturn-views button {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 16px;
-    border-radius: 999px;
-    background: rgba(15, 23, 42, 0.7);
-    border: 1px solid var(--line);
-    color: var(--fg);
-    font: inherit;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-  .saturn-views button:hover {
-    border-color: #facc15;
-    color: #fff;
-    background: rgba(30, 41, 59, 0.85);
-  }
-  .saturn-views button[aria-pressed="true"] {
-    background: linear-gradient(135deg, rgba(202, 138, 4, 0.85), rgba(250, 204, 21, 0.95));
-    border-color: #facc15;
-    color: #0f172a;
-    font-weight: 600;
-    box-shadow: 0 4px 14px rgba(250, 204, 21, 0.35);
-  }
-</style>
 </head>
 <body class="feature-page" style="--page-tint: #ca8a04;">
 <main class="wrap">
@@ -83,17 +49,19 @@
   </section>
 
   <h2>3D 环系与卫星多维视角</h2>
-  <div class="saturn-views" id="view-buttons">
-    <button type="button" data-route="saturn" aria-pressed="true">土星本体与光环全景</button>
-    <button type="button" data-route="sc_cassini">卡西尼号探测器 (Cassini)</button>
-    <button type="button" data-route="titan">土卫六泰坦 (Titan 浓厚大气卫星)</button>
-    <button type="button" data-route="enceladus">土卫二恩克拉多斯 (Enceladus 冰泉世界)</button>
-    <button type="button" data-route="iapetus">土卫八伊阿珀托斯 (阴阳脸双色卫星)</button>
+  <div class="view-tabs" id="view-buttons">
+    <button type="button" class="view-tab-btn" data-route="saturn" aria-pressed="true">土星本体与光环全景</button>
+    <button type="button" class="view-tab-btn" data-route="sc_cassini">卡西尼号探测器 (Cassini)</button>
+    <button type="button" class="view-tab-btn" data-route="titan">土卫六泰坦 (Titan 浓厚大气卫星)</button>
+    <button type="button" class="view-tab-btn" data-route="enceladus">土卫二恩克拉多斯 (Enceladus 冰泉世界)</button>
+    <button type="button" class="view-tab-btn" data-route="iapetus">土卫八伊阿珀托斯 (阴阳脸双色卫星)</button>
   </div>
 
-  <div class="stage">
-    <iframe id="eyes" title="土星及其卫星在 NASA Eyes 官方 3D 太阳系中的实时位置" allow="fullscreen"></iframe>
-    <div class="stage-bar">
+  <div class="stage feature-stage">
+    <div class="stage-viewport">
+      <iframe id="eyes" title="土星及其卫星在 NASA Eyes 官方 3D 太阳系中的实时位置" allow="fullscreen"></iframe>
+    </div>
+    <div class="feature-stage-bar">
       <span>画面基于 NASA/JPL 轨道动力学模型在客户端 WebGL 实时驱动解算。当前视线：<strong id="stage-cur">土星全景 (Saturn)</strong></span>
       <a id="raw" href="https://eyes.nasa.gov/apps/solar-system/#/saturn" target="_blank" rel="noopener">在官方站点中打开 ↗</a>
     </div>
@@ -185,13 +153,13 @@ const frame = document.getElementById('eyes');
 const rawLink = document.getElementById('raw');
 const stageCur = document.getElementById('stage-cur');
 const buttons = document.querySelectorAll('#view-buttons button');
-const loader = initStageLoader(frame, document.querySelector('.stage'));
+const loader = initStageLoader(frame, document.querySelector('.stage-viewport') || document.querySelector('.stage'), 'https://eyes.nasa.gov/apps/solar-system/#/saturn');
 
 function switchView(routeKey) {
   const v = views[routeKey] || views.saturn;
   const url = embedUrl({ route: v.route, featured: 'false', hd: 'true' });
   if (frame.src !== url) {
-    if (!frame.getAttribute('src')) loader?.show();
+    loader?.show(url);
     frame.src = url;
   }
   rawLink.href = url;

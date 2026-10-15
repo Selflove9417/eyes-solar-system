@@ -40,9 +40,11 @@
   </div>
 
   <h2>此刻它在太阳系中的实时位置与姿态</h2>
-  <div class="stage">
-    <iframe id="eyes" title="旅行者 1 号在 NASA Eyes 官方 3D 太阳系中的实时位置" allow="fullscreen"></iframe>
-    <div class="stage-bar">
+  <div class="stage feature-stage">
+    <div class="stage-viewport">
+      <iframe id="eyes" title="旅行者 1 号在 NASA Eyes 官方 3D 太阳系中的实时位置" allow="fullscreen"></iframe>
+    </div>
+    <div class="feature-stage-bar">
       <span>画面基于 NASA/JPL 轨道动力学模型在客户端 WebGL 实时驱动解算。</span>
       <a id="raw" href="https://eyes.nasa.gov/apps/solar-system/#/sc_voyager_1" target="_blank" rel="noopener">在官方站点中打开 ↗</a>
     </div>
@@ -97,7 +99,7 @@ import { renderChrome, embedUrl, el, initStageLoader } from './assets/js/site.js
 renderChrome('voyager-1.html');
 
 const frame = document.getElementById('eyes');
-initStageLoader(frame, document.querySelector('.stage'));
+initStageLoader(frame, document.querySelector('.stage-viewport') || document.querySelector('.stage'), 'https://eyes.nasa.gov/apps/solar-system/#/sc_voyager_1');
 
 try {
   const controller = new AbortController();

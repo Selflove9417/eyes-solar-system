@@ -14,14 +14,6 @@
 <meta name="twitter:description" content="詹姆斯·韦伯空间望远镜 (JWST) 核心参数、日地 L2 拉格朗日点晕轨道与 3D 展开姿态解析。">
 <meta name="twitter:image" content="assets/img/PIA21895_final_image.png">
 <link rel="stylesheet" href="assets/css/main.css?v=20261015p4b">
-<style>
-  .jwst-specs {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 16px;
-    margin: 20px 0;
-  }
-</style>
 </head>
 <body class="feature-page" style="--page-tint: #0284c7;">
 <main class="wrap">
@@ -57,9 +49,11 @@
   </section>
 
   <h2>3D 实时轨道与姿态展示</h2>
-  <div class="stage">
-    <iframe id="eyes" title="韦伯望远镜在 NASA Eyes 官方 3D 太阳系中的实时位置与姿态" allow="fullscreen"></iframe>
-    <div class="stage-bar">
+  <div class="stage feature-stage">
+    <div class="stage-viewport">
+      <iframe id="eyes" title="韦伯望远镜在 NASA Eyes 官方 3D 太阳系中的实时位置与姿态" allow="fullscreen"></iframe>
+    </div>
+    <div class="feature-stage-bar">
       <span>当前位置：<strong>詹姆斯·韦伯空间望远镜 (James Webb Space Telescope)</strong> · 日地 L2 晕轨道</span>
       <a id="raw" href="https://eyes.nasa.gov/apps/solar-system/#/sc_jwst" target="_blank" rel="noopener">在官方站点中打开 ↗</a>
     </div>
@@ -144,7 +138,7 @@ import { renderChrome, embedUrl, initStageLoader } from './assets/js/site.js?v=2
 renderChrome('jwst.html');
 
 const frame = document.getElementById('eyes');
-initStageLoader(frame, document.querySelector('.stage'));
+initStageLoader(frame, document.querySelector('.stage-viewport') || document.querySelector('.stage'), 'https://eyes.nasa.gov/apps/solar-system/#/sc_jwst');
 
 const url = embedUrl({ route: 'sc_jwst', featured: 'false', hd: 'true' });
 frame.src = url;

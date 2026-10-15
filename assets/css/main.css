@@ -1879,6 +1879,124 @@ kbd {
   }
 }
 
+/* Feature View Tabs (文字标签，当前项白色+2px下划线，其余灰色，横向滚动不换行，点击区域 >= 44px) */
+.view-tabs {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  gap: 4px 14px;
+  margin: 16px 0 20px;
+  padding: 4px 0 2px;
+}
+.view-tabs::-webkit-scrollbar {
+  display: none;
+}
+.view-tab-btn {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  color: var(--fg-muted);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 0 4px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+  box-shadow: none !important;
+}
+.view-tab-btn:hover {
+  color: #fff;
+}
+.view-tab-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.view-tab-btn[aria-pressed="true"] {
+  color: #fff;
+  font-weight: 600;
+  border-bottom-color: var(--accent);
+  background: transparent !important;
+}
+
+/* Feature 3D Stage (宽度满内容区，高度 >= 60vh / 55vh，无厚边框发光，圆角一致) */
+.feature-stage {
+  position: relative;
+  width: 100%;
+  margin: 16px 0 36px;
+  border: 1px solid var(--line-subtle);
+  border-radius: var(--r);
+  overflow: hidden;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+.feature-stage .stage-viewport {
+  position: relative;
+  width: 100%;
+  flex: 1 1 auto;
+  min-height: 480px;
+  height: clamp(480px, 62vh, 840px);
+  background: #000;
+}
+@media (max-width: 768px) {
+  .feature-stage .stage-viewport {
+    min-height: 360px;
+    height: 55vh;
+  }
+}
+.feature-stage iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #000;
+}
+
+/* Feature Stage Bar (视窗下方说明行降为一行灰色小字) */
+.feature-stage-bar {
+  flex-shrink: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  border-top: 1px solid var(--line-subtle);
+  background: rgba(11, 17, 32, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-size: 12.5px;
+  color: var(--fg-muted);
+}
+.feature-stage-bar strong {
+  color: var(--fg-dim);
+  font-weight: 600;
+}
+.feature-stage-bar a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 400;
+  color: var(--fg-muted);
+  font-size: 12.5px;
+  min-height: 44px;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.15s ease;
+}
+.feature-stage-bar a:hover {
+  color: #fff;
+}
+
 /* ---------- Minimalist Footer ---------- */
 footer, .site-footer {
   margin-top: var(--space-6);
