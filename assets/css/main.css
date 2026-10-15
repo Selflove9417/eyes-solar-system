@@ -2214,6 +2214,9 @@ footer, .site-footer {
 .footer-text a {
   color: var(--fg-dim);
   text-decoration: underline;
+  display: inline-block;
+  padding: 12px 2px;
+  margin: -12px -2px;
 }
 .footer-text a:hover {
   color: var(--accent);
