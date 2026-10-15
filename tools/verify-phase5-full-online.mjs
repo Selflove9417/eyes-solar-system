@@ -31,14 +31,14 @@ async function checkGitHubActions(sha) {
 }
 
 async function waitForLivePages() {
-  console.log('Waiting for GitHub Pages to serve ?v=20261015p5b...');
+  console.log('Waiting for GitHub Pages to serve ?v=20261015p5c...');
   for (let attempt = 1; attempt <= 30; attempt++) {
     try {
       const res = await fetch(`https://selflove9417.github.io/eyes-solar-system/saturn.html?_t=${Date.now()}`, { cache: 'no-store' });
       if (res.ok) {
         const text = await res.text();
-        if (text.includes('20261015p5b')) {
-          console.log(`✅ GitHub Pages is serving 20261015p5b! (Attempt ${attempt})`);
+        if (text.includes('20261015p5c')) {
+          console.log(`✅ GitHub Pages is serving 20261015p5c! (Attempt ${attempt})`);
           return true;
         }
       }
@@ -49,7 +49,7 @@ async function waitForLivePages() {
 }
 
 async function runVerification() {
-  const latestRun = await checkGitHubActions('870957c');
+  const latestRun = await checkGitHubActions('ab0aeee');
   await waitForLivePages();
 
   const tempProfile = path.join(root, '.chrome-temp-full-live-' + Date.now());
