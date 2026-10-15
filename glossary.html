@@ -20,18 +20,26 @@
   <h1>中英术语对照</h1>
   <p class="lede">站点与汉化扩展共用的中英术语对照。<a href="about.html#sources" class="lede-link">数据说明 ↗</a></p>
 
-  <div class="notice" id="coverage">统计加载中…</div>
+  <div class="glossary-overview" id="coverage">
+    <div class="overview-line">
+      <span id="coverage-core">统计加载中…</span>
+      <details class="overview-details">
+        <summary>查看统计与规则</summary>
+        <div class="overview-content" id="coverage-extra"></div>
+      </details>
+    </div>
+  </div>
 
-  <div class="chips" style="margin:16px 0">
-    <button class="chip" type="button" data-tab="entities" aria-pressed="true">实体名称</button>
-    <button class="chip" type="button" data-tab="ui" aria-pressed="false">界面字符串</button>
-    <button class="chip" type="button" data-tab="missing" aria-pressed="false">未收录条目（保留英文）</button>
+  <div class="tab-nav" role="tablist">
+    <button class="tab-btn" type="button" data-tab="entities" aria-pressed="true" role="tab">实体名称</button>
+    <button class="tab-btn" type="button" data-tab="ui" aria-pressed="false" role="tab">界面字符串</button>
+    <button class="tab-btn" type="button" data-tab="missing" aria-pressed="false" role="tab">未收录条目（保留英文）</button>
   </div>
 
   <div id="pane-entities">
     <div class="toolbar">
       <input type="search" id="f-ent" placeholder="筛选实体：中文名 / 英文名 / id / 类别…" aria-label="筛选实体">
-      <select id="f-status" style="background:var(--bg-soft);border:1px solid var(--line);border-radius:999px;color:var(--fg);padding:8px 12px;font:inherit">
+      <select id="f-status" class="select-control" aria-label="筛选译名等级">
         <option value="">全部译名等级</option>
         <option value="std">规范译名</option>
         <option value="common">通用译名</option>
@@ -76,15 +84,22 @@ const { names, ui, entityById } = await getData();
 const covered = Object.keys(names.entities).length;
 const total = names.meta.totalEntities;
 const byStatus = Object.values(names.entities).reduce((a, e) => ((a[e.status] = (a[e.status] || 0) + 1), a), {});
-document.getElementById('coverage').innerHTML =
-  `官方实体库 <strong>${total}</strong> 条 · 已建立中文对照 <strong>${covered}</strong> 条（${(covered / total * 100).toFixed(1)}%）` +
-  ` · 规范译名 ${byStatus.std || 0} / 通用译名 ${byStatus.common || 0} / 代号保留 ${byStatus.code || 0}` +
-  ` · <strong style="color:#ff8f6b">未收录 ${total - covered} 条保留英文</strong><br>` +
-  `界面字符串 <strong>${Object.keys(ui.ui).length}</strong> 条已收录，全部来自加载完成页面的实测采集。` +
-  `英文名取自官方数据，规则为 <code>displayName || iauName</code>（与站点渲染标签逐条核对一致）。`;
+const uiCount = Object.keys(ui.ui).length;
+const unrecorded = total - covered;
+
+document.getElementById('coverage-core').innerHTML =
+  `官方实体库 <strong>${total}</strong> 条，已建立中文对照 <strong>${covered}</strong> 条（${(covered / total * 100).toFixed(1)}%）`;
+document.getElementById('coverage-extra').innerHTML =
+  `<p style="margin:4px 0">译名等级分布：规范译名 ${byStatus.std || 0} 条 · 通用译名 ${byStatus.common || 0} 条 · 代号保留 ${byStatus.code || 0} 条 · <strong style="color:var(--warn)">未收录 ${unrecorded} 条（在模拟器中保留英文）</strong>。</p>` +
+  `<p style="margin:4px 0">界面字符串：<strong>${uiCount}</strong> 条已收录，全部来自加载完成页面的实测采集。</p>` +
+  `<p style="margin:4px 0">命名规则：英文名取自官方数据，规则为 <code>displayName || iauName</code>（与站点渲染标签逐条核对一致）。</p>`;
 
 const tbody = (id) => document.getElementById(id);
 const LABEL = { std: '规范译名', common: '通用译名', code: '代号保留' };
+
+function statusLabel(status) {
+  return el('span', { class: `status-text ${status || ''}` }, LABEL[status] || status || '');
+}
 
 function renderEnt() {
   const q = document.getElementById('f-ent').value.trim().toLowerCase();
@@ -103,7 +118,7 @@ function renderEnt() {
     .sort((a, b) => (a[1].cat || '').localeCompare(b[1].cat || '') || a[1].zh.localeCompare(b[1].zh, 'zh'));
   tbody('t-ent').replaceChildren(...rows.map(([id, e]) => el('tr', {},
     el('td', {}, e.zh), el('td', {}, e.en), el('td', {}, names.categories[e.cat] || e.cat || ''),
-    el('td', { class: 'mono' }, id), el('td', {}, el('span', { class: 'badge ' + e.status }, LABEL[e.status] || e.status)))));
+    el('td', { class: 'mono' }, id), el('td', {}, statusLabel(e.status)))));
   document.getElementById('c-ent').textContent = `显示 ${rows.length} / ${covered} 条`;
 }
 
