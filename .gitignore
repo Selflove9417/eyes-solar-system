@@ -11,4 +11,4 @@ node_modules/
 *.zip
 code_dump.txt
 .chrome-temp*/
-
+artifacts/

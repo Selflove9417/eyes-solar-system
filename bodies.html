@@ -1,18 +1,22 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>天体中文名与简介 · 深空之眸</title>
 <meta name="description" content="太阳、行星、矮行星与主要卫星的规范中文名称及简介，中文内容译自 NASA/JPL 官方 descriptions 数据并逐条标注来源。">
+<link rel="canonical" href="https://selflove9417.github.io/eyes-solar-system/bodies.html">
 <meta property="og:title" content="天体中文名与简介 · 深空之眸">
 <meta property="og:description" content="太阳、行星、矮行星与主要卫星的规范中文名称及简介，中文内容译自 NASA/JPL 官方 descriptions 数据并逐条标注来源。">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://selflove9417.github.io/eyes-solar-system/bodies.html">
 <meta property="og:image" content="assets/img/PIA21895_final_image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="天体中文名与简介 · 深空之眸">
 <meta name="twitter:description" content="太阳、行星、矮行星与主要卫星的规范中文名称及简介，中文内容译自 NASA/JPL 官方 descriptions 数据并逐条标注来源。">
 <meta name="twitter:image" content="assets/img/PIA21895_final_image.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="alternate icon" href="favicon.ico">
 <link rel="stylesheet" href="assets/css/main.css?v=20261015p5c">
 </head>
 <body>
@@ -65,7 +69,7 @@ function render(q = '') {
     const enTitle = entry?.en || b.id;
     const card = el('article', { class: 'entry-card' },
       el('div', { class: `entry-swatch ${getSwatchClass(b.cat)}` }),
-      el('h3', { class: 'entry-title' }, b.zh || b.id, entry ? statusTag(entry.status) : null),
+      el('h2', { class: 'entry-title' }, b.zh || b.id, entry ? statusTag(entry.status) : null),
       el('div', { class: 'entry-en' }, (catZh ? catZh + ' · ' : '') + enTitle),
       el('p', { class: 'entry-desc' }, b.zhl || '官方未提供该条目的简介文本。'),
       b.src
