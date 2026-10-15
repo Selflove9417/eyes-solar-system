@@ -245,34 +245,35 @@ for (const vp of viewports) {
     console.log(`  Flagship cards single-column on 375px: ${isSingleCol ? '✅ Single column (PASS)' : '❌ Not single column'}`);
   }
 
-  // 5. Hero lead orphan character check
-  const orphanCheck = await evaluate(`(() => {
+  // 5. Hero lead last line character count assertion using Range.getClientRects()
+  const lastLineChars = await evaluate(`(() => {
     const el = document.querySelector('.hero-lead');
+    const textNode = el.firstChild;
+    const text = textNode.textContent;
     const range = document.createRange();
     range.selectNodeContents(el);
-    const lines = [];
-    let currentY = -1;
-    let currentLine = '';
-    const text = el.textContent;
+    const lineRects = Array.from(range.getClientRects());
+    if (lineRects.length === 0) return 0;
+    const lastRect = lineRects[lineRects.length - 1];
+    let count = 0;
     for (let i = 0; i < text.length; i++) {
-      range.setStart(el.firstChild, i);
-      range.setEnd(el.firstChild, i + 1);
-      const r = range.getBoundingClientRect();
-      if (Math.abs(r.top - currentY) > 4) {
-        if (currentLine) lines.push(currentLine);
-        currentLine = text[i];
-        currentY = r.top;
-      } else {
-        currentLine += text[i];
+      range.setStart(textNode, i);
+      range.setEnd(textNode, i + 1);
+      const charRect = range.getBoundingClientRect();
+      if (Math.abs(charRect.bottom - lastRect.bottom) < 6) {
+        count++;
       }
     }
-    if (currentLine) lines.push(currentLine);
-    const lastLine = lines[lines.length - 1] || '';
-    const hasOrphan = lastLine.length <= 1;
-    return { lines, lastLine, hasOrphan };
+    return count;
   })()`);
-  console.log(`  Hero lead lines on ${vp.name}px:`, orphanCheck.lines);
-  console.log(`  No orphan single character on ${vp.name}px: ${!orphanCheck.hasOrphan ? '✅ PASS (No orphan character)' : '❌ FAIL'}`);
+
+  console.log(`  Hero lead last line character count on ${vp.name}px: ${lastLineChars} (must be >= 4)`);
+  if (lastLineChars < 4) {
+    console.error(`  ❌ Assertion failed: Hero lead last line has fewer than 4 characters on ${vp.name}px (${lastLineChars} chars)!`);
+    process.exit(1);
+  } else {
+    console.log(`  ✅ Assertion passed: Hero lead last line has >= 4 characters on ${vp.name}px.`);
+  }
 
   if (vp.name === '1440') {
     const foldCheck = await evaluate(`(() => {
