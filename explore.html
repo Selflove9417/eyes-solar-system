@@ -263,67 +263,11 @@
     color: #fff;
   }
 
-  /* ---------- Left Sidebar with Collapsible Categories ---------- */
-  .side-header-bar {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-bottom: 8px;
-  }
-  .sidebar-collapse-btn {
-    background: rgba(15, 23, 42, 0.7);
-    border: 1px solid var(--line);
-    color: var(--fg-muted);
-    border-radius: 6px;
-    padding: 6px 8px;
-    font: inherit;
-    font-size: 11.5px;
-    cursor: pointer;
-    white-space: nowrap;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 42px;
-    transition: all 0.15s ease;
-    flex-shrink: 0;
-  }
-  .sidebar-collapse-btn:hover {
-    color: #fff;
-    border-color: var(--accent);
-    background: rgba(56, 189, 248, 0.12);
-  }
-  .btn-home-hero {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    width: 100%;
-    padding: 8px 12px;
-    border-radius: 8px;
-    background: linear-gradient(135deg, rgba(2, 132, 199, 0.8), rgba(56, 189, 248, 0.9));
-    border: 1px solid var(--accent);
-    color: #fff;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 2px 10px var(--accent-glow);
-    transition: all 0.2s ease;
-    min-height: 42px;
-    font-family: inherit;
-    flex: 1 1 auto;
-  }
-  .btn-home-hero:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 16px var(--accent-glow);
-    background: linear-gradient(135deg, rgba(3, 105, 161, 0.95), rgba(14, 165, 233, 1));
-  }
-  .btn-home-hero[aria-current="true"] {
-    outline: 2px solid #fff;
-    outline-offset: 1px;
-  }
-  .search-box-wrap {
+  /* ---------- Drawer Search & Results ---------- */
+  .drawer-search-wrap {
     position: relative;
-    margin: 0 0 10px;
+    padding: 12px 14px 8px;
+    flex-shrink: 0;
   }
   .search-results-panel {
     position: absolute;
@@ -373,99 +317,7 @@
     line-height: 1.5;
   }
 
-  /* Collapsible Category Accordions */
-  .side-cat-group {
-    margin-bottom: 5px;
-    border: 1px solid var(--line-subtle);
-    border-radius: 8px;
-    background: rgba(15, 23, 42, 0.35);
-    overflow: hidden;
-    transition: border-color 0.18s ease;
-  }
-  .side-cat-group[open] {
-    border-color: rgba(56, 189, 248, 0.28);
-    background: rgba(15, 23, 42, 0.6);
-  }
-  .side-cat-summary {
-    padding: 7px 10px;
-    cursor: pointer;
-    font-size: 12.5px;
-    font-weight: 600;
-    color: #e2e8f0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    list-style: none;
-    user-select: none;
-    transition: background 0.15s;
-    min-height: 38px;
-  }
-  .side-cat-summary::-webkit-details-marker { display: none; }
-  .side-cat-summary:hover {
-    background: rgba(56, 189, 248, 0.08);
-    color: var(--accent);
-  }
-  .side-cat-summary::after {
-    content: '▾';
-    font-size: 11px;
-    color: var(--fg-muted);
-    transition: transform 0.18s ease;
-  }
-  .side-cat-group[open] .side-cat-summary::after {
-    transform: rotate(180deg);
-    color: var(--accent);
-  }
-  .side-cat-count {
-    font-size: 11px;
-    padding: 1px 6px;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.06);
-    color: var(--fg-muted);
-    margin-left: auto;
-    margin-right: 8px;
-  }
-  .side-cat-group .list {
-    padding: 4px 6px 6px;
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-    border-top: 1px solid rgba(255, 255, 255, 0.04);
-  }
-  .side-cat-group .list button {
-    font-size: 13px;
-    padding: 6px 10px;
-    min-height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    text-align: left;
-    background: rgba(15, 23, 42, 0.4);
-    border: 1px solid transparent;
-    color: var(--fg);
-    cursor: pointer;
-    border-radius: 6px;
-    font-family: inherit;
-    transition: all 0.15s ease;
-  }
-  .side-cat-group .list button:hover {
-    background: var(--panel);
-    border-color: var(--line-subtle);
-  }
-  .side-cat-group .list button[aria-current="true"] {
-    background: linear-gradient(135deg, rgba(2, 132, 199, 0.8), rgba(56, 189, 248, 0.85));
-    color: #fff;
-    border-color: var(--accent);
-    box-shadow: 0 2px 10px var(--accent-glow);
-  }
-  .side-cat-group .list button .en {
-    color: var(--fg-muted);
-    font-size: 11.5px;
-    margin-left: auto;
-  }
-  .side-cat-group .list button[aria-current="true"] .en {
-    color: #e0f2fe;
-  }
+
 
   /* Advanced Settings Collapsible */
   .side-advanced-group {
@@ -515,31 +367,7 @@
     margin: 0 0 6px;
   }
 
-  /* Mobile drawer button */
-  .side-mobile-toggle-bar {
-    display: none;
-    margin-bottom: 10px;
-  }
-  .side-toggle-btn {
-    width: 100%;
-    padding: 10px 16px;
-    border-radius: 8px;
-    background: rgba(15, 23, 42, 0.85);
-    border: 1px solid var(--line);
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-weight: 600;
-    font-size: 14px;
-    cursor: pointer;
-    min-height: 44px;
-    transition: all 0.2s ease;
-  }
-  .side-toggle-btn:hover {
-    border-color: var(--accent);
-    background: rgba(22, 33, 58, 0.95);
-  }
+
 
   /* ---------- Compact Story Theater HUD Panel ---------- */
   .theater-panel {
@@ -992,39 +820,6 @@
 
   /* ---------- Responsive Adjustments ---------- */
   @media (max-width: 990px) {
-    .side-mobile-toggle-bar { display: block; }
-    .side {
-      display: none;
-      position: static;
-      max-height: 55vh;
-      border: 1px solid var(--line);
-      border-radius: var(--r);
-      background: rgba(11, 17, 32, 0.95);
-      padding: 14px;
-      margin-bottom: 16px;
-    }
-    .side.open { display: block; }
-    .explore-layout {
-      display: flex;
-      flex-direction: column;
-    }
-    .explore-layout > .stage-section {
-      order: 1;
-      width: 100%;
-    }
-    .explore-layout > .side-mobile-toggle-bar {
-      order: 2;
-      width: 100%;
-      margin-top: 12px;
-    }
-    .explore-layout > .side {
-      order: 3;
-      width: 100%;
-    }
-    .explore-layout > .guided-section {
-      order: 4;
-      width: 100%;
-    }
     .theater-narrative-grid {
       grid-template-columns: 1fr;
     }
@@ -1300,62 +1095,54 @@
   </div>
 
   <div class="explore-layout" id="explore-layout">
-    <!-- 移动端抽屉展开按钮 -->
-    <div class="side-mobile-toggle-bar">
-      <button type="button" id="side-toggle-btn" class="side-toggle-btn" aria-expanded="false">
-        <span>天体快捷目录与搜索</span>
-        <span id="side-toggle-text" class="badge common">点击展开目录 ▾</span>
-      </button>
-    </div>
-
-    <!-- 左侧快捷导航侧栏 (支持桌面一键收起) -->
-    <aside class="side">
-      <div class="side-header-bar">
-        <button class="btn-home-hero" id="side-home-btn" type="button" aria-current="true">
-          返回太阳系全景 (全览模式)
-        </button>
-        <button type="button" id="sidebar-collapse-btn" class="sidebar-collapse-btn" title="收起侧栏以最大化 3D 舞台 (快捷键 S)" aria-label="收起侧栏">◀ 收起</button>
+    <!-- 覆盖式天体抽屉 (默认收起) -->
+    <div id="drawer-backdrop" class="drawer-backdrop" aria-hidden="true"></div>
+    <aside id="explore-drawer" class="explore-drawer" aria-label="天体与航天器目录" aria-hidden="true">
+      <div class="drawer-header">
+        <span class="drawer-title">天体与航天器</span>
+        <button type="button" id="drawer-close-btn" class="drawer-close-btn" aria-label="关闭天体列表 (Esc)" title="关闭天体列表 (快捷键 Esc)">✕</button>
       </div>
 
-      <div class="search-box-wrap">
-        <input type="search" id="jump-search" placeholder="输入天体/航天器中文名搜索…" aria-label="跳转到天体或航天器" autocomplete="off">
+      <div class="drawer-search-wrap">
+        <input type="search" id="jump-search" placeholder="搜索天体或航天器" aria-label="搜索天体或航天器" autocomplete="off">
         <div id="search-results-panel" class="search-results-panel" style="display:none"></div>
       </div>
-      <nav id="side-nav" aria-label="天体快捷导航"></nav>
 
-      <!-- 高级设置区域：默认折叠，保留所有原有时间机器与嵌入选项 -->
-      <details class="side-advanced-group" id="side-advanced-details">
-        <summary class="side-advanced-summary">模拟器高级设置 (流速与嵌入) ▾</summary>
-        <div class="side-advanced-content">
-          <h4 class="side-subhead">官方嵌入选项</h4>
-          <div id="embed-opts" style="display:flex;flex-direction:column;gap:7px"></div>
+      <div class="drawer-scroll" id="drawer-scroll">
+        <nav id="side-nav" aria-label="天体快捷导航"></nav>
 
-          <h4 class="side-subhead" style="margin-top:14px">时间机器与流速</h4>
-          <div style="display:flex;flex-direction:column;gap:8px">
-            <div style="font-size:11.5px;color:var(--accent);line-height:1.4">
-              设定时间为 <strong>UTC (协调世界时)</strong>
+        <!-- 高级设置区域：默认折叠，保留所有原有时间机器与嵌入选项 -->
+        <details class="side-advanced-group" id="side-advanced-details">
+          <summary class="side-advanced-summary">模拟器高级设置 (流速与嵌入) ▾</summary>
+          <div class="side-advanced-content">
+            <h4 class="side-subhead">官方嵌入选项</h4>
+            <div id="embed-opts" style="display:flex;flex-direction:column;gap:7px"></div>
+
+            <h4 class="side-subhead" style="margin-top:14px">时间机器与流速</h4>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="font-size:11.5px;color:var(--accent);line-height:1.4">
+                设定时间为 <strong>UTC (协调世界时)</strong>
+              </div>
+              <label class="sr" for="time-input">时间 (UTC)</label>
+              <input type="datetime-local" id="time-input" title="设定 UTC 协调世界时" placeholder="UTC 时间" style="background:var(--bg-soft);border:1px solid var(--line);border-radius:6px;color:var(--fg);padding:6px 8px;font:inherit;font-size:13px">
+              <label class="sr" for="rate-input">流速</label>
+              <select id="rate-input" style="background:var(--bg-soft);border:1px solid var(--line);border-radius:6px;color:var(--fg);padding:6px 8px;font:inherit;font-size:13px">
+                <option value="">实时流速 (真实速度)</option>
+                <option value="1">1 秒 / 秒 (1x 标准流速)</option>
+                <option value="0">0 (暂停时间推演)</option>
+                <option value="60">1 分钟 / 秒</option>
+                <option value="3600">1 小时 / 秒</option>
+                <option value="86400">1 天 / 秒</option>
+                <option value="604800">1 周 / 秒</option>
+              </select>
+              <button class="chip" id="apply-time" type="button" style="width:100%;margin-top:2px">应用时间与速率</button>
             </div>
-            <label class="sr" for="time-input">时间 (UTC)</label>
-            <input type="datetime-local" id="time-input" title="设定 UTC 协调世界时" placeholder="UTC 时间" style="background:var(--bg-soft);border:1px solid var(--line);border-radius:6px;color:var(--fg);padding:6px 8px;font:inherit;font-size:13px">
-            <label class="sr" for="rate-input">流速</label>
-            <select id="rate-input" style="background:var(--bg-soft);border:1px solid var(--line);border-radius:6px;color:var(--fg);padding:6px 8px;font:inherit;font-size:13px">
-              <option value="">实时流速 (真实速度)</option>
-              <option value="1">1 秒 / 秒 (1x 标准流速)</option>
-              <option value="0">0 (暂停时间推演)</option>
-              <option value="60">1 分钟 / 秒</option>
-              <option value="3600">1 小时 / 秒</option>
-              <option value="86400">1 天 / 秒</option>
-              <option value="604800">1 周 / 秒</option>
-            </select>
-            <button class="chip" id="apply-time" type="button" style="width:100%;margin-top:2px">应用时间与速率</button>
           </div>
-        </div>
-      </details>
+        </details>
+      </div>
     </aside>
 
     <section class="stage-section" id="stage-section">
-      <!-- 侧栏收起后的悬浮唤出按钮 -->
-      <button type="button" id="sidebar-reopen-btn" class="sidebar-reopen-btn" aria-label="展开天体目录 (S)" title="展开天体目录 (快捷键 S)">展开天体目录</button>
 
       <!-- Story Theater 紧凑控制面板 -->
       <section id="story-theater-panel" class="theater-panel" style="display:none" aria-label="探索剧场：卡西尼号土星大结局">
@@ -1422,6 +1209,12 @@
 
       <!-- 3D 舞台区域 (页面的视觉主体) -->
       <div class="stage" id="stage-wrapper">
+        <!-- 视窗左上角「天体列表」抽屉唤出按钮 -->
+        <button type="button" id="drawer-toggle-btn" class="btn-drawer-toggle" aria-expanded="false" aria-controls="explore-drawer" title="展开天体列表 (快捷键 S)">
+          <span class="drawer-toggle-icon">☰</span>
+          <span>天体列表</span>
+        </button>
+
         <!-- 沉浸模式悬浮退出胶囊 -->
         <div id="immersive-exit-banner" class="immersive-exit-banner" style="display:none">
           <span class="immersive-status-dot"></span>
@@ -1827,6 +1620,9 @@ for (const [idx, [title, ids]] of GROUPS.entries()) {
       state.route = id;
       markActive(b);
       refresh();
+      if (window.innerWidth <= 768) {
+        closeDrawer();
+      }
     });
     return b;
   }));
@@ -1850,7 +1646,7 @@ function goHome() {
   state.route = 'home';
   refresh();
 }
-sideHomeBtn.addEventListener('click', goHome);
+sideHomeBtn?.addEventListener('click', goHome);
 document.getElementById('reset-home-btn').addEventListener('click', goHome);
 
 // Preset buttons
@@ -1910,57 +1706,80 @@ function exitImmersiveMode() {
 immersiveBtn?.addEventListener('click', enterImmersiveMode);
 exitImmersiveBtn?.addEventListener('click', exitImmersiveMode);
 
-// Desktop Sidebar Collapsing & Progressive Disclosure
-const exploreLayout = document.getElementById('explore-layout');
-const sidebarToggleBtn = document.getElementById('sidebar-toggle-btn');
-const sidebarToggleIcon = document.getElementById('sidebar-toggle-icon');
-const sidebarToggleLabel = document.getElementById('sidebar-toggle-label');
-const sidebarCollapseBtn = document.getElementById('sidebar-collapse-btn');
-const sidebarReopenBtn = document.getElementById('sidebar-reopen-btn');
+// Overlay Drawer control (覆盖式抽屉)
+const drawerEl = document.getElementById('explore-drawer');
+const drawerBackdrop = document.getElementById('drawer-backdrop');
+const drawerToggleBtn = document.getElementById('drawer-toggle-btn');
+const drawerCloseBtn = document.getElementById('drawer-close-btn');
 
-function setSidebarCollapsed(collapsed) {
-  if (collapsed) {
-    exploreLayout?.classList.add('sidebar-collapsed');
-    if (sidebarToggleIcon) sidebarToggleIcon.textContent = '▶';
-    if (sidebarToggleLabel) sidebarToggleLabel.textContent = '展开侧栏';
-    sidebarToggleBtn?.setAttribute('title', '展开天体侧栏 (快捷键 S)');
-    sessionStorage.setItem('explore-sidebar-collapsed', '1');
+function openDrawer() {
+  document.body.classList.add('drawer-open');
+  drawerToggleBtn?.setAttribute('aria-expanded', 'true');
+  drawerEl?.setAttribute('aria-hidden', 'false');
+  const search = document.getElementById('jump-search');
+  if (search) search.focus();
+}
+
+function closeDrawer() {
+  if (!document.body.classList.contains('drawer-open')) return;
+  document.body.classList.remove('drawer-open');
+  drawerToggleBtn?.setAttribute('aria-expanded', 'false');
+  drawerEl?.setAttribute('aria-hidden', 'true');
+  drawerToggleBtn?.focus();
+}
+
+function toggleDrawer() {
+  if (document.body.classList.contains('drawer-open')) {
+    closeDrawer();
   } else {
-    exploreLayout?.classList.remove('sidebar-collapsed');
-    if (sidebarToggleIcon) sidebarToggleIcon.textContent = '◀';
-    if (sidebarToggleLabel) sidebarToggleLabel.textContent = '收起侧栏';
-    sidebarToggleBtn?.setAttribute('title', '收起天体侧栏以最大化 3D 舞台 (快捷键 S)');
-    sessionStorage.removeItem('explore-sidebar-collapsed');
+    openDrawer();
   }
 }
 
-function toggleSidebar() {
-  const isCurrentlyCollapsed = exploreLayout?.classList.contains('sidebar-collapsed');
-  setSidebarCollapsed(!isCurrentlyCollapsed);
-}
+drawerToggleBtn?.addEventListener('click', toggleDrawer);
+drawerCloseBtn?.addEventListener('click', closeDrawer);
+drawerBackdrop?.addEventListener('click', closeDrawer);
 
-sidebarToggleBtn?.addEventListener('click', toggleSidebar);
-sidebarCollapseBtn?.addEventListener('click', () => setSidebarCollapsed(true));
-sidebarReopenBtn?.addEventListener('click', () => setSidebarCollapsed(false));
+// Trap focus inside drawer when open
+drawerEl?.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    e.stopPropagation();
+    closeDrawer();
+    return;
+  }
+  if (e.key === 'Tab') {
+    const focusable = drawerEl.querySelectorAll('button:not([disabled]), input:not([disabled]), select:not([disabled]), details summary');
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  }
+});
 
-// Global Keyboard Shortcuts (Esc exits immersive; S toggles sidebar; I toggles immersive)
+// Global Keyboard Shortcuts (Esc exits immersive or drawer; S toggles drawer; I toggles immersive)
 window.addEventListener('keydown', (e) => {
   const isTyping = ['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName);
-  if (e.key === 'Escape' && document.body.classList.contains('stage-immersive-mode')) {
-    exitImmersiveMode();
+  if (e.key === 'Escape') {
+    if (document.body.classList.contains('stage-immersive-mode')) {
+      exitImmersiveMode();
+    } else if (document.body.classList.contains('drawer-open')) {
+      closeDrawer();
+    }
   } else if (!isTyping) {
     if (e.key === 's' || e.key === 'S') {
-      toggleSidebar();
+      toggleDrawer();
     } else if (e.key === 'i' || e.key === 'I') {
       if (document.body.classList.contains('stage-immersive-mode')) exitImmersiveMode();
       else enterImmersiveMode();
     }
   }
 });
-
-if (sessionStorage.getItem('explore-sidebar-collapsed') === '1') {
-  setSidebarCollapsed(true);
-}
 
 // Interactive Search with rich feedback
 const searchInput = document.getElementById('jump-search');
@@ -2012,6 +1831,9 @@ function renderSearch(query) {
       refresh();
       resultsPanel.style.display = 'none';
       searchInput.value = `${e.zh} (${e.en})`;
+      if (window.innerWidth <= 768) {
+        closeDrawer();
+      }
     });
     return btn;
   }));
@@ -2027,17 +1849,7 @@ searchInput.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') resultsPanel.style.display = 'none';
 });
 
-// Mobile drawer toggle
-const sideToggleBtn = document.getElementById('side-toggle-btn');
-const sideToggleText = document.getElementById('side-toggle-text');
-const sideNavAside = document.querySelector('.side');
-if (sideToggleBtn && sideNavAside) {
-  sideToggleBtn.addEventListener('click', () => {
-    const isOpen = sideNavAside.classList.toggle('open');
-    sideToggleBtn.setAttribute('aria-expanded', String(isOpen));
-    sideToggleText.textContent = isOpen ? '点击收起目录 ▴' : '点击展开目录 ▾';
-  });
-}
+
 
 // Controls config: default featured=false to hide big annoying announcement cards
 const OPTS = [
