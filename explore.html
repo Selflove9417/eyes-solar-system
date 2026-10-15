@@ -1432,21 +1432,14 @@
         <!-- 加载与恢复指示遮罩 -->
         <div id="stage-overlay" class="stage-overlay">
           <div id="stage-loading-box" style="display:flex;flex-direction:column;align-items:center;gap:12px">
-            <div class="stage-spinner"></div>
-            <div class="stage-loading-text" id="stage-status-title">正在连接 NASA JPL 官方 3D 动力学服务…</div>
-            <div class="stage-loading-sub" id="stage-status-desc" style="max-width:540px;line-height:1.6">
-              正在从加州 JPL 服务器实时载入天体轨道数据与 WebGL 着色器。<br>
-              首次加载需下载 3D 几何模型与高精度星历，受跨洋网络影响可能需要数秒，请耐心稍候。
-            </div>
+            <div class="stage-pulse-dot"></div>
+            <div class="stage-loading-text" id="stage-status-title">正在载入 NASA 3D 视图…</div>
           </div>
           <div id="stage-error-box" class="stage-recovery" style="display:none">
-            <div style="font-weight:700;font-size:16px;color:#fff">NASA 官方服务响应缓慢或连接受阻</div>
-            <div style="font-size:13.5px;color:var(--fg-dim);line-height:1.6;text-align:center">
-              NASA JPL 官方云端服务跨域加载耗时较长或暂未完成初始化。您可尝试刷新重试，或直接前往 NASA 官方网站。
-            </div>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:6px">
-              <button class="btn btn-primary" id="stage-retry-btn" type="button">重新尝试连接</button>
-              <a class="btn btn-secondary" id="stage-open-official" href="https://eyes.nasa.gov/apps/solar-system/" target="_blank" rel="noopener">在新标签页打开官网 ↗</a>
+            <div class="stage-error-text">3D 视图加载较慢，可重试或在 NASA 官方站点打开</div>
+            <div class="stage-error-actions">
+              <button class="btn-stage-retry" id="stage-retry-btn" type="button">重试</button>
+              <a class="stage-link-official" id="stage-open-official" href="https://eyes.nasa.gov/apps/solar-system/" target="_blank" rel="noopener">在 NASA 官方站点打开 ↗</a>
             </div>
           </div>
         </div>
@@ -1734,32 +1727,29 @@ const errorBox = document.getElementById('stage-error-box');
 const retryBtn = document.getElementById('stage-retry-btn');
 const officialLink = document.getElementById('stage-open-official');
 const statusTitle = document.getElementById('stage-status-title');
-const statusDesc = document.getElementById('stage-status-desc');
 let loadTimeout = null;
-let isInitialLoad = true;
 
 function startLoading() {
   if (loadTimeout) clearTimeout(loadTimeout);
   overlay.classList.remove('hidden');
   loadingBox.style.display = 'flex';
   errorBox.style.display = 'none';
-  statusTitle.textContent = '正在连接 NASA Eyes 官方 3D 动力学服务…';
-  statusDesc.textContent = '正在初始化行星轨道模型与太阳系空间数据（首次加载星图可能需要数秒）…';
+  statusTitle.textContent = '正在载入 NASA 3D 视图…';
 
   loadTimeout = setTimeout(() => {
     loadingBox.style.display = 'none';
     errorBox.style.display = 'flex';
-  }, 18000);
+  }, 11000); // 11 秒超时兜底
 }
 
 function finishLoading() {
-  if (loadTimeout) clearTimeout(loadTimeout);
-  isInitialLoad = false;
-  statusTitle.textContent = '已连接 NASA JPL 官方服务';
-  statusDesc.textContent = '时空指令已同步 · 客户端 WebGL 正解算渲染 3D 动力学模型…';
+  if (loadTimeout) {
+    clearTimeout(loadTimeout);
+    loadTimeout = null;
+  }
   setTimeout(() => {
     overlay.classList.add('hidden');
-  }, 600);
+  }, 250);
 }
 
 frame.addEventListener('load', finishLoading);
@@ -1769,11 +1759,10 @@ window.addEventListener('beforeunload', () => {
 });
 
 retryBtn.addEventListener('click', () => {
-  isInitialLoad = true;
   startLoading();
   const cur = frame.src;
   frame.src = 'about:blank';
-  setTimeout(() => { frame.src = cur; }, 120);
+  setTimeout(() => { frame.src = cur; }, 100);
 });
 
 function refresh() {
@@ -1782,9 +1771,7 @@ function refresh() {
   const url = embedUrl({ route: state.route, time: timeVal, rate: rateVal, ...state.opts });
   const cur = frame.src;
   if (!cur || cur !== url) {
-    if (isInitialLoad) {
-      startLoading();
-    }
+    startLoading();
     frame.src = url;
   }
   document.getElementById('open-raw').href = url;
