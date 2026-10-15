@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
@@ -15,28 +15,28 @@
 <meta name="twitter:image" content="assets/img/PIA21895_final_image.png">
 <link rel="stylesheet" href="assets/css/main.css?v=20261015p4b">
 </head>
-<body>
+<body class="feature-page" style="--page-tint: #2dd4bf;">
 <main class="wrap">
-  <div class="hero">
-    <div class="hero-tag">
+  <div class="hero feature-hero">
+    <div class="feature-kicker">
       飞出太阳系的人类信使 · 星际空间穿越者
     </div>
-    <h1>旅行者 1 号 <span class="src" style="font-size:22px;vertical-align:middle">Voyager 1</span></h1>
-    <p class="lede">
+    <h1 class="feature-title">旅行者 1 号 <span class="src" style="font-size:20px;vertical-align:middle;color:var(--fg-muted)">Voyager 1</span></h1>
+    <p class="lede feature-lede">
       人类迄今为止飞行距离最遥远的人造物体。它此刻正携带着刻录人类文明声音与图像的镀金唱片，向深邃的星际空间飞驰。
     </p>
   </div>
 
-  <section class="big" id="stats" aria-live="polite">
-    <div class="stat accent">
-      <div class="n">—<small>亿公里</small></div>
-      <div class="k">正在获取实时星历…</div>
+  <section class="stat-row" id="stats" aria-live="polite">
+    <div class="stat-col" style="grid-column: 1 / -1;">
+      <div class="stat-num">—<span class="stat-unit">亿公里</span></div>
+      <div class="stat-desc">正在获取实时星历…</div>
     </div>
   </section>
   <p class="src" id="asof"></p>
 
-  <div style="border:1px solid var(--line);border-left:4px solid var(--accent);background:var(--panel);border-radius:var(--r);padding:12px 18px;margin:12px 0 24px;font-size:13px;color:var(--fg-dim);line-height:1.6">
-    <strong>数据透明度说明</strong>：上方距离与光时由 NASA JPL Horizons 离线基准星历点，结合探测器退行速度（约 16.9 km/s）在客户端进行<strong>科学线性外推计算</strong>得出。该数值为高精度理论外推估算值，与深空网络（DSN）实测射电信号可能存在微小秒级差异。
+  <div style="border-top:1px solid var(--line-subtle);padding-top:12px;margin:12px 0 24px;font-size:13px;color:var(--fg-muted);line-height:1.6">
+    <strong style="color:var(--fg-dim)">数据透明度说明</strong>：上方距离与光时由 NASA JPL Horizons 离线基准星历点，结合探测器退行速度（约 16.9 km/s）在客户端进行<strong>科学线性外推计算</strong>得出。该数值为高精度理论外推估算值，与深空网络（DSN）实测射电信号可能存在微小秒级差异。
   </div>
 
   <h2>此刻它在太阳系中的实时位置与姿态</h2>
@@ -121,18 +121,18 @@ try {
   const curLightTimeText = `${curHours} 小时 ${curMins} 分 ${curSecs} 秒`;
 
   document.getElementById('stats').replaceChildren(
-    el('div', { class: 'stat accent' },
-      el('div', { class: 'n' }, (curRangeKm / 1e8).toFixed(2), el('small', {}, '亿公里')),
-      el('div', { class: 'k' }, '此刻离地球实际直线距离（动态实时解算）')),
-    el('div', { class: 'stat' },
-      el('div', { class: 'n' }, curLightTimeText),
-      el('div', { class: 'k' }, '一条指令光速发过去需要（单程光时）')),
-    el('div', { class: 'stat cyan' },
-      el('div', { class: 'n' }, curRangeAU.toFixed(2), el('small', {}, 'AU')),
-      el('div', { class: 'k' }, `相当于日地平均距离的 ${curRangeAU.toFixed(0)} 倍`)),
-    el('div', { class: 'stat purple' },
-      el('div', { class: 'n' }, dv.kmPerSecond.toFixed(2), el('small', {}, 'km/s')),
-      el('div', { class: 'k' }, `远离太阳的速度（每年远行约 ${dv.rangeAuPerYear.toFixed(2)} AU）`)),
+    el('div', { class: 'stat-col' },
+      el('div', { class: 'stat-num' }, (curRangeKm / 1e8).toFixed(2), el('span', { class: 'stat-unit' }, '亿公里')),
+      el('div', { class: 'stat-desc' }, '此刻离地球实际直线距离（动态实时解算）')),
+    el('div', { class: 'stat-col' },
+      el('div', { class: 'stat-num' }, curLightTimeText),
+      el('div', { class: 'stat-desc' }, '一条指令光速发过去需要（单程光时）')),
+    el('div', { class: 'stat-col' },
+      el('div', { class: 'stat-num' }, curRangeAU.toFixed(2), el('span', { class: 'stat-unit' }, 'AU')),
+      el('div', { class: 'stat-desc' }, `相当于日地平均距离的 ${curRangeAU.toFixed(0)} 倍`)),
+    el('div', { class: 'stat-col' },
+      el('div', { class: 'stat-num' }, dv.kmPerSecond.toFixed(2), el('span', { class: 'stat-unit' }, 'km/s')),
+      el('div', { class: 'stat-desc' }, `远离太阳的速度（每年远行约 ${dv.rangeAuPerYear.toFixed(2)} AU）`)),
   );
 
   document.getElementById('asof').textContent =
@@ -159,9 +159,9 @@ try {
 } catch (err) {
   console.error('Voyager-1 ephemeris load failed:', err);
   document.getElementById('stats').replaceChildren(
-    el('div', { class: 'stat accent', style: 'grid-column:1/-1;border-left:4px solid var(--accent-2);background:rgba(30,20,10,0.6);' },
-      el('div', { class: 'n', style: 'font-size:22px;color:var(--accent);' }, '实时星历数据暂不可用'),
-      el('div', { class: 'k', style: 'margin-top:6px;font-size:14px;color:var(--fg-dim);' },
+    el('div', { class: 'stat-col', style: 'grid-column:1/-1;border-top:1px solid var(--line-subtle);padding-top:14px;' },
+      el('div', { class: 'stat-num', style: 'font-size:20px;color:var(--fg);' }, '实时星历数据暂不可用'),
+      el('div', { class: 'stat-desc', style: 'margin-top:6px;font-size:13px;color:var(--fg-muted);' },
         '未能成功连接或加载 JPL Horizons 权威星历数据缓存。您仍可点击下方 3D 视窗查看旅行者 1 号在太阳系中的实时模拟运行。'))
   );
   document.getElementById('asof').textContent = '星历状态：数据暂不可用（请检查网络或稍后刷新页面）';

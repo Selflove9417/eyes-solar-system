@@ -1772,6 +1772,113 @@ kbd {
   margin-bottom: 14px;
 }
 
+/* ==========================================================================
+   Phase 5: Feature Pages Unified Minimalist Template
+   (saturn.html, mars.html, jwst.html, voyager-1.html)
+   ========================================================================== */
+
+.feature-page {
+  --page-tint: var(--accent);
+}
+
+/* Feature Section Headings (首页「旗舰目标」同款小号灰色标记，去除蓝色竖条与下划线) */
+.feature-page h2,
+.feature-heading {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fg-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 48px 0 var(--space-4);
+  padding: 0;
+  border: none;
+  display: block;
+}
+.feature-page h2::before,
+.feature-heading::before {
+  display: none !important;
+}
+
+/* Feature Hero Header */
+.feature-hero {
+  padding: 40px 0 20px;
+}
+.feature-kicker {
+  font-size: 13px;
+  color: var(--fg-muted);
+  letter-spacing: 0.06em;
+  font-weight: 500;
+  margin-bottom: 12px;
+  display: block;
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+.feature-title {
+  font-size: clamp(26px, 3.8vw, 38px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: #fff;
+  margin: 0 0 14px;
+}
+.feature-lede {
+  color: var(--fg-dim);
+  font-size: 16px;
+  line-height: 1.65;
+  max-width: 40em;
+  text-wrap: balance;
+  margin: 0 0 16px;
+}
+
+/* Feature Stats Row (无盒子卡片，低对比度顶细线，纯白大字，灰色小字，手机端 2x2) */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px 28px;
+  margin: 24px 0 36px;
+}
+.stat-col {
+  border-top: 1px solid var(--line-subtle);
+  padding-top: 14px;
+  display: flex;
+  flex-direction: column;
+}
+.stat-num {
+  font-size: clamp(24px, 3vw, 32px);
+  font-weight: 700;
+  line-height: 1.15;
+  color: #fff;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.stat-unit {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--fg-muted);
+}
+.stat-desc {
+  color: var(--fg-muted);
+  font-size: 13px;
+  line-height: 1.5;
+  margin-top: 6px;
+}
+@media (max-width: 768px) {
+  .stat-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 18px;
+  }
+}
+@media (max-width: 480px) {
+  .stat-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px 14px;
+  }
+}
+
 /* ---------- Minimalist Footer ---------- */
 footer, .site-footer {
   margin-top: var(--space-6);
