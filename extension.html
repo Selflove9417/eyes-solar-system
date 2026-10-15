@@ -1,13 +1,15 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>安装中文汉化扩展 · 深空之眸</title>
 <meta name="description" content="在 Chrome 或 Edge 桌面浏览器中安装非官方汉化扩展，直接在 NASA 官方站点内把界面与 3D 天体标签替换为简体中文。">
+<link rel="canonical" href="https://selflove9417.github.io/eyes-solar-system/extension.html">
 <meta property="og:title" content="安装中文汉化扩展 · 深空之眸">
 <meta property="og:description" content="在 Chrome 或 Edge 桌面浏览器中安装非官方汉化扩展，直接在 NASA 官方站点内把界面与 3D 天体标签替换为简体中文。">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://selflove9417.github.io/eyes-solar-system/extension.html">
 <meta property="og:image" content="assets/img/PIA21895_final_image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="安装中文汉化扩展 · 深空之眸">
@@ -16,74 +18,104 @@
 <link rel="stylesheet" href="assets/css/main.css?v=20261015p5c">
 </head>
 <body>
-<main class="wrap">
+<main class="wrap doc-wrap">
+  <div class="feature-kicker">非官方本地增强套件</div>
   <h1>中文汉化扩展</h1>
-  <p class="lede">这是唯一能把 NASA 模拟器<em>自身界面</em>汉化的途径——因为它运行在你自己的浏览器里，作用在官方页面的 DOM 上，而不是隔着跨域 iframe。</p>
+  <p class="lede">直接在浏览器中将 NASA 官方模拟器的界面与 3D 天体标签无缝转译为简体中文。<a href="#install" class="lede-link">安装步骤 ↗</a></p>
 
   <div class="notice">
-    <strong>扩展只读取、只改文字。</strong>
-    它不采集也不上传任何数据，不申请任何主机权限以外的能力，只在
+    <strong>扩展仅读取并替换界面文本。</strong>
+    不采集也不上传任何数据，不申请任何主机权限以外的能力，只在
     <code>eyes.nasa.gov/apps/solar-system/</code> 上运行；
-    不下载、不缓存、不重新分发 NASA 的任何程序或素材。3D 计算与画面完全由官方站点产生。
+    不下载、不缓存、不重新分发 NASA 的任何程序或素材。3D 动力学计算与画面完全由官方站点产生。
   </div>
 
-  <div style="margin:24px 0 28px;padding:20px 24px;background:rgba(56,189,248,0.08);border:1px solid rgba(56,189,248,0.3);border-radius:var(--r);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">
-    <div>
-      <div style="font-size:16px;font-weight:700;color:#fff;margin-bottom:4px">离线安装扩展包已就绪</div>
-      <div style="font-size:13.5px;color:var(--fg-dim)">无需配置开发环境，下载解压后即可按下方指引在 Chrome 或 Edge 中一键载入。</div>
+  <div class="download-action-row">
+    <div class="download-info">
+      <div class="download-title">离线安装扩展包已就绪</div>
+      <div class="download-desc">无需配置开发环境，下载解压后即可按下方指引在 Chrome 或 Edge 中一键载入。</div>
     </div>
     <a class="btn btn-primary" href="dist/eyes-zh-extension.zip" download="eyes-zh-extension.zip">下载汉化扩展包 (.zip)</a>
   </div>
 
   <h2>它会汉化什么</h2>
-  <div class="grid cols-3">
-    <article class="card"><h3>3D 场景标签</h3><p>太阳、行星、卫星、彗星、小行星与航天器的悬浮名称。官方实现把这些渲染成普通 DOM 元素，因此可以替换；实测改写后不会被应用回写。</p></article>
-    <article class="card"><h3>菜单与分类</h3><p>主菜单、分类标题、精选专题、搜索提示、"最受欢迎"等。</p></article>
-    <article class="card"><h3>详情面板</h3><p>Info / Toolbox / View Options 三个标签、简介区块标题、相关条目与外部专题标记。</p></article>
-    <article class="card"><h3>右侧工具条</h3><p>全部图标的悬停提示（<code>aria-label</code>），如"显示信息面板""切换图层""放大""切换光照模式"等。</p></article>
-    <article class="card"><h3>时间轴</h3><p>LIVE、真实速率、展开/收起、暂停播放、提高/降低速率等提示。<strong>日期与时间数值不变。</strong></p></article>
-    <article class="card"><h3>新手引导与嵌入对话框</h3><p>引导文案、全部嵌入选项标签及其说明文字。按键字母保留原文。</p></article>
+  <div class="col-grid cols-3">
+    <article class="text-block">
+      <div class="text-block-swatch"></div>
+      <h3 class="text-block-title">3D 场景标签</h3>
+      <p class="text-block-content">太阳、行星、卫星、彗星、小行星与航天器的悬浮名称。官方实现把这些渲染成普通页面元素，改写后不会被程序回写。</p>
+    </article>
+    <article class="text-block">
+      <div class="text-block-swatch"></div>
+      <h3 class="text-block-title">菜单与分类</h3>
+      <p class="text-block-content">主菜单、分类标题、精选专题、搜索提示、“最受欢迎”天体推荐等。</p>
+    </article>
+    <article class="text-block">
+      <div class="text-block-swatch"></div>
+      <h3 class="text-block-title">详情面板</h3>
+      <p class="text-block-content">Info / Toolbox / View Options 三个标签、简介区块标题、相关条目与外部专题标记。</p>
+    </article>
+    <article class="text-block">
+      <div class="text-block-swatch"></div>
+      <h3 class="text-block-title">右侧工具条</h3>
+      <p class="text-block-content">全部控制按钮的悬停提示，如“显示信息面板”“切换图层”“放大”“切换光照模式”等。</p>
+    </article>
+    <article class="text-block">
+      <div class="text-block-swatch"></div>
+      <h3 class="text-block-title">时间轴控制器</h3>
+      <p class="text-block-content">LIVE、真实速率、展开/收起、暂停播放、提高/降低速率等提示。<strong>日期与时间数值保持原样。</strong></p>
+    </article>
+    <article class="text-block">
+      <div class="text-block-swatch"></div>
+      <h3 class="text-block-title">新手引导与对话框</h3>
+      <p class="text-block-content">引导文案、全部嵌入选项标签及其说明文字。按键字母保留原文。</p>
+    </article>
   </div>
 
   <h2>它不会改动</h2>
   <ul>
     <li>NASA / JPL 标识与 <em>Eyes on the Solar System</em> 产品名——按品牌规范保留。</li>
     <li>任何数字：日期、时间、距离、坐标、单位换算值。</li>
-    <li>WebGL 画面本身（行星、环系、轨道线、尾迹、星空）。扩展不接触 canvas。</li>
+    <li>WebGL 画面本身（行星、环系、轨道线、尾迹、星空）。扩展不接触 3D 画布。</li>
     <li>官方实体库中没有可靠中文译名的条目——保留英文，不硬造译名。</li>
   </ul>
 
-  <h2>安装步骤</h2>
-  <h3>Chrome（桌面）</h3>
+  <h2 id="install">安装步骤</h2>
+  <h3>Chrome 浏览器（桌面端）</h3>
   <ol>
-    <li>下载并解压上方 <code>eyes-zh-extension.zip</code> 压缩包（或在本地源码目录执行 <code>node tools/pack-extension.mjs</code>）。</li>
-    <li>地址栏打开 <code>chrome://extensions</code>，开启右上角<strong>开发者模式</strong>。</li>
-    <li>点<strong>加载已解压的扩展程序</strong>，选择 <code>dist/eyes-zh-extension</code> 文件夹。</li>
-    <li>访问 <a href="https://eyes.nasa.gov/apps/solar-system/#/home" target="_blank" rel="noopener">官方站点</a>，标签与界面即为中文。</li>
+    <li>下载并解压上方 <code>eyes-zh-extension.zip</code> 离线包。</li>
+    <li>在地址栏输入 <code>chrome://extensions</code> 并按回车，开启右上角<strong>开发者模式</strong>。</li>
+    <li>点击<strong>加载已解压的扩展程序</strong>，选择解压出的 <code>dist/eyes-zh-extension</code> 文件夹。</li>
+    <li>访问 <a href="https://eyes.nasa.gov/apps/solar-system/#/home" target="_blank" rel="noopener">NASA Eyes 官方站点</a>，界面与天体标签即可显示为中文。</li>
   </ol>
-  <h3>Edge（桌面）</h3>
+
+  <h3>Edge 浏览器（桌面端）</h3>
   <ol>
     <li>同样先下载并解压 <code>eyes-zh-extension.zip</code> 离线包。</li>
-    <li>地址栏打开 <code>edge://extensions</code>，开启左下角<strong>开发人员模式</strong>。</li>
-    <li>点<strong>加载解压缩的扩展</strong>，选择 <code>dist/eyes-zh-extension</code> 文件夹。</li>
+    <li>在地址栏输入 <code>edge://extensions</code> 并按回车，开启左下角<strong>开发人员模式</strong>。</li>
+    <li>点击<strong>加载解压缩的扩展</strong>，选择解压出的 <code>dist/eyes-zh-extension</code> 文件夹。</li>
   </ol>
-  <p style="color:var(--fg-dim);font-size:13.5px">
-    为什么不能一键安装：Chrome 与 Edge 只允许从各自商店直接安装扩展，本地开发的扩展必须走"加载已解压"。
-    这是浏览器的安全设计，无法由网站绕过。
+
+  <p class="note-dim">
+    为什么不能一键安装：Chrome 与 Edge 浏览器安全机制规定本地扩展需通过开发者模式“加载已解压的扩展程序”，无法由第三方网站直接静默安装。这是浏览器的安全隔离设计。
   </p>
 
-  <h2>卸载</h2>
-  <p>在 <code>chrome://extensions</code> 或 <code>edge://extensions</code> 中移除即可，不留任何残留；官方站点恢复原样。</p>
+  <h2>卸载与恢复</h2>
+  <p style="color:var(--fg-dim);max-width:70ch">
+    在 <code>chrome://extensions</code> 或 <code>edge://extensions</code> 管理页面中点击“移除”即可彻底删除，不留任何本地残留；官方站点即可恢复原始英文呈现。
+  </p>
 
-  <h2>已知失效场景</h2>
+  <h2>已知限制与边界说明</h2>
   <ul>
-    <li><strong>官方改版。</strong>汉化依赖 <code>.pioneer-label-div</code> 等 class 名与英文字面量。NASA 更新界面后可能出现漏译，需要更新 <code>data/ui.zh.json</code>。</li>
-    <li><strong>动态模板。</strong>官方文案含 <code>##moon_count##</code> 一类占位符，替换时机在渲染阶段，个别句子可能出现中英混排。</li>
-    <li><strong>长尾名称。</strong>451 条卫星与 169 条航天器中，只有已建立对照的部分会被汉化，其余保留英文。</li>
-    <li><strong>本站 iframe 内不适用。</strong>扩展作用于顶层页面；<a href="explore.html">3D 探索</a>页里的嵌入窗口不受扩展影响（跨域限制）。</li>
+    <li><strong>官方改版：</strong>汉化层依赖官方界面 class 名与英文字面量。官方更新界面后可能出现漏译，需要同步更新术语映射。</li>
+    <li><strong>动态模板：</strong>官方文案含有运行时变量占位符，替换发生在渲染阶段，个别句子可能出现中英混排。</li>
+    <li><strong>长尾名称：</strong>在官方 700+ 实体中，仅已建立可靠中文审定对照的条目会被汉化，其余条目严格保留英文。</li>
+    <li><strong>本站嵌入视窗内不适用：</strong>扩展直接作用于顶层官方页面；本站 3D 探索页里的嵌入视窗受浏览器同源安全策略保护，不直接受扩展影响。</li>
   </ul>
 
-  <p><a href="glossary.html">查看术语表</a> · <a href="about.html">合规与数据来源</a></p>
+  <div style="margin-top:36px;border-top:1px solid var(--line-subtle);padding-top:16px;max-width:70ch">
+    <a href="glossary.html">查看术语对照表 ↗</a> · <a href="about.html" style="margin-left:12px">关于与合规声明 ↗</a>
+  </div>
 </main>
 <script type="module">
 import { renderChrome } from './assets/js/site.js?v=20261015p5c';

@@ -279,7 +279,7 @@ export function renderChrome(active) {
           <div class="nav-dropdown">
             <a href="extension.html"${active === 'extension.html' ? ' aria-current="page"' : ''}>浏览器汉化扩展</a>
             <a href="guide.html"${active === 'guide.html' ? ' aria-current="page"' : ''}>操作技巧指引</a>
-            <a href="about.html"${active === 'about.html' ? ' aria-current="page"' : ''}>关于与合规声明</a>
+            <a href="about.html"${active === 'about.html' ? ' aria-current="page"' : ''}>关于与合规</a>
           </div>
         </div>
       </nav>
@@ -311,7 +311,7 @@ export function renderChrome(active) {
     });
   }
 
-  // Dropdown hover with grace timer, click toggle & outside click dismissal
+  // Dropdown hover with grace timer, click toggle & keyboard accessibility
   const dropdownItems = header.querySelectorAll('.nav-item');
   dropdownItems.forEach((item) => {
     const btn = item.querySelector('.nav-dropdown-btn');
@@ -364,6 +364,42 @@ export function renderChrome(active) {
       } else {
         openMenu();
       }
+    });
+
+    const links = Array.from(item.querySelectorAll('.nav-dropdown a'));
+
+    btn.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openMenu();
+        if (links.length > 0) links[0].focus();
+      } else if (e.key === 'Escape' && item.classList.contains('open')) {
+        e.preventDefault();
+        closeMenu(0);
+        btn.focus();
+      }
+    });
+
+    links.forEach((link, idx) => {
+      link.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          const nextIdx = (idx + 1) % links.length;
+          links[nextIdx].focus();
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          const prevIdx = (idx - 1 + links.length) % links.length;
+          links[prevIdx].focus();
+        } else if (e.key === 'Escape') {
+          e.preventDefault();
+          closeMenu(0);
+          btn.focus();
+        } else if (e.key === 'Tab') {
+          if ((e.shiftKey && idx === 0) || (!e.shiftKey && idx === links.length - 1)) {
+            closeMenu(0);
+          }
+        }
+      });
     });
 
     item.dataset.closeMenu = closeMenu;

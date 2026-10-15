@@ -1,13 +1,15 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>操作说明 · 深空之眸</title>
 <meta name="description" content="NASA Eyes on the Solar System 官方 3D 模拟器的中文操作说明，键位与功能描述译自站点内置的新手引导，并附本项目实测结论。">
+<link rel="canonical" href="https://selflove9417.github.io/eyes-solar-system/guide.html">
 <meta property="og:title" content="操作说明 · 深空之眸">
 <meta property="og:description" content="NASA Eyes on the Solar System 官方 3D 模拟器的中文操作说明，键位与功能描述译自站点内置的新手引导，并附本项目实测结论。">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://selflove9417.github.io/eyes-solar-system/guide.html">
 <meta property="og:image" content="assets/img/PIA21895_final_image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="操作说明 · 深空之眸">
@@ -16,76 +18,97 @@
 <link rel="stylesheet" href="assets/css/main.css?v=20261015p5c">
 </head>
 <body>
-<main class="wrap">
+<main class="wrap doc-wrap">
+  <div class="feature-kicker">NASA EYES 官方 3D 模拟器</div>
   <h1>操作说明</h1>
-  <p class="lede">以下内容译自官方站点内置的新手引导文本（取自 <code>app.js</code> 中的引导正文，非第三方总结），键位字母按惯例保留原文。</p>
+  <p class="lede">官方站点内置新手引导与按键交互指南，键位字母按国际惯例保留原文。<a href="#notes" class="lede-link">注意事项 ↗</a></p>
+
+  <details class="tech-notes">
+    <summary>技术来源与提取细节</summary>
+    <p>正文内容译自官方站点客户端内置新手引导，实测运行参数与按键行为经桌面端及移动端双端核对。</p>
+  </details>
 
   <h2>基础操作</h2>
-  <div class="grid cols-3">
-    <article class="card">
-      <h3>时间控制</h3>
-      <p>用时间控件在时间与空间中前进或后退。可以直接点击或触摸日期与时间，改成任意时刻；也可以使用倒带、快进和播放/暂停按钮。想要更精细的控制，可拖动时间滑块来回快速移动。如果在时间中迷失，点击 <strong>LIVE</strong> 按钮即可回到当前时刻。</p>
+  <div class="col-grid cols-3">
+    <article class="text-block">
+      <div class="text-block-swatch"></div>
+      <h3 class="text-block-title">时间控制</h3>
+      <p class="text-block-content">用时间控件在时间与空间中前进或后退。可以直接点击或触摸日期与时间，改成任意时刻；也可以使用倒带、快进和播放/暂停按钮。想要更精细的控制，可拖动时间滑块来回快速移动。如果在时间中迷失，点击 <strong>LIVE</strong> 按钮即可回到当前时刻。</p>
     </article>
-    <article class="card">
-      <h3>环绕天体观察</h3>
-      <p>桌面端：点击并拖动；移动端 / 触屏：点按并拖动。<br>
+    <article class="text-block">
+      <div class="text-block-swatch"></div>
+      <h3 class="text-block-title">环绕天体观察</h3>
+      <p class="text-block-content">桌面端：点击并拖动；移动端 / 触屏：点按并拖动。<br>
       键盘——偏航 <kbd>A</kbd>/<kbd>D</kbd>，俯仰 <kbd>Q</kbd>/<kbd>E</kbd>，翻滚 <kbd>Z</kbd>/<kbd>C</kbd>。
       按住 <kbd>SHIFT</kbd> 可加速。</p>
     </article>
-    <article class="card">
-      <h3>放大与缩小</h3>
-      <p>桌面端：鼠标滚轮；移动端 / 触屏：双指捏合。<br>
+    <article class="text-block">
+      <div class="text-block-swatch"></div>
+      <h3 class="text-block-title">放大与缩小</h3>
+      <p class="text-block-content">桌面端：鼠标滚轮；移动端 / 触屏：双指捏合。<br>
       键盘——放大/缩小 <kbd>W</kbd>/<kbd>S</kbd>，按住 <kbd>SHIFT</kbd> 可加速。</p>
     </article>
-    <article class="card">
-      <h3>自由飞行模式</h3>
-      <p>仅桌面端。按 <kbd>K</kbd> 进入自由飞行模式，把鼠标指向你想去的方向，用 <kbd>W</kbd>/<kbd>A</kbd>/<kbd>S</kbd>/<kbd>D</kbd> 转向，按住 <kbd>SHIFT</kbd> 加速。用这种方式可以飞到太阳系任意位置，例如贴着火星表面掠过。再按一次 <kbd>K</kbd> 退出。</p>
+    <article class="text-block">
+      <div class="text-block-swatch"></div>
+      <h3 class="text-block-title">自由飞行模式</h3>
+      <p class="text-block-content">仅桌面端。按 <kbd>K</kbd> 进入自由飞行模式，把鼠标指向你想去的方向，用 <kbd>W</kbd>/<kbd>A</kbd>/<kbd>S</kbd>/<kbd>D</kbd> 转向，按住 <kbd>SHIFT</kbd> 加速。用这种方式可以飞到太阳系任意位置，例如贴着火星表面掠过。再按一次 <kbd>K</kbd> 退出。</p>
     </article>
-    <article class="card">
-      <h3>点击任意标签</h3>
-      <p>看到标签就直接点击或触摸，即可立刻前往该天体。到达之后，可以查看精选事件、与其他天体或航天器比较大小、切换视图，或跳转到其他相关天体。</p>
+    <article class="text-block">
+      <div class="text-block-swatch"></div>
+      <h3 class="text-block-title">点击任意标签</h3>
+      <p class="text-block-content">看到标签就直接点击或触摸，即可立刻前往该天体。到达之后，可以查看精选事件、与其他天体或航天器比较大小、切换视图，或跳转到其他相关天体。</p>
     </article>
-    <article class="card">
-      <h3>望远镜模式</h3>
-      <p>到达某颗行星后不妨试试望远镜模式。点击行星表面任意位置，你就会落到该处。然后打开星座图层，看看此刻的天空里有什么。</p>
+    <article class="text-block">
+      <div class="text-block-swatch"></div>
+      <h3 class="text-block-title">望远镜模式</h3>
+      <p class="text-block-content">到达某颗行星后不妨试试望远镜模式。点击行星表面任意位置，你就会落到该处。然后打开星座图层，看看此刻的天空里有什么。</p>
     </article>
   </div>
 
   <h2>界面功能</h2>
-  <div class="grid cols-3">
-    <article class="card">
-      <h3>菜单与搜索</h3>
-      <p>点按放大镜图标并输入你要找的内容即可。也可以用菜单按名称选择任意天体，包括行星、卫星、航天器、小行星和彗星。移动端通过右上角的"汉堡"菜单访问搜索与菜单。</p>
+  <div class="col-grid cols-2">
+    <article class="text-block">
+      <div class="text-block-swatch"></div>
+      <h3 class="text-block-title">菜单与搜索</h3>
+      <p class="text-block-content">点按放大镜图标并输入你要找的内容即可。也可以用菜单按名称选择任意天体，包括行星、卫星、航天器、小行星和彗星。移动端通过右上角的菜单访问搜索与分类。</p>
     </article>
-    <article class="card">
-      <h3>专题故事</h3>
-      <p>屏幕左侧（移动端在屏幕底部）会看到若干专题。点击其一会进入"滚动叙事"体验：了解卡西尼号发现土卫二冰喷泉的过程、观看毅力号在火星着陆，或跟随著名的旅行者号完成大巡游。</p>
+    <article class="text-block">
+      <div class="text-block-swatch"></div>
+      <h3 class="text-block-title">专题故事</h3>
+      <p class="text-block-content">屏幕左侧（移动端在屏幕底部）会看到若干专题。点击其一会进入“滚动叙事”体验：了解卡西尼号发现土卫二冰喷泉的过程、观看毅力号在火星着陆，或跟随著名的旅行者号完成大巡游。</p>
     </article>
-    <article class="card">
-      <h3>地表图层</h3>
-      <p>多颗行星与卫星可开启高质量纹理。进入该天体后，在面板上（笔记本在屏幕左侧，手机在屏幕底部）打开 <strong>View Options</strong> 标签。笔记本上会看到 <strong>Texture Quality</strong> 选项，选择 <strong>High Definition</strong>；移动端则选择 <strong>View Options</strong> 再选 <strong>Textures</strong>，是同一个选项。地球、火星和月球还可以在 <strong>Surface Map</strong> 一节选择质量更高的地图，并附有数据来源说明——以地球为例，那是前一天拍摄的超高分辨率全球马赛克影像。</p>
+    <article class="text-block">
+      <div class="text-block-swatch"></div>
+      <h3 class="text-block-title">地表图层</h3>
+      <p class="text-block-content">多颗行星与卫星可开启高质量纹理。进入该天体后，在面板上（笔记本在屏幕左侧，手机在屏幕底部）打开 <strong>View Options</strong> 标签。笔记本上会看到 <strong>Texture Quality</strong> 选项，选择 <strong>High Definition</strong>；移动端则选择 <strong>View Options</strong> 再选 <strong>Textures</strong>，是同一个选项。地球、火星和月球还可以在 <strong>Surface Map</strong> 一节选择质量更高的地图，并附有数据来源说明——以地球为例，那是前一天拍摄的超高分辨率全球马赛克影像。</p>
     </article>
-    <article class="card">
-      <h3>设置</h3>
-      <p>桌面端与移动端，显示/隐藏设置的按钮都在屏幕右下角。打开后可以改变光照（泛光、阴影、自然）、切换到全屏，以及开关各类可见性图层（星座、航天器、标签、轨迹、小行星、彗星，乃至整个用户界面）。</p>
+    <article class="text-block">
+      <div class="text-block-swatch"></div>
+      <h3 class="text-block-title">设置</h3>
+      <p class="text-block-content">桌面端与移动端，显示/隐藏设置的按钮都在屏幕右下角。打开后可以改变光照（泛光、阴影、自然）、切换到全屏，以及开关各类可见性图层（星座、航天器、标签、轨迹、小行星、彗星，乃至整个用户界面）。</p>
     </article>
   </div>
 
-  <h2>右侧工具条（悬停提示的中文对照）</h2>
-  <p>官方站点的工具条按钮只有图标，提示文字来自 <code>aria-label</code>。以下取自实测采集：</p>
+  <h2>右侧工具条（悬停提示中文对照）</h2>
+  <p style="color:var(--fg-dim);font-size:14px;margin:0 0 16px;max-width:70ch">官方模拟器右侧控制条按钮采用纯图标设计，提示文字取自鼠标悬停说明，以下为实测采集对照：</p>
   <div class="table-container">
     <table>
-      <thead><tr><th>图标提示原文</th><th>中文</th></tr></thead>
+      <thead><tr><th>图标提示原文</th><th>中文对照</th></tr></thead>
       <tbody id="rail"></tbody>
     </table>
   </div>
 
-  <h2>本项目实测补充的三条注意事项</h2>
+  <h2 id="notes">实测使用注意事项</h2>
   <ol>
     <li><strong>后台标签页会暂停渲染。</strong>若把模拟器窗口切到后台太久，画面可能停在加载中——浏览器会节流后台页面的动画帧。切回前台即恢复。这不是网络故障。</li>
-    <li><strong>首次加载需要下载较多数据。</strong>地形瓦片来自 <code>eyes.nasa.gov/assets/dynamic/…</code>，按瓦片流式加载；放大到地表级别时才拉取更高分辨率瓦片。</li>
-    <li><strong>触屏设备与桌面行为不同。</strong>官方引导中"自由飞行模式"标注为仅桌面端可用；键盘操作在触屏上不可用。</li>
+    <li><strong>首次加载需要下载较多数据。</strong>地形瓦片按需流式加载；放大到地表级别时才拉取更高分辨率瓦片。</li>
+    <li><strong>触屏设备与桌面行为不同。</strong>官方引导中“自由飞行模式”标注为仅桌面端可用；键盘操作在触屏上不可用。</li>
   </ol>
+
+  <details class="tech-notes">
+    <summary>查看瓦片流式加载与数据接口细节</summary>
+    <p>地形瓦片来自 <code>eyes.nasa.gov/assets/dynamic/…</code>，按瓦片流式加载；放大到地表级别时才拉取更高分辨率瓦片。引导正文取自客户端 <code>app.js</code>。</p>
+  </details>
 </main>
 <script type="module">
 import { renderChrome, getData, el } from './assets/js/site.js?v=20261015p5c';
