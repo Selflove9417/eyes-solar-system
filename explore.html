@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
@@ -13,7 +13,7 @@
 <meta name="twitter:title" content="3D 漫游 · 深空之眸">
 <meta name="twitter:description" content="嵌入 NASA/JPL 官方 Eyes on the Solar System 3D 动力学模拟器，体验卡西尼号土星大结局沉浸式三幕探索剧场，提供中文快捷导航、探索引导与全景视口。">
 <meta name="twitter:image" content="assets/img/PIA21895_final_image.png">
-<link rel="stylesheet" href="assets/css/main.css?v=20261015p4">
+<link rel="stylesheet" href="assets/css/main.css?v=20261015p4b">
 <style>
   /* ---------- Streamlined Header ---------- */
   .explore-header {
@@ -130,38 +130,76 @@
     border-bottom: 2px solid var(--accent) !important;
   }
 
-  /* Corner Tip Overlay (Semi-transparent in 3D viewport corner) */
+  /* Preset Bar Drawer Toggle Button */
+  .preset-drawer-btn {
+    flex-shrink: 0;
+    background: transparent;
+    border: 1px solid var(--line-subtle);
+    border-radius: var(--r);
+    padding: 6px 12px;
+    font: inherit;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--fg);
+    cursor: pointer;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.15s ease;
+    margin-right: 2px;
+  }
+  .preset-drawer-btn:hover {
+    color: #fff;
+    border-color: var(--line-bright);
+    background: rgba(255, 255, 255, 0.05);
+  }
+  .preset-drawer-btn:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  .preset-drawer-btn[aria-expanded="true"] {
+    border-color: var(--accent);
+    color: #fff;
+    background: rgba(56, 189, 248, 0.08);
+  }
+  .preset-bar-divider {
+    width: 1px;
+    height: 18px;
+    background: var(--line-subtle);
+    margin: 0 4px;
+    flex-shrink: 0;
+  }
+
+  /* Operation Tip Bar (Relocated below 3D viewport, above stage-bar) */
   .user-guide-tip {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    z-index: 20;
+    position: static;
     display: flex;
     align-items: center;
-    gap: 8px;
-    background: rgba(11, 17, 32, 0.78);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 6px;
-    padding: 6px 10px 6px 12px;
+    justify-content: space-between;
+    gap: 12px;
+    background: rgba(11, 17, 32, 0.95);
+    border-top: 1px solid var(--line-subtle);
+    padding: 6px 18px;
     font-size: 12px;
-    color: var(--fg-dim);
-    line-height: 1.35;
-    pointer-events: auto;
+    color: var(--fg-muted);
+    line-height: 1.4;
+    flex-shrink: 0;
     transition: opacity 0.2s ease;
   }
   .guide-tip-content {
     display: flex;
     align-items: center;
     gap: 6px;
-    color: var(--fg-dim);
+    flex-wrap: wrap;
+    color: var(--fg-muted);
   }
-  .guide-tip-sep { color: var(--fg-muted); }
+  .guide-tip-sep { color: var(--line); }
   .guide-tip-link {
     color: var(--fg-dim);
     text-decoration: underline;
     text-underline-offset: 2px;
+    transition: color 0.15s ease;
   }
   .guide-tip-link:hover { color: #fff; }
   .guide-tip-close {
@@ -170,15 +208,16 @@
     color: var(--fg-muted);
     font-size: 13px;
     cursor: pointer;
-    padding: 2px;
+    padding: 4px;
     border-radius: 4px;
     line-height: 1;
-    min-height: 24px;
-    min-width: 24px;
+    min-height: 28px;
+    min-width: 28px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    transition: all 0.15s ease;
   }
   .guide-tip-close:hover {
     color: #fff;
@@ -1081,7 +1120,12 @@
 
   <!-- 紧凑单行纯文字快捷航线栏 -->
   <div class="preset-bar-wrap">
-    <div class="preset-bar" role="tablist" aria-label="快捷航线">
+    <div class="preset-bar" role="tablist" aria-label="快捷航线与天体导航">
+      <button type="button" id="drawer-toggle-btn" class="preset-drawer-btn btn-drawer-toggle" aria-expanded="false" aria-controls="explore-drawer" title="展开天体列表 (快捷键 S)">
+        <span class="drawer-toggle-icon">☰</span>
+        <span>天体列表</span>
+      </button>
+      <span class="preset-bar-divider" aria-hidden="true"></span>
       <span class="preset-bar-label">快捷航线：</span>
       <button class="chip" data-quick="home" type="button" aria-pressed="true">太阳系全览</button>
       <button class="chip" data-quick="sun" type="button">太阳</button>
@@ -1210,13 +1254,33 @@
 
       <!-- 3D 舞台区域 (页面的视觉主体) -->
       <div class="stage" id="stage-wrapper">
-        <!-- 视窗左上角「天体列表」抽屉唤出按钮 -->
-        <button type="button" id="drawer-toggle-btn" class="btn-drawer-toggle" aria-expanded="false" aria-controls="explore-drawer" title="展开天体列表 (快捷键 S)">
-          <span class="drawer-toggle-icon">☰</span>
-          <span>天体列表</span>
-        </button>
+        <div class="stage-viewport" id="stage-viewport">
+          <!-- 沉浸模式悬浮退出胶囊 -->
+          <div id="immersive-exit-banner" class="immersive-exit-banner" style="display:none">
+            <span class="immersive-status-dot"></span>
+            <span class="immersive-label">沉浸观测中</span>
+            <button type="button" id="exit-immersive-btn" class="btn-exit-immersive" title="退出沉浸模式 (Esc)">✕ 退出沉浸 (Esc)</button>
+          </div>
 
-        <!-- 视窗角落半透明细提示条 (首次访问显示，关闭后记住) -->
+          <!-- 加载与恢复指示遮罩 -->
+          <div id="stage-overlay" class="stage-overlay">
+            <div id="stage-loading-box" style="display:flex;flex-direction:column;align-items:center;gap:12px">
+              <div class="stage-pulse-dot"></div>
+              <div class="stage-loading-text" id="stage-status-title">正在载入 NASA 3D 视图…</div>
+            </div>
+            <div id="stage-error-box" class="stage-recovery" style="display:none">
+              <div class="stage-error-text">3D 视图加载较慢，可重试或在 NASA 官方站点打开</div>
+              <div class="stage-error-actions">
+                <button class="btn-stage-retry" id="stage-retry-btn" type="button">重试</button>
+                <a class="stage-link-official" id="stage-open-official" href="https://eyes.nasa.gov/apps/solar-system/" target="_blank" rel="noopener">在 NASA 官方站点打开 ↗</a>
+              </div>
+            </div>
+          </div>
+
+          <iframe id="stage" title="NASA Eyes on the Solar System 官方 3D 模拟器" allow="fullscreen"></iframe>
+        </div>
+
+        <!-- 视窗下方操作提示条 (灰色小字，首次访问显示，关闭后记住) -->
         <div class="user-guide-tip" id="user-guide-tip">
           <div class="guide-tip-content">
             <span>左键旋转 · 滚轮缩放 · 右键平移</span>
@@ -1226,29 +1290,6 @@
           <button type="button" class="guide-tip-close" id="guide-tip-close" aria-label="关闭指引" title="不再提示">✕</button>
         </div>
 
-        <!-- 沉浸模式悬浮退出胶囊 -->
-        <div id="immersive-exit-banner" class="immersive-exit-banner" style="display:none">
-          <span class="immersive-status-dot"></span>
-          <span class="immersive-label">沉浸观测中</span>
-          <button type="button" id="exit-immersive-btn" class="btn-exit-immersive" title="退出沉浸模式 (Esc)">✕ 退出沉浸 (Esc)</button>
-        </div>
-
-        <!-- 加载与恢复指示遮罩 -->
-        <div id="stage-overlay" class="stage-overlay">
-          <div id="stage-loading-box" style="display:flex;flex-direction:column;align-items:center;gap:12px">
-            <div class="stage-pulse-dot"></div>
-            <div class="stage-loading-text" id="stage-status-title">正在载入 NASA 3D 视图…</div>
-          </div>
-          <div id="stage-error-box" class="stage-recovery" style="display:none">
-            <div class="stage-error-text">3D 视图加载较慢，可重试或在 NASA 官方站点打开</div>
-            <div class="stage-error-actions">
-              <button class="btn-stage-retry" id="stage-retry-btn" type="button">重试</button>
-              <a class="stage-link-official" id="stage-open-official" href="https://eyes.nasa.gov/apps/solar-system/" target="_blank" rel="noopener">在 NASA 官方站点打开 ↗</a>
-            </div>
-          </div>
-        </div>
-
-        <iframe id="stage" title="NASA Eyes on the Solar System 官方 3D 模拟器" allow="fullscreen"></iframe>
         <div class="stage-bar">
           <div>
             <span>当前视线：<strong id="current-label">太阳系全景 (全览模式)</strong></span>
@@ -1367,7 +1408,7 @@
 </main>
 
 <script type="module">
-import { renderChrome, getData, embedUrl, el, assetUrl } from './assets/js/site.js?v=20261015p4';
+import { renderChrome, getData, embedUrl, el, assetUrl } from './assets/js/site.js?v=20261015p4b';
 renderChrome('explore.html');
 const { names, entityById } = await getData();
 

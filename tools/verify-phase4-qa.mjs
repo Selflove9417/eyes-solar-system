@@ -124,6 +124,7 @@ const dm = await evalCdp(`(() => {
   const stageRect = stage.getBoundingClientRect();
   const btn = document.getElementById('drawer-toggle-btn');
   const btnRect = btn.getBoundingClientRect();
+  const presetBar = document.querySelector('.preset-bar');
   const drawer = document.getElementById('explore-drawer');
   const drawerRect = drawer.getBoundingClientRect();
   const title = document.querySelector('.explore-page-title');
@@ -132,29 +133,46 @@ const dm = await evalCdp(`(() => {
   const subStyle = window.getComputedStyle(sub);
   const tip = document.getElementById('user-guide-tip');
   const tipRect = tip ? tip.getBoundingClientRect() : null;
+  const iframe = document.getElementById('stage');
+  const iframeRect = iframe.getBoundingClientRect();
+  const bar = document.querySelector('.stage-bar');
+  const barRect = bar.getBoundingClientRect();
+
+  const overlapsIframe = (rect) => {
+    return !(rect.right <= iframeRect.left || 
+             rect.left >= iframeRect.right || 
+             rect.bottom <= iframeRect.top || 
+             rect.top >= iframeRect.bottom);
+  };
 
   return {
     scrollWidth: document.documentElement.scrollWidth,
     clientWidth: document.documentElement.clientWidth,
     stageWidth: stageRect.width,
     stageHeight: stageRect.height,
+    iframeHeight: iframeRect.height,
     btnHeight: btnRect.height,
+    btnInPresetBar: presetBar.contains(btn),
+    btnOverlapsIframe: overlapsIframe(btnRect),
     drawerOpen: document.body.classList.contains('drawer-open'),
     drawerLeft: drawerRect.left,
     titleFontSize: titleStyle.fontSize,
     subColor: subStyle.color,
-    tipInsideStage: stage.contains(tip),
-    tipVisible: tipRect && tipRect.width > 0 && tipRect.height > 0
+    tipAboveToolbar: tipRect ? tipRect.bottom <= barRect.top + 2 : true,
+    tipOverlapsIframe: tipRect ? overlapsIframe(tipRect) : false,
+    tipVisible: tipRect && tipRect.width > 0 && tipRect.height > 0,
+    toolbarBottom: barRect.bottom
   };
 })()`);
 
 report('1440 Desktop: No horizontal scroll', dm.scrollWidth <= dm.clientWidth, `scroll=${dm.scrollWidth}, client=${dm.clientWidth}`);
 report('1440 Desktop: 3D Stage expands full content width (>1100px)', dm.stageWidth >= 1100, `width=${dm.stageWidth}px`);
-report('1440 Desktop: 3D Stage meets minimum height (>=480px)', dm.stageHeight >= 480, `height=${dm.stageHeight}px`);
-report('1440 Desktop: Drawer button touch target >= 44px', dm.btnHeight >= 44, `height=${dm.btnHeight}px`);
+report('1440 Desktop: 3D Viewport meets minimum height (>=480px)', dm.iframeHeight >= 480, `height=${dm.iframeHeight}px`);
+report('1440 Desktop: Drawer button placed in preset bar with touch target >= 44px and no iframe overlap', dm.btnInPresetBar && dm.btnHeight >= 44 && !dm.btnOverlapsIframe, `in preset bar, height=${dm.btnHeight}px, no overlap`);
 report('1440 Desktop: Drawer is closed initially', !dm.drawerOpen && dm.drawerLeft < 0, `left=${dm.drawerLeft}px`);
 report('1440 Desktop: Page title matches h1 font size (>=28px)', parseFloat(dm.titleFontSize) >= 28, `fontSize=${dm.titleFontSize}`);
-report('1440 Desktop: Tip bar placed inside 3D viewport corner', dm.tipInsideStage && dm.tipVisible, 'placed in stage');
+report('1440 Desktop: Tip bar placed below viewport without covering iframe', dm.tipAboveToolbar && !dm.tipOverlapsIframe && dm.tipVisible, 'above toolbar, no overlap');
+report('1440 Desktop: 3D viewport and toolbar fully visible on screen (<=900px)', dm.toolbarBottom <= 900, `toolbar bottom=${dm.toolbarBottom}px`);
 
 await captureShot('shots/phase4-explore-1440.png');
 
