@@ -981,6 +981,41 @@ a.card:hover {
   align-items: center;
   gap: 5px;
   font-weight: 500;
+  color: var(--fg-muted);
+  font-size: 12.5px;
+  min-height: 44px;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.18s ease;
+}
+.stage-bar a:hover {
+  color: #fff;
+}
+.btn-fs {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid var(--line);
+  color: var(--fg-dim);
+  border-radius: 6px;
+  padding: 8px 14px;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-height: 44px;
+  box-shadow: none;
+}
+.btn-fs:hover {
+  border-color: var(--line-bright);
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+}
+.btn-fs:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 @media (max-width: 768px) {

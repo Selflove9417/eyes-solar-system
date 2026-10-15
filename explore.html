@@ -15,184 +15,151 @@
 <meta name="twitter:image" content="assets/img/PIA21895_final_image.png">
 <link rel="stylesheet" href="assets/css/main.css?v=20261015p3b">
 <style>
-  /* ---------- Streamlined Header & Mode HUD ---------- */
+  /* ---------- Streamlined Header ---------- */
   .explore-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 6px 12px;
-    margin: 8px 0 4px;
-    padding-bottom: 4px;
-    border-bottom: 1px solid var(--line-subtle);
-  }
-  .explore-title-row {
-    display: flex;
-    align-items: baseline;
-    gap: 8px;
-    flex-wrap: wrap;
+    margin: 16px 0 12px;
+    padding: 0;
   }
   .explore-page-title {
-    margin: 0;
-    font-size: 18px;
-    font-weight: 800;
+    margin: 0 0 6px;
+    font-size: 32px;
+    font-weight: 700;
     color: #fff;
-    letter-spacing: -0.2px;
+    letter-spacing: -0.5px;
+    line-height: 1.25;
   }
   .explore-page-sub {
-    font-size: 12px;
+    margin: 0;
+    font-size: 14px;
     color: var(--fg-muted);
-  }
-  .explore-header-right {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .btn-sidebar-toggle {
-    background: rgba(15, 23, 42, 0.7);
-    border: 1px solid var(--line);
-    color: var(--fg-dim);
-    padding: 3px 10px;
-    border-radius: 999px;
-    font: inherit;
-    font-size: 12px;
-    font-weight: 500;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    transition: all 0.18s ease;
-    min-height: 28px;
-  }
-  .btn-sidebar-toggle:hover {
-    color: #fff;
-    border-color: var(--accent);
-    background: rgba(56, 189, 248, 0.12);
-  }
-  .explore-mode-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 2px 10px;
-    border-radius: 999px;
-    font-size: 11.5px;
-    font-weight: 600;
-    background: rgba(56, 189, 248, 0.1);
-    border: 1px solid rgba(56, 189, 248, 0.28);
-    color: var(--accent);
-    transition: all 0.2s ease;
-  }
-  .mode-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--accent);
-    box-shadow: 0 0 8px var(--accent-glow);
-  }
-  .theater-active-mode .explore-mode-badge {
-    background: rgba(251, 146, 60, 0.15);
-    border-color: rgba(251, 146, 60, 0.4);
-    color: #fed7aa;
-  }
-  .theater-active-mode .mode-dot {
-    background: var(--accent-2);
-    box-shadow: 0 0 8px var(--accent-2-glow);
+    line-height: 1.5;
   }
 
-  /* Distinct UI state: In theater mode, hide roam header, preset bar & tip to eliminate noise and maximize 3D viewport */
+  /* Distinct UI state: In theater mode, hide roam header & preset bar to eliminate noise */
   .theater-active-mode .explore-header {
     display: none !important;
   }
   .theater-active-mode .preset-bar-wrap {
     display: none !important;
   }
-  .theater-active-mode .user-guide-tip {
-    display: none !important;
-  }
 
-  /* ---------- Streamlined Preset Bar ---------- */
+  /* ---------- Streamlined Preset Bar (Single-line Text Tabs) ---------- */
   .preset-bar-wrap {
-    margin: 4px 0 6px;
+    margin: 8px 0 14px;
+    border-bottom: 1px solid var(--line-subtle);
   }
   .preset-bar {
     display: flex;
     align-items: center;
-    gap: 5px;
-    padding: 1px 0 3px;
+    gap: 4px;
+    padding: 0;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
+    white-space: nowrap;
   }
   .preset-bar::-webkit-scrollbar { display: none; }
   .preset-bar-label {
-    font-size: 12px;
+    font-size: 13px;
     color: var(--fg-muted);
     white-space: nowrap;
     flex-shrink: 0;
+    padding-right: 6px;
   }
   .preset-bar .chip {
     flex-shrink: 0;
-    padding: 4px 10px;
-    font-size: 12.5px;
-    min-height: 32px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    border-radius: 0;
+    padding: 8px 12px;
+    font: inherit;
+    font-size: 13.5px;
+    color: var(--fg-muted);
+    cursor: pointer;
+    min-height: 44px;
     display: inline-flex;
     align-items: center;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  .preset-bar .chip:hover {
+    color: #fff;
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+  }
+  .preset-bar .chip:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
   }
   .preset-bar .chip[aria-pressed="true"] {
-    border-color: var(--accent);
     color: #fff;
-    background: rgba(56, 189, 248, 0.2);
-    box-shadow: 0 0 10px rgba(56, 189, 248, 0.25);
-  }
-
-  /* Story Theater trigger chip styling */
-  .chip-theater {
-    border-color: var(--accent-2) !important;
-    color: #fff !important;
-    background: rgba(251, 146, 60, 0.18) !important;
+    border-bottom: 2px solid var(--accent);
+    background: transparent;
+    box-shadow: none;
     font-weight: 600;
-    box-shadow: 0 0 10px rgba(251, 146, 60, 0.18);
-    transition: all 0.2s ease;
-  }
-  .chip-theater:hover {
-    background: rgba(251, 146, 60, 0.3) !important;
-    box-shadow: 0 0 16px rgba(251, 146, 60, 0.3);
-    transform: translateY(-1px);
   }
 
-  /* User Quick Guide Tip Strip */
+  /* Story Theater trigger chip: accent text + arrow, no orange capsule */
+  .preset-bar .chip-theater {
+    color: var(--accent) !important;
+    background: transparent !important;
+    border: none !important;
+    border-bottom: 2px solid transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    font-weight: 600;
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: color 0.15s ease;
+  }
+  .preset-bar .chip-theater:hover {
+    color: #fff !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    transform: none !important;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .preset-bar .chip-theater[aria-expanded="true"] {
+    border-bottom: 2px solid var(--accent) !important;
+  }
+
+  /* Corner Tip Overlay (Semi-transparent in 3D viewport corner) */
   .user-guide-tip {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 20;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     gap: 8px;
-    background: rgba(15, 23, 42, 0.75);
-    border: 1px solid rgba(56, 189, 248, 0.2);
+    background: rgba(11, 17, 32, 0.78);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 6px;
-    padding: 4px 8px;
-    margin: 2px 0 5px;
-    font-size: 11.5px;
+    padding: 6px 10px 6px 12px;
+    font-size: 12px;
+    color: var(--fg-dim);
     line-height: 1.35;
+    pointer-events: auto;
+    transition: opacity 0.2s ease;
   }
   .guide-tip-content {
     display: flex;
     align-items: center;
     gap: 6px;
-    flex-wrap: wrap;
-    color: var(--fg);
-  }
-  .guide-tip-badge {
-    background: rgba(56, 189, 248, 0.16);
-    color: var(--accent);
-    padding: 1px 5px;
-    border-radius: 4px;
-    font-size: 10.5px;
-    font-weight: 700;
-    flex-shrink: 0;
+    color: var(--fg-dim);
   }
   .guide-tip-sep { color: var(--fg-muted); }
   .guide-tip-link {
-    color: var(--accent);
+    color: var(--fg-dim);
     text-decoration: underline;
     text-underline-offset: 2px;
   }
@@ -203,7 +170,7 @@
     color: var(--fg-muted);
     font-size: 13px;
     cursor: pointer;
-    padding: 2px 4px;
+    padding: 2px;
     border-radius: 4px;
     line-height: 1;
     min-height: 24px;
@@ -216,6 +183,9 @@
   .guide-tip-close:hover {
     color: #fff;
     background: rgba(255, 255, 255, 0.1);
+  }
+  .theater-active-mode .user-guide-tip {
+    display: none !important;
   }
 
   /* Floating exit banner for in-page immersive mode */
@@ -678,23 +648,44 @@
 
   /* ---------- 3D Stage & Bottom Bar ---------- */
   .btn-fs {
-    background: rgba(15, 23, 42, 0.7);
+    background: rgba(15, 23, 42, 0.6);
     border: 1px solid var(--line);
-    color: var(--fg);
+    color: var(--fg-dim);
     border-radius: 6px;
-    padding: 6px 12px;
-    font-size: 12.5px;
+    padding: 8px 14px;
+    font: inherit;
+    font-size: 13px;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.18s ease;
     display: inline-flex;
     align-items: center;
-    gap: 4px;
-    min-height: 36px;
+    justify-content: center;
+    gap: 5px;
+    min-height: 44px;
+    box-shadow: none;
   }
   .btn-fs:hover {
-    border-color: var(--accent);
+    border-color: var(--line-bright);
     color: #fff;
-    background: var(--panel);
+    background: rgba(255, 255, 255, 0.05);
+  }
+  .btn-fs:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  #open-raw {
+    color: var(--fg-muted);
+    font-size: 12.5px;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 4px;
+    transition: color 0.18s ease;
+  }
+  #open-raw:hover {
+    color: #fff;
   }
 
   /* ---------- 2-Column Narrative & Archive (Below 3D Stage) ---------- */
@@ -808,14 +799,41 @@
   }
 
   .sop-tip-box {
-    font-size: 12.5px;
-    color: var(--fg-dim);
-    background: rgba(15, 23, 42, 0.4);
+    margin: 12px 0 0;
+    padding: 10px 14px;
+    background: rgba(15, 23, 42, 0.35);
     border: 1px solid var(--line-subtle);
     border-radius: 6px;
-    padding: 8px 12px;
-    margin-top: 8px;
-    line-height: 1.55;
+    font-size: 13px;
+    color: var(--fg-muted);
+    line-height: 1.6;
+  }
+  .sop-tip-main {
+    margin: 0;
+  }
+  .sop-tip-details {
+    margin-top: 6px;
+    border-top: 1px dashed var(--line-subtle);
+    padding-top: 6px;
+  }
+  .sop-tip-summary {
+    cursor: pointer;
+    color: var(--fg-dim);
+    font-size: 12px;
+    user-select: none;
+  }
+  .sop-tip-summary:hover {
+    color: #fff;
+  }
+  .sop-tip-content {
+    margin-top: 6px;
+    font-size: 12px;
+    color: var(--fg-muted);
+    line-height: 1.6;
+  }
+  .sop-tip-content a {
+    color: var(--accent);
+    text-decoration: underline;
   }
 
   /* ---------- Responsive Adjustments ---------- */
@@ -968,20 +986,24 @@
 
   @media (max-width: 480px) {
     .explore-header {
-      margin: 8px 0 4px;
-      padding-bottom: 4px;
+      margin: 12px 0 8px;
     }
     .explore-page-title {
-      font-size: 17px;
+      font-size: 24px;
+      margin-bottom: 4px;
     }
     .explore-page-sub {
-      display: none;
+      font-size: 13px;
+      display: block;
     }
     .user-guide-tip {
+      top: auto;
+      bottom: 56px;
+      right: 12px;
+      left: auto;
+      max-width: calc(100% - 24px);
+      font-size: 11px;
       padding: 4px 8px;
-      margin: 2px 0 6px;
-      font-size: 11.5px;
-      line-height: 1.35;
     }
     .theater-panel {
       padding: 5px 8px 4px;
@@ -1051,25 +1073,15 @@
 </head>
 <body>
 <main class="wrap">
-  <!-- 简洁低矮的页眉区 -->
+  <!-- 标准内页页眉区 -->
   <div class="explore-header">
-    <div class="explore-title-row">
-      <h1 class="explore-page-title">3D 太阳系漫游</h1>
-      <span class="explore-page-sub">NASA JPL 官方 WebGL 动力学解算驱动</span>
-    </div>
-    <div class="explore-header-right">
-      <button type="button" id="sidebar-toggle-btn" class="btn-sidebar-toggle" title="展开/收起天体侧栏 (快捷键 S)">
-        <span id="sidebar-toggle-icon">◀</span> <span id="sidebar-toggle-label">收起侧栏</span>
-      </button>
-      <div class="explore-mode-badge" id="explore-mode-badge">
-        <span class="mode-dot"></span> 自由漫游模式
-      </div>
-    </div>
+    <h1 class="explore-page-title">3D 太阳系漫游</h1>
+    <p class="explore-page-sub">NASA JPL 官方 WebGL 动力学解算驱动</p>
   </div>
 
-  <!-- 紧凑快捷航线栏 -->
+  <!-- 紧凑单行纯文字快捷航线栏 -->
   <div class="preset-bar-wrap">
-    <div class="preset-bar">
+    <div class="preset-bar" role="tablist" aria-label="快捷航线">
       <span class="preset-bar-label">快捷航线：</span>
       <button class="chip" data-quick="home" type="button" aria-pressed="true">太阳系全览</button>
       <button class="chip" data-quick="sun" type="button">太阳</button>
@@ -1079,19 +1091,8 @@
       <button class="chip" data-quick="saturn" type="button">土星</button>
       <button class="chip" data-quick="sc_voyager_1" type="button">旅行者 1 号</button>
       <button class="chip" data-quick="sc_mars_2020" type="button">毅力号火星车</button>
-      <button class="chip chip-theater" id="theater-trigger-btn" type="button" aria-expanded="false">探索剧场：卡西尼号 Grand Finale</button>
+      <button class="chip chip-theater" id="theater-trigger-btn" type="button" aria-expanded="false">探索剧场：卡西尼号 Grand Finale ➔</button>
     </div>
-  </div>
-
-  <!-- 紧凑操作贴士条 -->
-  <div class="user-guide-tip" id="user-guide-tip">
-    <div class="guide-tip-content">
-      <span class="guide-tip-badge">提示</span>
-      <span>左键旋转 · 滚轮缩放 · 右键平移</span>
-      <span class="guide-tip-sep">·</span>
-      <a href="guide.html" target="_blank" class="guide-tip-link">完整指引 ↗</a>
-    </div>
-    <button type="button" class="guide-tip-close" id="guide-tip-close" aria-label="关闭指引" title="暂时隐藏指引">✕</button>
   </div>
 
   <div class="explore-layout" id="explore-layout">
@@ -1215,6 +1216,16 @@
           <span>天体列表</span>
         </button>
 
+        <!-- 视窗角落半透明细提示条 (首次访问显示，关闭后记住) -->
+        <div class="user-guide-tip" id="user-guide-tip">
+          <div class="guide-tip-content">
+            <span>左键旋转 · 滚轮缩放 · 右键平移</span>
+            <span class="guide-tip-sep">·</span>
+            <a href="guide.html" target="_blank" class="guide-tip-link">完整指引 ↗</a>
+          </div>
+          <button type="button" class="guide-tip-close" id="guide-tip-close" aria-label="关闭指引" title="不再提示">✕</button>
+        </div>
+
         <!-- 沉浸模式悬浮退出胶囊 -->
         <div id="immersive-exit-banner" class="immersive-exit-banner" style="display:none">
           <span class="immersive-status-dot"></span>
@@ -1244,7 +1255,7 @@
             <span id="current-note"></span>
           </div>
           <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-            <button class="btn-fs" id="reset-home-btn" type="button" style="color:var(--accent);border-color:var(--accent)">
+            <button class="btn-fs" id="reset-home-btn" type="button">
               返回全览模式
             </button>
             <button class="btn-fs" id="immersive-mode-btn" type="button" title="进入沉浸式全屏观测 (快捷键 I)">
@@ -1296,9 +1307,15 @@
         </div>
       </section>
 
-      <!-- 紧凑操作贴士条 -->
+      <!-- 操作提示与技术细节 -->
       <div class="sop-tip-box">
-        <strong>操作提示</strong>：在左侧列表中点击任一天体即可指挥 3D 视角直达。由于浏览器跨域同源安全保护（SOP），在 3D 视窗内自由点击旋转时，外层页面无法获知视窗内的内部点击；若探索完毕想回到太阳系全貌，随时点击上方的【返回全览模式】即可瞬间复位！
+        <p class="sop-tip-main">提示：在 3D 画面内操作时，网页无法同步当前选中项；想回到全景，请点上方「返回全览」。</p>
+        <details class="sop-tip-details">
+          <summary class="sop-tip-summary">操作说明与技术细节</summary>
+          <div class="sop-tip-content">
+            由于浏览器跨域同源安全保护机制，在 3D 模拟器画布内自由缩放、旋转或点击目标时，外层网页无法获知内部焦点变化。若想重置或寻找其他天体，可通过左上角「天体列表」抽屉或下方「返回全览」随时复位。更多高级用法请参阅 <a href="guide.html" target="_blank" rel="noopener">完整操作指引 ↗</a>。
+          </div>
+        </details>
       </div>
 
       <!-- 新手探索引导入口 -->
@@ -1511,7 +1528,6 @@ function detachTheater({ resetTime = true } = {}) {
 const frame = document.getElementById('stage');
 const currentLabel = document.getElementById('current-label');
 const currentNote = document.getElementById('current-note');
-const sideHomeBtn = document.getElementById('side-home-btn');
 
 // Loading Overlay elements
 const overlay = document.getElementById('stage-overlay');
@@ -1572,24 +1588,25 @@ function refresh() {
   
   if (state.route === 'home') {
     currentLabel.textContent = '太阳系全景 (全览模式)';
-    currentNote.innerHTML = '<span class="badge std">宏观视野</span>';
-    sideHomeBtn.setAttribute('aria-current', 'true');
+    currentNote.innerHTML = '';
     nav.querySelectorAll('button').forEach((b) => b.removeAttribute('aria-current'));
   } else {
-    sideHomeBtn.removeAttribute('aria-current');
     const navBtn = nav.querySelector(`[data-route="${CSS.escape(state.route)}"]`);
     markActive(navBtn);
     const hit = names.entities[state.route];
     const real = entityById.get(state.route);
     const en = hit?.en || real?.displayName || real?.iauName || state.route;
     currentLabel.textContent = (hit?.zh || en) + ' (' + en + ')';
-    currentNote.innerHTML = hit
-      ? (hit.status === 'std' || hit.status === 'common'
-          ? '<span class="badge std">规范译名</span>'
-          : '<span class="badge code">参考译名</span>')
-      : real
-        ? '<span class="badge en-left">未收录中文</span>'
-        : '';
+    if (!hit) {
+      currentNote.innerHTML = real ? '<span class="entry-status-note">未收录中文</span>' : '';
+    } else if (hit.status === 'common') {
+      currentNote.innerHTML = '<span class="entry-status-note">通用译名</span>';
+    } else if (hit.status === 'code') {
+      currentNote.innerHTML = '<span class="entry-status-note">代号保留</span>';
+    } else {
+      // 规范译名保持极简，不显示胶囊标签
+      currentNote.innerHTML = '';
+    }
   }
   document.querySelectorAll('[data-quick]').forEach((b) => {
     const isHit = !theaterState.active && b.getAttribute('data-quick') === state.route;
@@ -1646,7 +1663,6 @@ function goHome() {
   state.route = 'home';
   refresh();
 }
-sideHomeBtn?.addEventListener('click', goHome);
 document.getElementById('reset-home-btn').addEventListener('click', goHome);
 
 // Preset buttons
@@ -1958,7 +1974,6 @@ async function activateTheater(sceneIndex = 0) {
 
   const navBtn = nav.querySelector(`[data-route="${CSS.escape(scene.route)}"]`);
   markActive(navBtn);
-  if (sideHomeBtn) sideHomeBtn.removeAttribute('aria-current');
 
   const timeInput = document.getElementById('time-input');
   if (timeInput && scene.time) {
@@ -1980,8 +1995,6 @@ async function activateTheater(sceneIndex = 0) {
 
   theaterPanel.style.display = 'block';
   if (theaterNarrativeSection) theaterNarrativeSection.style.display = 'block';
-  theaterTriggerBtn.style.background = 'rgba(251,146,60,0.35)';
-  theaterTriggerBtn.style.borderColor = 'var(--accent-2)';
   theaterTriggerBtn.setAttribute('aria-expanded', 'true');
 }
 
@@ -2117,8 +2130,6 @@ function exitTheater() {
   theaterPanel.style.display = 'none';
   if (theaterNarrativeSection) theaterNarrativeSection.style.display = 'none';
   if (theaterDetachedBanner) theaterDetachedBanner.style.display = 'none';
-  theaterTriggerBtn.style.background = 'rgba(251,146,60,0.18)';
-  theaterTriggerBtn.style.borderColor = 'var(--accent-2)';
   theaterTriggerBtn.setAttribute('aria-expanded', 'false');
 
   document.body.classList.remove('theater-active-mode');
@@ -2128,10 +2139,8 @@ function exitTheater() {
   }
 
   if (state.route === 'home') {
-    sideHomeBtn?.setAttribute('aria-current', 'true');
     nav.querySelectorAll('button').forEach((b) => b.removeAttribute('aria-current'));
   } else {
-    sideHomeBtn?.removeAttribute('aria-current');
     const navBtn = nav.querySelector(`[data-route="${CSS.escape(state.route)}"]`);
     markActive(navBtn);
   }
@@ -2208,18 +2217,21 @@ theaterReplayBtn.addEventListener('click', () => {
 theaterPauseBtn.addEventListener('click', togglePauseScene);
 
 // 新手操作小贴士横幅逻辑
+// 新手操作小贴士角落横幅逻辑 (首次访问显示，关闭后记住)
 const guideTip = document.getElementById('user-guide-tip');
 const guideTipClose = document.getElementById('guide-tip-close');
-if (sessionStorage.getItem('hide-explore-guide') === '1') {
-  if (guideTip) guideTip.style.display = 'none';
+try {
+  if (localStorage.getItem('hide-explore-guide') === '1') {
+    if (guideTip) guideTip.style.display = 'none';
+  }
+} catch (e) {
+  // localStorage 不可用时默认显示
 }
 guideTipClose?.addEventListener('click', () => {
   if (guideTip) guideTip.style.display = 'none';
-  sessionStorage.setItem('hide-explore-guide', '1');
-});
-document.getElementById('guide-tip-theater-btn')?.addEventListener('click', () => {
-  activateTheater(0);
-  theaterPanel?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  try {
+    localStorage.setItem('hide-explore-guide', '1');
+  } catch (e) {}
 });
 
 // 支持外部（如首页）通过 URL 或 hash 直达剧场
