@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { spawn } from 'node:child_process';
+import { SITE_ORIGIN } from './site-config.mjs';
 
 const CDP_PORT = 9466;
 const CHROME_PATH = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
@@ -9,7 +10,7 @@ const root = path.resolve('.');
 
 async function main() {
   const timestamp = Date.now();
-  const liveUrl = `https://selflove9417.github.io/eyes-solar-system/explore.html?v=${timestamp}`;
+  const liveUrl = `${SITE_ORIGIN}/explore.html?v=${timestamp}`;
   console.log(`Verifying live online deployment: ${liveUrl}`);
 
   // 1. Direct fetch checks

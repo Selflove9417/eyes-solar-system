@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { SITE_ORIGIN } from './site-config.mjs';
 
 const pages = [
   'index.html', 'explore.html', 'bodies.html', 'missions.html',
@@ -9,7 +10,7 @@ const pages = [
 
 for (const p of pages) {
   let content = fs.readFileSync(p, 'utf8');
-  const canonicalUrl = `https://selflove9417.github.io/eyes-solar-system/${p === 'index.html' ? '' : p}`;
+  const canonicalUrl = `${SITE_ORIGIN}/${p === 'index.html' ? '' : p}`;
 
   // 1. Ensure canonical
   if (!content.includes('rel="canonical"') && !content.includes("rel='canonical'")) {

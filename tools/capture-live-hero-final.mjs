@@ -57,7 +57,9 @@ await send('Network.setCacheDisabled', { cacheDisabled: true });
 
 await send('Emulation.setDeviceMetricsOverride', { width: 1440, height: 900, deviceScaleFactor: 1, mobile: false });
 
-const liveUrl = `https://selflove9417.github.io/eyes-solar-system/index.html?v=${Date.now()}`;
+import { SITE_ORIGIN } from './site-config.mjs';
+
+const liveUrl = `${SITE_ORIGIN}/index.html?v=${Date.now()}`;
 console.log('Navigating to LIVE URL:', liveUrl);
 await send('Page.navigate', { url: liveUrl });
 await sleep(3500);

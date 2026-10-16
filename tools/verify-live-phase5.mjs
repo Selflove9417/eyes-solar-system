@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { spawn } from 'node:child_process';
+import { SITE_ORIGIN } from './site-config.mjs';
 
 const CDP_PORT = 9477;
 const CHROME_PATH = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
@@ -8,8 +9,8 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const root = path.resolve('.');
 
 async function waitForLiveDeployment() {
-  console.log('Polling GitHub Pages for Phase 5 deployment (?v=20261015p5)...');
-  const checkUrl = `https://selflove9417.github.io/eyes-solar-system/saturn.html?_t=${Date.now()}`;
+  console.log('Polling live site for Phase 5 deployment (?v=20261015p5)...');
+  const checkUrl = `${SITE_ORIGIN}/saturn.html?_t=${Date.now()}`;
   for (let attempt = 1; attempt <= 40; attempt++) {
     try {
       const resp = await fetch(checkUrl, { cache: 'no-store' });
@@ -41,7 +42,7 @@ async function verifyLive() {
 
   console.log('\n--- Checking Live HTML Text for all 4 Feature Pages ---');
   for (const p of pages) {
-    const liveUrl = `https://selflove9417.github.io/eyes-solar-system/${p.file}?_t=${Date.now()}`;
+    const liveUrl = `${SITE_ORIGIN}/${p.file}?_t=${Date.now()}`;
     const res = await fetch(liveUrl, { cache: 'no-store' });
     const text = await res.text();
     const hasP5 = text.includes('20261015p5');
@@ -122,7 +123,7 @@ async function verifyLive() {
 
   // Verify saturn live on 1440 and 375
   await send('Emulation.setDeviceMetricsOverride', { width: 1440, height: 900, deviceScaleFactor: 1, mobile: false });
-  const liveSaturnUrl = `https://selflove9417.github.io/eyes-solar-system/saturn.html?_t=${Date.now()}`;
+  const liveSaturnUrl = `${SITE_ORIGIN}/saturn.html?_t=${Date.now()}`;
   await send('Page.navigate', { url: liveSaturnUrl });
   await sleep(2500);
 

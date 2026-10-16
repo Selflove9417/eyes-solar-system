@@ -1,19 +1,7 @@
-const pages = [
-  'index.html',
-  'explore.html',
-  'bodies.html',
-  'missions.html',
-  'glossary.html',
-  'guide.html',
-  'extension.html',
-  'about.html',
-  'saturn.html',
-  'mars.html',
-  'jwst.html',
-  'voyager-1.html'
-];
+import { SITE_ORIGIN, PAGES } from './site-config.mjs';
 
-const baseUrl = 'https://selflove9417.github.io/eyes-solar-system';
+const pages = PAGES;
+const baseUrl = SITE_ORIGIN;
 
 async function checkOnline() {
   const timestamp = Date.now();

@@ -1,24 +1,21 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { spawn } from 'node:child_process';
+import { SITE_ORIGIN, PAGES } from './site-config.mjs';
 
 const CDP_PORT = 9477;
 const CHROME_PATH = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const root = path.resolve('.');
 
-const pages = [
-  'index.html', 'explore.html', 'bodies.html', 'missions.html',
-  'glossary.html', 'guide.html', 'extension.html', 'about.html',
-  'mars.html', 'jwst.html', 'saturn.html', 'voyager-1.html'
-];
+const pages = PAGES;
 
 async function waitForDeployment() {
-  console.log('Polling GitHub Pages for deployment of version 20261015p6...');
+  console.log('Polling live site for deployment of version 20261015p6...');
   const maxAttempts = 30;
   for (let i = 1; i <= maxAttempts; i++) {
     try {
-      const url = `https://selflove9417.github.io/eyes-solar-system/index.html?cachebust=${Date.now()}`;
+      const url = `${SITE_ORIGIN}/index.html?cachebust=${Date.now()}`;
       const res = await fetch(url, { cache: 'no-store' });
       const text = await res.text();
       if (text.includes('20261015p6')) {
@@ -39,7 +36,7 @@ async function verifyAll12PagesLive() {
   console.log('\n=== Verifying All 12 Live Online Pages via HTTP ===');
   const results = {};
   for (const p of pages) {
-    const url = `https://selflove9417.github.io/eyes-solar-system/${p}?t=${Date.now()}`;
+    const url = `${SITE_ORIGIN}/${p}?t=${Date.now()}`;
     try {
       const res = await fetch(url, { cache: 'no-store' });
       const html = await res.text();
@@ -159,7 +156,7 @@ async function captureLiveScreenshots() {
 
   for (const t of tasks) {
     await cdp.setViewport(t.width, t.height, t.mobile);
-    const liveUrl = `https://selflove9417.github.io/eyes-solar-system/${t.page}?bust=${Date.now()}`;
+    const liveUrl = `${SITE_ORIGIN}/${t.page}?bust=${Date.now()}`;
     await cdp.send('Page.navigate', { url: liveUrl });
     await sleep(2500);
 

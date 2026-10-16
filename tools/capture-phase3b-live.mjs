@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { spawn } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { SITE_ORIGIN } from './site-config.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -99,7 +100,7 @@ console.log(`Navigating to LIVE site with timestamp ${ts}...`);
 
 // 1. Check bodies.html at 1440x900
 await setViewport(1440, 900);
-const bodiesUrl = `https://selflove9417.github.io/eyes-solar-system/bodies.html?v=${ts}`;
+const bodiesUrl = `${SITE_ORIGIN}/bodies.html?v=${ts}`;
 await navigateAndWait(bodiesUrl);
 for (let i = 0; i < 30; i++) {
   const count = await evalInPage("document.querySelectorAll('.entry-card').length");
@@ -127,7 +128,7 @@ await captureShot(path.join(root, 'shots', 'phase3b-bodies-1440-live.png'));
 
 // 2. Check glossary.html at 375x812
 await setViewport(375, 812);
-const glossaryUrl = `https://selflove9417.github.io/eyes-solar-system/glossary.html?v=${ts}`;
+const glossaryUrl = `${SITE_ORIGIN}/glossary.html?v=${ts}`;
 await navigateAndWait(glossaryUrl);
 for (let i = 0; i < 30; i++) {
   const count = await evalInPage("document.querySelectorAll('#t-ent tr').length");

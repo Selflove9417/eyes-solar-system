@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { spawn } from 'node:child_process';
+import { SITE_ORIGIN } from './site-config.mjs';
 
 const CDP_PORT = 9488;
 const CHROME_PATH = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
@@ -34,7 +35,7 @@ async function waitForLivePages() {
   console.log('Waiting for GitHub Pages to serve ?v=20261015p5c...');
   for (let attempt = 1; attempt <= 30; attempt++) {
     try {
-      const res = await fetch(`https://selflove9417.github.io/eyes-solar-system/saturn.html?_t=${Date.now()}`, { cache: 'no-store' });
+      const res = await fetch(`${SITE_ORIGIN}/saturn.html?_t=${Date.now()}`, { cache: 'no-store' });
       if (res.ok) {
         const text = await res.text();
         if (text.includes('20261015p5c')) {
@@ -162,7 +163,7 @@ async function runVerification() {
     console.log(`Testing Live Page: ${p.name}`);
     console.log(`==================================================`);
 
-    const liveUrl = `https://selflove9417.github.io/eyes-solar-system/${p.file}?_t=${Date.now()}`;
+    const liveUrl = `${SITE_ORIGIN}/${p.file}?_t=${Date.now()}`;
     await send('Page.navigate', { url: liveUrl });
     await sleep(2000);
 

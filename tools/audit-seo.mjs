@@ -1,11 +1,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-const files = [
-  'index.html', 'explore.html', 'bodies.html', 'missions.html',
-  'glossary.html', 'guide.html', 'extension.html', 'about.html',
-  'mars.html', 'jwst.html', 'saturn.html', 'voyager-1.html'
-];
+import { SITE_ORIGIN, PAGES } from './site-config.mjs';
+
+const files = PAGES;
 
 console.log('=== SEO & Social Sharing Audit ===\n');
 
@@ -68,7 +66,8 @@ for (const f of files) {
       console.error(`  ❌ [${f}] og:image must be an absolute URL starting with https:// (got: ${ogImg})`);
       totalErrors++;
     }
-    const localRel = ogImg.replace(/^https?:\/\/[^\/]+\/eyes-solar-system\//, '').replace(/^\//, '');
+    const imgUrl = new URL(ogImg);
+    const localRel = imgUrl.pathname.replace(/^\/eyes-solar-system/, '').replace(/^\//, '');
     const exists = fs.existsSync(localRel);
     console.log(`  og:image on disk: ${exists ? 'EXISTS (' + localRel + ')' : 'NOT FOUND (' + localRel + ')'}`);
     if (!exists) {

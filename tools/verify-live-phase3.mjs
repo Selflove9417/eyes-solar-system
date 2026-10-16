@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { spawn } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { SITE_ORIGIN } from './site-config.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -100,7 +101,7 @@ console.log(`Navigating to LIVE site with timestamp ${ts}...`);
 await setViewport(1440, 900);
 
 // Check bodies.html
-const bodiesUrl = `https://selflove9417.github.io/eyes-solar-system/bodies.html?v=${ts}`;
+const bodiesUrl = `${SITE_ORIGIN}/bodies.html?v=${ts}`;
 await navigateAndWait(bodiesUrl);
 for (let i = 0; i < 30; i++) {
   const count = await evalInPage("document.querySelectorAll('.entry-card').length");
@@ -118,7 +119,7 @@ console.log('LIVE bodies.html status:', bodiesInfo);
 await captureShot(path.join(root, 'shots', 'phase3-bodies-1440-live.png'));
 
 // Check missions.html
-const missionsUrl = `https://selflove9417.github.io/eyes-solar-system/missions.html?v=${ts}`;
+const missionsUrl = `${SITE_ORIGIN}/missions.html?v=${ts}`;
 await navigateAndWait(missionsUrl);
 const missionsInfo = await evalInPage(`({
   title: document.title,
@@ -130,7 +131,7 @@ console.log('LIVE missions.html status:', missionsInfo);
 await captureShot(path.join(root, 'shots', 'phase3-missions-1440-live.png'));
 
 // Check glossary.html
-const glossaryUrl = `https://selflove9417.github.io/eyes-solar-system/glossary.html?v=${ts}`;
+const glossaryUrl = `${SITE_ORIGIN}/glossary.html?v=${ts}`;
 await navigateAndWait(glossaryUrl);
 const glossaryInfo = await evalInPage(`({
   title: document.title,
