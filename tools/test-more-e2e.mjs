@@ -122,24 +122,33 @@ async function main() {
       await ev(bundle);
       await sleep(2500);
 
-      // 点击 Read More 展开
-      const clickRes = await ev(`(() => {
-        const btn = document.querySelector('button.more-button, [class*="more-button"]');
-        if (btn) {
-          btn.click();
-          return { clicked: true, text: btn.textContent.trim() };
-        }
-        return { clicked: false };
+      // 1. 点击展开
+      await ev(`document.querySelector('button.more-button')?.click()`);
+      await sleep(1000);
+
+      const btnAfterMore = await ev(`(() => {
+        const btn = document.querySelector('button.more-button');
+        return btn ? btn.textContent.trim() : '';
       })()`);
 
-      await sleep(2000);
+      // 2. 点击收起
+      await ev(`document.querySelector('button.more-button')?.click()`);
+      await sleep(1000);
+
+      const btnAfterCollapse = await ev(`(() => {
+        const btn = document.querySelector('button.more-button');
+        return btn ? btn.textContent.trim() : '';
+      })()`);
+
+      // 3. 再次点击展开以便截取展开后长文截图
+      await ev(`document.querySelector('button.more-button')?.click()`);
+      await sleep(1000);
 
       // 检测详情面板、一句话简介、展开长文的汉化状况
       const status = await ev(`(() => {
         const han = /[\\u4e00-\\u9fff]/;
         const blurbEl = document.querySelector('.description .copy:not(.more)');
         const moreEl = document.querySelector('.description .copy.more');
-        const moreBtn = document.querySelector('button.more-button');
 
         const blurbText = blurbEl ? blurbEl.textContent.trim() : '';
         const moreText = moreEl ? moreEl.textContent.trim() : '';
@@ -156,7 +165,6 @@ async function main() {
           totalParagraphs: paragraphs.length,
           zhParagraphsCount: zhParagraphs.length,
           enParagraphsCount: enParagraphs.length,
-          moreBtnText: moreBtn ? moreBtn.textContent.trim() : '',
           moreTextPreviewZh: zhParagraphs[0]?.slice(0, 60) || '',
           enParagraphsPreview: enParagraphs.slice(0, 2)
         };
@@ -167,9 +175,10 @@ async function main() {
       const shotFile = path.join(shotsDir, `more-${route}.png`);
       fs.writeFileSync(shotFile, Buffer.from(shot.data, 'base64'));
 
-      const isAllZh = status.totalParagraphs > 0 && status.enParagraphsCount === 0 && status.moreIsZh;
+      const isAllZh = status.totalParagraphs > 0 && status.enParagraphsCount === 0 && status.moreIsZh && btnAfterMore === '收起';
       console.log(`  - 一句话简介汉化: ${status.blurbIsZh ? '✅ 中文' : '❌ 仍为英文'}`);
-      console.log(`  - 按钮文案: "${status.moreBtnText}"`);
+      console.log(`  - 点击 More 后按钮文案: "${btnAfterMore}" (${btnAfterMore === '收起' ? '✅ 正确' : '❌ 异常'})`);
+      console.log(`  - 点击收起后按钮文案: "${btnAfterCollapse}" (${btnAfterCollapse === '阅读更多' ? '✅ 正确' : '❌ 异常'})`);
       console.log(`  - 长文段落数: 总计 ${status.totalParagraphs}，中文 ${status.zhParagraphsCount}，未翻译英文 ${status.enParagraphsCount}`);
       if (status.moreTextPreviewZh) {
         console.log(`  - 长文译文预览: "${status.moreTextPreviewZh}..."`);

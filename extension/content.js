@@ -63,7 +63,6 @@
     const lead = raw.match(/^\s*/)[0];
     const tail = raw.match(/\s*$/)[0];
     written.add(node);
-    written.add(node.parentElement);
     node.nodeValue = lead + zh + tail;
   }
 
@@ -107,6 +106,14 @@
       ...(root.querySelectorAll?.('button.more-button') || []),
     ]);
     for (const btn of moreBtns) {
+      if (!btn.__hasZhClick) {
+        btn.__hasZhClick = true;
+        btn.addEventListener('click', () => {
+          requestAnimationFrame(() => applyTo(btn));
+          setTimeout(() => applyTo(btn), 30);
+          setTimeout(() => applyTo(btn), 150);
+        });
+      }
       for (const n of btn.childNodes) {
         if (n.nodeType === Node.TEXT_NODE && /^\s*Read\s*$/i.test(n.nodeValue)) {
           written.add(n);
@@ -155,11 +162,14 @@
 
   new MutationObserver((records) => {
     for (const r of records) {
-      const touched = r.type === 'characterData'
-        ? (r.target.nodeType === Node.TEXT_NODE ? r.target.parentElement : r.target)
-        : r.target;
-      if (written.has(touched) || written.has(r.target)) continue;
-      schedule(touched?.nodeType === Node.ELEMENT_NODE ? touched : touched?.parentElement);
+      if (r.type === 'characterData') {
+        if (written.has(r.target) && hasHan(r.target.nodeValue)) continue;
+        written.delete(r.target);
+        schedule(r.target.parentElement);
+        continue;
+      }
+      if (written.has(r.target)) continue;
+      schedule(r.target.nodeType === Node.ELEMENT_NODE ? r.target : r.target.parentElement);
     }
   }).observe(document.documentElement, {
     childList: true,
