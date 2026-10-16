@@ -45,7 +45,7 @@
     <article class="text-block">
       <div class="text-block-swatch"></div>
       <h3 class="text-block-title">3D 场景标签</h3>
-      <p class="text-block-content">太阳、行星、卫星、彗星、小行星与航天器的悬浮名称。官方实现把这些渲染成普通页面元素，改写后不会被程序回写。</p>
+      <p class="text-block-content">太阳、行星、卫星、彗星、小行星与航天器的悬浮名称，直接在画面中显示清晰中文标签。</p>
     </article>
     <article class="text-block">
       <div class="text-block-swatch"></div>
@@ -107,13 +107,22 @@
     在 <code>chrome://extensions</code> 或 <code>edge://extensions</code> 管理页面中点击“移除”即可彻底删除，不留任何本地残留；官方站点即可恢复原始英文呈现。
   </p>
 
-  <h2>已知限制与边界说明</h2>
+  <h2>已知限制与注意事项</h2>
   <ul>
-    <li><strong>官方改版：</strong>汉化层依赖官方界面 class 名与英文字面量。官方更新界面后可能出现漏译，需要同步更新术语映射。</li>
-    <li><strong>动态模板：</strong>官方文案含有运行时变量占位符，替换发生在渲染阶段，个别句子可能出现中英混排。</li>
-    <li><strong>长尾名称：</strong>在官方 700+ 实体中，仅已建立可靠中文审定对照的条目会被汉化，其余条目严格保留英文。</li>
-    <li><strong>本站嵌入视窗内不适用：</strong>扩展直接作用于顶层官方页面；本站 3D 探索页里的嵌入视窗受浏览器同源安全策略保护，不直接受扩展影响。</li>
+    <li><strong>界面随官方更新：</strong>它只替换界面文字，不改动画面本身。若 NASA 官方改版或新增未收录功能，可能出现部分文字保持英文，我们会随版本跟进补齐。</li>
+    <li><strong>混合拼接句子：</strong>包含动态变化数值（如倒计时、实时距离）的句子，部分前缀可能呈现中英混排。</li>
+    <li><strong>长尾天体：</strong>官方 700 多个天体中，仅已有公认中文审定译名的条目会被汉化，尚未建立权威中文译名的罕见条目严格保留英文。</li>
+    <li><strong>作用范围说明：</strong>扩展专为直接在浏览器访问 NASA 官方网站时设计；本站内嵌的 3D 漫游视窗受浏览器底层安全隔离保护，不直接受此扩展改动。</li>
   </ul>
+
+  <details class="tech-notes">
+    <summary>查看扩展底层技术实现与安全细节</summary>
+    <div style="padding-top:10px;font-size:13px;color:var(--fg-dim);line-height:1.65">
+      <p style="margin:0 0 6px"><strong>DOM 监听与文本替换：</strong>扩展利用 <code>MutationObserver</code> 监听界面节点变化，根据官方界面 class 选择器与英文字面量匹配中文字典进行局部注入，不会中断官方 WebGL 渲染管线。</p>
+      <p style="margin:0 0 6px"><strong>动态模板占位符：</strong>部分文本含有运行时变量占位符（如 <code>{days} days ago</code>），由于替换发生在客户端渲染阶段，无法预知的模板字面量会做保守处理，优先保障程序稳定性。</p>
+      <p style="margin:0"><strong>跨域与同源安全隔离：</strong>根据浏览器同源安全策略（Same-Origin Policy），主站无法注入跨域 iframe 内部。因此本站探索页视窗仍由官方英文原生驱动，扩展仅在用户直接打开 <code>eyes.nasa.gov</code> 顶级页面时生效。</p>
+    </div>
+  </details>
 
   <div class="doc-footer-links" style="margin-top:36px;border-top:1px solid var(--line-subtle);padding-top:8px;max-width:70ch">
     <a href="glossary.html">查看术语对照表 ↗</a> · <a href="about.html" style="margin-left:12px">关于与合规 ↗</a>
