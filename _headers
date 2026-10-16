@@ -1,0 +1,19 @@
+# Cloudflare Pages 响应头配置规范
+# 1. HTML 入口与文档：强制协商缓存，确保用户始终即时获取包含最新静态指纹参数（?v=）的页面结构
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/
+  Cache-Control: public, max-age=0, must-revalidate
+
+# 2. 静态资源（CSS / JS / 图片 / 字体）：具备 ?v= 版本指纹，可安全设置长达 1 年的永久不可变强缓存
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# 3. 天体与科普数据（JSON）：设置 1 天边缘与浏览器缓存，配合后台平滑重新验证
+/data/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+
+# 4. 全局安全防御标头
+/*
+  X-Content-Type-Options: nosniff
