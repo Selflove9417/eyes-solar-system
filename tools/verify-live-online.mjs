@@ -40,13 +40,31 @@ async function main() {
       const ogImageOk = ogImage.startsWith(SITE_ORIGIN);
       const twCardOk = twCard === 'summary';
 
-      let gsvFound = false;
-      let gsvSnippet = '';
+      let gsvCheck = { count: 0, tag: '', content: '', ok: false, reason: '' };
       if (p === 'index.html') {
-        const gsvMatch = html.match(/<meta\s+name=["']google-site-verification["'][^>]*>/i);
-        gsvFound = Boolean(gsvMatch);
-        gsvSnippet = gsvMatch ? gsvMatch[0] : '';
-        if (!gsvFound) {
+        const matches = [...html.matchAll(/<meta\b[^>]*\bname\s*=\s*["']google-site-verification["'][^>]*>/gi)];
+        const count = matches.length;
+        const tag = matches[0]?.[0] || '';
+        const cMatch = tag.match(/\bcontent\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/i);
+        const content = cMatch ? (cMatch[1] ?? cMatch[2] ?? cMatch[3] ?? '') : '';
+
+        const EXPECTED_GSV = 'YUYEsF8jkU0GAS--tGDJwTFVTmY7NQhGHpycRHyFO6c';
+        const hasIllegal = /[<>"'\s]/.test(content);
+        const isStrict = content === EXPECTED_GSV;
+
+        if (count === 0) {
+          gsvCheck = { count: 0, tag: '', content: '', ok: false, reason: '未找到 google-site-verification 标签' };
+        } else if (count > 1) {
+          gsvCheck = { count, tag, content, ok: false, reason: `标签出现多次 (共 ${count} 次)` };
+        } else if (!isStrict) {
+          gsvCheck = { count, tag, content, ok: false, reason: `content 属性值不匹配: "${content}"` };
+        } else if (hasIllegal) {
+          gsvCheck = { count, tag, content, ok: false, reason: `content 包含非法字符 (<, >, 引号或空白): "${content}"` };
+        } else {
+          gsvCheck = { count: 1, tag, content, ok: true, reason: '' };
+        }
+
+        if (!gsvCheck.ok) {
           allChecksPassed = false;
         }
       }
@@ -63,9 +81,8 @@ async function main() {
         ogUrl,
         ogImage,
         twCard,
-        gsvFound,
-        gsvSnippet,
-        ok: canonicalOk && ogUrlOk && ogImageOk && twCardOk && (p !== 'index.html' || gsvFound)
+        gsvCheck,
+        ok: canonicalOk && ogUrlOk && ogImageOk && twCardOk && (p !== 'index.html' || gsvCheck.ok)
       });
     } catch (err) {
       metaResults.push({ page: p, error: err.message, ok: false });
@@ -82,12 +99,13 @@ async function main() {
 
   // 1.1 校验 index.html 的 google-site-verification 标签
   const indexMeta = metaResults.find((r) => r.page === 'index.html');
-  const gsvOk = Boolean(indexMeta?.gsvFound);
-  console.log(`  index.html google-site-verification 检查: ${gsvOk ? 'PASS' : 'FAIL (缺失)'}`);
-  if (gsvOk) {
-    console.log(`  标签源码: ${indexMeta.gsvSnippet}`);
-  } else {
-    console.error(`\n❌ [步骤 1 失败退出] index.html 缺失 google-site-verification 所有权验证标签。`);
+  const gsv = indexMeta?.gsvCheck || { ok: false, reason: '未抓取到数据' };
+  console.log(`  index.html google-site-verification 检查: ${gsv.ok ? 'PASS' : 'FAIL (' + gsv.reason + ')'}`);
+  console.log(`    标签出现次数 : ${gsv.count} (${gsv.count === 1 ? 'PASS' : 'FAIL'})`);
+  console.log(`    提取 content : "${gsv.content}" (${gsv.content === 'YUYEsF8jkU0GAS--tGDJwTFVTmY7NQhGHpycRHyFO6c' ? 'PASS' : 'FAIL'})`);
+  console.log(`    完整标签源码 : ${gsv.tag || '(无)'}`);
+  if (!gsv.ok) {
+    console.error(`\n❌ [步骤 1 失败退出] index.html google-site-verification 验证未满足要求: ${gsv.reason}`);
     process.exit(1);
   }
   console.log('');
