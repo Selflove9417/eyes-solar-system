@@ -1,0 +1,22 @@
+{
+  "name": "eyes-solar-system",
+  "version": "1.0.0",
+  "description": "深空之眸 · NASA Eyes 中文观测站",
+  "type": "module",
+  "scripts": {
+    "lint-zh": "node tools/lint-zh.mjs",
+    "check-all-links": "node tools/check-all-links.mjs",
+    "test-stories": "node tools/test-stories.mjs",
+    "check-design-doc": "node tools/check-design-doc.mjs",
+    "check-css-vars": "node tools/check-css-vars.mjs",
+    "measure-computed-contrast": "node tools/measure-computed-contrast.mjs",
+    "measure-touch-targets": "node tools/measure-touch-targets.mjs",
+    "measure-lede-orphan": "node tools/measure-lede-orphan.mjs",
+    "audit-keyboard-focus": "node tools/audit-keyboard-focus.mjs",
+    "verify-phase2-qa": "node tools/verify-phase2-qa.mjs",
+    "verify-phase3-qa": "node tools/verify-phase3-qa.mjs",
+    "verify-phase4": "node tools/verify-phase4-qa.mjs",
+    "verify-phase5": "node tools/verify-phase5-qa.mjs",
+    "test": "node tools/run-all-tests.mjs"
+  }
+}
