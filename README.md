@@ -1,7 +1,8 @@
 # 深空之眸 · NASA Eyes 中文观测站 (Eyes Solar System)
 
 > **基于 NASA/JPL 官方 Eyes on the Solar System 实时 3D 动力学模型，专为中文用户打造的太阳系探索门户与科普观测站。**  
-> 线上体验地址：[https://selflove9417.github.io/eyes-solar-system/](https://selflove9417.github.io/eyes-solar-system/)
+> 线上体验地址（主站）：[https://deepspaceeye.pages.dev/](https://deepspaceeye.pages.dev/)  
+> 镜像站点（GitHub Pages）：[https://selflove9417.github.io/eyes-solar-system/](https://selflove9417.github.io/eyes-solar-system/)
 
 ---
 
@@ -22,7 +23,7 @@
 ```mermaid
 flowchart TD
     User([用户访问]) --> ModeChoice{探索方式}
-    ModeChoice -->|即开即用 / 免安装| Portal[静态中文门户网站<br>GitHub Pages]
+    ModeChoice -->|即开即用 / 免安装| Portal[静态中文门户网站<br>Cloudflare Pages / GitHub Pages 镜像]
     ModeChoice -->|原生 3D 视窗全深度汉化| Extension[浏览器汉化扩展程序<br>Chrome / Edge]
     
     Portal --> P1[官方 3D 模拟器嵌入]
