@@ -171,6 +171,9 @@ for (let i = 0; i < testSteps.length; i++) {
   if (code === 0) {
     console.log(`✅ 通过 (${elapsed}s)`);
     results.push({ name: step.name, status: 'PASS', elapsed });
+    if (step.needsBrowser) {
+      await new Promise((r) => setTimeout(r, 600));
+    }
   } else {
     console.log(`❌ 失败 (exit code: ${code}, ${elapsed}s)`);
     console.error(`\n--- 错误输出 (${step.name}) ---`);

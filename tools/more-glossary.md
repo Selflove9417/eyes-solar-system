@@ -18,6 +18,10 @@
 | `core` | **核心** / **地核** | — | 如 iron core（铁质核心） |
 | `ice shell` | **冰壳** | — | 外层水冰硬壳 |
 | `tectonic plates` | **板块** | ❌ 构造板块 | 如 shifting tectonic plates（板块运动） |
+| `ring` / `rings` | **环** | ❌ 光环 | 统一定为“环”（如木星环、土星环），不用“光环” |
+| `river valley networks` | **河谷网络** | — | 火星古代水流冲刷遗迹 |
+| `delta` / `deltas` | **三角洲** | — | 火星河流冲积地貌 |
+| `lakebed` / `lakebeds` | **湖床** | — | 火星古代干涸湖泊遗迹 |
 
 ---
 
@@ -31,7 +35,12 @@
 | `magnetic lines of force` | **磁力线** | — | 行星磁场力线 |
 | `electric generator` | **发电机** | — | 木卫一洛伦兹力感应发电效应 |
 | `Great Red Spot` | **大红斑** | — | 木星标志性反气旋风暴 |
-| `gas giant` | **气态巨行星** | ❌ 气体行星 | 巨行星分类标准术语 |
+| `gas giant` | **气态巨行星** | ❌ 气体行星 | 木星、土星分类标准术语 |
+| `ice giant` | **冰巨行星** | ❌ 冰态巨行星 | 天王星、海王星分类标准术语 |
+| `solar wind` | **太阳风** | — | 太阳向外喷射的高能带电粒子流 |
+| `regolith` | **风化层** | ❌ 土壤（除非特指地球生物土壤） | 天体表层细颗粒风化物 |
+| `axial tilt` | **轴倾角** | ❌ 轴倾斜度 | 自转轴与公转轨道法线夹角 |
+| `runaway greenhouse effect` | **失控温室效应** | — | 金星极端温室效应标准术语 |
 
 ---
 
@@ -48,5 +57,23 @@
 | `Ganymede` | **木卫三** | 见 `names.zh.json` |
 | `Callisto` | **木卫四** | 见 `names.zh.json` |
 | `Jupiter` | **木星** | 见 `names.zh.json` |
+| `Sun` | **太阳** | 见 `names.zh.json` |
 | `Mercury` | **水星** | 见 `names.zh.json` |
+| `Venus` | **金星** | 见 `names.zh.json` |
+| `Earth` | **地球** | 见 `names.zh.json` |
+| `Mars` | **火星** | 见 `names.zh.json` |
+| `Saturn` | **土星** | 见 `names.zh.json` |
+| `Uranus` | **天王星** | 见 `names.zh.json` |
+| `Neptune` | **海王星** | 见 `names.zh.json` |
+| `Enceladus` | **土卫二** | 见 `names.zh.json` |
+| `Titan` | **土卫六** | 见 `names.zh.json` |
+| `Milky Way` / `Milky Way galaxy` | **银河系** | 通行天文学名词 |
+| `Orion Spur` | **猎户支臂** | 银河系结构通行天文学译名 |
+| `Sagittarius arm` | **人马臂** | 银河系旋臂通行天文学译名 |
+| `Olympus Mons` | **奥林匹斯山** | 火星火山通行天文学译名 |
+| `Mariner 2` | **水手 2 号** | 见 `missions.zh.json` |
+| `Mariner 10` | **水手 10 号** | 水手号系列空间探测器规范译名 |
+| `MESSENGER` | **信使号** | 见 `missions.zh.json` |
+| `Magellan` | **麦哲伦号** | 见 `missions.zh.json` |
 | `Galileo spacecraft` | **伽利略号探测器** | 见 `missions.zh.json` |
+| `Earth Observing System (EOS)` | **地球观测系统** | NASA 对地观测卫星系列体系 |

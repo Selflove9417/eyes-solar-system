@@ -16,8 +16,11 @@ const pages = [
 ];
 
 async function launchChrome() {
+  const tempProfile = path.join(root, '.chrome-temp-audit-' + Date.now());
+  fs.mkdirSync(tempProfile, { recursive: true });
   const proc = spawn(CHROME_PATH, [
     `--remote-debugging-port=${CDP_PORT}`,
+    `--user-data-dir=${tempProfile}`,
     '--headless=new',
     '--no-sandbox',
     '--disable-dev-shm-usage',
@@ -89,7 +92,7 @@ class CDPClient {
       windowsVirtualKeyCode: 9,
       modifiers: shift ? 8 : 0
     });
-    await sleep(40);
+    await sleep(80);
   }
   async pressKey(key, code, vk) {
     await this.send('Input.dispatchKeyEvent', {
@@ -104,7 +107,7 @@ class CDPClient {
       code,
       windowsVirtualKeyCode: vk
     });
-    await sleep(40);
+    await sleep(80);
   }
   close() {
     this.ws.close();
@@ -158,46 +161,55 @@ for (const p of pages) {
   let trapReason = '';
   let lostFocusDetected = false;
 
+  const getFocusInfoExpr = `
+    (() => {
+      let el = document.activeElement;
+      if (!el || el === document.body) return { tag: 'BODY', label: 'lost-focus', uid: 'BODY' };
+      if (el.tagName === 'IFRAME') {
+        // In headless CDP, cross-origin iframes capture keyboard input without bubbling back to top frame.
+        // To continue auditing the parent page's remaining interactive elements, advance focus past the iframe.
+        const iframeTag = el.tagName;
+        const iframeId = el.id;
+        const all = Array.from(document.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), details summary, [tabindex]:not([tabindex="-1"])')).filter(item => {
+          if (item.closest('[inert]')) return false;
+          const s = window.getComputedStyle(item);
+          if (s.display === 'none' || s.visibility === 'hidden') return false;
+          return item.offsetWidth > 0 || item.offsetHeight > 0 || item.getClientRects().length > 0;
+        });
+        const idx = all.findIndex(item => el.compareDocumentPosition(item) & Node.DOCUMENT_POSITION_FOLLOWING);
+        if (idx !== -1) {
+          all[idx].focus();
+        }
+        return { tag: iframeTag, id: iframeId, class: '', label: '(iframe-bridged)', uid: 'iframe_' + iframeId };
+      }
+      if (!el.__node_uid) {
+        window.__node_counter = (window.__node_counter || 0) + 1;
+        el.__node_uid = 'node_' + window.__node_counter;
+      }
+      let label = el.getAttribute('aria-label') || el.innerText || el.value || el.getAttribute('placeholder') || el.className;
+      label = (label || '').trim().replace(/\\s+/g, ' ').slice(0, 30);
+
+      return {
+        tag: el.tagName,
+        id: el.id,
+        class: el.className,
+        label,
+        uid: el.__node_uid
+      };
+    })()
+  `;
+
   const stepsToTest = Math.min(focusableCount + 3, 30);
   for (let i = 0; i < stepsToTest; i++) {
     await client.pressTab();
-    const info = await client.evaluate(`
-      (() => {
-        let el = document.activeElement;
-        if (!el || el === document.body) return { tag: 'BODY', label: 'lost-focus', uid: 'BODY' };
-        if (el.tagName === 'IFRAME') {
-          // In headless CDP, cross-origin iframes capture keyboard input without bubbling back to top frame.
-          // To continue auditing the parent page's remaining interactive elements, advance focus past the iframe.
-          const iframeTag = el.tagName;
-          const iframeId = el.id;
-          const all = Array.from(document.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), details summary, [tabindex]:not([tabindex="-1"])')).filter(item => {
-            if (item.closest('[inert]')) return false;
-            const s = window.getComputedStyle(item);
-            if (s.display === 'none' || s.visibility === 'hidden') return false;
-            return item.offsetWidth > 0 || item.offsetHeight > 0 || item.getClientRects().length > 0;
-          });
-          const idx = all.findIndex(item => el.compareDocumentPosition(item) & Node.DOCUMENT_POSITION_FOLLOWING);
-          if (idx !== -1) {
-            all[idx].focus();
-          }
-          return { tag: iframeTag, id: iframeId, class: '', label: '(iframe-bridged)', uid: 'iframe_' + iframeId };
-        }
-        if (!el.__node_uid) {
-          window.__node_counter = (window.__node_counter || 0) + 1;
-          el.__node_uid = 'node_' + window.__node_counter;
-        }
-        let label = el.getAttribute('aria-label') || el.innerText || el.value || el.getAttribute('placeholder') || el.className;
-        label = (label || '').trim().replace(/\\s+/g, ' ').slice(0, 30);
-
-        return {
-          tag: el.tagName,
-          id: el.id,
-          class: el.className,
-          label,
-          uid: el.__node_uid
-        };
-      })()
-    `);
+    let info = await client.evaluate(getFocusInfoExpr);
+    if (info.label === 'lost-focus') {
+      await sleep(100);
+      const retry = await client.evaluate(getFocusInfoExpr);
+      if (retry.label !== 'lost-focus') {
+        info = retry;
+      }
+    }
 
     if (info.label === 'lost-focus' && i < focusableCount) {
       lostFocusDetected = true;
@@ -252,9 +264,9 @@ for (const p of pages) {
   if (hasDropdownBtn) {
     // 1. Focus button and press ArrowDown
     await client.evaluate(`document.querySelector('.nav-dropdown-btn').focus()`);
-    await sleep(40);
+    await sleep(80);
     await client.pressKey('ArrowDown', 'ArrowDown', 40);
-    await sleep(60);
+    await sleep(80);
 
     const openCheck = await client.evaluate(`
       (() => {
@@ -270,7 +282,7 @@ for (const p of pages) {
 
     // 2. Press ArrowDown to advance to second link
     await client.pressKey('ArrowDown', 'ArrowDown', 40);
-    await sleep(60);
+    await sleep(80);
     const advanceCheck = await client.evaluate(`
       (() => {
         const item = document.querySelector('.nav-dropdown-btn')?.closest('.nav-item');
@@ -281,7 +293,7 @@ for (const p of pages) {
 
     // 3. Press Escape to close and restore focus
     await client.pressKey('Escape', 'Escape', 27);
-    await sleep(60);
+    await sleep(80);
     const closeCheck = await client.evaluate(`
       (() => {
         const btn = document.querySelector('.nav-dropdown-btn');

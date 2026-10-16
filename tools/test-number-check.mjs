@@ -55,6 +55,12 @@ const testCases = [
     zh: '由伽利略·伽利莱于 1610 年 1 月 7 日发现。',
     shouldPass: true
   },
+  {
+    name: 'Mariner 2 与 Dec. 14, 1962 (不误判 Mariner 为 March)',
+    en: 'Mariner 2 successfully flew by on Dec. 14, 1962.',
+    zh: '水手 2 号于 1962 年 12 月 14 日成功飞掠。',
+    shouldPass: true
+  },
   // 7. 反向用例：数值错误 (3 million 错译为 400 万)
   {
     name: '【反向】3 million 错译为 400 万（必须报错）',
