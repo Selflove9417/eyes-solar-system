@@ -100,6 +100,7 @@ async function checkPortAndEnsureServer() {
 
 const testSteps = [
   { name: 'lint-zh', script: 'tools/lint-zh.mjs', needsBrowser: false },
+  { name: 'check-more', script: 'tools/check-more.mjs', needsBrowser: false },
   { name: 'check-all-links', script: 'tools/check-all-links.mjs', needsBrowser: false },
   { name: 'test-stories', script: 'tools/test-stories.mjs', needsBrowser: false },
   { name: 'check-design-doc', script: 'tools/check-design-doc.mjs', needsBrowser: false },
@@ -198,6 +199,6 @@ if (!allPassed) {
   console.warn('⚠️ 注意：已执行的基础单元测试全部通过，但 8 项浏览器测试因环境缺失已跳过。');
   process.exit(2); // 因环境缺失跳过 -> 退出码 2
 } else {
-  console.log('🎉 全部 13 项回归测试全部通过！0 错误！');
+  console.log(`🎉 全部 ${testSteps.length} 项回归测试全部通过！0 错误！`);
   process.exit(0); // 全部通过 -> 退出码 0
 }

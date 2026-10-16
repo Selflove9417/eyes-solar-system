@@ -1,0 +1,1071 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "updated": "2026-10-16",
+    "totalEntities": 92,
+    "totalParagraphs": 150,
+    "description": "NASA Eyes 太阳系中文汉化 - 天体详情面板展开长文 (More) 翻译词库"
+  },
+  "entries": {
+    "sun": {
+      "en": "Its gravity holds the solar system together, keeping everything from the biggest planets to the smallest particles of debris in its orbit. Electric currents in the Sun generate a magnetic field that is carried out through the solar system by the solar wind—a stream of electrically charged gas blowing outward from the Sun in all directions.\n\n The connection and interactions between the Sun and Earth drive the seasons, ocean currents, weather, climate, radiation belts and aurorae. Though it is special to us, there are billions of stars like our Sun scattered across the Milky Way galaxy. The Sun, and everything that orbits it, is located in the Milky Way galaxy. More specifically, our Sun is in a spiral arm called the Orion Spur that extends outward from the Sagittarius arm. From there, the Sun orbits the center of the Milky Way Galaxy, bringing the planets, asteroids, comets and other objects along with it. Our solar system is moving with an average velocity of 450,000 miles per hour (720,000 kilometers per hour). But even at this speed, it takes us about 230 million years to make one complete orbit around the Milky Way.\n\n The Sun rotates as it orbits the center of the Milky Way. Its spin has an axial tilt of 7.25 degrees with respect to the plane of the planets’ orbits. Since the Sun is not a solid body, different parts of the Sun rotate at different rates. At the equator, the Sun spins around once about every 25 days, but at its poles the Sun rotates once on its axis every 36 Earth days.",
+      "paragraphs": [
+        {
+          "en": "Its gravity holds the solar system together, keeping everything from the biggest planets to the smallest particles of debris in its orbit. Electric currents in the Sun generate a magnetic field that is carried out through the solar system by the solar wind—a stream of electrically charged gas blowing outward from the Sun in all directions.",
+          "zh": ""
+        },
+        {
+          "en": "The connection and interactions between the Sun and Earth drive the seasons, ocean currents, weather, climate, radiation belts and aurorae. Though it is special to us, there are billions of stars like our Sun scattered across the Milky Way galaxy. The Sun, and everything that orbits it, is located in the Milky Way galaxy. More specifically, our Sun is in a spiral arm called the Orion Spur that extends outward from the Sagittarius arm. From there, the Sun orbits the center of the Milky Way Galaxy, bringing the planets, asteroids, comets and other objects along with it. Our solar system is moving with an average velocity of 450,000 miles per hour (720,000 kilometers per hour). But even at this speed, it takes us about 230 million years to make one complete orbit around the Milky Way.",
+          "zh": ""
+        },
+        {
+          "en": "The Sun rotates as it orbits the center of the Milky Way. Its spin has an axial tilt of 7.25 degrees with respect to the plane of the planets’ orbits. Since the Sun is not a solid body, different parts of the Sun rotate at different rates. At the equator, the Sun spins around once about every 25 days, but at its poles the Sun rotates once on its axis every 36 Earth days.",
+          "zh": ""
+        }
+      ]
+    },
+    "mercury": {
+      "en": "Mercury's surface temperatures are both extremely hot and cold. Because the planet is so close to the Sun, day temperatures can reach highs of 800°F (430°C). Without an atmosphere to retain that heat at night, temperatures can dip as low as -290°F (-180°C). From the surface of Mercury, the Sun would appear more than three times as large as it does when viewed from Earth, and the sunlight would be as much as seven times brighter. Despite its proximity to the Sun, Mercury is not the hottest planet in our solar system – that title belongs to nearby Venus, thanks to its dense atmosphere. But Mercury is the fastest planet, zipping around the Sun every 88 Earth days. Mercury's surface resembles that of Earth's moon, scarred by many impact craters resulting from collisions with meteoroids and comets. The first spacecraft to visit Mercury was Mariner 10, which imaged about 45 percent of the surface. NASA's MErcury Surface, Space ENvironment, GEochemistry, and Ranging (MESSENGER) mission flew by Mercury three times in 2008-2009 and orbited the planet from 2011 to 2015, mapping the entire surface.",
+      "paragraphs": [
+        {
+          "en": "Mercury's surface temperatures are both extremely hot and cold. Because the planet is so close to the Sun, day temperatures can reach highs of 800°F (430°C). Without an atmosphere to retain that heat at night, temperatures can dip as low as -290°F (-180°C). From the surface of Mercury, the Sun would appear more than three times as large as it does when viewed from Earth, and the sunlight would be as much as seven times brighter. Despite its proximity to the Sun, Mercury is not the hottest planet in our solar system – that title belongs to nearby Venus, thanks to its dense atmosphere. But Mercury is the fastest planet, zipping around the Sun every 88 Earth days. Mercury's surface resembles that of Earth's moon, scarred by many impact craters resulting from collisions with meteoroids and comets. The first spacecraft to visit Mercury was Mariner 10, which imaged about 45 percent of the surface. NASA's MErcury Surface, Space ENvironment, GEochemistry, and Ranging (MESSENGER) mission flew by Mercury three times in 2008-2009 and orbited the planet from 2011 to 2015, mapping the entire surface.",
+          "zh": ""
+        }
+      ]
+    },
+    "venus": {
+      "en": "Venus and Earth are similar in size, mass, density, composition, and gravity. There, however, the similarities end. Venus has a thick, toxic atmosphere filled with carbon dioxide and it’s perpetually shrouded in thick, yellowish clouds of mostly sulfuric acid that trap heat, causing a runaway greenhouse effect. It’s the hottest planet in our solar system, even though Mercury is closer to the Sun. Venus has crushing air pressure at its surface – more than 90 times that of Earth – similar to the pressure you'd encounter a mile below the ocean on Earth. Venus was the first planet to be explored by a spacecraft – NASA’s Mariner 2 successfully flew by and scanned the cloud-covered world on Dec. 14, 1962. Since then, numerous spacecraft from the U.S. and other space agencies have explored Venus, including NASA’s Magellan, which mapped the planet's surface with radar. The former Soviet Union is the only nation to land on the surface of Venus to date, though the spacecraft did not survive long in the harsh environment.",
+      "paragraphs": [
+        {
+          "en": "Venus and Earth are similar in size, mass, density, composition, and gravity. There, however, the similarities end. Venus has a thick, toxic atmosphere filled with carbon dioxide and it’s perpetually shrouded in thick, yellowish clouds of mostly sulfuric acid that trap heat, causing a runaway greenhouse effect. It’s the hottest planet in our solar system, even though Mercury is closer to the Sun. Venus has crushing air pressure at its surface – more than 90 times that of Earth – similar to the pressure you'd encounter a mile below the ocean on Earth. Venus was the first planet to be explored by a spacecraft – NASA’s Mariner 2 successfully flew by and scanned the cloud-covered world on Dec. 14, 1962. Since then, numerous spacecraft from the U.S. and other space agencies have explored Venus, including NASA’s Magellan, which mapped the planet's surface with radar. The former Soviet Union is the only nation to land on the surface of Venus to date, though the spacecraft did not survive long in the harsh environment.",
+          "zh": ""
+        }
+      ]
+    },
+    "earth": {
+      "en": "Earth is only the fifth largest planet in the solar system, just slightly larger than nearby Venus. Earth is the biggest of the four planets closest to the Sun, all of which are made of rock and metal. NASA has the most missions of all operating on our home planet. NASA’s Earth Observing System (EOS) is a coordinated series of polar-orbiting and low inclination satellites for long-term global observations of the land surface, biosphere, solid Earth, atmosphere, and oceans.",
+      "paragraphs": [
+        {
+          "en": "Earth is only the fifth largest planet in the solar system, just slightly larger than nearby Venus. Earth is the biggest of the four planets closest to the Sun, all of which are made of rock and metal. NASA has the most missions of all operating on our home planet. NASA’s Earth Observing System (EOS) is a coordinated series of polar-orbiting and low inclination satellites for long-term global observations of the land surface, biosphere, solid Earth, atmosphere, and oceans.",
+          "zh": ""
+        }
+      ]
+    },
+    "mars": {
+      "en": "Mars was named by the ancient Romans for their god of war because its reddish color was reminiscent of blood. The Red Planet is actually many colors. At the surface we see colors such as brown, gold and tan. The reason Mars looks reddish is due to oxidization—or rusting—of iron in the rocks, regolith (Martian “soil”), and dust of Mars. This dust gets kicked up into the atmosphere and from a distance makes the planet appear mostly red. Mars is home to the largest volcano in the solar system, Olympus Mons. It's three times taller than Earth's Mt. Everest with a base the size of the state of New Mexico.\n Mars appears to have had a watery past, with ancient river valley networks, deltas and lakebeds, as well as rocks and minerals on the surface that could only have formed in liquid water. Some features suggest that Mars experienced huge floods about 3.5 billion years ago. There is water on Mars today, but the Martian atmosphere is too thin for liquid water to exist for long on the surface. Today, water on Mars is found in the form of water-ice just under the surface in the polar regions as well as in briny (salty) water, which seasonally flows down some hillsides and crater walls.\n No planet beyond Earth has been studied as intensely as Mars. Today, a science fleet of robotic spacecraft study Mars from all angles.",
+      "paragraphs": [
+        {
+          "en": "Mars was named by the ancient Romans for their god of war because its reddish color was reminiscent of blood. The Red Planet is actually many colors. At the surface we see colors such as brown, gold and tan. The reason Mars looks reddish is due to oxidization—or rusting—of iron in the rocks, regolith (Martian “soil”), and dust of Mars. This dust gets kicked up into the atmosphere and from a distance makes the planet appear mostly red. Mars is home to the largest volcano in the solar system, Olympus Mons. It's three times taller than Earth's Mt. Everest with a base the size of the state of New Mexico.",
+          "zh": ""
+        },
+        {
+          "en": "Mars appears to have had a watery past, with ancient river valley networks, deltas and lakebeds, as well as rocks and minerals on the surface that could only have formed in liquid water. Some features suggest that Mars experienced huge floods about 3.5 billion years ago. There is water on Mars today, but the Martian atmosphere is too thin for liquid water to exist for long on the surface. Today, water on Mars is found in the form of water-ice just under the surface in the polar regions as well as in briny (salty) water, which seasonally flows down some hillsides and crater walls.",
+          "zh": ""
+        },
+        {
+          "en": "No planet beyond Earth has been studied as intensely as Mars. Today, a science fleet of robotic spacecraft study Mars from all angles.",
+          "zh": ""
+        }
+      ]
+    },
+    "jupiter": {
+      "en": "Jupiter's stripes and swirls are actually cold, windy clouds of ammonia and water, floating in an atmosphere of hydrogen and helium. Jupiter’s iconic Great Red Spot is a giant storm bigger than Earth that has raged for hundreds of years. Jupiter is surrounded by dozens of moons. Jupiter also has several rings, but unlike the famous rings of Saturn, Jupiter’s rings are very faint and made of dust, not ice. Jupiter has the shortest day in the solar system. One day on Jupiter takes only about 10 hours (the time it takes for Jupiter to rotate or spin around once), and Jupiter makes a complete orbit around the Sun (a year in Jovian time) in about 12 Earth years (4,333 Earth days). Its equator is tilted with respect to its orbital path around the Sun by just 3 degrees. This means Jupiter spins nearly upright and does not have seasons as extreme as other planets do. Jupiter took shape when the rest of the solar system formed about 4.5 billion years ago, when gravity pulled swirling gas and dust in to become this gas giant. Jupiter took most of the mass left over after the formation of the Sun, ending up with more than twice the combined material of the other bodies in the solar system. In fact, Jupiter has the same ingredients as a star, but it did not grow massive enough to ignite.",
+      "paragraphs": [
+        {
+          "en": "Jupiter's stripes and swirls are actually cold, windy clouds of ammonia and water, floating in an atmosphere of hydrogen and helium. Jupiter’s iconic Great Red Spot is a giant storm bigger than Earth that has raged for hundreds of years. Jupiter is surrounded by dozens of moons. Jupiter also has several rings, but unlike the famous rings of Saturn, Jupiter’s rings are very faint and made of dust, not ice. Jupiter has the shortest day in the solar system. One day on Jupiter takes only about 10 hours (the time it takes for Jupiter to rotate or spin around once), and Jupiter makes a complete orbit around the Sun (a year in Jovian time) in about 12 Earth years (4,333 Earth days). Its equator is tilted with respect to its orbital path around the Sun by just 3 degrees. This means Jupiter spins nearly upright and does not have seasons as extreme as other planets do. Jupiter took shape when the rest of the solar system formed about 4.5 billion years ago, when gravity pulled swirling gas and dust in to become this gas giant. Jupiter took most of the mass left over after the formation of the Sun, ending up with more than twice the combined material of the other bodies in the solar system. In fact, Jupiter has the same ingredients as a star, but it did not grow massive enough to ignite.",
+          "zh": ""
+        }
+      ]
+    },
+    "saturn": {
+      "en": "Surrounded by [##moon_count##] confirmed moons, Saturn is home to some of the most fascinating landscapes in our solar system. From the jets of water that spray from Enceladus to the methane lakes on smoggy Titan, the Saturn system is a rich source of scientific discovery and still holds many mysteries.The farthest planet from Earth discovered by the unaided human eye, Saturn has been known since ancient times. The planet is named for the Roman god of agriculture and wealth, who was also the father of Jupiter. Saturn's rings are thought to be pieces of comets, asteroids or shattered moons that broke up before they reached the planet, torn apart by Saturn's powerful gravity. They are made of billions of small chunks of ice and rock coated with another material such as dust. The ring particles mostly range from tiny, dust-sized icy grains to chunks as big as a house. A few particles are as large as mountains. The rings would look mostly white if you looked at them from the cloud tops of Saturn, and interestingly, each ring orbits at a different speed around the planet.",
+      "paragraphs": [
+        {
+          "en": "Surrounded by [##moon_count##] confirmed moons, Saturn is home to some of the most fascinating landscapes in our solar system. From the jets of water that spray from Enceladus to the methane lakes on smoggy Titan, the Saturn system is a rich source of scientific discovery and still holds many mysteries.The farthest planet from Earth discovered by the unaided human eye, Saturn has been known since ancient times. The planet is named for the Roman god of agriculture and wealth, who was also the father of Jupiter. Saturn's rings are thought to be pieces of comets, asteroids or shattered moons that broke up before they reached the planet, torn apart by Saturn's powerful gravity. They are made of billions of small chunks of ice and rock coated with another material such as dust. The ring particles mostly range from tiny, dust-sized icy grains to chunks as big as a house. A few particles are as large as mountains. The rings would look mostly white if you looked at them from the cloud tops of Saturn, and interestingly, each ring orbits at a different speed around the planet.",
+          "zh": ""
+        }
+      ]
+    },
+    "uranus": {
+      "en": "The ice giant is surrounded by 13 faint rings and [##moon_count##] moons as it rotates at a nearly 90-degree angle from the plane of its orbit. This unique tilt makes Uranus appear to spin on its side, orbiting the Sun like a rolling ball. Uranus is the only planet whose equator is nearly at a right angle to its orbit, with a tilt of 97.77 degrees—possibly the result of a collision with an Earth-sized object long ago. This unique tilt causes the most extreme seasons in the solar system. For nearly a quarter of each Uranian year, the Sun shines directly over each pole, plunging the other half of the planet into a 21-year-long, dark winter.\n Uranus is also one of just two planets that rotate in the opposite direction than most of the planets (Venus is the other one), from east to west.",
+      "paragraphs": [
+        {
+          "en": "The ice giant is surrounded by 13 faint rings and [##moon_count##] moons as it rotates at a nearly 90-degree angle from the plane of its orbit. This unique tilt makes Uranus appear to spin on its side, orbiting the Sun like a rolling ball. Uranus is the only planet whose equator is nearly at a right angle to its orbit, with a tilt of 97.77 degrees—possibly the result of a collision with an Earth-sized object long ago. This unique tilt causes the most extreme seasons in the solar system. For nearly a quarter of each Uranian year, the Sun shines directly over each pole, plunging the other half of the planet into a 21-year-long, dark winter.",
+          "zh": ""
+        },
+        {
+          "en": "Uranus is also one of just two planets that rotate in the opposite direction than most of the planets (Venus is the other one), from east to west.",
+          "zh": ""
+        }
+      ]
+    },
+    "neptune": {
+      "en": "More than 30 times as far from the Sun as Earth, Neptune is the only planet in our solar system not visible to the naked eye. In 2011 Neptune completed its first 165-year orbit since its discovery in 1846.\n Neptune is so far from the Sun that high noon on the big blue planet would seem like dim twilight to us. The warm light we see here on our home planet is roughly 900 times as bright as sunlight on Neptune. Neptune is one of two ice giants in the outer solar system (the other is Uranus). Most (80 percent or more) of the planet's mass is made up of a hot dense fluid of \"icy\" materials — water, methane and ammonia — above a small, rocky core. Of the giant planets, Neptune is the densest.\n Scientists think there might be an ocean of super hot water under Neptune's cold clouds. It does not boil away because incredibly high pressure keeps it locked inside. Neptune's atmosphere is made up mostly of hydrogen and helium with just a little bit of methane. Neptune's neighbor Uranus is a blue-green color due to such atmospheric methane, but Neptune is a more vivid, brighter blue, so there must be an unknown component that causes the more intense color.",
+      "paragraphs": [
+        {
+          "en": "More than 30 times as far from the Sun as Earth, Neptune is the only planet in our solar system not visible to the naked eye. In 2011 Neptune completed its first 165-year orbit since its discovery in 1846.",
+          "zh": ""
+        },
+        {
+          "en": "Neptune is so far from the Sun that high noon on the big blue planet would seem like dim twilight to us. The warm light we see here on our home planet is roughly 900 times as bright as sunlight on Neptune. Neptune is one of two ice giants in the outer solar system (the other is Uranus). Most (80 percent or more) of the planet's mass is made up of a hot dense fluid of \"icy\" materials — water, methane and ammonia — above a small, rocky core. Of the giant planets, Neptune is the densest.",
+          "zh": ""
+        },
+        {
+          "en": "Scientists think there might be an ocean of super hot water under Neptune's cold clouds. It does not boil away because incredibly high pressure keeps it locked inside. Neptune's atmosphere is made up mostly of hydrogen and helium with just a little bit of methane. Neptune's neighbor Uranus is a blue-green color due to such atmospheric methane, but Neptune is a more vivid, brighter blue, so there must be an unknown component that causes the more intense color.",
+          "zh": ""
+        }
+      ]
+    },
+    "134340_pluto": {
+      "en": "Pluto is a complex and mysterious world with mountains, valleys, plains, craters, and maybe glaciers. Discovered in 1930, Pluto was long considered our solar system's ninth planet. But after the discovery of similar intriguing worlds deeper in the distant Kuiper Belt, icy Pluto was reclassified as a dwarf planet.\n Pluto is orbited by five known moons, the largest of which is Charon. Charon is about half the size of Pluto itself, making it the largest satellite relative to the planet it orbits in our solar system. Pluto and Charon are often referred to as a \"double planet\". On July 14, 2015, NASA’s New Horizons spacecraft made its historic flight through the Pluto system – providing the first close-up images of Pluto and its moons and collecting other data that has transformed our understanding of these mysterious worlds on the solar system’s outer frontier.\n In the years since that groundbreaking flyby, nearly every conjecture about Pluto possibly being an inert ball of ice has been thrown out the window or flipped on its head.",
+      "paragraphs": [
+        {
+          "en": "Pluto is a complex and mysterious world with mountains, valleys, plains, craters, and maybe glaciers. Discovered in 1930, Pluto was long considered our solar system's ninth planet. But after the discovery of similar intriguing worlds deeper in the distant Kuiper Belt, icy Pluto was reclassified as a dwarf planet.",
+          "zh": ""
+        },
+        {
+          "en": "Pluto is orbited by five known moons, the largest of which is Charon. Charon is about half the size of Pluto itself, making it the largest satellite relative to the planet it orbits in our solar system. Pluto and Charon are often referred to as a \"double planet\". On July 14, 2015, NASA’s New Horizons spacecraft made its historic flight through the Pluto system – providing the first close-up images of Pluto and its moons and collecting other data that has transformed our understanding of these mysterious worlds on the solar system’s outer frontier.",
+          "zh": ""
+        },
+        {
+          "en": "In the years since that groundbreaking flyby, nearly every conjecture about Pluto possibly being an inert ball of ice has been thrown out the window or flipped on its head.",
+          "zh": ""
+        }
+      ]
+    },
+    "1_ceres": {
+      "en": "Ceres was the first member of the asteroid belt to be discovered when Giuseppe Piazzi spotted it in 1801. And when Dawn arrived in 2015, Ceres became the first dwarf planet to receive a visit from a spacecraft.\n\n Called an asteroid for many years, Ceres is so much bigger and so different from its rocky neighbors that scientists classified it as a dwarf planet in 2006. Even though Ceres comprises 25 percent of the asteroid belt's total mass, tiny Pluto is still 14 times more massive.\n\n Ceres is named for the Roman goddess of corn and harvests. The word cereal comes from the same name.",
+      "paragraphs": [
+        {
+          "en": "Ceres was the first member of the asteroid belt to be discovered when Giuseppe Piazzi spotted it in 1801. And when Dawn arrived in 2015, Ceres became the first dwarf planet to receive a visit from a spacecraft.",
+          "zh": ""
+        },
+        {
+          "en": "Called an asteroid for many years, Ceres is so much bigger and so different from its rocky neighbors that scientists classified it as a dwarf planet in 2006. Even though Ceres comprises 25 percent of the asteroid belt's total mass, tiny Pluto is still 14 times more massive.",
+          "zh": ""
+        },
+        {
+          "en": "Ceres is named for the Roman goddess of corn and harvests. The word cereal comes from the same name.",
+          "zh": ""
+        }
+      ]
+    },
+    "136199_eris": {
+      "en": "Eris first appeared to be larger than Pluto. This triggered a debate in the scientific community that led to the International Astronomical Union's decision in 2006 to clarify the definition of a planet. Pluto, Eris and other similar objects are now classified as dwarf planets.\n\n Originally designated 2003 UB313 (and nicknamed for the television warrior Xena by its discovery team), Eris is named for the ancient Greek goddess of discord and strife. The name fits since Eris remains at the center of a scientific debate about the definition of a planet.",
+      "paragraphs": [
+        {
+          "en": "Eris first appeared to be larger than Pluto. This triggered a debate in the scientific community that led to the International Astronomical Union's decision in 2006 to clarify the definition of a planet. Pluto, Eris and other similar objects are now classified as dwarf planets.",
+          "zh": ""
+        },
+        {
+          "en": "Originally designated 2003 UB313 (and nicknamed for the television warrior Xena by its discovery team), Eris is named for the ancient Greek goddess of discord and strife. The name fits since Eris remains at the center of a scientific debate about the definition of a planet.",
+          "zh": ""
+        }
+      ]
+    },
+    "136108_haumea": {
+      "en": "Haumea is an oval-shaped object with a radius of about 385 miles. It has two moons, Namaka and Hi’iaka. Aday on Haumea lasts only four Earth hours, making it one of the fastest rotating large objects in our solar system.",
+      "paragraphs": [
+        {
+          "en": "Haumea is an oval-shaped object with a radius of about 385 miles. It has two moons, Namaka and Hi’iaka. Aday on Haumea lasts only four Earth hours, making it one of the fastest rotating large objects in our solar system.",
+          "zh": ""
+        }
+      ]
+    },
+    "136472_makemake": {
+      "en": "Slightly smaller than Pluto, Makemake is the second-brightest object in the Kuiper Belt as seen from Earth (while Pluto is the brightest). It takes about 305 Earth years for this dwarf planet to make one trip around the sun.\n\n Makemake holds an important place in the history of solar system studies because it—along with Eris—was one of the objects whose discovery prompted the International Astronomical Union to reconsider the definition of a planet and to create the new group of dwarf planets.\n\n Makemake was named after the Rapanui god of fertility.",
+      "paragraphs": [
+        {
+          "en": "Slightly smaller than Pluto, Makemake is the second-brightest object in the Kuiper Belt as seen from Earth (while Pluto is the brightest). It takes about 305 Earth years for this dwarf planet to make one trip around the sun.",
+          "zh": ""
+        },
+        {
+          "en": "Makemake holds an important place in the history of solar system studies because it—along with Eris—was one of the objects whose discovery prompted the International Astronomical Union to reconsider the definition of a planet and to create the new group of dwarf planets.",
+          "zh": ""
+        },
+        {
+          "en": "Makemake was named after the Rapanui god of fertility.",
+          "zh": ""
+        }
+      ]
+    },
+    "moon": {
+      "en": "The brightest and largest object in our night sky, the Moon makes Earth a more livable planet by moderating our home planet's wobble on its axis, leading to a relatively stable climate. It also causes tides, creating a rhythm that has guided humans for thousands of years.\n\n Our moon is the fifth largest of the 190+ moons orbiting planets in our solar system.\n\n Earth's only natural satellite is simply called \"the Moon\" because people didn't know other moons existed until Galileo Galilei discovered four moons orbiting Jupiter in 1610. With a radius of 1,079.6 miles (1,737.5 kilometers), the Moon is less than a third the width of Earth. If Earth were the size of a nickel, the Moon would be about as big as a coffee bean.\n\n The Moon is farther away from Earth than most people realize. The Moon is an average of 238,855 miles (384,400 kilometers) away. That means 30 Earth-sized planets could fit in between Earth and the Moon.\n\n The Moon is slowly moving away from Earth, getting about an inch farther away each year. The leading theory of the Moon's origin is that a Mars-sized body collided with Earth about 4.5 billion years ago. The resulting debris from both Earth and the impactor accumulated to form our natural satellite. The newly formed Moon was in a molten state, but within about 100 million years, most of the global \"magma ocean\" had crystallized, with less-dense rocks floating upward and eventually forming the lunar crust.",
+      "paragraphs": [
+        {
+          "en": "The brightest and largest object in our night sky, the Moon makes Earth a more livable planet by moderating our home planet's wobble on its axis, leading to a relatively stable climate. It also causes tides, creating a rhythm that has guided humans for thousands of years.",
+          "zh": ""
+        },
+        {
+          "en": "Our moon is the fifth largest of the 190+ moons orbiting planets in our solar system.",
+          "zh": ""
+        },
+        {
+          "en": "Earth's only natural satellite is simply called \"the Moon\" because people didn't know other moons existed until Galileo Galilei discovered four moons orbiting Jupiter in 1610. With a radius of 1,079.6 miles (1,737.5 kilometers), the Moon is less than a third the width of Earth. If Earth were the size of a nickel, the Moon would be about as big as a coffee bean.",
+          "zh": ""
+        },
+        {
+          "en": "The Moon is farther away from Earth than most people realize. The Moon is an average of 238,855 miles (384,400 kilometers) away. That means 30 Earth-sized planets could fit in between Earth and the Moon.",
+          "zh": ""
+        },
+        {
+          "en": "The Moon is slowly moving away from Earth, getting about an inch farther away each year. The leading theory of the Moon's origin is that a Mars-sized body collided with Earth about 4.5 billion years ago. The resulting debris from both Earth and the impactor accumulated to form our natural satellite. The newly formed Moon was in a molten state, but within about 100 million years, most of the global \"magma ocean\" had crystallized, with less-dense rocks floating upward and eventually forming the lunar crust.",
+          "zh": ""
+        }
+      ]
+    },
+    "phobos": {
+      "en": "Phobos, gouged and nearly shattered by a giant impact crater and beaten by thousands of meteorite impacts, is on a collision course with Mars. Phobos is the larger of Mars' two moons and is 17 x 14 x 11 miles (27 by 22 by 18 kilometers) in diameter. Phobos is nearing Mars at a rate of six feet (1.8 meters) every hundred years; at that rate, it will either crash into Mars in 50 million years or break up into a ring. Its most prominent feature is the 6-mile (9.7 kilometer) crater Stickney, its impact causing streak patterns across the moon's surface. Stickney was seen by Mars Global Surveyor to be filled with fine dust, with evidence of boulders sliding down its sloped surface.",
+      "paragraphs": [
+        {
+          "en": "Phobos, gouged and nearly shattered by a giant impact crater and beaten by thousands of meteorite impacts, is on a collision course with Mars. Phobos is the larger of Mars' two moons and is 17 x 14 x 11 miles (27 by 22 by 18 kilometers) in diameter. Phobos is nearing Mars at a rate of six feet (1.8 meters) every hundred years; at that rate, it will either crash into Mars in 50 million years or break up into a ring. Its most prominent feature is the 6-mile (9.7 kilometer) crater Stickney, its impact causing streak patterns across the moon's surface. Stickney was seen by Mars Global Surveyor to be filled with fine dust, with evidence of boulders sliding down its sloped surface.",
+          "zh": ""
+        }
+      ]
+    },
+    "deimos": {
+      "en": "Deimos is a small and lumpy, heavily cratered object. Its craters are generally smaller than 1.6 miles (2.5 kilometers) in diameter, however, and it lacks the grooves and ridges seen on Phobos. Typically when a meteorite hits a surface, surface material is thrown up and out of the resulting crater. The material usually falls back to the surface surrounding the crater. However, these ejecta deposits are not seen on Deimos, perhaps because the moon's gravity is so low that the ejecta escaped to space. Material does appear to have moved down slopes. Deimos also has a thick regolith, perhaps as deep as 328 feet (100 meters), formed as meteorites pulverized the surface. Deimos is a dark body that appears to be composed of C-type surface materials, similar to that of asteroids found in the outer asteroid belt.",
+      "paragraphs": [
+        {
+          "en": "Deimos is a small and lumpy, heavily cratered object. Its craters are generally smaller than 1.6 miles (2.5 kilometers) in diameter, however, and it lacks the grooves and ridges seen on Phobos. Typically when a meteorite hits a surface, surface material is thrown up and out of the resulting crater. The material usually falls back to the surface surrounding the crater. However, these ejecta deposits are not seen on Deimos, perhaps because the moon's gravity is so low that the ejecta escaped to space. Material does appear to have moved down slopes. Deimos also has a thick regolith, perhaps as deep as 328 feet (100 meters), formed as meteorites pulverized the surface. Deimos is a dark body that appears to be composed of C-type surface materials, similar to that of asteroids found in the outer asteroid belt.",
+          "zh": ""
+        }
+      ]
+    },
+    "io": {
+      "en": "Io’s remarkable activity is the result of a tug-of-war between Jupiter's powerful gravity and smaller but precisely timed pulls from two neighboring moons that orbit farther from Jupiter – Europa and Ganymede. A bit larger than Earth's Moon, Io is the third largest of Jupiter's moons, and the fifth one in distance from the planet. Although Io always points the same side toward Jupiter in its orbit around the giant planet, the large moons Europa and Ganymede perturb Io's orbit into an irregularly elliptical one. Thus, in its widely varying distances from Jupiter, Io is subjected to tremendous tidal forces.\n\n These forces cause Io's surface to bulge up and down (or in and out) by as much as 330 feet (100 meters). Compare these tides on Io's solid surface to the tides on Earth's oceans. On Earth, in the place where tides are highest, the difference between low and high tides is only 60 feet (18 meters), and this is for water, not solid ground.\n\n Io's orbit, keeping it at more or less a cozy 262,000 miles (422,000 kilometers) from Jupiter, cuts across the planet's powerful magnetic lines of force, thus turning Io into an electric generator. Io can develop 400,000 volts across itself and create an electric current of 3 million amperes. This current takes the path of least resistance along Jupiter's magnetic field lines to the planet's surface, creating lightning in Jupiter's upper atmosphere.",
+      "paragraphs": [
+        {
+          "en": "Io’s remarkable activity is the result of a tug-of-war between Jupiter's powerful gravity and smaller but precisely timed pulls from two neighboring moons that orbit farther from Jupiter – Europa and Ganymede. A bit larger than Earth's Moon, Io is the third largest of Jupiter's moons, and the fifth one in distance from the planet. Although Io always points the same side toward Jupiter in its orbit around the giant planet, the large moons Europa and Ganymede perturb Io's orbit into an irregularly elliptical one. Thus, in its widely varying distances from Jupiter, Io is subjected to tremendous tidal forces.",
+          "zh": "木卫一显著的地质活动源于一场引力“拉锯战”，交战双方是木星强大的引力，以及两颗在更远轨道上运行的邻近卫星——木卫二和木卫三所施加的较小但时机精准的引力拉扯。木卫一的体积略大于月球，是木星的第三大卫星，也是距离木星由近及远的第五颗卫星。尽管在围绕这颗巨行星公转时，木卫一始终以同一面朝向木星，但大体量卫星木卫二和木卫三的摄动将其轨道扭曲为一个不规则的椭圆。因此，在与木星距离不断大幅变动的公转过程中，木卫一承受着巨大的潮汐力。"
+        },
+        {
+          "en": "These forces cause Io's surface to bulge up and down (or in and out) by as much as 330 feet (100 meters). Compare these tides on Io's solid surface to the tides on Earth's oceans. On Earth, in the place where tides are highest, the difference between low and high tides is only 60 feet (18 meters), and this is for water, not solid ground.",
+          "zh": "这些潮汐力导致木卫一表面上下（或内外）起伏隆起高达 330 英尺（100 米）。相比之下，不妨将木卫一固体地表上的这些潮汐与地球海洋的潮汐进行对比：在地球上海潮落差最大的地方，高潮与低潮之间的落差也仅有 60 英尺（18 米），而且这还是流动的水体，而非坚硬的固体地面。"
+        },
+        {
+          "en": "Io's orbit, keeping it at more or less a cozy 262,000 miles (422,000 kilometers) from Jupiter, cuts across the planet's powerful magnetic lines of force, thus turning Io into an electric generator. Io can develop 400,000 volts across itself and create an electric current of 3 million amperes. This current takes the path of least resistance along Jupiter's magnetic field lines to the planet's surface, creating lightning in Jupiter's upper atmosphere.",
+          "zh": "木卫一的公转轨道使其与木星保持在约 262,000 英里（422,000 千米）的距离上，不断横切该行星强劲的磁力线，从而将木卫一自身变成了一台巨型发电机。木卫一两端能够产生高达 400,000 伏特的电势差，并形成 300 万安培的强电流。这股电流沿着木星磁力线中阻力最小的路径奔流至木星表面，并在木星的上层大气中激发闪电。"
+        }
+      ]
+    },
+    "europa": {
+      "en": "Scientists are almost certain that hidden beneath the icy surface of Europa is a salty-water ocean thought to contain twice as much water as Earth’s oceans combined. Slightly smaller than Earth's Moon, Europa’s water-ice surface is crisscrossed by long, linear fractures, cracks, ridges, and bands. The moon’s ice shell is probably 10 to 15 miles (15 to 25 kilometers) thick, beneath which the ocean is estimated to be 40 to 100 miles (60 to 150 kilometers) deep. Like Earth, Europa is thought to also contain a rocky mantle and iron core. Europa’s water-ice surface is crisscrossed by long, linear fractures. Based on the small number of observable craters, the surface of this moon appears to be no more than 40 to 90 million years old, which is youthful in geologic terms (the surface of Callisto, another of Jupiter’s moons, is estimated to be a few billion years old). Along Europa's many fractures, and in splotchy patterns across its surface, is a reddish-brown material whose composition is not known for certain, but likely contains salts and sulfur compounds that have been mixed with the water ice and modified by radiation. This surface composition may hold clues to the moon's potential as a habitable world.",
+      "paragraphs": [
+        {
+          "en": "Scientists are almost certain that hidden beneath the icy surface of Europa is a salty-water ocean thought to contain twice as much water as Earth’s oceans combined. Slightly smaller than Earth's Moon, Europa’s water-ice surface is crisscrossed by long, linear fractures, cracks, ridges, and bands. The moon’s ice shell is probably 10 to 15 miles (15 to 25 kilometers) thick, beneath which the ocean is estimated to be 40 to 100 miles (60 to 150 kilometers) deep. Like Earth, Europa is thought to also contain a rocky mantle and iron core. Europa’s water-ice surface is crisscrossed by long, linear fractures. Based on the small number of observable craters, the surface of this moon appears to be no more than 40 to 90 million years old, which is youthful in geologic terms (the surface of Callisto, another of Jupiter’s moons, is estimated to be a few billion years old). Along Europa's many fractures, and in splotchy patterns across its surface, is a reddish-brown material whose composition is not known for certain, but likely contains salts and sulfur compounds that have been mixed with the water ice and modified by radiation. This surface composition may hold clues to the moon's potential as a habitable world.",
+          "zh": "科学家们几乎可以肯定，在木卫二冰封的地表之下隐藏着一片咸水海洋，其水量据认为相当于地球所有海洋总水量的两倍。木卫二的体积略小于月球，其水冰表面纵横交错着狭长的线状断裂带、裂缝、山脊与条纹。该卫星的冰壳厚度可能在 10 至 15 英里（15 至 25 千米），其下方的海洋据估计深达 40 至 100 英里（60 至 150 千米）。与地球类似，木卫二据认为同样拥有岩质地幔和铁质核心。木卫二的水冰表面交错着漫长而线性的断裂带。根据可观测到的少量撞击坑判断，这颗卫星的地表年龄似乎不超过 4000 万至 9000 万年，这在地质学尺度上是非常年轻的（木星的另一颗卫星木卫四的地表年龄据估计已有数十亿年）。沿着木卫二的众多断裂带以及遍布表面的斑块状图案中，存在着一种红褐色物质，其确切成分尚不完全明了，但很可能含有与水冰混合并受到辐射改造的盐类与硫化物。这种表面成分可能为该卫星作为潜在宜居世界的探索提供重要线索。"
+        }
+      ]
+    },
+    "ganymede": {
+      "en": "The magnetic field of Ganymede causes auroras, which are ribbons of glowing, electrified gas, in regions circling the moon’s north and south poles. Ganymede has large, bright regions of ridges and grooves that slice across older, darker terrains. These grooved regions are a clue that the moon experienced dramatic upheavals in the distant past. Scientists have also found strong evidence of an underground ocean on Ganymede. Ganymede was discovered by Galileo Galilei on Jan. 7, 1610. The discovery, along with three other Jovian moons, was the first time a moon was discovered orbiting a planet other than Earth. The discovery of the four Galilean satellites eventually led to the understanding that planets in our solar system orbit the sun, instead of our solar system revolving around Earth.",
+      "paragraphs": [
+        {
+          "en": "The magnetic field of Ganymede causes auroras, which are ribbons of glowing, electrified gas, in regions circling the moon’s north and south poles. Ganymede has large, bright regions of ridges and grooves that slice across older, darker terrains. These grooved regions are a clue that the moon experienced dramatic upheavals in the distant past. Scientists have also found strong evidence of an underground ocean on Ganymede. Ganymede was discovered by Galileo Galilei on Jan. 7, 1610. The discovery, along with three other Jovian moons, was the first time a moon was discovered orbiting a planet other than Earth. The discovery of the four Galilean satellites eventually led to the understanding that planets in our solar system orbit the sun, instead of our solar system revolving around Earth.",
+          "zh": "木卫三自身的磁场在其南北两极周围区域激发了极光——即发光的带电气体丝带。木卫三拥有大片明亮的山脊和沟槽区域，横切着更为古老、暗沉的地层。这些沟槽区域表明该卫星在遥远的过去曾经历过剧烈的地质动荡。科学家们还在木卫三上发现了存在地下海洋的强有力证据。木卫三由伽利略·伽利莱于 1610 年 1 月 7 日发现。这项发现与另外三颗木星卫星一起，标志着人类首次发现围绕地球以外其他行星运行的天然卫星。这四颗伽利略卫星的发现，最终促使人类认识到太阳系中的行星都是围绕太阳运行的，而非整个太阳系围绕地球运转。"
+        }
+      ]
+    },
+    "callisto": {
+      "en": "Callisto is about the same size as Mercury. In the past, some scientists thought of Callisto as a boring “ugly duckling moon” and a “hunk of rock and ice.” That’s because the crater-covered world didn’t seem to have much going on—no active volcanoes or shifting tectonic plates. But data from NASA’s Galileo spacecraft in the 1990s revealed Callisto may have a secret: a salty ocean beneath its surface. That finding put the once seemingly dead moon on the list of worlds that could possibly harbor life.",
+      "paragraphs": [
+        {
+          "en": "Callisto is about the same size as Mercury. In the past, some scientists thought of Callisto as a boring “ugly duckling moon” and a “hunk of rock and ice.” That’s because the crater-covered world didn’t seem to have much going on—no active volcanoes or shifting tectonic plates. But data from NASA’s Galileo spacecraft in the 1990s revealed Callisto may have a secret: a salty ocean beneath its surface. That finding put the once seemingly dead moon on the list of worlds that could possibly harbor life.",
+          "zh": "木卫四的大小与水星大致相当。在过去，一些科学家曾认为木卫四是一颗乏味的“丑小鸭卫星”和“大块岩石与冰坨”。这是因为这个布满撞击坑的世界似乎没有发生太多地质活动——既没有活火山，也没有板块运动。然而，来自 NASA 伽利略号探测器在 1990 年代的数据显示，木卫四可能隐藏着一个秘密：在其地表之下存在着一片咸水海洋。这一发现使这颗曾经看似毫无生机的死寂卫星，被列入了可能孕育生命的潜在天体名单之中。"
+        }
+      ]
+    },
+    "titan": {
+      "en": "Among our solar system’s more than 400 known moons, Titan is the only one with a substantial atmosphere. And of all the places in the solar system, Titan is the only place besides Earth known to have liquids in the form of rivers, lakes and seas on its surface. Titan is larger than the planet Mercury and is the second largest moon in our solar system. Jupiter's moon Ganymede is just a little bit larger (by about 2 percent). Titan’s atmosphere is made mostly of nitrogen, like Earth’s, but with a surface pressure 50 percent higher than Earth’s. Titan has clouds, rain, rivers, lakes and seas of liquid hydrocarbons like methane and ethane. The largest seas are hundreds of feet deep and hundreds of miles wide. Beneath Titan’s thick crust of water ice is more liquid—an ocean primarily of water rather than methane. Titan’s subsurface water could be a place to harbor life as we know it, while its surface lakes and seas of liquid hydrocarbons could conceivably harbor life that uses different chemistry than we’re used to—that is, life as we don’t yet know it. Titan could also be a lifeless world.",
+      "paragraphs": [
+        {
+          "en": "Among our solar system’s more than 400 known moons, Titan is the only one with a substantial atmosphere. And of all the places in the solar system, Titan is the only place besides Earth known to have liquids in the form of rivers, lakes and seas on its surface. Titan is larger than the planet Mercury and is the second largest moon in our solar system. Jupiter's moon Ganymede is just a little bit larger (by about 2 percent). Titan’s atmosphere is made mostly of nitrogen, like Earth’s, but with a surface pressure 50 percent higher than Earth’s. Titan has clouds, rain, rivers, lakes and seas of liquid hydrocarbons like methane and ethane. The largest seas are hundreds of feet deep and hundreds of miles wide. Beneath Titan’s thick crust of water ice is more liquid—an ocean primarily of water rather than methane. Titan’s subsurface water could be a place to harbor life as we know it, while its surface lakes and seas of liquid hydrocarbons could conceivably harbor life that uses different chemistry than we’re used to—that is, life as we don’t yet know it. Titan could also be a lifeless world.",
+          "zh": ""
+        }
+      ]
+    },
+    "enceladus": {
+      "en": "Few worlds in our solar system are as compelling as Saturn’s icy ocean moon Enceladus. A handful of worlds are thought to have liquid water oceans beneath their frozen shell, but Enceladus sprays its ocean out into space where a spacecraft can sample it. From these samples, scientists have determined that Enceladus has most of thechemical ingredients needed for life, and likely has hydrothermal vents spewing out hot, mineral-rich water into its ocean. About as wide as Arizona, Enceladus also has the whitest,most reflective surface in the solar system. The moon creates a ring of its own as it orbits Saturn—its spray of icy particles spreads out into the space around its orbit, circling the planet to form Saturn’s E ring. In 2005, NASA’s Cassini spacecraft discovered that icy water particles and gas gush from the moon’s surface at approximately 800 miles per hour (400 meters per second). The eruptions appear to be continuous, generating an enormous halo of fine ice dust around Enceladus, which supplies material to Saturn's E-ring. Only a small fraction of the material ends up in the ring, however, with most of it falling like snow back to the moon’s surface, which helps keep Enceladus bright white.The water jets come from relatively warm fractures in the crust, which scientists informally call the “tiger stripes.” Several gases, including water vapor, carbon dioxide, methane, perhaps a little ammonia and either carbon monoxide or nitrogen gas make up the gaseous envelope of the plume, along with salts and silica. And the density of organic materials in the plume was about 20 times denser than scientists expected. From gravity measurements based on the Doppler effect and the magnitude of the moon’s very slight wobble as it orbits Saturn, scientists determined that the jets were being supplied by a global ocean inside the moon. Scientists think that the moon’s ice shell may be as thin as half a mile to 3 miles (1 to 5 kilometers) at the south pole. The average global thickness of the ice is thought to be about 12 to 16 miles (20 to 25 kilometers). Since the ocean in Enceladus supplies the jets, and the jets produce Saturn’s E ring, to study material in the E ring is to study Enceladus’ ocean. The E ring is mostly made of ice droplets, but among them are peculiar nanograins of silica, which can only be generated where liquid water and rock interact at temperatures above about 200 degrees Fahrenheit (90 degrees Celsius). This, among other evidence, points to hydrothermal vents deep beneath Enceladus’ icy shell, not unlike the hydrothermal vents that dot Earth’s ocean floor. With its global ocean, unique chemistry and internal heat, Enceladus has become a promising lead in our search for worlds where life could exist.",
+      "paragraphs": [
+        {
+          "en": "Few worlds in our solar system are as compelling as Saturn’s icy ocean moon Enceladus. A handful of worlds are thought to have liquid water oceans beneath their frozen shell, but Enceladus sprays its ocean out into space where a spacecraft can sample it. From these samples, scientists have determined that Enceladus has most of thechemical ingredients needed for life, and likely has hydrothermal vents spewing out hot, mineral-rich water into its ocean. About as wide as Arizona, Enceladus also has the whitest,most reflective surface in the solar system. The moon creates a ring of its own as it orbits Saturn—its spray of icy particles spreads out into the space around its orbit, circling the planet to form Saturn’s E ring. In 2005, NASA’s Cassini spacecraft discovered that icy water particles and gas gush from the moon’s surface at approximately 800 miles per hour (400 meters per second). The eruptions appear to be continuous, generating an enormous halo of fine ice dust around Enceladus, which supplies material to Saturn's E-ring. Only a small fraction of the material ends up in the ring, however, with most of it falling like snow back to the moon’s surface, which helps keep Enceladus bright white.The water jets come from relatively warm fractures in the crust, which scientists informally call the “tiger stripes.” Several gases, including water vapor, carbon dioxide, methane, perhaps a little ammonia and either carbon monoxide or nitrogen gas make up the gaseous envelope of the plume, along with salts and silica. And the density of organic materials in the plume was about 20 times denser than scientists expected. From gravity measurements based on the Doppler effect and the magnitude of the moon’s very slight wobble as it orbits Saturn, scientists determined that the jets were being supplied by a global ocean inside the moon. Scientists think that the moon’s ice shell may be as thin as half a mile to 3 miles (1 to 5 kilometers) at the south pole. The average global thickness of the ice is thought to be about 12 to 16 miles (20 to 25 kilometers). Since the ocean in Enceladus supplies the jets, and the jets produce Saturn’s E ring, to study material in the E ring is to study Enceladus’ ocean. The E ring is mostly made of ice droplets, but among them are peculiar nanograins of silica, which can only be generated where liquid water and rock interact at temperatures above about 200 degrees Fahrenheit (90 degrees Celsius). This, among other evidence, points to hydrothermal vents deep beneath Enceladus’ icy shell, not unlike the hydrothermal vents that dot Earth’s ocean floor. With its global ocean, unique chemistry and internal heat, Enceladus has become a promising lead in our search for worlds where life could exist.",
+          "zh": ""
+        }
+      ]
+    },
+    "iapetus": {
+      "en": "Iapetus has been called the yin and yang of the Saturn moons because its leading hemisphere has a reflectivity (or albedo) as dark as coal (albedo 0.03-0.05 with a slight reddish tinge) and its trailing hemisphere is much brighter at 0.5-0.6.\n\n Saturn's third largest moon, Iapetus has a mean radius of 457 miles (736 kilometers) and a density only 1.2 times that of liquid water. It has been suggested that Iapetus (like Rhea) is three quarters ice and one quarter rock.Iapetus orbits at 2,213,000 miles (3,561,000 kilometers) from Saturn. The great distance from Saturn's tidal forces and from most of the other moons and ring particles has probably allowed the Iapetus surface to be largely unaffected by any melting episodes that could have caused some smoothing or \"resurfacing\" as on some of the moons closer to Saturn.\n\n However, despite the great distance, Saturn has tidally locked Iapetus. The moon always presents the same face toward Saturn. With its distant, inclined orbit, Iapetus is the only large moon from which there is a nice view of the rings of Saturn.Giovanni Cassini observed the dark-light difference of this moon's surface when he discovered Iapetus in 1671. He noted that he could only see Iapetus on the west side of Saturn. He correctly concluded that Iapetus had one side much darker than the other side, and that Iapetus was tidally locked with Saturn.\n\n Scientists have long wondered why one hemisphere of Iapetus is so dark in comparison to its other hemisphere, and in comparison to other surfaces in the Saturn system. Iapetus may be sweeping up particles from the more-distant dark moon, Phoebe. If that is the darkening mechanism, it should be steadily renewing the dark surface because very few fresh bright craters are detected within the dark terrain. An alternate theory is that there might be ice volcanism distributing darker material to the surface. Volcano-like eruptions of hydrocarbons might form the dark surfaces, particularly after chemical reactions caused by solar radiation.\n\n The September 2007 Cassini flyby of Iapetus showed that a third process, thermal segregation, is probably the most responsible for Iapetus' dark hemisphere. Iapetus has a very slow rotation, longer than 79 days. Such a slow rotation means that the daily temperature cycle is very long, so long that the dark material can absorb heat from the sun and warm up. (The dark material absorbs more heat than the bright icy material.) This heating will cause any volatile, or icy, species within the dark material to sublime out, and retreat to colder regions on Iapetus. This sublimation of volatiles causes the dark material to become even darker -- and causes neighboring bright, cold regions to become even brighter. Iapetus may have experienced a (possibly small) influx of dark material from an external source, which could have warmed up and triggered this thermal segregation process.\n\n The second most notable feature of Iapetus is its \"equatorial ridge\", a chain of 6-mile (10-km) high mountains girdling the moon's equator. On the anti-Saturnian side of Iapetus, the ridge appears to break up and distinct, partially bright mountains are observed. The Voyager I and Voyager II encounters provided the first knowledge of these mountains, and they are informally referred to as the Voyager Mountains.\n\n There are two theories on how the ridge formed. Some scientists think the ridge was formed at an earlier time when Iapetus rotated much faster than it does today; others think the ridge is made of material left from the collapse of a ring.",
+      "paragraphs": [
+        {
+          "en": "Iapetus has been called the yin and yang of the Saturn moons because its leading hemisphere has a reflectivity (or albedo) as dark as coal (albedo 0.03-0.05 with a slight reddish tinge) and its trailing hemisphere is much brighter at 0.5-0.6.",
+          "zh": ""
+        },
+        {
+          "en": "Saturn's third largest moon, Iapetus has a mean radius of 457 miles (736 kilometers) and a density only 1.2 times that of liquid water. It has been suggested that Iapetus (like Rhea) is three quarters ice and one quarter rock.Iapetus orbits at 2,213,000 miles (3,561,000 kilometers) from Saturn. The great distance from Saturn's tidal forces and from most of the other moons and ring particles has probably allowed the Iapetus surface to be largely unaffected by any melting episodes that could have caused some smoothing or \"resurfacing\" as on some of the moons closer to Saturn.",
+          "zh": ""
+        },
+        {
+          "en": "However, despite the great distance, Saturn has tidally locked Iapetus. The moon always presents the same face toward Saturn. With its distant, inclined orbit, Iapetus is the only large moon from which there is a nice view of the rings of Saturn.Giovanni Cassini observed the dark-light difference of this moon's surface when he discovered Iapetus in 1671. He noted that he could only see Iapetus on the west side of Saturn. He correctly concluded that Iapetus had one side much darker than the other side, and that Iapetus was tidally locked with Saturn.",
+          "zh": ""
+        },
+        {
+          "en": "Scientists have long wondered why one hemisphere of Iapetus is so dark in comparison to its other hemisphere, and in comparison to other surfaces in the Saturn system. Iapetus may be sweeping up particles from the more-distant dark moon, Phoebe. If that is the darkening mechanism, it should be steadily renewing the dark surface because very few fresh bright craters are detected within the dark terrain. An alternate theory is that there might be ice volcanism distributing darker material to the surface. Volcano-like eruptions of hydrocarbons might form the dark surfaces, particularly after chemical reactions caused by solar radiation.",
+          "zh": ""
+        },
+        {
+          "en": "The September 2007 Cassini flyby of Iapetus showed that a third process, thermal segregation, is probably the most responsible for Iapetus' dark hemisphere. Iapetus has a very slow rotation, longer than 79 days. Such a slow rotation means that the daily temperature cycle is very long, so long that the dark material can absorb heat from the sun and warm up. (The dark material absorbs more heat than the bright icy material.) This heating will cause any volatile, or icy, species within the dark material to sublime out, and retreat to colder regions on Iapetus. This sublimation of volatiles causes the dark material to become even darker -- and causes neighboring bright, cold regions to become even brighter. Iapetus may have experienced a (possibly small) influx of dark material from an external source, which could have warmed up and triggered this thermal segregation process.",
+          "zh": ""
+        },
+        {
+          "en": "The second most notable feature of Iapetus is its \"equatorial ridge\", a chain of 6-mile (10-km) high mountains girdling the moon's equator. On the anti-Saturnian side of Iapetus, the ridge appears to break up and distinct, partially bright mountains are observed. The Voyager I and Voyager II encounters provided the first knowledge of these mountains, and they are informally referred to as the Voyager Mountains.",
+          "zh": ""
+        },
+        {
+          "en": "There are two theories on how the ridge formed. Some scientists think the ridge was formed at an earlier time when Iapetus rotated much faster than it does today; others think the ridge is made of material left from the collapse of a ring.",
+          "zh": ""
+        }
+      ]
+    },
+    "rhea": {
+      "en": "Rhea is a small, cold, airless body that is very similar to sister moons Dione and Tethys. As with the other two moons, Rhea is tidally locked in phase with its parent — one side always faces toward Saturn — as it completes its 4.5-Earth-day orbit around the planet. Rhea's surface temperatures are also similar to Dione and Tethys, being roughly as warm as -281 degrees Fahrenheit (-174 degrees Celsius) in sunlit areas and ranging down to -364 degrees Fahrenheit (-220 degrees Celsius) in shaded areas. Also like Dione and Tethys, Rhea has a high reflectivity (or geometric albedo) suggesting a surface composition largely of water ice, which behaves like rock in Rhea's temperature range. In 2008, the Cassini spacecraft found evidence of material orbiting Rhea — the first time rings had been found around a moon. A broad debris disk and at least one ring appear to have been detected by a suite of six instruments on Cassini specifically designed to study the atmospheres and particles around Saturn and its moons.",
+      "paragraphs": [
+        {
+          "en": "Rhea is a small, cold, airless body that is very similar to sister moons Dione and Tethys. As with the other two moons, Rhea is tidally locked in phase with its parent — one side always faces toward Saturn — as it completes its 4.5-Earth-day orbit around the planet. Rhea's surface temperatures are also similar to Dione and Tethys, being roughly as warm as -281 degrees Fahrenheit (-174 degrees Celsius) in sunlit areas and ranging down to -364 degrees Fahrenheit (-220 degrees Celsius) in shaded areas. Also like Dione and Tethys, Rhea has a high reflectivity (or geometric albedo) suggesting a surface composition largely of water ice, which behaves like rock in Rhea's temperature range. In 2008, the Cassini spacecraft found evidence of material orbiting Rhea — the first time rings had been found around a moon. A broad debris disk and at least one ring appear to have been detected by a suite of six instruments on Cassini specifically designed to study the atmospheres and particles around Saturn and its moons.",
+          "zh": ""
+        }
+      ]
+    },
+    "dione": {
+      "en": "About 700 miles (1,100 kilometers) in diameter, Dione's density is 1.48 times that of liquid water, suggesting that about a third of Dione is made up of a dense core (probably silicate rock) with the remainder of its composition being ice. At Dione's average temperature of minus 121 degrees Fahrenheit (minus 186 degrees Celsius or 87 Kelvin), ice is hard as rock. Ice particles as fine as smoke constantly bombard Dione from Saturn's E ring, which is produced by the jets of icy material spraying from Enceladus. So while Enceladus is less than half the diameter of Dione, the smaller moon is altering the surface of the larger moon, painting it with fresh ice dust.",
+      "paragraphs": [
+        {
+          "en": "About 700 miles (1,100 kilometers) in diameter, Dione's density is 1.48 times that of liquid water, suggesting that about a third of Dione is made up of a dense core (probably silicate rock) with the remainder of its composition being ice. At Dione's average temperature of minus 121 degrees Fahrenheit (minus 186 degrees Celsius or 87 Kelvin), ice is hard as rock. Ice particles as fine as smoke constantly bombard Dione from Saturn's E ring, which is produced by the jets of icy material spraying from Enceladus. So while Enceladus is less than half the diameter of Dione, the smaller moon is altering the surface of the larger moon, painting it with fresh ice dust.",
+          "zh": ""
+        }
+      ]
+    },
+    "tethys": {
+      "en": "This cold, airless and heavily scarred body is very similar to sister moons Dione and Rhea except that Tethys is not as heavily cratered as the other two. Tethys appeared as a tiny dot to astronomers until the Voyager (1 and 2) encounters in 1980 and 1981. The Voyager images showed a major impact crater and a great chasm. The Cassini spacecraft has added details including a great variety of colors at small scales suggesting a variety of materials not seen elsewhere.",
+      "paragraphs": [
+        {
+          "en": "This cold, airless and heavily scarred body is very similar to sister moons Dione and Rhea except that Tethys is not as heavily cratered as the other two. Tethys appeared as a tiny dot to astronomers until the Voyager (1 and 2) encounters in 1980 and 1981. The Voyager images showed a major impact crater and a great chasm. The Cassini spacecraft has added details including a great variety of colors at small scales suggesting a variety of materials not seen elsewhere.",
+          "zh": ""
+        }
+      ]
+    },
+    "mimas": {
+      "en": "Its most distinguishing feature is a giant impact crater – named Herschel after the moon's discoverer – which stretches a third of the way across the face of the moon, making it look like the Death Star from \"Star Wars\" The Herschel Crater is 80 miles (130 kilometers) across – one third of the diameter of the moon itself – with outer walls about 3 miles (5 kilometers) high and a central peak 3.5 miles (6 km) high. The impact that blasted this crater out of Mimas probably came close to breaking the moon apart. Shock waves from the Herschel impact may have caused the fractures, also called chasmata, on the opposite side of Mimas. That Mimas appears to be frozen solid is puzzling because Mimas is closer to Saturn and has a much more eccentric (elongated) orbit than Enceladus, which should mean that Mimas has more tidal heating than Enceladus. Yet Enceladus displays geysers of water, which implies internal heat, while Mimas has one of the most heavily cratered surfaces in the solar system, which suggests a frozen surface that has persisted for enough time to preserve all those craters. This paradox has prompted the \"Mimas Test\" by which any theory that claims to explain the partially thawed water of Enceladus must also explain the entirely frozen water of Mimas.",
+      "paragraphs": [
+        {
+          "en": "Its most distinguishing feature is a giant impact crater – named Herschel after the moon's discoverer – which stretches a third of the way across the face of the moon, making it look like the Death Star from \"Star Wars\" The Herschel Crater is 80 miles (130 kilometers) across – one third of the diameter of the moon itself – with outer walls about 3 miles (5 kilometers) high and a central peak 3.5 miles (6 km) high. The impact that blasted this crater out of Mimas probably came close to breaking the moon apart. Shock waves from the Herschel impact may have caused the fractures, also called chasmata, on the opposite side of Mimas. That Mimas appears to be frozen solid is puzzling because Mimas is closer to Saturn and has a much more eccentric (elongated) orbit than Enceladus, which should mean that Mimas has more tidal heating than Enceladus. Yet Enceladus displays geysers of water, which implies internal heat, while Mimas has one of the most heavily cratered surfaces in the solar system, which suggests a frozen surface that has persisted for enough time to preserve all those craters. This paradox has prompted the \"Mimas Test\" by which any theory that claims to explain the partially thawed water of Enceladus must also explain the entirely frozen water of Mimas.",
+          "zh": ""
+        }
+      ]
+    },
+    "triton": {
+      "en": "Scientists think Triton is a Kuiper Belt Object captured by Neptune's gravity millions of years ago. It shares many similarities with Pluto, the best known world of the Kuiper Belt.\n\n Like our own moon, Triton is locked in synchronous rotation with Neptune―one side faces the planet at all times. But because of its unusual orbital inclination both polar regions take turns facing the Sun. Triton's thin atmosphere is composed mainly of nitrogen with small amounts of methane. This atmosphere most likely originates from Triton's volcanic activity, which is driven by seasonal heating by the Sun. Triton, Io and Venus are the only bodies in the solar system besides Earth that are known to be volcanically active at the present time.\n\n Triton is one of the coolest objects in our solar system. It is so cold that most of Triton's nitrogen is condensed as frost, giving its surface an icy sheen that reflects 70 percent of the sunlight that hits it.\n\n NASA's Voyager 2―the only spacecraft to fly past Neptune and Triton―found surface temperatures of -391 degrees Fahrenheit (-235 degrees Celsius). During its 1989 flyby, Voyager 2 also found Triton has active geysers, making it one of the few geologically active moons in our solar system.",
+      "paragraphs": [
+        {
+          "en": "Scientists think Triton is a Kuiper Belt Object captured by Neptune's gravity millions of years ago. It shares many similarities with Pluto, the best known world of the Kuiper Belt.",
+          "zh": ""
+        },
+        {
+          "en": "Like our own moon, Triton is locked in synchronous rotation with Neptune―one side faces the planet at all times. But because of its unusual orbital inclination both polar regions take turns facing the Sun. Triton's thin atmosphere is composed mainly of nitrogen with small amounts of methane. This atmosphere most likely originates from Triton's volcanic activity, which is driven by seasonal heating by the Sun. Triton, Io and Venus are the only bodies in the solar system besides Earth that are known to be volcanically active at the present time.",
+          "zh": ""
+        },
+        {
+          "en": "Triton is one of the coolest objects in our solar system. It is so cold that most of Triton's nitrogen is condensed as frost, giving its surface an icy sheen that reflects 70 percent of the sunlight that hits it.",
+          "zh": ""
+        },
+        {
+          "en": "NASA's Voyager 2―the only spacecraft to fly past Neptune and Triton―found surface temperatures of -391 degrees Fahrenheit (-235 degrees Celsius). During its 1989 flyby, Voyager 2 also found Triton has active geysers, making it one of the few geologically active moons in our solar system.",
+          "zh": ""
+        }
+      ]
+    },
+    "charon": {
+      "en": "The little moon is so big that Pluto and Charon are sometimes referred to as a double dwarf planet system. The distance between them is 19,640 km (12,200 miles). Pluto-Charon is our solar system's only known double planetary system. The same surfaces of Charon and Pluto always face each other, a phenomenon called mutual tidal locking. Charon orbits Pluto every 6.4 Earth days.",
+      "paragraphs": [
+        {
+          "en": "The little moon is so big that Pluto and Charon are sometimes referred to as a double dwarf planet system. The distance between them is 19,640 km (12,200 miles). Pluto-Charon is our solar system's only known double planetary system. The same surfaces of Charon and Pluto always face each other, a phenomenon called mutual tidal locking. Charon orbits Pluto every 6.4 Earth days.",
+          "zh": ""
+        }
+      ]
+    },
+    "miranda": {
+      "en": "At about 500 km in diameter, it's only one-seventh as large as Earth's moon, a size that seems unlikely to support much tectonic activity.\n\n Yet Miranda sports one of the strangest and most varied landscapes among extraterrestrial bodies, including three large features known as \"coronae,\" which are unique among known objects in our solar system. They are lightly cratered collections of ridges and valleys, separated from the more heavily cratered (and presumably older) terrain by sharp boundaries like mismatched patches on a moth-eaten coat. Miranda's giant fault canyons are as much as 12 times as deep as the Grand Canyon. Due to Miranda's low gravity and large cliffs, a rock dropped off the edge of the highest cliff would take a full 10 minutes to reach the foot of the cliff. All of Uranus' larger moons, including Miranda, are thought to consist mostly of roughly equal amounts of water ice and silicate rock. Unlike the other four main Uranian satellites, Miranda's orbit is slightly inclined. Miranda was named for the daughter of Prospero in William Shakespeare's play, \"The Tempest.\"",
+      "paragraphs": [
+        {
+          "en": "At about 500 km in diameter, it's only one-seventh as large as Earth's moon, a size that seems unlikely to support much tectonic activity.",
+          "zh": ""
+        },
+        {
+          "en": "Yet Miranda sports one of the strangest and most varied landscapes among extraterrestrial bodies, including three large features known as \"coronae,\" which are unique among known objects in our solar system. They are lightly cratered collections of ridges and valleys, separated from the more heavily cratered (and presumably older) terrain by sharp boundaries like mismatched patches on a moth-eaten coat. Miranda's giant fault canyons are as much as 12 times as deep as the Grand Canyon. Due to Miranda's low gravity and large cliffs, a rock dropped off the edge of the highest cliff would take a full 10 minutes to reach the foot of the cliff. All of Uranus' larger moons, including Miranda, are thought to consist mostly of roughly equal amounts of water ice and silicate rock. Unlike the other four main Uranian satellites, Miranda's orbit is slightly inclined. Miranda was named for the daughter of Prospero in William Shakespeare's play, \"The Tempest.\"",
+          "zh": ""
+        }
+      ]
+    },
+    "titania": {
+      "en": "A prominent system of fault valleys, some nearly 1,000 miles (1,609 kilometers) long, is visible near the terminator (shadow line). The troughs break the crust in two directions, an indication of some tectonic extension of Titania's crust. Deposits of highly reflective material, which may represent frost, can be seen along the Sun-facing valley walls.\n\n The moon is about 1,000 miles (1,600 kilometers) in diameter. The neutral gray color of Titania is typical of most of the significant Uranian moons. Titania is named for the queen of the fairies in William Shakespeare's 16th century play \"A Midsummer Night's Dream.\"",
+      "paragraphs": [
+        {
+          "en": "A prominent system of fault valleys, some nearly 1,000 miles (1,609 kilometers) long, is visible near the terminator (shadow line). The troughs break the crust in two directions, an indication of some tectonic extension of Titania's crust. Deposits of highly reflective material, which may represent frost, can be seen along the Sun-facing valley walls.",
+          "zh": ""
+        },
+        {
+          "en": "The moon is about 1,000 miles (1,600 kilometers) in diameter. The neutral gray color of Titania is typical of most of the significant Uranian moons. Titania is named for the queen of the fairies in William Shakespeare's 16th century play \"A Midsummer Night's Dream.\"",
+          "zh": ""
+        }
+      ]
+    },
+    "oberon": {
+      "en": "Discovered in 1787, little was known about this moon until Voyager 2 passed it during its flyby of Uranus in January 1986. Oberon is heavily cratered―similar to Umbriel―especially when compared to three other moons of Uranus: Ariel, Titania and Miranda. Like all of Uranus' large moons, Oberon is composed of roughly half ice and half rock. Oberon has at least one large mountain that rises about 6 km off the surface. The moon was named for the king of the fairies in Shakespeare's \"A Midsummer Night's Dream.\"",
+      "paragraphs": [
+        {
+          "en": "Discovered in 1787, little was known about this moon until Voyager 2 passed it during its flyby of Uranus in January 1986. Oberon is heavily cratered―similar to Umbriel―especially when compared to three other moons of Uranus: Ariel, Titania and Miranda. Like all of Uranus' large moons, Oberon is composed of roughly half ice and half rock. Oberon has at least one large mountain that rises about 6 km off the surface. The moon was named for the king of the fairies in Shakespeare's \"A Midsummer Night's Dream.\"",
+          "zh": ""
+        }
+      ]
+    },
+    "ariel": {
+      "en": "All of Uranus' larger moons, including Ariel, are thought to consist mostly of roughly equal amounts of water ice and silicate rock. Carbon dioxide has also been detected on Ariel.\n\n Ariel's surface appears to be the youngest of all the moons of Uranus. It has few large craters and many small ones, indicating that fairly recent low-impact collisions wiped out the large craters that would have been left by much earlier, bigger strikes. Ariel is also thought to have had the most recent geologic activity of Uranus' larger moons. It is transected by grabens, which are fault-bounded valleys.\n\n Ariel has the brightest surface of the five largest Uranian moons, but none of them reflect more than about a third of the sunlight that strikes them. This suggests that their surfaces have been darkened by a carbonaceous material. Ariel's brightness increases dramatically when it is in opposition―that is, when the observer is directly between it and the Sun. This indicates that its surface is porous, casting reflectivity-decreasing shadows when illuminated at other angles.",
+      "paragraphs": [
+        {
+          "en": "All of Uranus' larger moons, including Ariel, are thought to consist mostly of roughly equal amounts of water ice and silicate rock. Carbon dioxide has also been detected on Ariel.",
+          "zh": ""
+        },
+        {
+          "en": "Ariel's surface appears to be the youngest of all the moons of Uranus. It has few large craters and many small ones, indicating that fairly recent low-impact collisions wiped out the large craters that would have been left by much earlier, bigger strikes. Ariel is also thought to have had the most recent geologic activity of Uranus' larger moons. It is transected by grabens, which are fault-bounded valleys.",
+          "zh": ""
+        },
+        {
+          "en": "Ariel has the brightest surface of the five largest Uranian moons, but none of them reflect more than about a third of the sunlight that strikes them. This suggests that their surfaces have been darkened by a carbonaceous material. Ariel's brightness increases dramatically when it is in opposition―that is, when the observer is directly between it and the Sun. This indicates that its surface is porous, casting reflectivity-decreasing shadows when illuminated at other angles.",
+          "zh": ""
+        }
+      ]
+    },
+    "umbriel": {
+      "en": "Other Uranian moons are much brighter. The process by which Umbriel's ancient cratered surface was darkened remains a mystery. Umbriel has a diameter of about 750 miles (1,200 kilometers). Images taken by Voyager 2 in 1986 revealed a curious bright ring about 90 miles (140 kilometers) in diameter on the moon's dark surface. It is unclear what created the distinctive ring, although it may be frost deposits associated with an impact crater.",
+      "paragraphs": [
+        {
+          "en": "Other Uranian moons are much brighter. The process by which Umbriel's ancient cratered surface was darkened remains a mystery. Umbriel has a diameter of about 750 miles (1,200 kilometers). Images taken by Voyager 2 in 1986 revealed a curious bright ring about 90 miles (140 kilometers) in diameter on the moon's dark surface. It is unclear what created the distinctive ring, although it may be frost deposits associated with an impact crater.",
+          "zh": ""
+        }
+      ]
+    },
+    "16_psyche": {
+      "en": "One of the most intriguing targets in the main asteroid belt, 16 Psyche is a giant metal asteroid, about three times farther away from the sun than is the Earth. Its average diameter is about 140 miles (226 kilometers) — about one-sixteenth the diameter of Earth’s Moon or about the distance between Los Angeles and San Diego. Unlike most other asteroids that are rocky or icy bodies, scientists think the M-type (metallic) asteroid 16 Psyche is comprised mostly of metallic iron and nickel similar to Earth’s core. Scientists wonder whether Psyche could be an exposed core of an early planet, maybe as large as Mars, that lost its rocky outer layers due to a number of violent collisions billions of years ago. This intriguing asteroid is now the primary target of the Psyche mission. The Psyche spacecraft launched on October 13th, 2023, and will arrive at the asteroid in 2029.",
+      "paragraphs": [
+        {
+          "en": "One of the most intriguing targets in the main asteroid belt, 16 Psyche is a giant metal asteroid, about three times farther away from the sun than is the Earth. Its average diameter is about 140 miles (226 kilometers) — about one-sixteenth the diameter of Earth’s Moon or about the distance between Los Angeles and San Diego. Unlike most other asteroids that are rocky or icy bodies, scientists think the M-type (metallic) asteroid 16 Psyche is comprised mostly of metallic iron and nickel similar to Earth’s core. Scientists wonder whether Psyche could be an exposed core of an early planet, maybe as large as Mars, that lost its rocky outer layers due to a number of violent collisions billions of years ago. This intriguing asteroid is now the primary target of the Psyche mission. The Psyche spacecraft launched on October 13th, 2023, and will arrive at the asteroid in 2029.",
+          "zh": ""
+        }
+      ]
+    },
+    "4_vesta": {
+      "en": "The asteroid's official name is 4 Vesta because it was the fourth asteroid discovered. About the length of Arizona, it appears to have a surface of basaltic rock - frozen lava - which oozed out of the asteroid's presumably hot interior shortly after its formation 4.5 billion years ago, and has remained largely intact ever since. Telescopic observations reveal mineralogical variations across its surface.\n\nVesta has a unique surface feature which scientists look forward to peering into. At the asteroid's south pole is a giant crater - 460 kilometers (285 miles) across and 13 kilometers (8 miles) deep. The massive collision that created this crater gouged out one percent of the asteroid's volume, blasting over one-half million cubic miles of rock into space. What happened to the one percent that was propelled from its Vesta home? The debris, ranging in size from sand and gravel to boulder and mountain, was ejected into space where it began its own journey through the solar system. Scientist believe that about 5 percent of all meteorites we find on Earth are a result of this single ancient crash in deep space.",
+      "paragraphs": [
+        {
+          "en": "The asteroid's official name is 4 Vesta because it was the fourth asteroid discovered. About the length of Arizona, it appears to have a surface of basaltic rock - frozen lava - which oozed out of the asteroid's presumably hot interior shortly after its formation 4.5 billion years ago, and has remained largely intact ever since. Telescopic observations reveal mineralogical variations across its surface.",
+          "zh": ""
+        },
+        {
+          "en": "Vesta has a unique surface feature which scientists look forward to peering into. At the asteroid's south pole is a giant crater - 460 kilometers (285 miles) across and 13 kilometers (8 miles) deep. The massive collision that created this crater gouged out one percent of the asteroid's volume, blasting over one-half million cubic miles of rock into space. What happened to the one percent that was propelled from its Vesta home? The debris, ranging in size from sand and gravel to boulder and mountain, was ejected into space where it began its own journey through the solar system. Scientist believe that about 5 percent of all meteorites we find on Earth are a result of this single ancient crash in deep space.",
+          "zh": ""
+        }
+      ]
+    },
+    "2_pallas": {
+      "en": "Pallas is the third-largest asteroid in the Solar System by both volume and mass, and is a likely remnant protoplanet. At 513 km in diameter, Pallas is slightly smaller than Vesta. The mass of Pallas is 79%±1% that of Vesta, 22% that of Ceres, and a quarter of one percent that of the Moon. Even so, Pallas by itself makes up 7% of the mass of the entire asteroid belt.",
+      "paragraphs": [
+        {
+          "en": "Pallas is the third-largest asteroid in the Solar System by both volume and mass, and is a likely remnant protoplanet. At 513 km in diameter, Pallas is slightly smaller than Vesta. The mass of Pallas is 79%±1% that of Vesta, 22% that of Ceres, and a quarter of one percent that of the Moon. Even so, Pallas by itself makes up 7% of the mass of the entire asteroid belt.",
+          "zh": ""
+        }
+      ]
+    },
+    "101955_bennu": {
+      "en": "Bennu likely broke off from a much larger carbon-rich asteroid about 700million to 2 billion years ago. It likely formed in the Main Asteroid Belt between Mars and Jupiter, and has drifted much closer to Earth since then. Because its materials are so old, Bennu may contain organic molecules similar to those that could have been involved with the start of life on Earth. NASA’s OSIRIS-REx mission, which launched in 2016, performed the most in-depth exploration of Bennu to date and returned a sample of its material to Earth in 2023. This spacecraft’s data will also help scientists better understand the likelihood of Bennu striking Earth someday.",
+      "paragraphs": [
+        {
+          "en": "Bennu likely broke off from a much larger carbon-rich asteroid about 700million to 2 billion years ago. It likely formed in the Main Asteroid Belt between Mars and Jupiter, and has drifted much closer to Earth since then. Because its materials are so old, Bennu may contain organic molecules similar to those that could have been involved with the start of life on Earth. NASA’s OSIRIS-REx mission, which launched in 2016, performed the most in-depth exploration of Bennu to date and returned a sample of its material to Earth in 2023. This spacecraft’s data will also help scientists better understand the likelihood of Bennu striking Earth someday.",
+          "zh": ""
+        }
+      ]
+    },
+    "162173_ryugu": {
+      "en": "Ryugu measures approximately 1 kilometer (0.62 mi) in diameter and orbits the earth every 1.3 years. The Japanese space agency JAXA launched the Hayabusa2 mission to Ryugu in 2014, and arrived in 2018. The spacecraft spent a year and a half in orbit around the asteroid before returning to Earth to drop off samples of the surface. The spacecraft had multiple objects land on the asteroid and collect data, including two small rovers. The samples of the surface were returned to Earth in December of 2020.",
+      "paragraphs": [
+        {
+          "en": "Ryugu measures approximately 1 kilometer (0.62 mi) in diameter and orbits the earth every 1.3 years. The Japanese space agency JAXA launched the Hayabusa2 mission to Ryugu in 2014, and arrived in 2018. The spacecraft spent a year and a half in orbit around the asteroid before returning to Earth to drop off samples of the surface. The spacecraft had multiple objects land on the asteroid and collect data, including two small rovers. The samples of the surface were returned to Earth in December of 2020.",
+          "zh": ""
+        }
+      ]
+    },
+    "486958_arrokoth": {
+      "en": "Arrokoth is in a region of space beyond Neptune called the Kuiper Belt that is swarming with small, icy and ancient objects. Because they are so far from the Sun, Kuiper Belt objects have only been slightly heated since forming, and are thought to be well-preserved, frozen samples of what the outer solar system was like after its birth more than 4.5 billion years ago.\n\n  It was discovered in 2014 by NASA’s New Horizons science team, using the Hubble Space Telescope. New Horizons flew by Arrokoth on Jan. 1, 2019, snapping images that showed a double-lobed object that looked like a partially flattened snowman. It’s also very red — even redder than Pluto. The object's strange shape — unlike any ever seen — was the biggest surprise of the flyby. Arrokoth means means “sky” in the Powhatan/Algonquian language.",
+      "paragraphs": [
+        {
+          "en": "Arrokoth is in a region of space beyond Neptune called the Kuiper Belt that is swarming with small, icy and ancient objects. Because they are so far from the Sun, Kuiper Belt objects have only been slightly heated since forming, and are thought to be well-preserved, frozen samples of what the outer solar system was like after its birth more than 4.5 billion years ago.",
+          "zh": ""
+        },
+        {
+          "en": "It was discovered in 2014 by NASA’s New Horizons science team, using the Hubble Space Telescope. New Horizons flew by Arrokoth on Jan. 1, 2019, snapping images that showed a double-lobed object that looked like a partially flattened snowman. It’s also very red — even redder than Pluto. The object's strange shape — unlike any ever seen — was the biggest surprise of the flyby. Arrokoth means means “sky” in the Powhatan/Algonquian language.",
+          "zh": ""
+        }
+      ]
+    },
+    "65803_didymos": {
+      "en": "The asteroid was discovered in 1996, by the Spacewatch survey at Kitt Peak, and its small 160-metre minor-planet moon was discovered in 2003, named Dimorphos. Due to its binary nature, it was then named \"Didymos\", the Greek word for twin. The Didymos binary system was the target of the DART mission, which was designed to impact with Dimorphos. The collision occurred on September 26th, 2022, and was a resounding success, changing the orbital period of the smaller moon by approximately thirty minutes.",
+      "paragraphs": [
+        {
+          "en": "The asteroid was discovered in 1996, by the Spacewatch survey at Kitt Peak, and its small 160-metre minor-planet moon was discovered in 2003, named Dimorphos. Due to its binary nature, it was then named \"Didymos\", the Greek word for twin. The Didymos binary system was the target of the DART mission, which was designed to impact with Dimorphos. The collision occurred on September 26th, 2022, and was a resounding success, changing the orbital period of the smaller moon by approximately thirty minutes.",
+          "zh": ""
+        }
+      ]
+    },
+    "dimorphos": {
+      "en": "Discovered in 2003, It measures approximately 160 metres (520 ft) in diameter compared to the larger Didymos, at 780 metres (2,560 ft). The DART mission successfully impacted Dimorphos on September 26th, 2022, in order to test the viability of redirecting the orbit of an asteroid.  The orbital period of Dimorphos around Didymos was changed by approximately half an hour.",
+      "paragraphs": [
+        {
+          "en": "Discovered in 2003, It measures approximately 160 metres (520 ft) in diameter compared to the larger Didymos, at 780 metres (2,560 ft). The DART mission successfully impacted Dimorphos on September 26th, 2022, in order to test the viability of redirecting the orbit of an asteroid.  The orbital period of Dimorphos around Didymos was changed by approximately half an hour.",
+          "zh": ""
+        }
+      ]
+    },
+    "1p_halley": {
+      "en": "Halley's dimensions are about 9.3 by 5 miles (15 kilometers by 8 kilometers). It is one of the darkest, or least reflective, objects in the solar system. It has an albedo of 0.03, which means that it reflects only 3% of the light that falls on it. In 1986, an international fleet spacecraft met the comet for an unprecedented study from a variety of vantage points. The science fleet included Japan's Suisei and Sakigake spacecraft, the Soviet Union's Vega 1 and Vega 2,the international ISEE-3 (ICE) spacecraft and the European Space Agency's Giotto. NASA's Pioneer 7 and Pioneer 12 also contributed the the bounty of science data collected.",
+      "paragraphs": [
+        {
+          "en": "Halley's dimensions are about 9.3 by 5 miles (15 kilometers by 8 kilometers). It is one of the darkest, or least reflective, objects in the solar system. It has an albedo of 0.03, which means that it reflects only 3% of the light that falls on it. In 1986, an international fleet spacecraft met the comet for an unprecedented study from a variety of vantage points. The science fleet included Japan's Suisei and Sakigake spacecraft, the Soviet Union's Vega 1 and Vega 2,the international ISEE-3 (ICE) spacecraft and the European Space Agency's Giotto. NASA's Pioneer 7 and Pioneer 12 also contributed the the bounty of science data collected.",
+          "zh": ""
+        }
+      ]
+    },
+    "67p_churyumov_gerasimenko": {
+      "en": "Churyumov-Gerasimenko loops around the Sun in an orbit that crosses those of Jupiter and Mars, approaching but not reaching Earth's orbit. Like most Jupiter Family comets, it is thought to have fallen from the Kuiper Belt, a region beyond Neptune's orbit, as a result of one or more collisions or gravitational tugs. The Rosetta spacecraft, carrying the Philae lander, rendezvoused with this comet in August 2014 and to escorted it on its journey to the inner solar system and back out again. Rosetta is a mission of the European Space Agency (ESA) for which NASA is providing key instruments and support.",
+      "paragraphs": [
+        {
+          "en": "Churyumov-Gerasimenko loops around the Sun in an orbit that crosses those of Jupiter and Mars, approaching but not reaching Earth's orbit. Like most Jupiter Family comets, it is thought to have fallen from the Kuiper Belt, a region beyond Neptune's orbit, as a result of one or more collisions or gravitational tugs. The Rosetta spacecraft, carrying the Philae lander, rendezvoused with this comet in August 2014 and to escorted it on its journey to the inner solar system and back out again. Rosetta is a mission of the European Space Agency (ESA) for which NASA is providing key instruments and support.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_voyager_1": {
+      "en": "NASA's Voyager 1 was launched after Voyager 2, but because of a faster route, it exited the asteroid belt earlier than its twin, having overtaken Voyager 2 on Dec. 15, 1977. The twin Voyager 1 and 2 spacecraft are exploring where no spacecraft from Earth has flown before. Continuing on their more-than-40-year journey since their 1977 launches, they each are much farther away from Earth and the sun than Pluto. In August 2012, Voyager 1 made the historic entry into interstellar space, the region between stars, filled with material ejected by the death of nearby stars millions of years ago. Voyager 2 entered interstellar space on November 5, 2018 and scientists hope to learn more about this region. Both spacecraft are still sending scientific information about their surroundings through the Deep Space Network, or DSN. The primary mission was the exploration of Jupiter and Saturn. After making a string of discoveries there — such as active volcanoes on Jupiter's moon Io and intricacies of Saturn's rings — the mission was extended. Voyager 2 went on to explore Uranus and Neptune, and is still the only spacecraft to have visited those outer planets. The adventurers' current mission, the Voyager Interstellar Mission (VIM), will explore the outermost edge of the Sun's domain. And beyond.",
+      "paragraphs": [
+        {
+          "en": "NASA's Voyager 1 was launched after Voyager 2, but because of a faster route, it exited the asteroid belt earlier than its twin, having overtaken Voyager 2 on Dec. 15, 1977. The twin Voyager 1 and 2 spacecraft are exploring where no spacecraft from Earth has flown before. Continuing on their more-than-40-year journey since their 1977 launches, they each are much farther away from Earth and the sun than Pluto. In August 2012, Voyager 1 made the historic entry into interstellar space, the region between stars, filled with material ejected by the death of nearby stars millions of years ago. Voyager 2 entered interstellar space on November 5, 2018 and scientists hope to learn more about this region. Both spacecraft are still sending scientific information about their surroundings through the Deep Space Network, or DSN. The primary mission was the exploration of Jupiter and Saturn. After making a string of discoveries there — such as active volcanoes on Jupiter's moon Io and intricacies of Saturn's rings — the mission was extended. Voyager 2 went on to explore Uranus and Neptune, and is still the only spacecraft to have visited those outer planets. The adventurers' current mission, the Voyager Interstellar Mission (VIM), will explore the outermost edge of the Sun's domain. And beyond.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_voyager_2": {
+      "en": "The twin Voyager 1 and 2 spacecraft are exploring where no spacecraft from Earth has flown before. Continuing on their more-than-40-year journey since their 1977 launches, they each are much farther away from Earth and the sun than Pluto. Voyager 2 entered interstellar space on November 5, 2018 and scientists hope to learn more about this region. Both spacecraft are still sending scientific information about their surroundings through the Deep Space Network, or DSN.\n\n The primary mission was the exploration of Jupiter and Saturn. After making a string of discoveries there — such as active volcanoes on Jupiter's moon Io and intricacies of Saturn's rings — the mission was extended. Voyager 2 went on to explore Uranus and Neptune, and is still the only spacecraft to have visited those outer planets. The adventurers' current mission, the Voyager Interstellar Mission (VIM), will explore the outermost edge of the Sun's domain. And beyond.",
+      "paragraphs": [
+        {
+          "en": "The twin Voyager 1 and 2 spacecraft are exploring where no spacecraft from Earth has flown before. Continuing on their more-than-40-year journey since their 1977 launches, they each are much farther away from Earth and the sun than Pluto. Voyager 2 entered interstellar space on November 5, 2018 and scientists hope to learn more about this region. Both spacecraft are still sending scientific information about their surroundings through the Deep Space Network, or DSN.",
+          "zh": ""
+        },
+        {
+          "en": "The primary mission was the exploration of Jupiter and Saturn. After making a string of discoveries there — such as active volcanoes on Jupiter's moon Io and intricacies of Saturn's rings — the mission was extended. Voyager 2 went on to explore Uranus and Neptune, and is still the only spacecraft to have visited those outer planets. The adventurers' current mission, the Voyager Interstellar Mission (VIM), will explore the outermost edge of the Sun's domain. And beyond.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_pioneer_10": {
+      "en": "Pioneer 10, the first NASA mission to the outer planets, garnered a series of firsts perhaps unmatched by any other robotic spacecraft in the space era: the first vehicle placed on a trajectory to escape the solar system into interstellar space; the first spacecraft to fly beyond Mars; the first to fly through the asteroid belt; the first to fly past Jupiter; and the first to use all-nuclear electrical power.",
+      "paragraphs": [
+        {
+          "en": "Pioneer 10, the first NASA mission to the outer planets, garnered a series of firsts perhaps unmatched by any other robotic spacecraft in the space era: the first vehicle placed on a trajectory to escape the solar system into interstellar space; the first spacecraft to fly beyond Mars; the first to fly through the asteroid belt; the first to fly past Jupiter; and the first to use all-nuclear electrical power.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_pioneer_11": {
+      "en": "Pioneer 11, the sister spacecraft to Pioneer 10, was the first human-made object to fly past Saturn and also returned the first pictures of the polar regions of Jupiter. Among Pioneer 11’s many discoveries at Saturn were a narrow ring outside the A ring named the F ring and a new satellite 124 miles (200 kilometers) in diameter.",
+      "paragraphs": [
+        {
+          "en": "Pioneer 11, the sister spacecraft to Pioneer 10, was the first human-made object to fly past Saturn and also returned the first pictures of the polar regions of Jupiter. Among Pioneer 11’s many discoveries at Saturn were a narrow ring outside the A ring named the F ring and a new satellite 124 miles (200 kilometers) in diameter.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_new_horizons": {
+      "en": "New Horizons was the first spacecraft to encounter Pluto, a relic from the formation of the solar system. By the time it reached the Pluto system, the spacecraft had traveled farther away and for a longer time period (more than nine years) than any previous deep space spacecraft ever launched. On July 14, 2015, New Horizons flew about 4,800 miles (7,800 kilometers) above the surface of Pluto. Besides collecting data on Pluto and Charon (the Charon flyby was at about 17,900 miles or 28,800 kilometers), New Horizons also observed Pluto’s other satellites, Nix, Hydra, Kerberos and Styx.\n\n The download of the entire set of data collected during the encounter with Pluto and Charon—about 6.25 gigabytes—took over 15 months and was officially completed at 21:48 UT Oct. 25, 2016. Such a lengthy period was necessary because the spacecraft was roughly 4.5 light-hours from Earth and it could only transmit 1-2 kilobits per second. On Jan. 1, 2019, New Horizons flew past Arrokoth (previously named 2014 MU69 and also called Ultima Thule), the most distant target in history. The New Horizons mission is currently exploring additional Kuiper Belt objects.",
+      "paragraphs": [
+        {
+          "en": "New Horizons was the first spacecraft to encounter Pluto, a relic from the formation of the solar system. By the time it reached the Pluto system, the spacecraft had traveled farther away and for a longer time period (more than nine years) than any previous deep space spacecraft ever launched. On July 14, 2015, New Horizons flew about 4,800 miles (7,800 kilometers) above the surface of Pluto. Besides collecting data on Pluto and Charon (the Charon flyby was at about 17,900 miles or 28,800 kilometers), New Horizons also observed Pluto’s other satellites, Nix, Hydra, Kerberos and Styx.",
+          "zh": ""
+        },
+        {
+          "en": "The download of the entire set of data collected during the encounter with Pluto and Charon—about 6.25 gigabytes—took over 15 months and was officially completed at 21:48 UT Oct. 25, 2016. Such a lengthy period was necessary because the spacecraft was roughly 4.5 light-hours from Earth and it could only transmit 1-2 kilobits per second. On Jan. 1, 2019, New Horizons flew past Arrokoth (previously named 2014 MU69 and also called Ultima Thule), the most distant target in history. The New Horizons mission is currently exploring additional Kuiper Belt objects.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_cassini": {
+      "en": "Cassini was one of the most ambitious efforts ever mounted in planetary exploration. A joint endeavor of NASA, ESA (the European Space Agency) and the Italian space agency (ASI), Cassini was a sophisticated robotic spacecraft sent to study Saturn and its complex system of rings and moons in unprecedented detail. Cassini carried a probe called Huygens to the Saturn system. The probe, which was built by ESA, parachuted to the surface of Saturn’s largest moon, Titan, in January 2005—the most distant landing to date in our solar system. Huygens returned spectacular images and other science results during a two-and-a-half-hour descent through Titan’s hazy atmosphere, before coming to rest amid rounded cobbles of ice on a floodplain damp with liquid methane.Cassini completed its initial four-year mission in June 2008 and earned two mission extensions that enabled the team to delve even deeper into Saturn’s mysteries. Key discoveries during its 13 years at Saturn included a global ocean with strong indications of hydrothermal activity within Enceladus, and liquid methane seas on Titan. After 20 years in space — 13 of those years exploring Saturn — Cassini exhausted its fuel supply. And so, to protect moons of Saturn that could have conditions suitable for life, Cassini was sent on a daring final mission that would seal its fate. After a series of nearly two dozen nail-biting dives between the planet and its icy rings, Cassini plunged into Saturn’s atmosphere on Sept. 15, 2017, returning science data to the very end.",
+      "paragraphs": [
+        {
+          "en": "Cassini was one of the most ambitious efforts ever mounted in planetary exploration. A joint endeavor of NASA, ESA (the European Space Agency) and the Italian space agency (ASI), Cassini was a sophisticated robotic spacecraft sent to study Saturn and its complex system of rings and moons in unprecedented detail. Cassini carried a probe called Huygens to the Saturn system. The probe, which was built by ESA, parachuted to the surface of Saturn’s largest moon, Titan, in January 2005—the most distant landing to date in our solar system. Huygens returned spectacular images and other science results during a two-and-a-half-hour descent through Titan’s hazy atmosphere, before coming to rest amid rounded cobbles of ice on a floodplain damp with liquid methane.Cassini completed its initial four-year mission in June 2008 and earned two mission extensions that enabled the team to delve even deeper into Saturn’s mysteries. Key discoveries during its 13 years at Saturn included a global ocean with strong indications of hydrothermal activity within Enceladus, and liquid methane seas on Titan. After 20 years in space — 13 of those years exploring Saturn — Cassini exhausted its fuel supply. And so, to protect moons of Saturn that could have conditions suitable for life, Cassini was sent on a daring final mission that would seal its fate. After a series of nearly two dozen nail-biting dives between the planet and its icy rings, Cassini plunged into Saturn’s atmosphere on Sept. 15, 2017, returning science data to the very end.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_juno": {
+      "en": "Juno’s marching orders — to pick the lock on Jupiter’s secrets — have been spectacularly fulfilled. High above Jupiter’s roiling clouds, three giant blades stretch out from a cylindrical, six-sided body. Some 66 feet (20 meters) wide, the Juno spacecraft is a dynamic engineering marvel, spinning to keep itself stable as it makes sweeping elliptical (oval-shaped) orbits around Jupiter. At their widest point, these carry Juno far from the giant planet and its moons, keeping it mostly clear of heavy radiation regions. But on closer passes, every 38 days, Juno cuts within 3,100 miles (5,000 kilometers) of Jupiter’s cloud tops. Juno achieved rough, global coverage of the giant planet by the end of 2018, but at a coarse resolution; it then began a new set of orbits to fill in the details. The spacecraft’s long, looping orbits are meant to keep it mostly clear of the doughnut-shaped belts of harmful radiation close to Jupiter and its moons. Every 38 days, however, Juno makes a close pass to observe Jupiter’s gigantic clouds and titanic storms, crackling with lightning. Powerful pulses of energy — super-charged particles streaming through Jupiter’s magnetic field — create auroras. They’re similar to the northern and southern lights on Earth, that is, if you can imagine scaling them up to the size of a planet that could hold 1,300 Earths.",
+      "paragraphs": [
+        {
+          "en": "Juno’s marching orders — to pick the lock on Jupiter’s secrets — have been spectacularly fulfilled. High above Jupiter’s roiling clouds, three giant blades stretch out from a cylindrical, six-sided body. Some 66 feet (20 meters) wide, the Juno spacecraft is a dynamic engineering marvel, spinning to keep itself stable as it makes sweeping elliptical (oval-shaped) orbits around Jupiter. At their widest point, these carry Juno far from the giant planet and its moons, keeping it mostly clear of heavy radiation regions. But on closer passes, every 38 days, Juno cuts within 3,100 miles (5,000 kilometers) of Jupiter’s cloud tops. Juno achieved rough, global coverage of the giant planet by the end of 2018, but at a coarse resolution; it then began a new set of orbits to fill in the details. The spacecraft’s long, looping orbits are meant to keep it mostly clear of the doughnut-shaped belts of harmful radiation close to Jupiter and its moons. Every 38 days, however, Juno makes a close pass to observe Jupiter’s gigantic clouds and titanic storms, crackling with lightning. Powerful pulses of energy — super-charged particles streaming through Jupiter’s magnetic field — create auroras. They’re similar to the northern and southern lights on Earth, that is, if you can imagine scaling them up to the size of a planet that could hold 1,300 Earths.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_europa_clipper": {
+      "en": "To determine if this distant moon has conditions favorable for life, NASA’s Europa Clipper mission is preparing to conduct the first dedicated and detailed study of an ocean world beyond Earth.\n The expedition’s objective is to explore Europa to investigate its habitability. The spacecraft is not being sent to find life itself, but will instead try to answer specific questions about Europa’s ocean, ice shell, composition and geology.",
+      "paragraphs": [
+        {
+          "en": "To determine if this distant moon has conditions favorable for life, NASA’s Europa Clipper mission is preparing to conduct the first dedicated and detailed study of an ocean world beyond Earth.",
+          "zh": ""
+        },
+        {
+          "en": "The expedition’s objective is to explore Europa to investigate its habitability. The spacecraft is not being sent to find life itself, but will instead try to answer specific questions about Europa’s ocean, ice shell, composition and geology.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_parker_solar_probe": {
+      "en": "NASA's Parker Solar Probe is diving into the Sun’s atmosphere, facing brutal heat and radiation, on a mission to give humanity its first-ever sampling of a star’s atmosphere.\n\n During its journey, the mission will provide answers to long-standing questions that have puzzled scientists for more than 60 years: Why is the corona much hotter than the Sun's surface (the photosphere)? How does the solar wind accelerate? What are the sources of high-energy solar particles?\n\n We live in the Sun's atmosphere and this mission will help scientists better understand the Sun's impact on Earth.\n\n Data from Parker will be key to understanding and, perhaps, forecasting space weather. Space weather can change the orbits of satellites, shorten their lifetimes, or interfere with onboard electronics.\n\n On its final three orbits, Parker Solar Probe will fly to within 3.9 million miles (6.2 million kilometers) of the Sun’s surface—more than seven times closer than the current record holder for a close solar pass: the Helios 2 spacecraft. Helios came within 27 million miles (43 million kilometers) in 1976.\n\n Parker can survive these conditions because cutting-edge thermal engineering advances protect the spacecraft during its dangerous journey.\n\n The probe has four instrument suites designed to study magnetic fields, plasma and energetic particles, and image the solar wind.\n\n The mission is named for Dr. Eugene N. Parker, who pioneered our modern understanding of the Sun.",
+      "paragraphs": [
+        {
+          "en": "NASA's Parker Solar Probe is diving into the Sun’s atmosphere, facing brutal heat and radiation, on a mission to give humanity its first-ever sampling of a star’s atmosphere.",
+          "zh": ""
+        },
+        {
+          "en": "During its journey, the mission will provide answers to long-standing questions that have puzzled scientists for more than 60 years: Why is the corona much hotter than the Sun's surface (the photosphere)? How does the solar wind accelerate? What are the sources of high-energy solar particles?",
+          "zh": ""
+        },
+        {
+          "en": "We live in the Sun's atmosphere and this mission will help scientists better understand the Sun's impact on Earth.",
+          "zh": ""
+        },
+        {
+          "en": "Data from Parker will be key to understanding and, perhaps, forecasting space weather. Space weather can change the orbits of satellites, shorten their lifetimes, or interfere with onboard electronics.",
+          "zh": ""
+        },
+        {
+          "en": "On its final three orbits, Parker Solar Probe will fly to within 3.9 million miles (6.2 million kilometers) of the Sun’s surface—more than seven times closer than the current record holder for a close solar pass: the Helios 2 spacecraft. Helios came within 27 million miles (43 million kilometers) in 1976.",
+          "zh": ""
+        },
+        {
+          "en": "Parker can survive these conditions because cutting-edge thermal engineering advances protect the spacecraft during its dangerous journey.",
+          "zh": ""
+        },
+        {
+          "en": "The probe has four instrument suites designed to study magnetic fields, plasma and energetic particles, and image the solar wind.",
+          "zh": ""
+        },
+        {
+          "en": "The mission is named for Dr. Eugene N. Parker, who pioneered our modern understanding of the Sun.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_jwst": {
+      "en": "Webb will be the premier observatory of the next decade, serving thousands of astronomers worldwide. It will study every phase in the history of our Universe, ranging from the first luminous glows after the Big Bang, to the formation of solar systems capable of supporting life on planets like Earth, to the evolution of our own Solar System.",
+      "paragraphs": [
+        {
+          "en": "Webb will be the premier observatory of the next decade, serving thousands of astronomers worldwide. It will study every phase in the history of our Universe, ranging from the first luminous glows after the Big Bang, to the formation of solar systems capable of supporting life on planets like Earth, to the evolution of our own Solar System.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_hubble_space_telescope": {
+      "en": "The Hubble Space Telescope's launch and deployment in April 1990 marked the most significant advancement in astronomy since Galileo's telescope. The first major optical telescope to be placed in space, Hubble operates from the ultimate mountaintop. Far above the distortion of Earth's atmosphere, clouds and light pollution, Hubble has an unobstructed view of the universe.\n\n Hubble can see far more than what we can with our eyes. Its domain extends from the ultraviolet, through the visible, and to the near-infrared.\n\n The telescope has had a major impact on every area of astronomy, from the solar system to objects at the edge of the universe. Scientists have used Hubble to observe the most distant stars and galaxies as well as the planets in our solar system.\n\n Data and from the orbiting telescope are the backbone of more than 15,000 technical papers. It also, of course, continues to dazzle us with stunning pictures of stars, galaxies and planets.",
+      "paragraphs": [
+        {
+          "en": "The Hubble Space Telescope's launch and deployment in April 1990 marked the most significant advancement in astronomy since Galileo's telescope. The first major optical telescope to be placed in space, Hubble operates from the ultimate mountaintop. Far above the distortion of Earth's atmosphere, clouds and light pollution, Hubble has an unobstructed view of the universe.",
+          "zh": ""
+        },
+        {
+          "en": "Hubble can see far more than what we can with our eyes. Its domain extends from the ultraviolet, through the visible, and to the near-infrared.",
+          "zh": ""
+        },
+        {
+          "en": "The telescope has had a major impact on every area of astronomy, from the solar system to objects at the edge of the universe. Scientists have used Hubble to observe the most distant stars and galaxies as well as the planets in our solar system.",
+          "zh": ""
+        },
+        {
+          "en": "Data and from the orbiting telescope are the backbone of more than 15,000 technical papers. It also, of course, continues to dazzle us with stunning pictures of stars, galaxies and planets.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_mars_2020": {
+      "en": "The rover has a drill to collect core samples of Martian rock and soil, then store them in sealed tubes for pickup by a future mission that would ferry them back to Earth for detailed analysis. Perseverance will also test technologies to help pave the way for future human exploration of Mars. The Mars helicopter (Ingenuity) was deployed from the Perseverance rover and has performed dozens of test flights, becoming the first powered flight on the red planet.",
+      "paragraphs": [
+        {
+          "en": "The rover has a drill to collect core samples of Martian rock and soil, then store them in sealed tubes for pickup by a future mission that would ferry them back to Earth for detailed analysis. Perseverance will also test technologies to help pave the way for future human exploration of Mars. The Mars helicopter (Ingenuity) was deployed from the Perseverance rover and has performed dozens of test flights, becoming the first powered flight on the red planet.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_mars_science_laboratory": {
+      "en": "With its rover named Curiosity, Mars Science Laboratory mission is part of NASA's Mars Exploration Program, a long-term effort of robotic exploration of the red planet. Curiosity was designed to assess whether Mars ever had an environment able to support small life forms called microbes. In other words, its mission is to determine the planet's \"habitability.\"\n\nTo find out, the rover carries the biggest, most advanced suite of instruments for scientific studies ever sent to the martian surface. The rover will analyze samples scooped from the soil and drilled from rocks. The record of the planet's climate and geology is essentially \"written in the rocks and soil\" -- in their formation, structure, and chemical composition. The rover's onboard laboratory will study rocks, soils, and the local geologic setting in order to detect chemical building blocks of life (e.g., forms of carbon) on Mars and will assess what the martian environment was like in the past.",
+      "paragraphs": [
+        {
+          "en": "With its rover named Curiosity, Mars Science Laboratory mission is part of NASA's Mars Exploration Program, a long-term effort of robotic exploration of the red planet. Curiosity was designed to assess whether Mars ever had an environment able to support small life forms called microbes. In other words, its mission is to determine the planet's \"habitability.\"",
+          "zh": ""
+        },
+        {
+          "en": "To find out, the rover carries the biggest, most advanced suite of instruments for scientific studies ever sent to the martian surface. The rover will analyze samples scooped from the soil and drilled from rocks. The record of the planet's climate and geology is essentially \"written in the rocks and soil\" -- in their formation, structure, and chemical composition. The rover's onboard laboratory will study rocks, soils, and the local geologic setting in order to detect chemical building blocks of life (e.g., forms of carbon) on Mars and will assess what the martian environment was like in the past.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_insight": {
+      "en": "InSight is the first outer space robotic explorer to study in-depth the \"inner space\" of Mars: its crust, mantle, and core. Studying Mars' interior structure answers key questions about the early formation of rocky planets in our inner solar system - Mercury, Venus, Earth, and Mars - more than 4 billion years ago, as well as rocky exoplanets. InSight also measures tectonic activity and meteorite impacts on Mars today. The lander uses cutting edge instruments, to delve deep beneath the surface and seek the fingerprints of the processes that formed the terrestrial planets. It does so by measuring the planet's \"vital signs\": its \"pulse\" (seismology), \"temperature\" (heat flow), and \"reflexes\" (precision tracking).",
+      "paragraphs": [
+        {
+          "en": "InSight is the first outer space robotic explorer to study in-depth the \"inner space\" of Mars: its crust, mantle, and core. Studying Mars' interior structure answers key questions about the early formation of rocky planets in our inner solar system - Mercury, Venus, Earth, and Mars - more than 4 billion years ago, as well as rocky exoplanets. InSight also measures tectonic activity and meteorite impacts on Mars today. The lander uses cutting edge instruments, to delve deep beneath the surface and seek the fingerprints of the processes that formed the terrestrial planets. It does so by measuring the planet's \"vital signs\": its \"pulse\" (seismology), \"temperature\" (heat flow), and \"reflexes\" (precision tracking).",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_phoenix": {
+      "en": "The mission’s science goals included studying the history of water on Mars in all phases, searching for evidence of habitable zones, and assessing the biological potential of the ice-soil boundary. More broadly, the lander was designed to determine whether life ever existed on Mars, characterize the climate and geology of the Red Planet, and to help prepare for future human exploration of its surface.",
+      "paragraphs": [
+        {
+          "en": "The mission’s science goals included studying the history of water on Mars in all phases, searching for evidence of habitable zones, and assessing the biological potential of the ice-soil boundary. More broadly, the lander was designed to determine whether life ever existed on Mars, characterize the climate and geology of the Red Planet, and to help prepare for future human exploration of its surface.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_iss": {
+      "en": "From design to launch, 15 countries collaborated to assemble the world's only permanently crewed orbital facility, which can house a crew of six and 150 ongoing experiments annually across an array of disciplines. The ISS represents a global effort to expand our knowledge and improve life on Earth while testing technology that will extend our reach to the moon, Mars and beyond.",
+      "paragraphs": [
+        {
+          "en": "From design to launch, 15 countries collaborated to assemble the world's only permanently crewed orbital facility, which can house a crew of six and 150 ongoing experiments annually across an array of disciplines. The ISS represents a global effort to expand our knowledge and improve life on Earth while testing technology that will extend our reach to the moon, Mars and beyond.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_lucy": {
+      "en": "Trojan asteroids associated with Jupiter are thought to be remnants of the primordial material that formed the outer planets. These primitive bodies may hold clues to the history of solar system formation. Lucy is the first mission to visit the Trojans.",
+      "paragraphs": [
+        {
+          "en": "Trojan asteroids associated with Jupiter are thought to be remnants of the primordial material that formed the outer planets. These primitive bodies may hold clues to the history of solar system formation. Lucy is the first mission to visit the Trojans.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_psyche": {
+      "en": "Deep within the terrestrial planets, including Earth, scientists infer the presence of metallic cores, but these lie unreachably far below the planets’ rocky mantles and crusts. The asteroid Psyche offers a unique window into these building blocks of planet formation and the opportunity to investigate a previously unexplored type of world.",
+      "paragraphs": [
+        {
+          "en": "Deep within the terrestrial planets, including Earth, scientists infer the presence of metallic cores, but these lie unreachably far below the planets’ rocky mantles and crusts. The asteroid Psyche offers a unique window into these building blocks of planet formation and the opportunity to investigate a previously unexplored type of world.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_osiris_rex": {
+      "en": "OSIRIS-APEX is an acronym for \"Origins, Spectral Interpretation, Resource Identification, Security-Apophis Explorer.\" Originally named OSIRIS-REx (\"Regolith Explorer\"), the goal of the mission was to collect a sample weighing 2.1 ounces (59.5 grams) from near-Earth asteroid 101955 Bennu and then to bring the sample to Earth.\n\n The mission, developed by scientists at the University of Arizona, will give scientists more information about how the early solar system formed and about how life began. It will also help us better understand asteroids that could impact Earth in the future. On October 20th, 2020, approximately 121.6 grams of material from the surface of Bennu was successfully collected. On May 10th, 2021, the spacecraft left Bennu after nearly two years in orbit to begin the two-year voyage back to Earth.\n\n On Sept. 24, 2023, the OSIRIS-REx spacecraft flew by Earth to release the capsule carrying the asteroid sample for a parachute landing. The sample capsule deployed its parachute at an altitude of about 1.9 miles (3 kilometers), bringing it in for a soft landing at the Utah Test and Training Range about 80 miles (130 kilometers) west of Salt Lake City, Utah.\n\n The capsule was sent to Johnson Space Center in Houston, Texas, where scientists at the Astromaterials Acquisition and Curation Office will catalog it and set aside portions of the sample for partners in the Japanese and Canadian space agencies. The spacecraft collected 121.6 grams of material from Bennu. \n\n The main spacecraft (now renamed OSIRIS-APEX) will continue on to investigate the asteroid 99942 Apophis.\n\n ",
+      "paragraphs": [
+        {
+          "en": "OSIRIS-APEX is an acronym for \"Origins, Spectral Interpretation, Resource Identification, Security-Apophis Explorer.\" Originally named OSIRIS-REx (\"Regolith Explorer\"), the goal of the mission was to collect a sample weighing 2.1 ounces (59.5 grams) from near-Earth asteroid 101955 Bennu and then to bring the sample to Earth.",
+          "zh": ""
+        },
+        {
+          "en": "The mission, developed by scientists at the University of Arizona, will give scientists more information about how the early solar system formed and about how life began. It will also help us better understand asteroids that could impact Earth in the future. On October 20th, 2020, approximately 121.6 grams of material from the surface of Bennu was successfully collected. On May 10th, 2021, the spacecraft left Bennu after nearly two years in orbit to begin the two-year voyage back to Earth.",
+          "zh": ""
+        },
+        {
+          "en": "On Sept. 24, 2023, the OSIRIS-REx spacecraft flew by Earth to release the capsule carrying the asteroid sample for a parachute landing. The sample capsule deployed its parachute at an altitude of about 1.9 miles (3 kilometers), bringing it in for a soft landing at the Utah Test and Training Range about 80 miles (130 kilometers) west of Salt Lake City, Utah.",
+          "zh": ""
+        },
+        {
+          "en": "The capsule was sent to Johnson Space Center in Houston, Texas, where scientists at the Astromaterials Acquisition and Curation Office will catalog it and set aside portions of the sample for partners in the Japanese and Canadian space agencies. The spacecraft collected 121.6 grams of material from Bennu.",
+          "zh": ""
+        },
+        {
+          "en": "The main spacecraft (now renamed OSIRIS-APEX) will continue on to investigate the asteroid 99942 Apophis.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_dart": {
+      "en": "An on-orbit demonstration of asteroid deflection was a key test that NASA and other agencies wished to perform before any actual need is present. The DART mission was NASA's demonstration of kinetic impactor technology, impacting an asteroid to adjust its speed and path. The targeted system is composed of two asteroids: the larger asteroid Didymos (diameter: 780 meters, 0.48 miles), and the smaller moonlet asteroid, Dimorphos (diameter: 160 meters, 525 feet), which orbits Didymos. On September 26th, 2022, the DART spacecraft impacted Dimorphos nearly head-on, shortening the time it takes the small asteroid moonlet to orbit Didymos by several minutes.",
+      "paragraphs": [
+        {
+          "en": "An on-orbit demonstration of asteroid deflection was a key test that NASA and other agencies wished to perform before any actual need is present. The DART mission was NASA's demonstration of kinetic impactor technology, impacting an asteroid to adjust its speed and path. The targeted system is composed of two asteroids: the larger asteroid Didymos (diameter: 780 meters, 0.48 miles), and the smaller moonlet asteroid, Dimorphos (diameter: 160 meters, 525 feet), which orbits Didymos. On September 26th, 2022, the DART spacecraft impacted Dimorphos nearly head-on, shortening the time it takes the small asteroid moonlet to orbit Didymos by several minutes.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_artemis_1": {
+      "en": "The first in a series of increasingly complex missions, Artemis I was an uncrewed flight test that provided a foundation for human deep space exploration, and demonstrated our commitment and capability to extend human existence to the Moon and beyond. The spacecraft launched on the most powerful rocket in the world and flew farther than any spacecraft built for humans has ever flown, traveling thousands of miles past the moon, then entering a distant retrograde orbit of the moon before returning to Earth.",
+      "paragraphs": [
+        {
+          "en": "The first in a series of increasingly complex missions, Artemis I was an uncrewed flight test that provided a foundation for human deep space exploration, and demonstrated our commitment and capability to extend human existence to the Moon and beyond. The spacecraft launched on the most powerful rocket in the world and flew farther than any spacecraft built for humans has ever flown, traveling thousands of miles past the moon, then entering a distant retrograde orbit of the moon before returning to Earth.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_artemis_2": {
+      "en": "The Artemis II test flight was NASA’s first mission with crew under Artemis. Astronauts on their first flight aboard NASA’s Orion spacecraft confirmed all of the spacecraft’s systems operated as designed with crew aboard in the actual environment of deep space. Through the ongoing Artemis campaign, NASA will send astronauts to explore the Moon for scientific discovery, economic benefits, and to build the foundation for the first crewed missions to Mars – for the benefit of all. Following Artemis II, the Artemis III mission, now in 2027, will be designed to test out systems and operational capabilities in low Earth orbit to prepare for an Artemis IV moon landing in 2028.",
+      "paragraphs": [
+        {
+          "en": "The Artemis II test flight was NASA’s first mission with crew under Artemis. Astronauts on their first flight aboard NASA’s Orion spacecraft confirmed all of the spacecraft’s systems operated as designed with crew aboard in the actual environment of deep space. Through the ongoing Artemis campaign, NASA will send astronauts to explore the Moon for scientific discovery, economic benefits, and to build the foundation for the first crewed missions to Mars – for the benefit of all. Following Artemis II, the Artemis III mission, now in 2027, will be designed to test out systems and operational capabilities in low Earth orbit to prepare for an Artemis IV moon landing in 2028.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_roman_space_telescope": {
+      "en": "This observatory blocks starlight to directly see exoplanets and planet-forming disks, will complete a statistical census of planetary systems in our galaxy, and settle essential questions in the areas of dark energy, exoplanets, and infrared astrophysics. The observatory will orbit the Sun-Earth Lagrange point L2.",
+      "paragraphs": [
+        {
+          "en": "This observatory blocks starlight to directly see exoplanets and planet-forming disks, will complete a statistical census of planetary systems in our galaxy, and settle essential questions in the areas of dark energy, exoplanets, and infrared astrophysics. The observatory will orbit the Sun-Earth Lagrange point L2.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_mars_odyssey": {
+      "en": "Mars Odyssey was designed to investigate the Martian environment, providing key information on its surface and the radiation hazards future explorers might face. The goal was to map the chemical and mineralogical makeup of Mars as a step to detecting evidence of past or present water and volcanic activity on Mars. One of Mars Odyssey’s most exciting findings came early in the mission. In May 2002, NASA announced that the probe had identified large amounts of hydrogen in the soil, implying the presence of ice below the planet’s surface. During its many years in Martian orbit, Mars Odyssey globally mapped the amount and distribution of the numerous chemical elements and minerals in the Martian surface and also tracked the radiation environment in low Mars orbit, both necessary before humans can effectively explore the Martian surface.\n By mid-2016, the THEMIS instrument had returned more than 208,000 images in visible-light wavelengths and more than 188,000 in thermal-infrared wavelengths.",
+      "paragraphs": [
+        {
+          "en": "Mars Odyssey was designed to investigate the Martian environment, providing key information on its surface and the radiation hazards future explorers might face. The goal was to map the chemical and mineralogical makeup of Mars as a step to detecting evidence of past or present water and volcanic activity on Mars. One of Mars Odyssey’s most exciting findings came early in the mission. In May 2002, NASA announced that the probe had identified large amounts of hydrogen in the soil, implying the presence of ice below the planet’s surface. During its many years in Martian orbit, Mars Odyssey globally mapped the amount and distribution of the numerous chemical elements and minerals in the Martian surface and also tracked the radiation environment in low Mars orbit, both necessary before humans can effectively explore the Martian surface.",
+          "zh": ""
+        },
+        {
+          "en": "By mid-2016, the THEMIS instrument had returned more than 208,000 images in visible-light wavelengths and more than 188,000 in thermal-infrared wavelengths.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_mars_reconnaissance_orbiter": {
+      "en": "Mars Reconnaissance Orbiter is designed to track changes in the water and dust in Mars' atmosphere, look for more evidence of ancient seas and hot springs and peer into past Martian climate changes by studying surface minerals and layering. The orbiter carries a powerful camera capable of taking sharp images of surface features the size of a beach ball. The orbiter also serves as a data relay station for other Mars missions.",
+      "paragraphs": [
+        {
+          "en": "Mars Reconnaissance Orbiter is designed to track changes in the water and dust in Mars' atmosphere, look for more evidence of ancient seas and hot springs and peer into past Martian climate changes by studying surface minerals and layering. The orbiter carries a powerful camera capable of taking sharp images of surface features the size of a beach ball. The orbiter also serves as a data relay station for other Mars missions.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_messenger": {
+      "en": "MESSENGER (Mercury Surface, Space Environment, Geochemistry and Ranging) was the first spacecraft to orbit Mercury. Among its accomplishments, the mission determined Mercury’s surface composition, revealed its geological history, discovered details about its internal magnetic field, and verified its polar deposits are dominantly water-ice. The mission ended when MESSENGER slammed into Mercury’s surface.",
+      "paragraphs": [
+        {
+          "en": "MESSENGER (Mercury Surface, Space Environment, Geochemistry and Ranging) was the first spacecraft to orbit Mercury. Among its accomplishments, the mission determined Mercury’s surface composition, revealed its geological history, discovered details about its internal magnetic field, and verified its polar deposits are dominantly water-ice. The mission ended when MESSENGER slammed into Mercury’s surface.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_galileo": {
+      "en": "The Galileo spacecraft logged quite a few other firsts during its 14-year mission to Jupiter. Among its discoveries: an intense radiation belt above Jupiter's cloud tops, helium in about the same concentration as the Sun, extensive and rapid resurfacing of the moon Io because of volcanism and a magnetic field at Ganymede.",
+      "paragraphs": [
+        {
+          "en": "The Galileo spacecraft logged quite a few other firsts during its 14-year mission to Jupiter. Among its discoveries: an intense radiation belt above Jupiter's cloud tops, helium in about the same concentration as the Sun, extensive and rapid resurfacing of the moon Io because of volcanism and a magnetic field at Ganymede.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_magellan": {
+      "en": "The Magellan probe was the first interplanetary mission to be launched from the Space Shuttle, the first mission to map the entire surface of Venus, and the first spacecraft to test aerobraking as a method for circularizing its orbit. Magellan was the fifth successful NASA mission to Venus, and it ended an eleven-year gap in U.S. interplanetary probe launches. It self-destructed in the Venusian atmosphere in 1994.",
+      "paragraphs": [
+        {
+          "en": "The Magellan probe was the first interplanetary mission to be launched from the Space Shuttle, the first mission to map the entire surface of Venus, and the first spacecraft to test aerobraking as a method for circularizing its orbit. Magellan was the fifth successful NASA mission to Venus, and it ended an eleven-year gap in U.S. interplanetary probe launches. It self-destructed in the Venusian atmosphere in 1994.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_kepler_space_telescope": {
+      "en": "Kepler was equipped to look for planets with size spans from one-half to twice the size of Earth (terrestrial planets) in the habitable zone of their stars where liquid water might exist in the natural state on the surface of the planet. It operated from 2009 to 2018.",
+      "paragraphs": [
+        {
+          "en": "Kepler was equipped to look for planets with size spans from one-half to twice the size of Earth (terrestrial planets) in the habitable zone of their stars where liquid water might exist in the natural state on the surface of the planet. It operated from 2009 to 2018.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_tess": {
+      "en": "The Transiting Exoplanet Survey Satellite (TESS) is the next step in the search for planets outside of our solar system, including those that could support life. The mission will find exoplanets that periodically block part of the light from their host stars, events called transits. TESS will survey 200,000 of the brightest stars near the sun to search for transiting exoplanets. TESS launched on April 18, 2018, aboard a SpaceX Falcon 9 rocket.\n\n TESS scientists expect the mission will catalog thousands of planet candidates and vastly increase the current number of known exoplanets. Of these, approximately 300 are expected to be Earth-sized and super-Earth-sized exoplanets, which are worlds no larger than twice the size of Earth. TESS will find the most promising exoplanets orbiting our nearest and brightest stars, giving future researchers a rich set of new targets for more comprehensive follow-up studies.",
+      "paragraphs": [
+        {
+          "en": "The Transiting Exoplanet Survey Satellite (TESS) is the next step in the search for planets outside of our solar system, including those that could support life. The mission will find exoplanets that periodically block part of the light from their host stars, events called transits. TESS will survey 200,000 of the brightest stars near the sun to search for transiting exoplanets. TESS launched on April 18, 2018, aboard a SpaceX Falcon 9 rocket.",
+          "zh": ""
+        },
+        {
+          "en": "TESS scientists expect the mission will catalog thousands of planet candidates and vastly increase the current number of known exoplanets. Of these, approximately 300 are expected to be Earth-sized and super-Earth-sized exoplanets, which are worlds no larger than twice the size of Earth. TESS will find the most promising exoplanets orbiting our nearest and brightest stars, giving future researchers a rich set of new targets for more comprehensive follow-up studies.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_chandra": {
+      "en": "The Chandra X-ray Observatory is part of NASA's ﬂeet of \"Great Observatories\" along with the Hubble Space Telescope, Spitizer Space Telescope and the now deorbited Compton Gamma Ray Observatory.\n The Chandra X-ray Observatory, which was launched by Space Shuttle Columbia in 1999, can better define the hot, turbulent regions of space. This increased clarity can help scientists answer fundamental questions about the origin, evolution, and destiny of the universe.",
+      "paragraphs": [
+        {
+          "en": "The Chandra X-ray Observatory is part of NASA's ﬂeet of \"Great Observatories\" along with the Hubble Space Telescope, Spitizer Space Telescope and the now deorbited Compton Gamma Ray Observatory.",
+          "zh": ""
+        },
+        {
+          "en": "The Chandra X-ray Observatory, which was launched by Space Shuttle Columbia in 1999, can better define the hot, turbulent regions of space. This increased clarity can help scientists answer fundamental questions about the origin, evolution, and destiny of the universe.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_sdo": {
+      "en": "SDO is designed to help us understand the Sun's influence on Earth and Near-Earth space by studying the solar atmosphere on small scales of space and time and in many wavelengths simultaneously.",
+      "paragraphs": [
+        {
+          "en": "SDO is designed to help us understand the Sun's influence on Earth and Near-Earth space by studying the solar atmosphere on small scales of space and time and in many wavelengths simultaneously.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_soho": {
+      "en": "The ESA-sponsored Solar and Heliospheric Observatory (SOHO) carries 12 scientific instruments to study the solar atmosphere, helioseismology and the solar wind. Information from the mission has allowed scientists to learn more about the Sun’s internal structure and dynamics, the chromosphere, the corona and solar particles.",
+      "paragraphs": [
+        {
+          "en": "The ESA-sponsored Solar and Heliospheric Observatory (SOHO) carries 12 scientific instruments to study the solar atmosphere, helioseismology and the solar wind. Information from the mission has allowed scientists to learn more about the Sun’s internal structure and dynamics, the chromosphere, the corona and solar particles.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_ulysses": {
+      "en": "Ulysses was launched in 1990 and made three \"fast latitude scans\" of the Sun in 1994/1995, 2000/2001, and 2007/2008. In addition, the probe studied several comets. The vehicle was designed to fly a unique trajectory that would use a gravity assist from Jupiter to take it out of the plane of the solar system. Ulysses found that the solar wind has become progressively weaker over the last 50 years.",
+      "paragraphs": [
+        {
+          "en": "Ulysses was launched in 1990 and made three \"fast latitude scans\" of the Sun in 1994/1995, 2000/2001, and 2007/2008. In addition, the probe studied several comets. The vehicle was designed to fly a unique trajectory that would use a gravity assist from Jupiter to take it out of the plane of the solar system. Ulysses found that the solar wind has become progressively weaker over the last 50 years.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_rosetta": {
+      "en": "The mission was launched on 2 March 2004, on a 10-year journey towards comet 67P/Churyumov-Gerasimenko. En route, it passed by two asteroids, 2867 Steins (in 2008) and 21 Lutetia (in 2010), before entering deep-space hibernation mode in June 2011. On 20 January 2014, it 'woke up' and prepared for arrival at the comet in August that year. On 12 November, the mission deployed its Philae probe to the comet, the first time in history that such a feat was achieved.",
+      "paragraphs": [
+        {
+          "en": "The mission was launched on 2 March 2004, on a 10-year journey towards comet 67P/Churyumov-Gerasimenko. En route, it passed by two asteroids, 2867 Steins (in 2008) and 21 Lutetia (in 2010), before entering deep-space hibernation mode in June 2011. On 20 January 2014, it 'woke up' and prepared for arrival at the comet in August that year. On 12 November, the mission deployed its Philae probe to the comet, the first time in history that such a feat was achieved.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_stardust": {
+      "en": "Its primary goal was to fly by the Comet Wild 2, collect samples of dust from the coma of the comet as well as additional interstellar particles, and then bring the samples to Earth. In 2006, the sample return capsule re-entered Earth's atmosphere and landed in Utah, and the sampes have been studied ever since. After dropping off the samples at Earth, the spacecraft visited Comet Tempel 1 in 2011, and then the mission ended shortly thereafter.",
+      "paragraphs": [
+        {
+          "en": "Its primary goal was to fly by the Comet Wild 2, collect samples of dust from the coma of the comet as well as additional interstellar particles, and then bring the samples to Earth. In 2006, the sample return capsule re-entered Earth's atmosphere and landed in Utah, and the sampes have been studied ever since. After dropping off the samples at Earth, the spacecraft visited Comet Tempel 1 in 2011, and then the mission ended shortly thereafter.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_deep_impact": {
+      "en": "On July 3, 2005, at 06:00 UT (or 06:07 UT Earth-receive time), Deep Impact released the impactor probe, which, using small thrusters, moved into the path of the comet, where it hit the following day, July 4, at 05:44:58 UT. The mission was then renamed as EPOXI, with a dual purpose to study extrasolar planets and the comet 103/P Hartley 2. The spacecraft arrived at Hartley 2 in 2010, and then planned to study an asteroid when contact was lost in August of 2013.",
+      "paragraphs": [
+        {
+          "en": "On July 3, 2005, at 06:00 UT (or 06:07 UT Earth-receive time), Deep Impact released the impactor probe, which, using small thrusters, moved into the path of the comet, where it hit the following day, July 4, at 05:44:58 UT. The mission was then renamed as EPOXI, with a dual purpose to study extrasolar planets and the comet 103/P Hartley 2. The spacecraft arrived at Hartley 2 in 2010, and then planned to study an asteroid when contact was lost in August of 2013.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_dawn": {
+      "en": "Dawn launched in 2007 on a journey that put about 4.3 billion miles (6.9 billion kilometers) on its odometer. Propelled by ion engines, the spacecraft achieved many firsts until its extended mission concluded on Oct. 31, 2018. The Dawn mission was designed to study two large bodies in the asteroid belt in order to answer questions about the formation of the Solar System, as well as to test the performance of its ion thrusters in deep space. Ceres and Vesta were chosen as two contrasting protoplanets, the first one apparently \"wet\" (i.e. icy and cold) and the other \"dry\" (i.e. rocky). The Dawn mission ran out of fuel in 2018 and still orbits the dwarf planet Ceres.",
+      "paragraphs": [
+        {
+          "en": "Dawn launched in 2007 on a journey that put about 4.3 billion miles (6.9 billion kilometers) on its odometer. Propelled by ion engines, the spacecraft achieved many firsts until its extended mission concluded on Oct. 31, 2018. The Dawn mission was designed to study two large bodies in the asteroid belt in order to answer questions about the formation of the Solar System, as well as to test the performance of its ion thrusters in deep space. Ceres and Vesta were chosen as two contrasting protoplanets, the first one apparently \"wet\" (i.e. icy and cold) and the other \"dry\" (i.e. rocky). The Dawn mission ran out of fuel in 2018 and still orbits the dwarf planet Ceres.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_clementine": {
+      "en": "Clementine was launched in 1994 and The lunar observations included imaging at various wavelengths in the visible as well as in ultraviolet and infrared, laser ranging altimetry, gravimetry, and charged particle measurements. Clementine successfully entered an elliptical polar orbit (about 270 × 1,830 miles or 430 × 2,950 kilometers) around the Moon on Feb. 19, 1994, with a period of five days. In two months during 1994, it transmitted about 1.6 million digital images of the lunar surface, many of them with resolutions down to about 330-660 feet (100-200 meters). In the process, it provided scientists with their first look at the total lunar landscape including polar regions.",
+      "paragraphs": [
+        {
+          "en": "Clementine was launched in 1994 and The lunar observations included imaging at various wavelengths in the visible as well as in ultraviolet and infrared, laser ranging altimetry, gravimetry, and charged particle measurements. Clementine successfully entered an elliptical polar orbit (about 270 × 1,830 miles or 430 × 2,950 kilometers) around the Moon on Feb. 19, 1994, with a period of five days. In two months during 1994, it transmitted about 1.6 million digital images of the lunar surface, many of them with resolutions down to about 330-660 feet (100-200 meters). In the process, it provided scientists with their first look at the total lunar landscape including polar regions.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_lunar_reconnaissance_orbiter": {
+      "en": "LRO’s primary goal was to make a 3D map of the Moon’s surface from lunar polar orbit as part of a high-resolution mapping program to identify landing sites and potential resources, to investigate the radiation environment, and to prove new technologies in anticipation of future automated and human missions to the surface of the Moon.The LRO instruments return global data, such as day-night temperature maps, a global geodetic grid, high resolution color imaging and the moon's UV albedo. However there is particular emphasis on the polar regions of the moon where continuous access to solar illumination may be possible and the prospect of water in the permanently shadowed regions at the poles may exist.",
+      "paragraphs": [
+        {
+          "en": "LRO’s primary goal was to make a 3D map of the Moon’s surface from lunar polar orbit as part of a high-resolution mapping program to identify landing sites and potential resources, to investigate the radiation environment, and to prove new technologies in anticipation of future automated and human missions to the surface of the Moon.The LRO instruments return global data, such as day-night temperature maps, a global geodetic grid, high resolution color imaging and the moon's UV albedo. However there is particular emphasis on the polar regions of the moon where continuous access to solar illumination may be possible and the prospect of water in the permanently shadowed regions at the poles may exist.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_grail_a": {
+      "en": "As the two spacecraft flew over areas of increasing gravity, the probes moved slightly toward and away from each other, while an instrument measured changes in their relative velocity, providing key information on the Moon’s gravitational field. At the end of the mission, the probes were purposely crashed on the Moon.",
+      "paragraphs": [
+        {
+          "en": "As the two spacecraft flew over areas of increasing gravity, the probes moved slightly toward and away from each other, while an instrument measured changes in their relative velocity, providing key information on the Moon’s gravitational field. At the end of the mission, the probes were purposely crashed on the Moon.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_maven": {
+      "en": "The Mars Atmosphere and Volatile Evolution Mission (MAVEN) was the first mission dedicated to studying Mars’ upper atmosphere. The goal was to use this data to determine how the loss of volatiles from the Martian atmosphere affected the Martian climate over time, and thus contribute to a better understanding of terrestrial climatology. The last contact with MAVEN was on December 6th, 2025, and a formal end-of-mission declaration was made on June 3rd, 2026.",
+      "paragraphs": [
+        {
+          "en": "The Mars Atmosphere and Volatile Evolution Mission (MAVEN) was the first mission dedicated to studying Mars’ upper atmosphere. The goal was to use this data to determine how the loss of volatiles from the Martian atmosphere affected the Martian climate over time, and thus contribute to a better understanding of terrestrial climatology. The last contact with MAVEN was on December 6th, 2025, and a formal end-of-mission declaration was made on June 3rd, 2026.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_mars_express": {
+      "en": "NASA is participating in a mission of the European Space Agency and the Italian Space Agency called Mars Express, which has been exploring the atmosphere and surface of Mars from polar orbit since arriving at the red planet on December 26, 2003. The mission's main objective is to search for sub-surface water from orbit. Seven scientific instruments on the orbiting spacecraft have conducted rigorous investigations to help answer fundamental questions about the geology, atmosphere, surface environment, history of water, and potential for life on Mars. Examples of discoveries - still debated by scientists -- by Mars Express are evidence of recent glacial activity, explosive volcanism, and methane gas.\n\nMars Express is so called because it will be built more quickly than any other comparable planetary mission.",
+      "paragraphs": [
+        {
+          "en": "NASA is participating in a mission of the European Space Agency and the Italian Space Agency called Mars Express, which has been exploring the atmosphere and surface of Mars from polar orbit since arriving at the red planet on December 26, 2003. The mission's main objective is to search for sub-surface water from orbit. Seven scientific instruments on the orbiting spacecraft have conducted rigorous investigations to help answer fundamental questions about the geology, atmosphere, surface environment, history of water, and potential for life on Mars. Examples of discoveries - still debated by scientists -- by Mars Express are evidence of recent glacial activity, explosive volcanism, and methane gas.",
+          "zh": ""
+        },
+        {
+          "en": "Mars Express is so called because it will be built more quickly than any other comparable planetary mission.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_trace_gas_orbiter": {
+      "en": "The ExoMars Trace Gas Orbiter (TGO) was designed to search for trace gases in the Martian atmosphere such as methane, water vapor, nitrogen oxides and acetylene. These gases could provide evidence for possible biological or geological activity on Mars. Organisms on Earth release methane during digestion, although geological processes such as the oxidation of minerals can also release methane.\n\n ExoMars also will monitor seasonal changes in the Martian atmosphere and will look for water-ice beneath the surface. Information gathered during the mission will help decide landing sites for future ESA missions.",
+      "paragraphs": [
+        {
+          "en": "The ExoMars Trace Gas Orbiter (TGO) was designed to search for trace gases in the Martian atmosphere such as methane, water vapor, nitrogen oxides and acetylene. These gases could provide evidence for possible biological or geological activity on Mars. Organisms on Earth release methane during digestion, although geological processes such as the oxidation of minerals can also release methane.",
+          "zh": ""
+        },
+        {
+          "en": "ExoMars also will monitor seasonal changes in the Martian atmosphere and will look for water-ice beneath the surface. Information gathered during the mission will help decide landing sites for future ESA missions.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_explorer_1": {
+      "en": "It was the first spacecraft to detect the Van Allen radiation belt, returning data until its batteries were exhausted after nearly four months. It remained in orbit until 1970.",
+      "paragraphs": [
+        {
+          "en": "It was the first spacecraft to detect the Van Allen radiation belt, returning data until its batteries were exhausted after nearly four months. It remained in orbit until 1970.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_mariner_2": {
+      "en": "During a 42 minute scan of the planet, Mariner 2 gathered significant data on the Venusian atmosphere and the surface before continuing on to heliocentric orbit. The radiometers, in particular, were able to conduct five scans of the night side of the planet, eight across the terminator, and five on the daylight side. NASA maintained contact until 07:00 UT Jan. 3, 1963, when the spacecraft was 53.9 million miles (86.7 million kilometers) from Earth, a new distance record for a deep space probe.",
+      "paragraphs": [
+        {
+          "en": "During a 42 minute scan of the planet, Mariner 2 gathered significant data on the Venusian atmosphere and the surface before continuing on to heliocentric orbit. The radiometers, in particular, were able to conduct five scans of the night side of the planet, eight across the terminator, and five on the daylight side. NASA maintained contact until 07:00 UT Jan. 3, 1963, when the spacecraft was 53.9 million miles (86.7 million kilometers) from Earth, a new distance record for a deep space probe.",
+          "zh": ""
+        }
+      ]
+    },
+    "sc_huygens": {
+      "en": "The probe was about 9 feet wide (2.7 meters) and weighed roughly 700 pounds (318 kilograms). It was built like a shellfish: a hard shell protected its delicate interior from high temperatures during the a two hour and 27 minute descent through the atmosphere of Saturn's giant moon Titan. Huygens landed on Titan on January 14, 2005.",
+      "paragraphs": [
+        {
+          "en": "The probe was about 9 feet wide (2.7 meters) and weighed roughly 700 pounds (318 kilograms). It was built like a shellfish: a hard shell protected its delicate interior from high temperatures during the a two hour and 27 minute descent through the atmosphere of Saturn's giant moon Titan. Huygens landed on Titan on January 14, 2005.",
+          "zh": ""
+        }
+      ]
+    }
+  }
+}

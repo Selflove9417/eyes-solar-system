@@ -170,12 +170,13 @@
 
   async function start() {
     const load = async (p) => (await fetch(chrome.runtime.getURL(p))).json();
-    const [names, ui, bodies, missions, events] = await Promise.all([
+    const [names, ui, bodies, missions, events, moreData] = await Promise.all([
       load('data/names.zh.json'),
       load('data/ui.zh.json'),
       load('data/bodies.zh.json'),
       load('data/missions.zh.json'),
       load('data/events.zh.json'),
+      load('data/more.zh.json').catch(() => null),
     ]);
     entityById = {};
     entityByEn = {};
@@ -197,9 +198,9 @@
     // Long-form body text: the site renders the official descriptions blurb as
     // plain text, so index our translations by that same stripped form.
     // Note the two files use different field names — bodies: en/zhl, missions: enBlurb/zhBlurb.
-    const stripTags = (s) => (s || '').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+    const stripTags = (s) => (s || '').replace(/<[^>]+>/g, '').trim();
     const addDesc = (en, zh) => {
-      const a = stripTags(en), b = stripTags(zh);
+      const a = clean(stripTags(en)), b = stripTags(zh);
       if (!a || !b) return;
       if (a.includes('##')) {
         const escaped = a.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
@@ -212,6 +213,20 @@
     };
     for (const e of bodies.bodies) addDesc(e.en, e.zhl);
     for (const e of missions.missions) addDesc(e.enBlurb, e.zhBlurb);
+    if (moreData?.entries) {
+      for (const [slug, entry] of Object.entries(moreData.entries)) {
+        if (!entry.paragraphs?.length) continue;
+        const allTranslated = entry.paragraphs.every((p) => p.zh && p.zh.trim());
+        if (allTranslated) {
+          const fullEn = entry.en || entry.paragraphs.map((p) => p.en).join('\n\n');
+          const fullZh = entry.paragraphs.map((p) => p.zh).join('\n\n');
+          addDesc(fullEn, fullZh);
+        }
+        for (const p of entry.paragraphs) {
+          if (p.en && p.zh) addDesc(p.en, p.zh);
+        }
+      }
+    }
     applyTo(document.body);
     translateTitle();
   }

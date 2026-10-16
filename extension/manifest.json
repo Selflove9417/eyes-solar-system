@@ -21,7 +21,8 @@
         "data/ui.zh.json",
         "data/bodies.zh.json",
         "data/missions.zh.json",
-        "data/events.zh.json"
+        "data/events.zh.json",
+        "data/more.zh.json"
       ],
       "matches": [
         "https://eyes.nasa.gov/*"

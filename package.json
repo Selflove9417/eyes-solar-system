@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "lint-zh": "node tools/lint-zh.mjs",
+    "check-more": "node tools/check-more.mjs",
     "check-all-links": "node tools/check-all-links.mjs",
     "test-stories": "node tools/test-stories.mjs",
     "check-design-doc": "node tools/check-design-doc.mjs",
