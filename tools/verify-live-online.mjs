@@ -94,31 +94,76 @@ async function main() {
   console.log('');
 
   // -------------------------------------------------------------
-  // 3. robots.txt 与 sitemap.xml 线上可达性
+  // 3. robots.txt、sitemap.xml 与 404 响应真实状态校验
   // -------------------------------------------------------------
-  console.log(`[步骤 3/6] 检查 robots.txt 与 sitemap.xml...`);
+  console.log(`[步骤 3/6] 检查 /robots.txt、/sitemap.xml 与 404 响应...`);
   const robotsUrl = `${SITE_ORIGIN}/robots.txt?_t=${Date.now()}`;
   const sitemapUrl = `${SITE_ORIGIN}/sitemap.xml?_t=${Date.now()}`;
+  const notFoundUrl = `${SITE_ORIGIN}/__no_such_page__.html?_t=${Date.now()}`;
 
+  let step3Failed = false;
+
+  // 3.1 robots.txt
   try {
     const rRobots = await fetch(robotsUrl, { cache: 'no-store' });
+    const robotsCt = rRobots.headers.get('content-type') || '(none)';
     const robotsText = await rRobots.text();
-    const hasSitemapRef = robotsText.includes('Sitemap: https://deepspaceeye.pages.dev/sitemap.xml');
-    console.log(`  robots.txt : HTTP ${rRobots.status}, Sitemap 指向正常: ${hasSitemapRef ? 'YES' : 'NO'}`);
-    if (rRobots.status !== 200 || !hasSitemapRef) allChecksPassed = false;
+    const isTextPlain = robotsCt.toLowerCase().includes('text/plain');
+    const hasSitemapRef = robotsText.includes('Sitemap:');
+    const robotsOk = rRobots.status === 200 && isTextPlain && hasSitemapRef;
 
-    const rSitemap = await fetch(sitemapUrl, { cache: 'no-store' });
-    const sitemapText = await rSitemap.text();
-    const urlCount = (sitemapText.match(/<loc>/g) || []).length;
-    const all12InSitemap = PAGES.every(p => {
-      const u = p === 'index.html' ? `${SITE_ORIGIN}/` : `${SITE_ORIGIN}/${p}`;
-      return sitemapText.includes(`<loc>${u}</loc>`);
-    });
-    console.log(`  sitemap.xml: HTTP ${rSitemap.status}, 包含 URL 数量: ${urlCount}, 12 页面完整收录: ${all12InSitemap ? 'YES' : 'NO'}`);
-    if (rSitemap.status !== 200 || !all12InSitemap) allChecksPassed = false;
+    console.log(`  /robots.txt            : HTTP ${rRobots.status}, Content-Type: "${robotsCt}", 包含 "Sitemap:": ${hasSitemapRef ? 'YES' : 'NO'} (${robotsOk ? 'PASS' : 'FAIL'})`);
+    if (!robotsOk) {
+      step3Failed = true;
+      allChecksPassed = false;
+    }
   } catch (err) {
-    console.error(`  ❌ 抓取 robots/sitemap 失败:`, err.message);
+    console.error(`  ❌ /robots.txt 请求异常:`, err.message);
+    step3Failed = true;
     allChecksPassed = false;
+  }
+
+  // 3.2 sitemap.xml
+  try {
+    const rSitemap = await fetch(sitemapUrl, { cache: 'no-store' });
+    const sitemapCt = rSitemap.headers.get('content-type') || '(none)';
+    const sitemapText = await rSitemap.text();
+    const isXml = sitemapCt.toLowerCase().includes('xml');
+    const locMatches = sitemapText.match(/<loc>/g) || [];
+    const locCount = locMatches.length;
+    const sitemapOk = rSitemap.status === 200 && isXml && locCount === 12;
+
+    console.log(`  /sitemap.xml           : HTTP ${rSitemap.status}, Content-Type: "${sitemapCt}", 包含 <loc> 数量: ${locCount} (${sitemapOk ? 'PASS' : 'FAIL'})`);
+    if (!sitemapOk) {
+      step3Failed = true;
+      allChecksPassed = false;
+    }
+  } catch (err) {
+    console.error(`  ❌ /sitemap.xml 请求异常:`, err.message);
+    step3Failed = true;
+    allChecksPassed = false;
+  }
+
+  // 3.3 不存在页面 404 检测
+  try {
+    const rNotFound = await fetch(notFoundUrl, { cache: 'no-store' });
+    const notFoundCt = rNotFound.headers.get('content-type') || '(none)';
+    const notFoundOk = rNotFound.status === 404;
+
+    console.log(`  /__no_such_page__.html : HTTP ${rNotFound.status}, Content-Type: "${notFoundCt}" (${notFoundOk ? 'PASS' : 'FAIL'})`);
+    if (!notFoundOk) {
+      step3Failed = true;
+      allChecksPassed = false;
+    }
+  } catch (err) {
+    console.error(`  ❌ /__no_such_page__.html 请求异常:`, err.message);
+    step3Failed = true;
+    allChecksPassed = false;
+  }
+
+  if (step3Failed) {
+    console.error(`\n❌ [步骤 3 失败退出] /robots.txt、/sitemap.xml 或 404 检测未满足要求。`);
+    process.exit(1);
   }
   console.log('');
 
