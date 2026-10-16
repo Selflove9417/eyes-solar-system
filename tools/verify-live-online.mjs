@@ -145,16 +145,15 @@ async function main() {
   // 5. 无头浏览器真实交互验收 (JSON 数据加载、探索页抽屉、特写页视角)
   // -------------------------------------------------------------
   console.log(`[步骤 5/6] 运行 Headless Chrome 对线上站点进行功能验收...`);
-  const tempProfile = path.resolve('.chrome-temp-live-verify-' + Date.now());
-  fs.mkdirSync(tempProfile, { recursive: true });
 
   const chromeProc = spawn(CHROME_PATH, [
+    `--remote-debugging-port=${CDP_PORT}`,
     '--headless=new',
-    '--remote-debugging-port=' + CDP_PORT,
     '--no-sandbox',
-    '--user-data-dir=' + tempProfile,
-    'about:blank'
-  ], { stdio: 'ignore' });
+    '--disable-dev-shm-usage',
+    '--disable-gpu',
+    '--window-size=1440,900'
+  ]);
 
   let ws = null;
   try {
@@ -162,13 +161,15 @@ async function main() {
       await sleep(200);
       try {
         const res = await fetch(`http://127.0.0.1:${CDP_PORT}/json/list`);
-        const list = await res.json();
-        if (list && list.length > 0) {
-          ws = new WebSocket(list[0].webSocketDebuggerUrl);
+        const targets = await res.json();
+        const page = targets.find((t) => t.type === 'page');
+        if (page && page.webSocketDebuggerUrl) {
+          ws = new WebSocket(page.webSocketDebuggerUrl);
           break;
         }
       } catch {}
     }
+    if (!ws) throw new Error('未能连接到 Chrome CDP WebSocket 目标');
     await new Promise(r => ws.onopen = r);
 
     let id = 1;
@@ -190,41 +191,57 @@ async function main() {
       const res = await send('Runtime.evaluate', { expression: expr, returnByValue: true, awaitPromise: true });
       return res.result?.value;
     };
+    const pollEval = async (expr, maxMs = 6000, stepMs = 250) => {
+      const start = Date.now();
+      while (Date.now() - start < maxMs) {
+        try {
+          const val = await evalInPage(expr);
+          if (val) return val;
+        } catch {}
+        await sleep(stepMs);
+      }
+      return await evalInPage(expr);
+    };
 
     await send('Page.enable');
     await send('Runtime.enable');
 
     // 5.1 天体页 JSON 数据加载验收
     await send('Page.navigate', { url: `${SITE_ORIGIN}/bodies.html` });
-    await sleep(2500);
-    const bodiesCheck = await evalInPage(`(() => {
+    const bodiesCheck = await pollEval(`(() => {
       const countEl = document.getElementById('count');
       const cards = document.querySelectorAll('.entry-card');
-      return { countText: countEl?.innerText?.trim(), cardCount: cards.length };
+      if (cards.length > 5) {
+        return { countText: countEl?.innerText?.trim(), cardCount: cards.length };
+      }
+      return null;
     })()`);
     console.log(`  天体页 (bodies.html) 数据加载: 统计文案 "${bodiesCheck?.countText}", 卡片数量 ${bodiesCheck?.cardCount} (${bodiesCheck?.cardCount > 0 ? 'PASS' : 'FAIL'})`);
     if (!bodiesCheck?.cardCount) allChecksPassed = false;
 
     // 5.2 术语页 JSON 数据加载验收
     await send('Page.navigate', { url: `${SITE_ORIGIN}/glossary.html` });
-    await sleep(2500);
-    const glossaryCheck = await evalInPage(`(() => {
+    const glossaryCheck = await pollEval(`(() => {
       const coverage = document.getElementById('coverage-core')?.innerText?.trim();
       const rows = document.querySelectorAll('#t-ent tr').length;
-      return { coverage, rows };
+      if (rows > 5) {
+        return { coverage, rows };
+      }
+      return null;
     })()`);
     console.log(`  术语页 (glossary.html) 数据加载: 统计文案 "${glossaryCheck?.coverage}", 数据行数 ${glossaryCheck?.rows} (${glossaryCheck?.rows > 0 ? 'PASS' : 'FAIL'})`);
     if (!glossaryCheck?.rows) allChecksPassed = false;
 
     // 5.3 探索页天体抽屉交互验收
     await send('Page.navigate', { url: `${SITE_ORIGIN}/explore.html` });
-    await sleep(2500);
-    const drawerOpenCheck = await evalInPage(`(() => {
+    await sleep(2000);
+    const drawerOpenCheck = await pollEval(`(() => {
       const btn = document.getElementById('drawer-toggle-btn');
-      btn.click();
-      return document.body.classList.contains('drawer-open');
-    })()`);
-    await sleep(150);
+      if (btn) btn.click();
+      return document.body.classList.contains('drawer-open') ? true : null;
+    })()`, 5000, 300);
+
+    await sleep(200);
     const drawerCloseCheck = await evalInPage(`(() => {
       const closeBtn = document.getElementById('drawer-close-btn');
       if (closeBtn) closeBtn.click();
@@ -235,18 +252,21 @@ async function main() {
 
     // 5.4 土星特写页视角切换交互验收
     await send('Page.navigate', { url: `${SITE_ORIGIN}/saturn.html` });
-    await sleep(2500);
-    const saturnTabCheck = await evalInPage(`(() => {
+    await sleep(2000);
+    const saturnTabCheck = await pollEval(`(() => {
       const tabs = Array.from(document.querySelectorAll('.view-tab-btn'));
-      if (tabs.length < 2) return { ok: false, reason: 'Tab count < 2' };
+      if (tabs.length < 2) return null;
       const secondTab = tabs[1];
       secondTab.click();
-      return {
-        ok: true,
-        activeTab: secondTab.innerText.trim(),
-        isPressed: secondTab.getAttribute('aria-pressed') === 'true'
-      };
-    })()`);
+      if (secondTab.getAttribute('aria-pressed') === 'true') {
+        return {
+          ok: true,
+          activeTab: secondTab.innerText.trim(),
+          isPressed: true
+        };
+      }
+      return null;
+    })()`, 5000, 300);
     console.log(`  土星特写页 (saturn.html) 视角切换: 激活标签 "${saturnTabCheck?.activeTab}", aria-pressed=${saturnTabCheck?.isPressed} (${saturnTabCheck?.isPressed ? 'PASS' : 'FAIL'})`);
     if (!saturnTabCheck?.isPressed) allChecksPassed = false;
 
@@ -256,7 +276,6 @@ async function main() {
   } finally {
     if (ws) ws.close();
     chromeProc.kill();
-    try { fs.rmSync(tempProfile, { recursive: true, force: true }); } catch {}
   }
   console.log('');
 
