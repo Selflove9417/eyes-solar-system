@@ -57,14 +57,28 @@ export function parseEnglishQuantities(text) {
     november: 11, nov: 11,
     december: 12, dec: 12
   };
-  const monthRegex = /\b(january|jan|february|feb|march|mar|april|apr|may|june|jun|july|jul|august|aug|september|sept|sep|october|oct|november|nov|december|dec)\.?\s+(\d{1,2})\b/gi;
+  const monthRegex = /\b(january|jan|february|feb|march|mar|april|apr|may|june|jun|july|jul|august|aug|september|sept|sep|october|oct|november|nov|december|dec)\.?\s+(\d{1,2}|\d{4})\b/gi;
   for (const match of text.matchAll(monthRegex)) {
     const mNum = MONTHS[match[1].toLowerCase()];
     results.push(mNum);
-    // 日份在后续纯数字中也会被提取，但月份作为数值计入
+    // 日份或年份在后续纯数字中也会被提取，但月份作为数值计入
   }
 
-  // 4. 普通数值提取（含千分位、小数，如 "262,000", "400,000", "330"）
+  // 4. 任务罗马数字编号匹配：如 "Voyager I", "Voyager II" -> 1, 2
+  const ROMAN_NUMERALS = {
+    i: 1, ii: 2, iii: 3, iv: 4, v: 5,
+    vi: 6, vii: 7, viii: 8, ix: 9, x: 10
+  };
+  const romanMissionRegex = /\b(voyager|pioneer|mariner|apollo|viking)\s+(i|ii|iii|iv|v|vi|vii|viii|ix|x)\b/gi;
+  for (const match of text.matchAll(romanMissionRegex)) {
+    const rNum = ROMAN_NUMERALS[match[2].toLowerCase()];
+    if (rNum) {
+      results.push(rNum);
+      recordSpan(match.index, match.index + match[0].length);
+    }
+  }
+
+  // 5. 普通数值提取（含千分位、小数，如 "262,000", "400,000", "330"）
   const plainNumRegex = /(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?/g;
   for (const match of text.matchAll(plainNumRegex)) {
     if (isCovered(match.index, match.index + match[0].length)) continue;

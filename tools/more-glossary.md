@@ -22,6 +22,12 @@
 | `river valley networks` | **河谷网络** | — | 火星古代水流冲刷遗迹 |
 | `delta` / `deltas` | **三角洲** | — | 火星河流冲积地貌 |
 | `lakebed` / `lakebeds` | **湖床** | — | 火星古代干涸湖泊遗迹 |
+| `equatorial ridge` | **赤道脊** | ❌ 赤道山脉（除非特指） | 土卫八赤道独特隆起山脊地貌 |
+| `hydrothermal vent` / `vents` | **热液喷口** | — | 土卫二海底热液喷口 |
+| `tiger stripes` | **虎纹** | — | 土卫二南极裂缝与断裂构造 |
+| `chasmata` | **峡谷群** / **裂谷带** | — | 土卫四、土卫三表面大型深谷系统（如 Ithaca Chasma） |
+| `albedo` | **反照率** | — | 表面反射太阳光的能力指标（如土卫八黑白两面） |
+| `thermal segregation` | **热分选** | — | 土卫八黑白两面极度反差的热物理驱动机制 |
 
 ---
 
@@ -41,6 +47,10 @@
 | `regolith` | **风化层** | ❌ 土壤（除非特指地球生物土壤） | 天体表层细颗粒风化物 |
 | `axial tilt` | **轴倾角** | ❌ 轴倾斜度 | 自转轴与公转轨道法线夹角 |
 | `runaway greenhouse effect` | **失控温室效应** | — | 金星极端温室效应标准术语 |
+| `tidally locked` | **潮汐锁定** | — | 卫星自转与公转周期同步，始终以同一面朝向母星 |
+| `plume` / `plumes` | **羽流** / **喷羽** | ❌ 喷气 | 土卫二南极冰下海洋喷向太空的水汽和冰粒柱 |
+| `eccentric orbit` | **偏心轨道** | — | 非正圆轨道，离心率大于 0 |
+| `tidal heating` | **潮汐加热** | — | 轨道偏心与引力摄动引起的内部摩擦与潮汐形变加热 |
 
 ---
 
@@ -77,3 +87,13 @@
 | `Magellan` | **麦哲伦号** | 见 `missions.zh.json` |
 | `Galileo spacecraft` | **伽利略号探测器** | 见 `missions.zh.json` |
 | `Earth Observing System (EOS)` | **地球观测系统** | NASA 对地观测卫星系列体系 |
+| `Iapetus` | **土卫八** | 见 `names.zh.json` |
+| `Rhea` | **土卫五** | 见 `names.zh.json` |
+| `Dione` | **土卫四** | 见 `names.zh.json` |
+| `Tethys` | **土卫三** | 见 `names.zh.json` |
+| `Mimas` | **土卫一** | 见 `names.zh.json` |
+| `Phoebe` | **土卫九** | 见 `names.zh.json` |
+| `Giovanni Cassini` | **乔瓦尼·卡西尼** | 意大利/法国著名天文学家，发现土星多颗卫星与卡西尼缝 |
+| `Herschel Crater` | **赫歇尔撞击坑** | 土卫一标志性巨大撞击坑 |
+| `Voyager Mountains` | **旅行者山脉** | 土卫八赤道脊部分崇山峻岭命名 |
+| `Mimas Test` | **“土卫一检验”** | 科学界对比土卫一与土卫二内部构造与潮汐加热差异的科学检验命名 |

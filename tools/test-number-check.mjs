@@ -61,6 +61,18 @@ const testCases = [
     zh: '水手 2 号于 1962 年 12 月 14 日成功飞掠。',
     shouldPass: true
   },
+  {
+    name: 'Voyager I 与 Voyager II (罗马数字航天器编号)',
+    en: 'The Voyager I and Voyager II encounters provided the first knowledge.',
+    zh: '旅行者 1 号和旅行者 2 号的交会探测提供了第一手知识。',
+    shouldPass: true
+  },
+  {
+    name: 'September 2007 (英文年月无日份与中文年月对应)',
+    en: 'The September 2007 Cassini flyby revealed much of the moon.',
+    zh: '卡西尼号在 2007 年 9 月的飞掠揭示了这颗卫星的大部分面貌。',
+    shouldPass: true
+  },
   // 7. 反向用例：数值错误 (3 million 错译为 400 万)
   {
     name: '【反向】3 million 错译为 400 万（必须报错）',
