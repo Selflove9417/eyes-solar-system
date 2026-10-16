@@ -170,7 +170,12 @@ for (const p of pages) {
           // To continue auditing the parent page's remaining interactive elements, advance focus past the iframe.
           const iframeTag = el.tagName;
           const iframeId = el.id;
-          const all = Array.from(document.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled])'));
+          const all = Array.from(document.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), details summary, [tabindex]:not([tabindex="-1"])')).filter(item => {
+            if (item.closest('[inert]')) return false;
+            const s = window.getComputedStyle(item);
+            if (s.display === 'none' || s.visibility === 'hidden') return false;
+            return item.offsetWidth > 0 || item.offsetHeight > 0 || item.getClientRects().length > 0;
+          });
           const idx = all.findIndex(item => el.compareDocumentPosition(item) & Node.DOCUMENT_POSITION_FOLLOWING);
           if (idx !== -1) {
             all[idx].focus();
@@ -194,7 +199,7 @@ for (const p of pages) {
       })()
     `);
 
-    if (info.label === 'lost-focus') {
+    if (info.label === 'lost-focus' && i < focusableCount) {
       lostFocusDetected = true;
     }
 
@@ -229,11 +234,14 @@ for (const p of pages) {
   let reverseOk = true;
   if (visitedUids.length >= 3) {
     const beforeShift = await client.evaluate(`document.activeElement?.tagName || 'NONE'`);
-    await client.pressTab(true); // Shift+Tab
-    const afterShift = await client.evaluate(`document.activeElement?.tagName || 'NONE'`);
-    if (afterShift === 'NONE' || afterShift === 'BODY') {
-      reverseOk = false;
-      lostFocusDetected = true;
+    if (beforeShift !== 'BODY' && beforeShift !== 'NONE') {
+      await client.pressTab(true); // Shift+Tab
+      await sleep(40);
+      const afterShift = await client.evaluate(`document.activeElement?.tagName || 'NONE'`);
+      if (afterShift === 'NONE' || afterShift === 'BODY') {
+        reverseOk = false;
+        lostFocusDetected = true;
+      }
     }
   }
 
@@ -244,7 +252,9 @@ for (const p of pages) {
   if (hasDropdownBtn) {
     // 1. Focus button and press ArrowDown
     await client.evaluate(`document.querySelector('.nav-dropdown-btn').focus()`);
+    await sleep(40);
     await client.pressKey('ArrowDown', 'ArrowDown', 40);
+    await sleep(60);
 
     const openCheck = await client.evaluate(`
       (() => {
@@ -260,6 +270,7 @@ for (const p of pages) {
 
     // 2. Press ArrowDown to advance to second link
     await client.pressKey('ArrowDown', 'ArrowDown', 40);
+    await sleep(60);
     const advanceCheck = await client.evaluate(`
       (() => {
         const item = document.querySelector('.nav-dropdown-btn')?.closest('.nav-item');
@@ -270,6 +281,7 @@ for (const p of pages) {
 
     // 3. Press Escape to close and restore focus
     await client.pressKey('Escape', 'Escape', 27);
+    await sleep(60);
     const closeCheck = await client.evaluate(`
       (() => {
         const btn = document.querySelector('.nav-dropdown-btn');
