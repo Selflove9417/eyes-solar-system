@@ -28,7 +28,26 @@
     <span id="count" style="color:var(--fg-dim);font-size:13.5px"></span>
   </div>
   <p style="color:var(--fg-muted);font-size:13px;margin:8px 0 20px">注：未特别标注的任务均采用国家审定规范译名；标注「通用译名」为中文出版物通行译名，「代号保留」为国际编号原文。</p>
-  <div class="entry-grid" id="list"></div>
+  <div class="entry-grid" id="list" style="min-height:85vh">
+    <article class="entry-card" aria-hidden="true" style="opacity:0.35;min-height:160px;pointer-events:none;">
+      <div class="entry-swatch swatch-mission"></div>
+      <h2 class="entry-title" style="color:var(--fg-muted)">载入航天任务数据中…</h2>
+      <div class="entry-en" style="color:var(--fg-muted)">Loading space missions data…</div>
+      <p class="entry-desc" style="color:var(--fg-muted)">正在加载航天器与探测任务中文审定数据库，请稍候…</p>
+    </article>
+    <article class="entry-card" aria-hidden="true" style="opacity:0.25;min-height:160px;pointer-events:none;">
+      <div class="entry-swatch swatch-mission"></div>
+      <h2 class="entry-title" style="color:var(--fg-muted)">航天任务载入中…</h2>
+      <div class="entry-en" style="color:var(--fg-muted)">Spacecraft / Mission placeholder…</div>
+      <p class="entry-desc" style="color:var(--fg-muted)">正在获取发射历史与任务简介…</p>
+    </article>
+    <article class="entry-card" aria-hidden="true" style="opacity:0.15;min-height:160px;pointer-events:none;">
+      <div class="entry-swatch swatch-mission"></div>
+      <h2 class="entry-title" style="color:var(--fg-muted)">航天任务载入中…</h2>
+      <div class="entry-en" style="color:var(--fg-muted)">Spacecraft / Mission placeholder…</div>
+      <p class="entry-desc" style="color:var(--fg-muted)">正在获取发射历史与任务简介…</p>
+    </article>
+  </div>
   <p style="margin-top:40px;color:var(--fg-muted);font-size:13.5px;border-top:1px solid var(--line-subtle);padding-top:20px">
     未收录的航天器（如 <code>TDRS-11</code>、<code>CYGNSS 5</code>、<code>GRACE-FO2</code> 等任务代号）在模拟器中保留英文，
     完整名单见<a href="glossary.html" style="color:var(--fg-dim);text-decoration:underline">中英术语对照</a>。

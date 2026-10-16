@@ -41,6 +41,7 @@
 | `--warn` | `#f87171` | 状态告警 / 警告红色 | **6.52:1**（满足 AA 4.5:1） |
 | `--line` | `rgba(255, 255, 255, 0.08)` | 常规分隔线 | 细致低噪 |
 | `--line-subtle` | `rgba(255, 255, 255, 0.06)` | 次级微弱指示线、数据条顶部细线 | 极致降噪 |
+| `--line-hover` | `rgba(56, 189, 248, 0.4)` | 悬浮态与微高亮指示线 | 交互聚焦 |
 
 #### 页面主题色 (`--page-tint`) 使用规范
 - **允许使用范围**：仅用于特写专题页的小尺寸短指示线（`.text-block-swatch`）、旗舰卡片指示线（`.flagship-swatch`）以及极小范围的数值强调（`.stat-highlight`）。
@@ -115,9 +116,16 @@
 ### 2. 主按钮 (`.btn-primary`)
 
 - **规范**：整页唯一实心按钮。天蓝底色加纯黑粗体字，点击热区 $\ge 44\text{px}$，无阴影无浮夸变形。
+- **核心尺寸与属性**：
+  - `min-height`: `44px`
+  - `padding`: `12px 28px`
+  - `background`: `var(--accent)`
+  - `color`: `#030712`
+  - `border-radius`: `var(--r)`
+  - `box-shadow`: `none`
 
 ```html
-<a class="btn-primary" href="extension/eyes-zh-extension.zip" download>
+<a class="btn-primary" href="dist/eyes-zh-extension.zip" download="eyes-zh-extension.zip">
   下载汉化扩展包 (.zip)
 </a>
 ```
@@ -228,6 +236,22 @@
 </footer>
 ```
 
+### 11. 长文阅读容器 (`.doc-wrap`)
+
+- **规范**：用于操作指南、关于与合规、扩展安装指引等文本阅读页面。严格限制单行最大行宽 $\le 70\text{ch}$，水平居中对齐，保证长时间阅读舒适感。
+- **核心尺寸与属性**：
+  - `max-width`: `70ch`
+  - `margin`: `0 auto`
+  - `padding`: `0 var(--space-4)`
+
+```html
+<main class="wrap doc-wrap">
+  <div class="feature-kicker">非官方本地增强套件</div>
+  <h1>中文汉化扩展</h1>
+  <p class="lede">页面导言说明…</p>
+</main>
+```
+
 ---
 
 ## 四、设计禁用清单 (Prohibited Practices)
@@ -278,6 +302,8 @@
    - `node tools/lint-zh.mjs`
    - `node tools/test-stories.mjs`
    - `node tools/check-all-links.mjs`
+    - `node tools/check-design-doc.mjs`
+    - `node tools/measure-computed-contrast.mjs`
    - `node tools/verify-phase4-qa.mjs`
    - `node tools/verify-phase5-qa.mjs`
 
