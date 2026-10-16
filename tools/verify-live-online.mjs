@@ -171,18 +171,73 @@ async function main() {
   // 4. Cloudflare Pages 响应头与缓存控制标头 (_headers 生效验证)
   // -------------------------------------------------------------
   console.log(`[步骤 4/6] 检查 Cloudflare Pages 响应头缓存策略...`);
+  let step4Failed = false;
+
+  const validateCacheControl = (cc, isAsset = true) => {
+    if (!cc) return { ok: false, reason: 'Cache-Control 标头缺失' };
+    const tokens = cc.trim().split(',').map((s) => s.trim().toLowerCase());
+    const seen = new Set();
+    for (const t of tokens) {
+      if (seen.has(t)) {
+        return { ok: false, reason: `出现重复指令 "${t}"` };
+      }
+      seen.add(t);
+    }
+    if (isAsset) {
+      const hasPublic = tokens.includes('public');
+      const hasMaxAge = tokens.includes('max-age=31536000');
+      const hasImmutable = tokens.includes('immutable');
+      if (!hasPublic || !hasMaxAge || !hasImmutable) {
+        return { ok: false, reason: `缺少必要强缓存指令: "${cc}"` };
+      }
+    } else {
+      const hasMustRevalidate = tokens.includes('must-revalidate');
+      if (!hasMustRevalidate) {
+        return { ok: false, reason: `缺少协商缓存指令 must-revalidate: "${cc}"` };
+      }
+    }
+    return { ok: true, formatted: cc.trim() };
+  };
+
   try {
+    // 4.1 HTML 首页
     const htmlRes = await fetch(`${SITE_ORIGIN}/?_t=${Date.now()}`, { cache: 'no-store' });
     const htmlCc = htmlRes.headers.get('cache-control') || '';
-    const htmlCcOk = htmlCc.includes('must-revalidate');
-    console.log(`  HTML 首页 Cache-Control: "${htmlCc}" (协商缓存: ${htmlCcOk ? 'PASS' : 'FAIL'})`);
+    const htmlCheck = validateCacheControl(htmlCc, false);
+    console.log(`  HTML 首页 Cache-Control : "${htmlCc}" (${htmlCheck.ok ? 'PASS' : 'FAIL: ' + htmlCheck.reason})`);
+    if (!htmlCheck.ok) {
+      step4Failed = true;
+      allChecksPassed = false;
+    }
 
-    const assetRes = await fetch(`${SITE_ORIGIN}/assets/css/main.css?v=20261016p6final`, { cache: 'no-store' });
-    const assetCc = assetRes.headers.get('cache-control') || '';
-    const assetCcOk = assetCc.includes('immutable') || assetCc.includes('max-age=31536000');
-    console.log(`  静态 CSS Cache-Control  : "${assetCc}" (永久缓存: ${assetCcOk ? 'PASS' : 'FAIL'})`);
+    // 4.2 静态 CSS
+    const cssRes = await fetch(`${SITE_ORIGIN}/assets/css/main.css?v=20261016p6final`, { cache: 'no-store' });
+    const cssCc = cssRes.headers.get('cache-control') || '';
+    const cssCheck = validateCacheControl(cssCc, true);
+    console.log(`  静态 CSS Cache-Control  : "${cssCc}" (${cssCheck.ok ? 'PASS' : 'FAIL: ' + cssCheck.reason})`);
+    if (!cssCheck.ok) {
+      step4Failed = true;
+      allChecksPassed = false;
+    }
+
+    // 4.3 静态 JS
+    const jsRes = await fetch(`${SITE_ORIGIN}/assets/js/site.js?v=20261016p6final`, { cache: 'no-store' });
+    const jsCc = jsRes.headers.get('cache-control') || '';
+    const jsCheck = validateCacheControl(jsCc, true);
+    console.log(`  静态 JS  Cache-Control  : "${jsCc}" (${jsCheck.ok ? 'PASS' : 'FAIL: ' + jsCheck.reason})`);
+    if (!jsCheck.ok) {
+      step4Failed = true;
+      allChecksPassed = false;
+    }
   } catch (err) {
     console.error(`  ❌ 标头检查异常:`, err.message);
+    step4Failed = true;
+    allChecksPassed = false;
+  }
+
+  if (step4Failed) {
+    console.error(`\n❌ [步骤 4 失败退出] Cache-Control 标头未满足要求或出现重复值。`);
+    process.exit(1);
   }
   console.log('');
 

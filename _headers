@@ -4,15 +4,6 @@
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
 
-/assets/css/*
-  Cache-Control: public, max-age=31536000, immutable
-
-/assets/js/*
-  Cache-Control: public, max-age=31536000, immutable
-
-/assets/img/*
-  Cache-Control: public, max-age=31536000, immutable
-
 # 2. 天体与科普数据（JSON）：设置 1 天边缘与浏览器缓存，配合后台平滑重新验证
 /data/*
   Cache-Control: public, max-age=86400, stale-while-revalidate=604800
