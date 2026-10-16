@@ -40,6 +40,17 @@ async function main() {
       const ogImageOk = ogImage.startsWith(SITE_ORIGIN);
       const twCardOk = twCard === 'summary';
 
+      let gsvFound = false;
+      let gsvSnippet = '';
+      if (p === 'index.html') {
+        const gsvMatch = html.match(/<meta\s+name=["']google-site-verification["'][^>]*>/i);
+        gsvFound = Boolean(gsvMatch);
+        gsvSnippet = gsvMatch ? gsvMatch[0] : '';
+        if (!gsvFound) {
+          allChecksPassed = false;
+        }
+      }
+
       if (!canonicalOk || !ogUrlOk || !ogImageOk || !twCardOk) {
         allChecksPassed = false;
       }
@@ -52,7 +63,9 @@ async function main() {
         ogUrl,
         ogImage,
         twCard,
-        ok: canonicalOk && ogUrlOk && ogImageOk && twCardOk
+        gsvFound,
+        gsvSnippet,
+        ok: canonicalOk && ogUrlOk && ogImageOk && twCardOk && (p !== 'index.html' || gsvFound)
       });
     } catch (err) {
       metaResults.push({ page: p, error: err.message, ok: false });
@@ -64,6 +77,18 @@ async function main() {
   console.log('| :--- | :--- | :--- | :--- | :--- | :--- | :--- |');
   for (const r of metaResults) {
     console.log(`| \`${r.page}\` | ${r.status} | ${r.title} | \`${r.canonical}\` | \`${r.ogUrl}\` | \`${r.ogImage}\` | \`${r.twCard}\` |`);
+  }
+  console.log('');
+
+  // 1.1 校验 index.html 的 google-site-verification 标签
+  const indexMeta = metaResults.find((r) => r.page === 'index.html');
+  const gsvOk = Boolean(indexMeta?.gsvFound);
+  console.log(`  index.html google-site-verification 检查: ${gsvOk ? 'PASS' : 'FAIL (缺失)'}`);
+  if (gsvOk) {
+    console.log(`  标签源码: ${indexMeta.gsvSnippet}`);
+  } else {
+    console.error(`\n❌ [步骤 1 失败退出] index.html 缺失 google-site-verification 所有权验证标签。`);
+    process.exit(1);
   }
   console.log('');
 
