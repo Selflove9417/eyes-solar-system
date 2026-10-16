@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>页面不存在 · 404 · 深空之眸</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="alternate icon" href="/favicon.ico">
+<link rel="stylesheet" href="/assets/css/main.css?v=20261016p6final" id="app-css">
+<script>
+// 针对不同托管平台的基准路径自适应支持：
+// 1. Cloudflare Pages 主域名环境（根路径 /）：保持原生绝对路径。
+// 2. GitHub Pages 镜像环境（子路径 /eyes-solar-system/）：注入 base 标签并重写静态资源前缀。
+if (location.pathname.startsWith('/eyes-solar-system')) {
+  const baseEl = document.createElement('base');
+  baseEl.href = '/eyes-solar-system/';
+  document.head.prepend(baseEl);
+  const cssEl = document.getElementById('app-css');
+  if (cssEl) cssEl.href = '/eyes-solar-system/assets/css/main.css?v=20261016p6final';
+}
+</script>
+</head>
+<body>
+<main class="wrap doc-wrap" style="min-height:55vh;display:flex;flex-direction:column;justify-content:center;padding:48px 24px">
+  <div class="feature-kicker">404 NOT FOUND</div>
+  <h1>页面不存在</h1>
+  <p class="lede" style="max-width:52ch;margin:16px 0 28px">你所访问的星际坐标或页面不存在，可能地址已变更或输入有误。</p>
+  <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:15px">
+    <a href="index.html" class="lede-link">← 返回首页</a>
+    <a href="bodies.html" class="lede-link">天体名录 ↗</a>
+    <a href="missions.html" class="lede-link">探测任务 ↗</a>
+  </div>
+</main>
+<script type="module">
+const prefix = location.pathname.startsWith('/eyes-solar-system') ? '/eyes-solar-system' : '';
+const { renderChrome } = await import(`${prefix}/assets/js/site.js?v=20261016p6final`);
+renderChrome('404.html');
+</script>
+</body>
+</html>

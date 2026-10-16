@@ -1,11 +1,15 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-const htmlFiles = [
+// Regular content pages to verify for navigation reachability (orphan check)
+const regularHtmlFiles = [
   'index.html', 'explore.html', 'bodies.html', 'missions.html',
   'glossary.html', 'guide.html', 'extension.html', 'about.html',
   'mars.html', 'jwst.html', 'saturn.html', 'voyager-1.html'
 ];
+
+// All files to check for internal link validity (including 404 error page)
+const htmlFilesToCheck = [...regularHtmlFiles, '404.html'];
 
 // Also check site.js for links rendered in header/footer
 const jsFiles = ['assets/js/site.js'];
@@ -30,7 +34,8 @@ function checkFile(file) {
       continue;
     }
     totalLinks++;
-    const resolved = path.resolve('.', target);
+    const normalizedTarget = target.startsWith('/') ? target.slice(1) : target;
+    const resolved = path.resolve('.', normalizedTarget);
     if (!fs.existsSync(resolved)) {
       console.error(`❌ 404 Link Error in ${file}: target '${target}' not found (resolved: ${resolved})`);
       errors++;
@@ -40,16 +45,17 @@ function checkFile(file) {
   }
 }
 
-htmlFiles.forEach(checkFile);
+htmlFilesToCheck.forEach(checkFile);
 jsFiles.forEach(checkFile);
 
-// Check if any of the 12 HTML pages are orphaned (not reachable from nav or home)
+// Check if any of the 12 regular HTML pages are orphaned (not reachable from nav or home)
 // The top navigation contains: explore.html, bodies.html, missions.html, glossary.html, extension.html, guide.html, about.html
 // Homepage links to: explore.html, saturn.html (theater & card), mars.html, jwst.html, voyager-1.html
-// Thus all 12 pages are directly linked from nav and/or homepage!
+// Thus all 12 regular pages are directly linked from nav and/or homepage!
+// 404.html 是专门的 HTTP 异常捕获与重定向页，由 Web 服务器根据 404 状态直接呈现，按规范排除在站内链接孤儿检测之外。
 
 console.log(`\n========================================`);
-console.log(`Checked ${totalLinks} internal links across ${htmlFiles.length} HTML files and ${jsFiles.length} JS file.`);
+console.log(`Checked ${totalLinks} internal links across ${htmlFilesToCheck.length} HTML files and ${jsFiles.length} JS file.`);
 if (errors === 0) {
   console.log(`✅ All ${totalLinks} internal links are valid. No 404 errors found.`);
 } else {
