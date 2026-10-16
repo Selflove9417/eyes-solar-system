@@ -30,6 +30,8 @@
 | `perturb` / `perturbation` | **摄动** | ❌ 扰动、捣乱 | 天体力学标准术语 |
 | `magnetic lines of force` | **磁力线** | — | 行星磁场力线 |
 | `electric generator` | **发电机** | — | 木卫一洛伦兹力感应发电效应 |
+| `Great Red Spot` | **大红斑** | — | 木星标志性反气旋风暴 |
+| `gas giant` | **气态巨行星** | ❌ 气体行星 | 巨行星分类标准术语 |
 
 ---
 
