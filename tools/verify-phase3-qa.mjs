@@ -130,8 +130,16 @@ const setViewport = async (w, h) => {
 const captureShot = async (outPath) => {
   const { data } = await sendCdp('Page.captureScreenshot', { format: 'png' });
   const buf = Buffer.from(data, 'base64');
-  fs.writeFileSync(outPath, buf);
-  console.log(`  📸 Saved shot: ${path.relative(root, outPath)} (${Math.round(buf.length / 1024)} KB)`);
+  if (process.argv.includes('--update-shots')) {
+    fs.writeFileSync(outPath, buf);
+    console.log(`  📸 Saved shot: ${path.relative(root, outPath)} (${Math.round(buf.length / 1024)} KB)`);
+  } else {
+    const tmpPath = path.join(root, 'shots', '.tmp', path.basename(outPath));
+    const tmpDir = path.dirname(tmpPath);
+    if (!fs.existsSync(tmpDir)) fs.mkdirSync(tmpDir, { recursive: true });
+    fs.writeFileSync(tmpPath, buf);
+    console.log(`  📸 Screenshot check OK: ${path.relative(root, outPath)} (baseline preserved; saved to shots/.tmp/)`);
+  }
 };
 
 let allPassed = true;

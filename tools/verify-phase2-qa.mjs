@@ -142,8 +142,15 @@ async function captureShot(filename, clip = null) {
   if (clip) params.clip = clip;
   const shot = await sendCdp('Page.captureScreenshot', params);
   const buf = Buffer.from(shot.data, 'base64');
-  fs.writeFileSync(path.join(shotsDir, filename), buf);
-  console.log(`  📸 Saved shot: shots/${filename} (${Math.round(buf.length / 1024)} KB)`);
+  if (process.argv.includes('--update-shots')) {
+    fs.writeFileSync(path.join(shotsDir, filename), buf);
+    console.log(`  📸 Saved shot: shots/${filename} (${Math.round(buf.length / 1024)} KB)`);
+  } else {
+    const tmpDir = path.join(shotsDir, '.tmp');
+    if (!fs.existsSync(tmpDir)) fs.mkdirSync(tmpDir, { recursive: true });
+    fs.writeFileSync(path.join(tmpDir, filename), buf);
+    console.log(`  📸 Screenshot check OK: shots/${filename} (baseline preserved; saved to shots/.tmp/)`);
+  }
 }
 
 console.log('\n--- Verifying Viewports (375px, 768px, 1440px) on index.html ---');

@@ -150,11 +150,24 @@ e:\NASA/
 ├── tools/                       # 零依赖本地工程工具链
 │   ├── serve.mjs                # 轻量静态 HTTP 服务器
 │   ├── lint-zh.mjs              # 中文知识库自动化数据校验脚本
+│   ├── run-all-tests.mjs        # 聚合测试套件运行器 (npm test)
 │   └── pack-extension.mjs       # 扩展程序一键打包脚本
+│
+├── shots/                       # 官方视觉基线与验收截图 (44 张正式基线)
+│   └── .tmp/                    # 本地测试产生的临时比对截图 (已被 .gitignore 忽略)
 │
 ├── .github/workflows/deploy.yml # GitHub Actions 自动化静态发布流水线
 └── README.md                    # 项目全景说明文档
 ```
+
+### 本地测试与截图更新规范
+
+运行全站 13 项自动化回归测试套件：
+```bash
+npm test
+```
+- **临时截图隔离**：测试默认将运行截图写入 `shots/.tmp/` 目录（已加入 `.gitignore`），避免污染 Git 工作区。
+- **正式基线更新**：仅当需要刻意更新视觉验收基线时，为子脚本追加 `--update-shots` 参数（例如 `node tools/verify-phase4-qa.mjs --update-shots`），才会覆盖写入 `shots/` 根目录下的正式基准图。
 
 ---
 

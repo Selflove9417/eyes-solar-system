@@ -111,7 +111,10 @@ async function captureShot(filename) {
     fs.writeFileSync(outPath, buf);
     console.log(`  📸 Saved shot: ${filename} (${Math.round(buf.length / 1024)} KB)`);
   } else {
-    console.log(`  📸 Screenshot check OK: ${filename} (baseline preserved; pass --update-shots to overwrite)`);
+    const tmpPath = path.join(root, 'shots', '.tmp', path.basename(filename));
+    fs.mkdirSync(path.dirname(tmpPath), { recursive: true });
+    fs.writeFileSync(tmpPath, buf);
+    console.log(`  📸 Screenshot check OK: ${filename} (baseline preserved; saved to shots/.tmp/)`);
   }
 }
 
