@@ -102,6 +102,7 @@ const testSteps = [
   { name: 'lint-zh', script: 'tools/lint-zh.mjs', needsBrowser: false },
   { name: 'check-more', script: 'tools/check-more.mjs', needsBrowser: false },
   { name: 'test-number-check', script: 'tools/test-number-check.mjs', needsBrowser: false },
+  { name: 'test-more-negative', script: 'tools/test-more-negative.mjs', needsBrowser: false },
   { name: 'check-all-links', script: 'tools/check-all-links.mjs', needsBrowser: false },
   { name: 'test-stories', script: 'tools/test-stories.mjs', needsBrowser: false },
   { name: 'check-design-doc', script: 'tools/check-design-doc.mjs', needsBrowser: false },

@@ -267,17 +267,18 @@ ${content}
         };
       })()`);
 
+      const slug = route.split('/').pop();
       // 截取截图保存至 shots/.tmp/
       const shot = await send('Page.captureScreenshot', { format: 'png' });
-      const shotFile = path.join(shotsDir, `more-${route}.png`);
+      const shotFile = path.join(shotsDir, `more-${slug}.png`);
       fs.writeFileSync(shotFile, Buffer.from(shot.data, 'base64'));
 
       // 执行严谨的比对校验
-      const entry = moreData.entries[route];
+      const entry = moreData.entries[slug] || moreData.entries[route];
       const checkRes = verifyMoreExpansion({
         actualMoreText: domData.moreText,
         blurbText: domData.blurbText,
-        slug: route,
+        slug,
         entry,
         btnAfterMore,
         btnAfterCollapse
@@ -314,10 +315,8 @@ ${content}
     }
     console.log('================================================');
 
-    ws.close();
-    if (!allOk) {
-      process.exit(1);
-    }
+    try { ws.close(); } catch {}
+    return allOk;
   } finally {
     proc.kill();
     try {
@@ -332,7 +331,10 @@ async function main() {
     await runNegativeTests();
     return;
   }
-  await runE2E();
+  const allOk = await runE2E();
+  if (!allOk) {
+    process.exit(1);
+  }
 }
 
 const isDirectRun = process.argv[1] && process.argv[1].endsWith('test-more-e2e.mjs');
