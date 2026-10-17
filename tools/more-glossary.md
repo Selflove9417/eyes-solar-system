@@ -28,6 +28,12 @@
 | `chasmata` | **峡谷群** / **裂谷带** | — | 土卫四、土卫三表面大型深谷系统（如 Ithaca Chasma） |
 | `albedo` | **反照率** | — | 表面反射太阳光的能力指标（如土卫八黑白两面） |
 | `thermal segregation` | **热分选** | — | 土卫八黑白两面极度反差的热物理驱动机制 |
+| `corona` / `coronae` | **冕状物** / **冕状地形** | — | 天卫五表面独特的复杂地貌构造 |
+| `fault canyon` / `fault valley` | **断层峡谷** / **断层谷** | — | 天卫五、天卫三表面深裂谷系统 |
+| `graben` / `grabens` | **地堑** | — | 天卫一表面以断层为边界的狭长下陷谷地 |
+| `trough` / `troughs` | **槽谷** / **槽状地堑** | — | 天卫三表面构造拉张槽谷 |
+| `terminator` | **晨昏线** | — | 天体表面受光半球与阴影半球的分界线 |
+| `opposition` | **冲** / **冲位** | — | 地外天体与太阳分别位于地球两侧的天象，天卫一亮度在此时显著增亮 |
 
 ---
 
@@ -51,6 +57,10 @@
 | `plume` / `plumes` | **羽流** / **喷羽** | ❌ 喷气 | 土卫二南极冰下海洋喷向太空的水汽和冰粒柱 |
 | `eccentric orbit` | **偏心轨道** | — | 非正圆轨道，离心率大于 0 |
 | `tidal heating` | **潮汐加热** | — | 轨道偏心与引力摄动引起的内部摩擦与潮汐形变加热 |
+| `retrograde orbit` | **逆行轨道** | — | 与母星自转方向相反的轨道，海卫一标志性动力学特征 |
+| `synchronous rotation` | **同步自转** | — | 自转周期与公转周期相同（如海卫一与海王星） |
+| `tectonic extension` | **构造拉张** | — | 地壳受拉张应力作用而撕裂或形成地堑 |
+| `geyser` / `geysers` | **间歇泉** | — | 海卫一南极活跃的液氮喷泉 |
 
 ---
 
@@ -97,3 +107,12 @@
 | `Herschel Crater` | **赫歇尔撞击坑** | 土卫一标志性巨大撞击坑 |
 | `Voyager Mountains` | **旅行者山脉** | 土卫八赤道脊部分崇山峻岭命名 |
 | `Mimas Test` | **“土卫一检验”** | 科学界对比土卫一与土卫二内部构造与潮汐加热差异的科学检验命名 |
+| `Miranda` | **天卫五** | 见 `names.zh.json` |
+| `Titania` | **天卫三** | 见 `names.zh.json` |
+| `Oberon` | **天卫四** | 见 `names.zh.json` |
+| `Ariel` | **天卫一** | 见 `names.zh.json` |
+| `Umbriel` | **天卫二** | 见 `names.zh.json` |
+| `Triton` | **海卫一** | 见 `names.zh.json` |
+| `Kuiper Belt` | **柯伊伯带** | 海王星外侧小天体带 |
+| `Kuiper Belt Object` | **柯伊伯带天体** | 海卫一捕获前所属天体类型 |
+| `Pluto` | **冥王星** | 见 `names.zh.json` |
