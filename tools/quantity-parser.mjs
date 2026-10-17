@@ -57,7 +57,7 @@ export function parseEnglishQuantities(text) {
     november: 11, nov: 11,
     december: 12, dec: 12
   };
-  const monthRegex = /\b(january|jan|february|feb|march|mar|april|apr|may|june|jun|july|jul|august|aug|september|sept|sep|october|oct|november|nov|december|dec)\.?\s+(\d{1,2}|\d{4})\b/gi;
+  const monthRegex = /\b(january|jan|february|feb|march|mar|april|apr|may|june|jun|july|jul|august|aug|september|sept|sep|october|oct|november|nov|december|dec)\.?\s+(?:of\s+)?(\d{1,2}(?:st|nd|rd|th)?|\d{4})\b/gi;
   for (const match of text.matchAll(monthRegex)) {
     const mNum = MONTHS[match[1].toLowerCase()];
     results.push(mNum);

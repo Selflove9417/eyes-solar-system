@@ -151,7 +151,7 @@
 | `Vesta` / `4 Vesta` | **灶神星** / **4 号小行星灶神星** | 见 `names.zh.json` |
 | `Pallas` / `2 Pallas` | **智神星** / **2 号小行星智神星** | 见 `names.zh.json` |
 | `Bennu` / `101955 Bennu` | **贝努小行星** | 见 `names.zh.json` |
-| `Ryugu` / `162173 Ryugu` | **龙宫小行星** | 见 `names.zh.json` |
+| `Ryugu` / `162173 Ryugu` | **龙宫小行星** | 见 `names.zh.json`；官方源文误写为绕地球公转，实际绕太阳公转，译文已纠正并附注 |
 | `Arrokoth` / `486958 Arrokoth` | **阿罗科思** | 见 `names.zh.json` |
 | `Didymos` / `65803 Didymos` | **迪迪莫斯** | 见 `names.zh.json` |
 | `Dimorphos` | **迪莫弗斯** | 见 `names.zh.json` |
