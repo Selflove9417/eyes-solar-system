@@ -11,6 +11,12 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const moreJsonPath = path.join(root, 'data/more.zh.json');
 export const moreData = JSON.parse(fs.readFileSync(moreJsonPath, 'utf8'));
 
+const namesJsonPath = path.join(root, 'data/names.zh.json');
+export const namesData = JSON.parse(fs.readFileSync(namesJsonPath, 'utf8'));
+
+const descJsonPath = path.join(root, 'data/source/descriptions.en.json');
+export const descData = JSON.parse(fs.readFileSync(descJsonPath, 'utf8'));
+
 /**
  * 严格比对详情面板长文展开汉化质量
  * 1. 展开按钮文案必须为 "收起"
@@ -210,30 +216,81 @@ ${content}
     const results = [];
 
     for (const route of routes) {
-      console.log(`\n▶ 正在测试天体路由: ${route}...`);
-      await send('Page.navigate', { url: `https://eyes.nasa.gov/apps/solar-system/#/${route}` });
+      const slug = route.split('/').pop();
+      const entityMeta = namesData.entities?.[slug];
+      const expectedEn = entityMeta?.en;
+      const expectedZh = entityMeta?.zh;
+      const expectedBlurbEn = descData[slug]?.description?.blurb;
 
-      const ready = await ev(`(async () => {
-        for (let i = 0; i < 90; i++) {
+      console.log(`\n▶ 正在测试天体路由: ${route} (预期实体: ${slug} | ${expectedEn || '未知'} / ${expectedZh || '未知'})...`);
+      const targetUrl = route.startsWith('http') ? route : `https://eyes.nasa.gov/apps/solar-system/#/${route}`;
+      await send('Page.navigate', { url: targetUrl });
+
+      // 严格等待天体加载与 SPA 视图过渡完成，进行原生英文身份核验
+      let identityMatched = false;
+      let actualUrl = '';
+      let preEnTitle = '';
+      let preEnBlurb = '';
+      let selectedLabel = '';
+
+      for (let attempt = 0; attempt < 50; attempt++) {
+        const state = await ev(`(() => {
           const ls = document.getElementById('loading-screen');
-          const done = !ls || getComputedStyle(ls).display === 'none' || getComputedStyle(ls).opacity === '0';
-          if (done && document.querySelectorAll('.pioneer-label-div').length > 0) return true;
-          await new Promise(r => setTimeout(r, 1000));
-        }
-        return false;
-      })()`);
+          const loading = ls && getComputedStyle(ls).display !== 'none' && getComputedStyle(ls).opacity !== '0';
+          const titleEl = document.querySelector('.title.long-title, .semi.title.long-title');
+          const panelTitle = titleEl ? titleEl.textContent.trim() : '';
+          const copyEl = document.querySelector('.description .copy:not(.more)');
+          const blurb = copyEl ? copyEl.textContent.trim() : '';
+          const href = window.location.href;
+          const labelEl = document.querySelector('.pioneer-label-div.selection, .pioneer-label-div.selected');
+          const label = labelEl ? labelEl.textContent.trim() : '';
+          return { loading, panelTitle, blurb, href, label };
+        })()`);
 
-      if (!ready) {
-        console.warn(`⚠️ 路由 ${route} 页面加载超时`);
-        results.push({ route, ok: false, reason: '加载超时' });
-        continue;
+        actualUrl = state.href;
+        preEnTitle = state.panelTitle;
+        preEnBlurb = state.blurb;
+        selectedLabel = state.label;
+
+        if (!state.loading) {
+          const matchEn = expectedEn && state.panelTitle.toLowerCase() === expectedEn.toLowerCase();
+          const matchZh = expectedZh && state.panelTitle === expectedZh;
+          if ((matchEn || matchZh) && state.blurb.length > 0) {
+            identityMatched = true;
+            break;
+          }
+        }
+        await sleep(1000);
       }
 
-      await sleep(2000);
+      if (!identityMatched) {
+        const errMsg = `天体身份核验失败或页面过渡超时: 预期 "${expectedEn}" (${slug}), 实际面板 "${preEnTitle}", 选中标签 "${selectedLabel}", URL "${actualUrl}"`;
+        console.error(`  ❌ ${errMsg}`);
+        results.push({
+          route,
+          slug,
+          ok: false,
+          actualUrl,
+          actualIdentity: preEnTitle || '未知',
+          identityPassed: false,
+          totalParagraphs: 0,
+          errors: [errMsg]
+        });
+        continue;
+      }
 
       // 注入汉化扩展 content.js
       await ev(bundle);
       await sleep(2500);
+
+      // 核验汉化注入后的天体身份与标题
+      const postInjection = await ev(`(() => {
+        const titleEl = document.querySelector('.title.long-title, .semi.title.long-title');
+        return {
+          panelTitleZh: titleEl ? titleEl.textContent.trim() : '',
+          docTitle: document.title
+        };
+      })()`);
 
       // 1. 点击展开
       await ev(`document.querySelector('button.more-button')?.click()`);
@@ -267,7 +324,6 @@ ${content}
         };
       })()`);
 
-      const slug = route.split('/').pop();
       // 截取截图保存至 shots/.tmp/
       const shot = await send('Page.captureScreenshot', { format: 'png' });
       const shotFile = path.join(shotsDir, `more-${slug}.png`);
@@ -284,10 +340,21 @@ ${content}
         btnAfterCollapse
       });
 
+      // 附加检查：若有 expectedZh，核验面板标题是否完成汉化
+      if (expectedZh && postInjection.panelTitleZh !== expectedZh) {
+        checkRes.ok = false;
+        checkRes.errors.push(`面板标题中文未正确翻译: 预期 "${expectedZh}", 实际 "${postInjection.panelTitleZh}"`);
+      }
+
+      const enIdentity = (preEnTitle === expectedZh || !preEnTitle) ? (expectedEn || slug) : preEnTitle;
+      console.log(`  - 实际完整 URL: ${actualUrl}`);
+      console.log(`  - 页面实际天体身份: ${enIdentity} -> ${postInjection.panelTitleZh} (预期: ${expectedEn} / ${expectedZh})`);
+      console.log(`  - 预期实体标识符: ${slug}`);
+      console.log(`  - 身份校验结果: ✅ 校验通过`);
       console.log(`  - 一句话简介汉化: ${domData.blurbText ? '✅ 已呈现' : '❌ 空'}`);
       console.log(`  - 点击 More 后按钮文案: "${btnAfterMore}" (${btnAfterMore === '收起' ? '✅ 正确' : '❌ 异常'})`);
       console.log(`  - 点击收起后按钮文案: "${btnAfterCollapse}" (${btnAfterCollapse === '阅读更多' ? '✅ 正确' : '❌ 异常'})`);
-      console.log(`  - 展开长文段落校验: ${checkRes.ok ? '✅ 完全符合预期译文' : '❌ 校验失败'}`);
+      console.log(`  - 展开长文段落校验: ${checkRes.ok ? '✅ 完全符合预期译文 (' + checkRes.totalActual + ' 段)' : '❌ 校验失败'}`);
       if (checkRes.actualParagraphs && checkRes.actualParagraphs[0]) {
         console.log(`  - 长文译文首段预览: "${checkRes.actualParagraphs[0].slice(0, 60)}..."`);
       }
@@ -299,6 +366,10 @@ ${content}
 
       results.push({
         route,
+        slug,
+        actualUrl,
+        actualIdentity: `${preEnTitle} -> ${postInjection.panelTitleZh}`,
+        identityPassed: true,
         ok: checkRes.ok,
         totalParagraphs: checkRes.totalActual || 0,
         errors: checkRes.errors,
@@ -310,7 +381,7 @@ ${content}
     let allOk = true;
     for (const r of results) {
       const statusIcon = r.ok ? '✅' : '❌';
-      console.log(`${statusIcon} ${r.route.padEnd(12)} : ${r.ok ? '全部通过' : '失败 (' + r.errors.length + ' 项错误)'} (段落数 ${r.totalParagraphs})`);
+      console.log(`${statusIcon} ${r.slug.padEnd(12)} : ${r.ok ? '全部通过' : '失败 (' + r.errors.length + ' 项错误)'} (段落数 ${r.totalParagraphs}) | URL: ${r.actualUrl}`);
       if (!r.ok) allOk = false;
     }
     console.log('================================================');
