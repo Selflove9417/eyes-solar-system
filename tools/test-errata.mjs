@@ -81,9 +81,38 @@ const testCases = [
     }
   },
 
-  // 5. 反向用例：试图通过修改英文 en 绕过勘误机制
+  // 5a. 反向用例：sourceEn 未提供（未传该字段）
   {
-    name: '【反向】英文 en 字段被篡改以迎合中文（必须拦截）',
+    name: '【反向】sourceEn 未提供时（必须拦截）',
+    run: () => {
+      const res = applyApprovedErrata({
+        slug: 'sc_mars_express',
+        paragraphIndex: 0,
+        en: validEn,
+        zh: validZh
+      });
+      return { pass: !res.ok && res.error.includes('原始英文源文缺失或与词库不一致') };
+    }
+  },
+
+  // 5b. 反向用例：sourceEn 为 undefined
+  {
+    name: '【反向】sourceEn 为 undefined 时（必须拦截）',
+    run: () => {
+      const res = applyApprovedErrata({
+        slug: 'sc_mars_express',
+        paragraphIndex: 0,
+        en: validEn,
+        zh: validZh,
+        sourceEn: undefined
+      });
+      return { pass: !res.ok && res.error.includes('原始英文源文缺失或与词库不一致') };
+    }
+  },
+
+  // 5c. 反向用例：sourceEn 与 en 不一致（英文 en 字段被篡改以迎合中文）
+  {
+    name: '【反向】sourceEn 与 en 不一致时（必须拦截）',
     run: () => {
       const enAltered = validEn.replace('December 26, 2003', 'December 25, 2003');
       const res = applyApprovedErrata({
@@ -93,7 +122,7 @@ const testCases = [
         zh: validZh,
         sourceEn: validEn
       });
-      return { pass: !res.ok && res.error.includes('英文 en 字段已被修改') };
+      return { pass: !res.ok && res.error.includes('原始英文源文缺失或与词库不一致') };
     }
   },
 

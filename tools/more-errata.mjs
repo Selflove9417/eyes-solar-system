@@ -38,13 +38,13 @@ export function applyApprovedErrata({ slug, paragraphIndex, en, zh, sourceEn }) 
     return { isErrata: false, ok: true, normalizedEn: en };
   }
 
-  // 1. 若提供了 sourceEn，必须验证原始 en 字段未被篡改，保持逐字一致
-  if (sourceEn !== undefined && en !== sourceEn) {
+  // 1. 强制要求原始英文源文存在且与词库中的 en 保持逐字一致
+  if (typeof sourceEn !== 'string' || en !== sourceEn) {
     return {
       isErrata: true,
       ok: false,
       normalizedEn: en,
-      error: `[Errata 校验失败] ${key}: 英文 en 字段已被修改，禁止通过修改 en 绕过勘误机制`
+      error: `[Errata 校验失败] ${key}: 原始英文源文缺失或与词库不一致`
     };
   }
 
