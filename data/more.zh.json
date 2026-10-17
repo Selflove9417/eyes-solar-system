@@ -730,7 +730,7 @@
       "paragraphs": [
         {
           "en": "InSight is the first outer space robotic explorer to study in-depth the \"inner space\" of Mars: its crust, mantle, and core. Studying Mars' interior structure answers key questions about the early formation of rocky planets in our inner solar system - Mercury, Venus, Earth, and Mars - more than 4 billion years ago, as well as rocky exoplanets. InSight also measures tectonic activity and meteorite impacts on Mars today. The lander uses cutting edge instruments, to delve deep beneath the surface and seek the fingerprints of the processes that formed the terrestrial planets. It does so by measuring the planet's \"vital signs\": its \"pulse\" (seismology), \"temperature\" (heat flow), and \"reflexes\" (precision tracking).",
-          "zh": "洞察号是首个深入研究火星“内部空间”的外太空机器人探测器：包括其地壳、地幔和地核。研究火星内部结构能够回答关于超过 40 亿年前太阳系内侧岩质行星（水星、金星、地球和火星）以及系外岩质行星早期形成的关键问题。洞察号还测量如今火星上的构造活动与陨石撞击。该着陆器利用尖端仪器深入地表之下，探寻塑造类地行星演化过程的指纹。它通过测量这颗行星的“生命体征”来实现这一目标：包括其“脉搏”（地震学）、“体温”（热流）以及“反射”（精密跟踪）。"
+          "zh": "洞察号是首个深入研究火星“内部空间”的外太空机器人探测器：包括其地壳、地幔和地核。研究火星内部结构能够回答关于超过 40 亿年前太阳系内侧岩质行星（水星、金星、地球和火星）以及系外岩质行星早期形成的关键问题。洞察号还对火星现今的构造活动和陨石撞击进行了测量。该着陆器旨在利用先进仪器探测地表深处，寻找揭示类地行星形成过程的线索。其科学方案通过地震学、热流测量和精密跟踪，分别研究火星的“脉搏”“体温”和“反射”等“生命体征”。"
         }
       ]
     },
@@ -836,7 +836,7 @@
       "paragraphs": [
         {
           "en": "Mars Odyssey was designed to investigate the Martian environment, providing key information on its surface and the radiation hazards future explorers might face. The goal was to map the chemical and mineralogical makeup of Mars as a step to detecting evidence of past or present water and volcanic activity on Mars. One of Mars Odyssey’s most exciting findings came early in the mission. In May 2002, NASA announced that the probe had identified large amounts of hydrogen in the soil, implying the presence of ice below the planet’s surface. During its many years in Martian orbit, Mars Odyssey globally mapped the amount and distribution of the numerous chemical elements and minerals in the Martian surface and also tracked the radiation environment in low Mars orbit, both necessary before humans can effectively explore the Martian surface.",
-          "zh": "火星奥德赛号旨在调查火星环境，提供有关其表面以及未来探险者可能面临的辐射危害的关键信息。其目标是绘制火星的化学和矿物学成分图，以此作为探测火星过去或现在存在水与火山活动证据的一步。火星奥德赛号最令人兴奋的发现之一出现在任务初期。2002 年 5 月，NASA 宣布该探测器在土壤中发现了大量的氢，这意味着该行星表面下方存在水冰。在环绕火星轨道的多年运行中，火星奥德赛号绘制了火星表面众多化学元素和矿物含量与分布的全球图谱，并监测了低火星轨道的辐射环境，这两项工作都是人类有效探索火星表面之前所必需的。"
+          "zh": "火星奥德赛号旨在调查火星环境，提供有关其表面以及未来探险者可能面临的辐射危害的关键信息。其目标是绘制火星的化学和矿物学成分图，以此作为探测火星过去或现在存在水与火山活动证据的一步。火星奥德赛号最令人兴奋的发现之一出现在任务初期。2002 年 5 月，NASA 宣布该探测器在火星土壤中探测到大量氢，这一发现暗示火星地表下方可能存在水冰。在环绕火星轨道的多年运行中，火星奥德赛号绘制了火星表面众多化学元素和矿物含量与分布的全球图谱，并监测了低火星轨道的辐射环境，这两项工作都是人类有效探索火星表面之前所必需的。"
         },
         {
           "en": "By mid-2016, the THEMIS instrument had returned more than 208,000 images in visible-light wavelengths and more than 188,000 in thermal-infrared wavelengths.",
