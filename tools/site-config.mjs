@@ -34,7 +34,7 @@ export function getPageUrl(page = '') {
 
 /**
  * 获取静态资源绝对 URL
- * @param {string} relPath 如 'assets/img/PIA21895_final_image.png'
+ * @param {string} relPath 如 'assets/img/PIA21895_final_image_505x508.jpg'
  * @returns {string}
  */
 export function getAssetUrl(relPath = '') {

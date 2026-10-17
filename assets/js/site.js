@@ -92,8 +92,11 @@ export function initStageLoader(frameEl, stageContainer = frameEl?.parentElement
   const officialLink = overlay.querySelector('.stage-link-official');
 
   let loadTimeout = null;
+  let loaded = false;
+  let timerArmed = false;
 
   const hide = () => {
+    loaded = true;
     if (loadTimeout) {
       clearTimeout(loadTimeout);
       loadTimeout = null;
@@ -104,6 +107,7 @@ export function initStageLoader(frameEl, stageContainer = frameEl?.parentElement
   };
 
   const show = (officialUrl) => {
+    if (loaded) return;
     if (officialUrl && officialLink) {
       officialLink.href = officialUrl;
     }
@@ -118,8 +122,16 @@ export function initStageLoader(frameEl, stageContainer = frameEl?.parentElement
     }, 11000); // 11 秒超时兜底
   };
 
+  const armTimeout = (officialUrl) => {
+    if (timerArmed || loaded) return;
+    timerArmed = true;
+    show(officialUrl);
+  };
+
   if (retryBtn) {
     retryBtn.addEventListener('click', () => {
+      loaded = false;
+      timerArmed = true;
       show(frameEl.src);
       const cur = frameEl.src;
       frameEl.src = 'about:blank';
@@ -128,7 +140,19 @@ export function initStageLoader(frameEl, stageContainer = frameEl?.parentElement
   }
 
   frameEl.addEventListener('load', hide);
-  show(defaultOfficialUrl);
+
+  // 折叠线以下的 3D iframe 使用 loading="lazy"：浏览器要等它接近视口才开始加载，
+  // 所以 11 秒「加载慢」兜底也必须从那时起算，否则访客还没滚动到就会看到超时提示。
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      if (!entries.some((entry) => entry.isIntersecting)) return;
+      observer.disconnect();
+      armTimeout(defaultOfficialUrl);
+    }, { rootMargin: '300px 0px' });
+    observer.observe(stageContainer);
+  } else {
+    armTimeout(defaultOfficialUrl);
+  }
 
   return { show, hide };
 }

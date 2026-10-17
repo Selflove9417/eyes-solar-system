@@ -66,7 +66,7 @@
         "description": "NASA 官方确认的航天器端通信丢失时间为标称 10:32 UTC（SCET），地球端堪培拉深空站确认的最后载波中断记录为 11:55:46 UTC（ERT）。10:32:06 UTC 属 3D 模拟器历史场景定位时刻（由 ERT 结合光时估算的近似值），不可称为已确认的秒级任务重建结果。科学界严谨区分推进器达到极限导致通信中断时刻与数秒至数十秒后的结构机械解体气化。下方展示卡西尼号在进入大气前夕拍摄的最后一张历史照片（PIA21895）。",
         "instrument": "DSN DSS-43 (堪培拉 70 米天线) / ISS-WAC (广角相机)",
         "source": "NASA/JPL End of Mission Timeline & Cassini Imaging Team",
-        "image": "assets/img/PIA21895_final_image.png",
+        "image": "assets/img/PIA21895_final_image_505x508.jpg",
         "imageCaption": "PIA21895: 卡西尼号成像相机在进入大气层前夕拍摄的绝版最后影像",
         "imageMeta": {
           "captureTime": "2017-09-14 19:59 UTC (入轨前约 14.5 小时)",

@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { spawn } from 'node:child_process';
-import { SITE_ORIGIN, PAGES, getPageUrl } from './site-config.mjs';
+import { SITE_ORIGIN, PAGES } from './site-config.mjs';
 
 const GITHUB_MIRROR_ORIGIN = 'https://selflove9417.github.io/eyes-solar-system';
 const CHROME_PATH = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
@@ -114,15 +114,30 @@ async function main() {
   // 2. og:image 真实可达性与物理尺寸校验
   // -------------------------------------------------------------
   console.log(`[步骤 2/6] 检查社交分享图 og:image...`);
-  const ogImgUrl = `${SITE_ORIGIN}/assets/img/PIA21895_final_image.png?_t=${Date.now()}`;
+  const ogImgUrl = `${SITE_ORIGIN}/assets/img/PIA21895_final_image_505x508.jpg?_t=${Date.now()}`;
   try {
     const res = await fetch(ogImgUrl, { cache: 'no-store' });
     const buf = Buffer.from(await res.arrayBuffer());
     // PNG IHDR: width at 16 (4B), height at 20 (4B)
+    // JPEG: 扫描 SOF0/SOF1/SOF2 标记，段内 height 在前、width 在后
     let width = 0, height = 0;
     if (buf.length > 24 && buf.toString('ascii', 1, 4) === 'PNG') {
       width = buf.readUInt32BE(16);
       height = buf.readUInt32BE(20);
+    } else if (buf.length > 4 && buf[0] === 0xff && buf[1] === 0xd8) {
+      let i = 2;
+      while (i + 9 < buf.length) {
+        if (buf[i] !== 0xff) { i++; continue; }
+        const marker = buf[i + 1];
+        const isSof = marker >= 0xc0 && marker <= 0xc3;
+        const segLen = buf.readUInt16BE(i + 2);
+        if (isSof) {
+          height = buf.readUInt16BE(i + 5);
+          width = buf.readUInt16BE(i + 7);
+          break;
+        }
+        i += 2 + segLen;
+      }
     }
     const imgOk = res.status === 200 && width === 505 && height === 508;
     console.log(`  URL: ${ogImgUrl}`);
@@ -433,7 +448,8 @@ async function main() {
       const res = await fetch(mirrorUrl, { cache: 'no-store' });
       const html = await res.text();
       const canonical = html.match(/<link\s+rel=["']canonical["']\s+href=["']([^"']+)["']/i)?.[1]?.trim() || '(缺失)';
-      const targetCanonical = p === 'index.html' ? `${SITE_ORIGIN}/` : `${SITE_ORIGIN}/${p}`;
+      // canonical 与 Cloudflare Pages 的最终 URL 对齐：无扩展名
+      const targetCanonical = p === 'index.html' ? `${SITE_ORIGIN}/` : `${SITE_ORIGIN}/${p.replace(/\.html$/, '')}`;
       const isTarget = canonical === targetCanonical;
 
       if (!isTarget) allChecksPassed = false;

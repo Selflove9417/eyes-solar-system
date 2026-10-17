@@ -14,14 +14,14 @@ for (const p of pages) {
 
   // 2. Add og:image:width, og:image:height, og:image:alt after og:image if not present
   if (!html.includes('og:image:width')) {
-    const target = `<meta property="og:image" content="${SITE_ORIGIN}/assets/img/PIA21895_final_image.png">`;
+    const target = `<meta property="og:image" content="${SITE_ORIGIN}/assets/img/PIA21895_final_image_505x508.jpg">`;
     const replacement = `${target}\n<meta property="og:image:width" content="505">\n<meta property="og:image:height" content="508">\n<meta property="og:image:alt" content="卡西尼号土星任务艺术概念图 - 深空之眸">`;
     html = html.replace(target, replacement);
   }
 
   // 3. Add twitter:image:alt after twitter:image if not present
   if (!html.includes('twitter:image:alt')) {
-    const target = `<meta name="twitter:image" content="${SITE_ORIGIN}/assets/img/PIA21895_final_image.png">`;
+    const target = `<meta name="twitter:image" content="${SITE_ORIGIN}/assets/img/PIA21895_final_image_505x508.jpg">`;
     const replacement = `${target}\n<meta name="twitter:image:alt" content="卡西尼号土星任务艺术概念图 - 深空之眸">`;
     html = html.replace(target, replacement);
   }

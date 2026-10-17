@@ -10,7 +10,9 @@ const pages = [
 
 for (const p of pages) {
   let content = fs.readFileSync(p, 'utf8');
-  const canonicalUrl = `${SITE_ORIGIN}/${p === 'index.html' ? '' : p}`;
+  const canonicalUrl = p === 'index.html'
+    ? `${SITE_ORIGIN}/`
+    : `${SITE_ORIGIN}/${p.replace(/\.html$/, '')}`;
 
   // 1. Ensure canonical
   if (!content.includes('rel="canonical"') && !content.includes("rel='canonical'")) {

@@ -5,47 +5,47 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://deepspaceeye.pages.dev/explore.html</loc>
+    <loc>https://deepspaceeye.pages.dev/explore</loc>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://deepspaceeye.pages.dev/saturn.html</loc>
+    <loc>https://deepspaceeye.pages.dev/saturn</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://deepspaceeye.pages.dev/mars.html</loc>
+    <loc>https://deepspaceeye.pages.dev/mars</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://deepspaceeye.pages.dev/jwst.html</loc>
+    <loc>https://deepspaceeye.pages.dev/jwst</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://deepspaceeye.pages.dev/voyager-1.html</loc>
+    <loc>https://deepspaceeye.pages.dev/voyager-1</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://deepspaceeye.pages.dev/bodies.html</loc>
+    <loc>https://deepspaceeye.pages.dev/bodies</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://deepspaceeye.pages.dev/missions.html</loc>
+    <loc>https://deepspaceeye.pages.dev/missions</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://deepspaceeye.pages.dev/glossary.html</loc>
+    <loc>https://deepspaceeye.pages.dev/glossary</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://deepspaceeye.pages.dev/guide.html</loc>
+    <loc>https://deepspaceeye.pages.dev/guide</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://deepspaceeye.pages.dev/extension.html</loc>
+    <loc>https://deepspaceeye.pages.dev/extension</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://deepspaceeye.pages.dev/about.html</loc>
+    <loc>https://deepspaceeye.pages.dev/about</loc>
     <priority>0.6</priority>
   </url>
 </urlset>

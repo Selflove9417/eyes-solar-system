@@ -10,15 +10,15 @@
 <link rel="stylesheet" href="/assets/css/main.css?v=20261016p6final" id="app-css">
 <script>
 // 针对不同托管平台的基准路径自适应支持：
-// 1. Cloudflare Pages 主域名环境（根路径 /）：保持原生绝对路径。
-// 2. GitHub Pages 镜像环境（子路径 /eyes-solar-system/）：注入 base 标签并重写静态资源前缀。
-if (location.pathname.startsWith('/eyes-solar-system')) {
-  const baseEl = document.createElement('base');
-  baseEl.href = '/eyes-solar-system/';
-  document.head.prepend(baseEl);
-  const cssEl = document.getElementById('app-css');
-  if (cssEl) cssEl.href = '/eyes-solar-system/assets/css/main.css?v=20261016p6final';
-}
+// 1. Cloudflare Pages 主域名环境（根路径 /）：base 指向站点根，深层 404（如 /a/b/c）里的
+//    相对链接才不会解析成 /a/b/index.html 而二次 404。
+// 2. GitHub Pages 镜像环境（子路径 /eyes-solar-system/）：base 指向子目录，并重写静态资源前缀。
+const basePrefix = location.pathname.startsWith('/eyes-solar-system') ? '/eyes-solar-system/' : '/';
+const baseEl = document.createElement('base');
+baseEl.href = basePrefix;
+document.head.prepend(baseEl);
+const cssEl = document.getElementById('app-css');
+if (cssEl) cssEl.href = basePrefix + 'assets/css/main.css?v=20261016p6final';
 </script>
 </head>
 <body>
