@@ -61,6 +61,10 @@
   // Preserve the original indentation around the phrase we replace.
   function replaceText(node, zh) {
     const raw = node.nodeValue || '';
+    if (!node.__origEn) {
+      const c = clean(raw);
+      if (c && !hasHan(c)) node.__origEn = c;
+    }
     const lead = raw.match(/^\s*/)[0];
     const tail = raw.match(/\s*$/)[0];
     written.add(node);
@@ -136,24 +140,55 @@
     }
   }
 
-  function translateTitle() {
-    const page = location.hash.replace(/^#\/?/, '').split('?')[0].split('/')[0] || 'home';
-    const name = entityById[page];
+  function getRouteEntitySlug() {
+    const raw = location.hash.replace(/^#\/?/, '').split('?')[0];
+    if (!raw) return null;
+    const segments = raw.toLowerCase().split('/').filter(Boolean);
+    for (let i = segments.length - 1; i >= 0; i--) {
+      const seg = segments[i];
+      if (entityById[seg]) return seg;
+    }
+    return null;
+  }
+
+  function updateDocumentTitle(slug) {
+    if (!slug) return;
+    const name = entityById[slug];
     if (!name) return;
     const wanted = `太阳系探索 - ${name} - NASA/JPL（非官方中文）`;
     if (document.title !== wanted) { written.add(document); document.title = wanted; }
+  }
 
-    const enName = entityEnById[page];
+  function translateDetailTitle(slug) {
+    if (!slug) return;
+    const targetEn = entityEnById[slug];
+    const targetZh = entityById[slug];
+    if (!targetEn || !targetZh) return;
+
     for (const el of document.querySelectorAll('.title.long-title, .semi.title.long-title')) {
       for (const n of el.childNodes) {
-        if (n.nodeType === Node.TEXT_NODE && !hasHan(n.nodeValue)) {
-          const t = clean(n.nodeValue);
-          if (t && (t === enName || !lookup(t))) {
-            replaceText(n, name);
+        if (n.nodeType !== Node.TEXT_NODE) continue;
+        const cur = clean(n.nodeValue);
+        if (!cur) continue;
+
+        if (!hasHan(cur)) {
+          n.__origEn = cur;
+        }
+
+        const en = n.__origEn || (!hasHan(cur) ? cur : null);
+        if (en && en.toLowerCase() === targetEn.toLowerCase()) {
+          if (cur !== targetZh) {
+            replaceText(n, targetZh);
           }
         }
       }
     }
+  }
+
+  function translateTitle() {
+    const slug = getRouteEntitySlug();
+    updateDocumentTitle(slug);
+    translateDetailTitle(slug);
   }
 
   // ---- batching: one pass per frame, and our own writes never re-trigger us ----
@@ -254,6 +289,7 @@
     }
     applyTo(document.body);
     translateTitle();
+    window.addEventListener('hashchange', () => schedule(document.body));
   }
 
   start().catch((err) => console.warn('[NASA Eyes 中文汉化] 启动失败：', err));
