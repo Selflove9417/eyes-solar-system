@@ -73,6 +73,24 @@ const testCases = [
     zh: '卡西尼号在 2007 年 9 月的飞掠揭示了这颗卫星的大部分面貌。',
     shouldPass: true
   },
+  {
+    name: 'October 13th, 2023 -> 2023 年 10 月 13 日 (序数日份)',
+    en: 'launched on October 13th, 2023, and will arrive in 2029.',
+    zh: '于 2023 年 10 月 13 日发射升空，并将于 2029 年抵达。',
+    shouldPass: true
+  },
+  {
+    name: 'September 26th, 2022 -> 2022 年 9 月 26 日 (序数日份)',
+    en: 'collision occurred on September 26th, 2022.',
+    zh: '碰撞发生于 2022 年 9 月 26 日。',
+    shouldPass: true
+  },
+  {
+    name: 'December of 2020 -> 2020 年 12 月 (带 of 年月)',
+    en: 'returned to Earth in December of 2020.',
+    zh: '于 2020 年 12 月送回地球。',
+    shouldPass: true
+  },
   // 7. 反向用例：数值错误 (3 million 错译为 400 万)
   {
     name: '【反向】3 million 错译为 400 万（必须报错）',
@@ -99,6 +117,19 @@ const testCases = [
     name: '【反向】40 to 100 miles 漏掉 100（必须报错）',
     en: 'ocean is estimated to be 40 to 100 miles deep.',
     zh: '海洋据估计深达 40 英里。',
+    shouldPass: false
+  },
+  // 11. 反向用例：序数日期与年月错译
+  {
+    name: '【反向】October 13th 日期错译 (10 月 13 日 错写为 10 月 15 日)',
+    en: 'launched on October 13th, 2023.',
+    zh: '于 2023 年 10 月 15 日发射。',
+    shouldPass: false
+  },
+  {
+    name: '【反向】December of 2020 年月错译 (12 月 错写为 11 月)',
+    en: 'returned to Earth in December of 2020.',
+    zh: '于 2020 年 11 月送回地球。',
     shouldPass: false
   }
 ];

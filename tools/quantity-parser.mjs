@@ -57,11 +57,32 @@ export function parseEnglishQuantities(text) {
     november: 11, nov: 11,
     december: 12, dec: 12
   };
+  const recordedMonthIndices = new Set();
+  const recordMonth = (idx, mStr) => {
+    if (!recordedMonthIndices.has(idx)) {
+      recordedMonthIndices.add(idx);
+      results.push(MONTHS[mStr.toLowerCase()]);
+    }
+  };
+
+  // 3a. 月份 + 日/年：如 "Jan. 7, 1610", "December of 2020", "October 13th, 2023"
   const monthRegex = /\b(january|jan|february|feb|march|mar|april|apr|may|june|jun|july|jul|august|aug|september|sept|sep|october|oct|november|nov|december|dec)\.?\s+(?:of\s+)?(\d{1,2}(?:st|nd|rd|th)?|\d{4})\b/gi;
   for (const match of text.matchAll(monthRegex)) {
-    const mNum = MONTHS[match[1].toLowerCase()];
-    results.push(mNum);
-    // 日份或年份在后续纯数字中也会被提取，但月份作为数值计入
+    recordMonth(match.index, match[1]);
+  }
+
+  // 3b. 日 + 月份：如 "12 November", "20 January", "2 March"
+  const dayMonthRegex = /\b(\d{1,2}(?:st|nd|rd|th)?)\s+(january|jan|february|feb|march|mar|april|apr|may|june|jun|july|jul|august|aug|september|sept|sep|october|oct|november|nov|december|dec)\b/gi;
+  for (const match of text.matchAll(dayMonthRegex)) {
+    const monthStart = match.index + match[0].lastIndexOf(match[2]);
+    recordMonth(monthStart, match[2]);
+  }
+
+  // 3c. 介词 + 月份：如 "in August", "in June"
+  const prepMonthRegex = /\b(?:in|during|by|until|since)\s+(january|february|march|april|may|june|july|august|september|october|november|december)\b/gi;
+  for (const match of text.matchAll(prepMonthRegex)) {
+    const monthStart = match.index + match[0].lastIndexOf(match[1]);
+    recordMonth(monthStart, match[1]);
   }
 
   // 4. 任务罗马数字编号匹配：如 "Voyager I", "Voyager II" -> 1, 2

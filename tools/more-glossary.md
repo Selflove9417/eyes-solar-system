@@ -160,3 +160,25 @@
 | `DART` | **DART**（**双小行星重定向试验**） | NASA 首个全尺寸行星防御技术验证任务 |
 | `Spacewatch` | **空间监视巡天计划** | 美国基特峰国家天文台近地天体巡天项目 |
 | `Kitt Peak` | **基特峰** | 位于美国亚利桑那州的著名国家天文台观测基地 |
+| `1P/Halley` / `Halley` | **哈雷彗星** | 见 `names.zh.json` |
+| `67P/Churyumov-Gerasimenko` | **67P/丘留莫夫－格拉西缅科彗星** / **丘留莫夫－格拉西缅科彗星** | 见 `names.zh.json` |
+| `Suisei` | **彗星号** | 日本宇宙科学研究所（ISAS）哈雷彗星探测器（PLANET-A） |
+| `Sakigake` | **先驱号** | 日本首个深空与哈雷彗星探测器 |
+| `Vega 1` / `Vega 2` | **织女星 1 号** / **织女星 2 号** | 苏联金星与哈雷彗星国际联合探测器 |
+| `ISEE-3 (ICE)` | **国际 ISEE-3（ICE）航天器** | 国际日地探险者 3 号（后重命名为国际彗星探险者号 ICE） |
+| `Giotto` | **乔托号** | 欧洲空间局（ESA）首个哈雷彗星近距离交会探测器 |
+| `Pioneer 7` / `Pioneer 12` | **先驱者 7 号** / **先驱者 12 号** | NASA 先驱者系列行星际探测器（先驱者 12 号即先驱者金星轨道器） |
+| `Jupiter Family comets` | **木星族彗星** | 轨道周期小于 20 年且受木星引力控制的彗星族群 |
+| `Rosetta` | **罗塞塔号** | 见 `missions.zh.json`，欧空局 67P 彗星轨道器 |
+| `Philae` / `Philae lander` / `Philae probe` | **菲莱着陆器** / **菲莱探测器** | 见 `names.zh.json`，罗塞塔号携带的人类首个彗核着陆器 |
+| `2867 Steins` | **小行星 2867 施泰因斯** / **施泰因斯** | 见 `names.zh.json` |
+| `21 Lutetia` | **小行星 21 鲁特西亚** / **鲁特西亚** | 见 `names.zh.json` |
+| `Wild 2` / `Comet Wild 2` | **维尔特 2 号彗星** | 见 `names.zh.json`，81P/维尔特 2 号彗星 |
+| `Tempel 1` / `Comet Tempel 1` | **坦普尔 1 号彗星** | 见 `names.zh.json`，9P/坦普尔 1 号彗星 |
+| `Hartley 2` / `103/P Hartley 2` | **103P/哈特雷 2 号彗星** / **哈特雷 2 号** | 见 `names.zh.json` |
+| `Stardust` | **星尘号** | 见 `missions.zh.json`，NASA 彗星彗发尘埃采样返回任务 |
+| `Deep Impact` | **深度撞击号** | 见 `missions.zh.json`，NASA 坦普尔 1 号彗星动能撞击探测器 |
+| `impactor probe` | **撞击器探测器** / **撞击器** | 深度撞击号释放的铜质动能撞击舱 |
+| `EPOXI` | **EPOXI 任务** | 深度撞击号扩展任务（系外行星观测与深空彗星扩展调查） |
+| `Earth-receive time` | **地球接收时间** | 信号传播延迟后地球深空网接收到遥测的时刻 |
+| `UT` / `Universal Time` | **世界时 (UT)** | 国际天文学通用标准时间 |
