@@ -34,6 +34,9 @@
 | `trough` / `troughs` | **槽谷** / **槽状地堑** | — | 天卫三表面构造拉张槽谷 |
 | `terminator` | **晨昏线** | — | 天体表面受光半球与阴影半球的分界线 |
 | `opposition` | **冲** / **冲位** | — | 地外天体与太阳分别位于地球两侧的天象，天卫一亮度在此时显著增亮 |
+| `magma ocean` / `magma oceans` | **岩浆洋** | — | 新生月球早期全球熔融岩浆层 |
+| `ejecta` / `ejecta deposits` | **喷出物** / **喷出物沉积** | ❌ 抛射物（地质学术语规范为喷出物） | 陨石撞击产生的飞溅物及堆积 |
+| `C-type` | **C 型** | — | 碳质小行星光谱分类，如火卫二表面物质 |
 
 ---
 
@@ -61,6 +64,9 @@
 | `synchronous rotation` | **同步自转** | — | 自转周期与公转周期相同（如海卫一与海王星） |
 | `tectonic extension` | **构造拉张** | — | 地壳受拉张应力作用而撕裂或形成地堑 |
 | `geyser` / `geysers` | **间歇泉** | — | 海卫一南极活跃的液氮喷泉 |
+| `double planet` | **双行星** | — | 冥王星与冥卫一等质心位于本体之外的系统统称 |
+| `double dwarf planet` | **双矮行星** | — | 冥王星-冥卫一系统的天文学描述 |
+| `mutual tidal locking` | **相互潮汐锁定** | — | 双方始终以同一面相互朝向对方的引力潮汐现象（如冥王星与冥卫一） |
 
 ---
 
@@ -116,3 +122,9 @@
 | `Kuiper Belt` | **柯伊伯带** | 海王星外侧小天体带 |
 | `Kuiper Belt Object` | **柯伊伯带天体** | 海卫一捕获前所属天体类型 |
 | `Pluto` | **冥王星** | 见 `names.zh.json` |
+| `Phobos` | **火卫一** | 见 `names.zh.json` |
+| `Deimos` | **火卫二** | 见 `names.zh.json` |
+| `Charon` | **冥卫一** | 见 `names.zh.json` |
+| `Stickney` / `Stickney crater` | **斯蒂克尼撞击坑** | 火卫一标志性最大撞击坑 |
+| `Mars Global Surveyor` | **火星全球勘测者号** | 见 `missions.zh.json` |
+| `New Horizons` | **新视野号** | 见 `missions.zh.json` |
