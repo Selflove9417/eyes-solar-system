@@ -248,7 +248,7 @@
 | `Trace Gas Orbiter` / `ExoMars Trace Gas Orbiter` | **微量气体轨道器** / **ExoMars 微量气体轨道器** | 见 `names.zh.json`，ESA/Roscosmos 联合火星微量气体与地下水冰探测轨道器 |
 | `Lunar Reconnaissance Orbiter (LRO)` | **月球勘测轨道飞行器** / **LRO** | 见 `names.zh.json`，NASA 高分辨率月球三维测绘与资源勘查轨道器 |
 | `GRAIL` / `GRAIL A` | **重力恢复与内部实验室** / **重力恢复与内部实验室 A** | 见 `names.zh.json`，NASA 通过双星微波测距反演月球重力场的孪生探测器任务 |
-| `Clementine` | **克莱门汀号** | 见 `names.zh.json`，美国国防部 BMDO 与 NASA 联合月球与深空传感器技术验证探测器 |
+| `Clementine` | **克莱门汀号** | 见 `names.zh.json`，美国国防部 BMDO 与 NASA 联合月球与深空传感器技术验证探测器；官方源文误将测绘轨道周期记为五天，实际约为五小时，译文已更正并附注 |
 | `Artemis I` | **阿尔忒弥斯 I 号** | 见 `names.zh.json`，NASA 阿尔忒弥斯重返月球计划首飞无人飞行试验任务 |
 | `Artemis II` | **阿尔忒弥斯 II 号** | 见 `names.zh.json`，NASA 阿尔忒弥斯计划首次载人绕月飞行测试任务 |
 | `Artemis III` | **阿尔忒弥斯 III 号** | NASA 阿尔忒弥斯计划载人近地轨道测试/登月后续规划任务 |

@@ -14,6 +14,10 @@ const validEn = 'NASA is participating in a mission of the European Space Agency
 
 const validZh = 'NASA 参与了欧洲空间局与意大利航天局名为火星快车号的联合任务，该探测器自 2003 年 12 月 25 日抵达这颗红色星球以来（译注：NASA Eyes 英文原文所列抵达日期有误；此处依据 ESA 与 NASA 官方任务记录订正。），一直在极轨道上探测火星的大气与地表。该任务的主要目标是从轨道上搜寻地表下水资源。轨道器上的七台科学仪器开展了严密的勘测，以协助解答关于火星地质、大气、地表环境、水的历史以及潜在生命可能性的基本问题。火星快车号的发现成果（在科学界仍存有争议）包括近期冰川活动、爆发性火山活动以及甲烷气体的证据。';
 
+const validClementineEn = 'Clementine was launched in 1994 and The lunar observations included imaging at various wavelengths in the visible as well as in ultraviolet and infrared, laser ranging altimetry, gravimetry, and charged particle measurements. Clementine successfully entered an elliptical polar orbit (about 270 × 1,830 miles or 430 × 2,950 kilometers) around the Moon on Feb. 19, 1994, with a period of five days. In two months during 1994, it transmitted about 1.6 million digital images of the lunar surface, many of them with resolutions down to about 330-660 feet (100-200 meters). In the process, it provided scientists with their first look at the total lunar landscape including polar regions.';
+
+const validClementineZh = '克莱门汀号于 1994 年发射升空，其月球观测项目包括可见光、紫外与红外波段的多波长成像、激光测高、重力测量以及带电粒子测量。克莱门汀号于 1994 年 2 月 19 日成功切入环绕月球的椭圆极轨道（初始周期约八小时），两天后调整为周期约五小时的测绘轨道（约为 270 × 1,830 英里，即 430 × 2,950 千米）（译注：NASA Eyes 英文原文误将轨道周期记为五天；依据 NASA 官方任务记录与研究论文，探测器初始入轨周期约八小时，经调整后的测绘轨道周期实际约为五小时。）在 1994 年的两个月内，它传回了约 160 万幅月球表面数字图像，其中许多图像的分辨率高达约 330 至 660 英尺（100 至 200 米）。在此过程中，它为科学家首次提供了包含极地地区在内的全月球地貌全貌。';
+
 const testCases = [
   // 1. 正向用例：目标段落正确订正 + 正确译注 + 未改动英文源文
   {
@@ -184,6 +188,115 @@ const testCases = [
     run: () => {
       const qRes = verifyQuantitiesEquivalence('create an electric current of 3 million amperes.', '形成 300 万安培的强电流。');
       return { pass: qRes.ok };
+    }
+  },
+
+  // 10. 克莱门汀号正向用例：正确区分首次入轨与后续测绘轨道 + 正确更正为测绘轨道约五小时 + 包含必需译注
+  {
+    name: '【正向】sc_clementine:0 正确更正为测绘轨道周期约五小时并附带指定译注',
+    run: () => {
+      const res = applyApprovedErrata({
+        slug: 'sc_clementine',
+        paragraphIndex: 0,
+        en: validClementineEn,
+        zh: validClementineZh,
+        sourceEn: validClementineEn
+      });
+      if (!res.ok) return { pass: false, msg: `预期通过但返回错误: ${res.error}` };
+      const qRes = verifyQuantitiesEquivalence(res.normalizedEn, validClementineZh);
+      if (!qRes.ok) return { pass: false, msg: `数值比对未通过: missing=${qRes.missingInZh}, extra=${qRes.extraInZh}` };
+      // 验证科学事实关键要求：正确区分首次入轨与后续测绘轨道，且正文不再声称周期为五天
+      const distinguishesOrbits = validClementineZh.includes('初始周期约八小时') && validClementineZh.includes('周期约五小时的测绘轨道');
+      const noFiveDays = !validClementineZh.includes('周期为五天');
+      return { pass: distinguishesOrbits && noFiveDays };
+    }
+  },
+
+  // 11. 克莱门汀号反向用例：中文正文仍声称“周期为五天”
+  {
+    name: '【反向】sc_clementine:0 中文正文仍声称“周期为五天”（必须拦截）',
+    run: () => {
+      const zhWrong = validClementineZh.replace('周期约五小时的测绘轨道', '周期为五天的测绘轨道');
+      const res = applyApprovedErrata({
+        slug: 'sc_clementine',
+        paragraphIndex: 0,
+        en: validClementineEn,
+        zh: zhWrong,
+        sourceEn: validClementineEn
+      });
+      return { pass: !res.ok && res.error.includes('中文译文仍包含被否决的原错误表述') };
+    }
+  },
+
+  // 12. 克莱门汀号反向用例：中文缺少“周期约五小时”更正
+  {
+    name: '【反向】sc_clementine:0 中文缺少“周期约五小时”更正（必须拦截）',
+    run: () => {
+      const zhMissingCorrection = validClementineZh.replace('周期约五小时', '周期未知');
+      const res = applyApprovedErrata({
+        slug: 'sc_clementine',
+        paragraphIndex: 0,
+        en: validClementineEn,
+        zh: zhMissingCorrection,
+        sourceEn: validClementineEn
+      });
+      return { pass: !res.ok && res.error.includes('中文译文未包含核准的更正表述') };
+    }
+  },
+
+  // 13. 克莱门汀号反向用例：中文缺少必需的译注说明
+  {
+    name: '【反向】sc_clementine:0 中文缺少必需的译注说明（必须拦截）',
+    run: () => {
+      const zhNoNote = validClementineZh.replace('（译注：NASA Eyes 英文原文误将轨道周期记为五天；依据 NASA 官方任务记录与研究论文，探测器初始入轨周期约八小时，经调整后的测绘轨道周期实际约为五小时。）', '');
+      const res = applyApprovedErrata({
+        slug: 'sc_clementine',
+        paragraphIndex: 0,
+        en: validClementineEn,
+        zh: zhNoNote,
+        sourceEn: validClementineEn
+      });
+      return { pass: !res.ok && res.error.includes('缺少必需的订正依据译注') };
+    }
+  },
+
+  // 14. 克莱门汀号反向用例：原始英文 sourceEn 缺失或被篡改
+  {
+    name: '【反向】sc_clementine:0 原始英文 sourceEn 缺失或被篡改（必须拦截）',
+    run: () => {
+      const resMissing = applyApprovedErrata({
+        slug: 'sc_clementine',
+        paragraphIndex: 0,
+        en: validClementineEn,
+        zh: validClementineZh,
+        sourceEn: undefined
+      });
+      const resAltered = applyApprovedErrata({
+        slug: 'sc_clementine',
+        paragraphIndex: 0,
+        en: validClementineEn.replace('with a period of five days', 'with a period of 5 hours'),
+        zh: validClementineZh,
+        sourceEn: validClementineEn
+      });
+      return { pass: !resMissing.ok && !resAltered.ok };
+    }
+  },
+
+  // 15. 克莱门汀号反向用例：其他轨道数值被篡改或遗漏（如 430 千米被误删或修改）
+  {
+    name: '【反向】sc_clementine:0 轨道数值被篡改或遗漏（必须拦截）',
+    run: () => {
+      const zhTampered = validClementineZh.replace('430 × 2,950', '999 × 2,950');
+      const res = applyApprovedErrata({
+        slug: 'sc_clementine',
+        paragraphIndex: 0,
+        en: validClementineEn,
+        zh: zhTampered,
+        sourceEn: validClementineEn
+      });
+      if (!res.ok) return { pass: false, msg: 'applyApprovedErrata 自身不应失败' };
+      const qRes = verifyQuantitiesEquivalence(res.normalizedEn, zhTampered);
+      return { pass: !qRes.ok && qRes.missingInZh.includes(430) };
     }
   }
 ];

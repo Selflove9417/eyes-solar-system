@@ -16,6 +16,18 @@ export const APPROVED_ERRATA = {
     esaSourceUrl: 'https://www.esa.int/Newsroom/Press_Releases/Merry_Christmas_from_Mars',
     nasaSourceUrl: 'https://science.nasa.gov/mission/mars-express/',
     reason: 'ESA 当日官方新闻公报与 NASA 任务主页均记录 Mars Express 于 2003 年 12 月 25 日成功进行轨道切入（Orbit Insertion），NASA Eyes 英文长文记为 26 日确系源文笔误。'
+  },
+  'sc_clementine:0': {
+    slug: 'sc_clementine',
+    paragraphIndex: 0,
+    originalEnText: 'with a period of five days',
+    expectedZhText: '周期约五小时',
+    forbiddenZhText: '周期为五天',
+    requiredNote: '（译注：NASA Eyes 英文原文误将轨道周期记为五天；依据 NASA 官方任务记录与研究论文，探测器初始入轨周期约八小时，经调整后的测绘轨道周期实际约为五小时。）',
+    nasaSourceUrl: 'https://science.nasa.gov/mission/clementine/',
+    nasaHistoryUrl: 'https://www.nasa.gov/history/30-years-ago-clementine-changes-our-view-of-the-moon/',
+    paperUrl: 'https://spudislunarresources.nss.org/Bibliography/p/86.pdf',
+    reason: 'NASA Eyes 原文将轨道周期误记为 five days。官方任务记录与科学论文证实，1994 年 2 月 19 日首次切入环月极轨道周期约 8 小时，两天后经微调进入周期约 5 小时的测绘轨道（430 × 2,950 千米）。原文“five days”确系笔误。'
   }
 };
 
@@ -49,7 +61,7 @@ export function applyApprovedErrata({ slug, paragraphIndex, en, zh, sourceEn }) 
   }
 
   // 2. 英文原文必须精确包含原错误表述
-  if (!en.includes(errata.originalEnDate)) {
+  if (errata.originalEnDate && !en.includes(errata.originalEnDate)) {
     return {
       isErrata: true,
       ok: false,
@@ -57,9 +69,27 @@ export function applyApprovedErrata({ slug, paragraphIndex, en, zh, sourceEn }) 
       error: `[Errata 校验失败] ${key}: 英文原文未包含预期的官方错误日期 "${errata.originalEnDate}"`
     };
   }
+  if (errata.originalEnText && !en.includes(errata.originalEnText)) {
+    return {
+      isErrata: true,
+      ok: false,
+      normalizedEn: en,
+      error: `[Errata 校验失败] ${key}: 英文原文未包含预期的官方错误表述 "${errata.originalEnText}"`
+    };
+  }
 
-  // 3. 中文译文必须精确包含更正后的中文日期
-  if (!zh.includes(errata.expectedZhDate)) {
+  // 3. 中文译文不得包含被否决的原错误表述（优先拦截原错误）
+  if (errata.forbiddenZhText && zh.includes(errata.forbiddenZhText)) {
+    return {
+      isErrata: true,
+      ok: false,
+      normalizedEn: en,
+      error: `[Errata 校验失败] ${key}: 中文译文仍包含被否决的原错误表述 "${errata.forbiddenZhText}"`
+    };
+  }
+
+  // 3b. 中文译文必须精确包含更正后的中文表述
+  if (errata.expectedZhDate && !zh.includes(errata.expectedZhDate)) {
     return {
       isErrata: true,
       ok: false,
@@ -67,9 +97,17 @@ export function applyApprovedErrata({ slug, paragraphIndex, en, zh, sourceEn }) 
       error: `[Errata 校验失败] ${key}: 中文译文未包含核准的更正日期 "${errata.expectedZhDate}"`
     };
   }
+  if (errata.expectedZhText && !zh.includes(errata.expectedZhText)) {
+    return {
+      isErrata: true,
+      ok: false,
+      normalizedEn: en,
+      error: `[Errata 校验失败] ${key}: 中文译文未包含核准的更正表述 "${errata.expectedZhText}"`
+    };
+  }
 
   // 4. 中文译文必须包含指定的译注说明
-  if (!zh.includes(errata.requiredNote)) {
+  if (errata.requiredNote && !zh.includes(errata.requiredNote)) {
     return {
       isErrata: true,
       ok: false,
@@ -79,7 +117,9 @@ export function applyApprovedErrata({ slug, paragraphIndex, en, zh, sourceEn }) 
   }
 
   // 满足全部条件，生成仅供 Rule 3 数值比对的临时规范化英文副本
-  const normalizedEn = en.replace(errata.originalEnDate, errata.correctedEnDate);
+  const origPattern = errata.originalEnText || errata.originalEnDate;
+  const replacement = errata.correctedEnText || errata.correctedEnDate;
+  const normalizedEn = (origPattern && replacement) ? en.replace(origPattern, replacement) : en;
   return {
     isErrata: true,
     ok: true,
