@@ -48,6 +48,8 @@
 | `crust` | **地壳** | — | 行星最外层固态岩石壳层（与地幔 mantle、地核 core 并列） |
 | `core sample` / `core samples` | **岩心样本** | ❌ 核心样本 | 通过中空钻头采集的圆柱状深层岩石与土壤样品（毅力号） |
 | `ice-soil boundary` | **冰土交界带** | — | 极区地下水冰层与上方风化土壤层的过渡分界面（凤凰号） |
+| `layering` | **岩层层理** / **层理** | — | 火星地表暴露的地壳岩石沉积或火山层理构造（MRO） |
+| `beach ball` | **沙滩球** | — | 形容成像分辨率极高，可清晰分辨地表沙滩球大小的特征（MRO） |
 
 ---
 
@@ -93,6 +95,14 @@
 | `heat flow` | **热流** | — | 行星内部热量向外传导的能量流率与温度梯度测量（洞察号“体温”） |
 | `precision tracking` | **精密跟踪** | — | 通过双向无线电多普勒频移测量自转轴进动以反演地核大小与状态的技术（洞察号“反射”） |
 | `chemical building blocks of life` | **生命的化学基石** | — | 构成生命有机体所需的基础含碳分子与化学原料（好奇号） |
+| `data relay station` | **数据中继站** | — | 为火星地表探测器向地球深空网转发指令与科学数据的轨道通信中继枢纽（MRO） |
+| `loss of volatiles` | **挥发分的逸散** / **挥发分流失** | — | 火星大气中水分和气体等挥发成分向外层太空的长期逃逸流失（MAVEN） |
+| `terrestrial climatology` | **地球气候学** | 避免直接译为“陆地气候学” | 研究地球气候演变机制的学科，通过与火星大气演化对比提供参照（MAVEN） |
+| `polar orbit` | **极轨道** | — | 轨道倾角接近 90 度通过行星南北极区上空的环绕轨道（火星快车号） |
+| `sub-surface water` | **地表下水资源** / **地下水** | — | 隐藏在火星地表岩石或土壤层之下的液态或固态水（火星快车号） |
+| `trace gases` | **微量气体** / **痕量气体** | — | 在行星大气中所占比例极低的气体成分，如甲烷、氮氧化物等（TGO） |
+| `nitrogen oxides` | **氮氧化物** | — | 火星大气中微量氮氧化合物气体（TGO） |
+| `acetylene` | **乙炔** | — | 火星大气中微量碳氢化合物气体（TGO） |
 
 ---
 
@@ -224,4 +234,8 @@
 | `Phoenix` | **凤凰号** | 见 `names.zh.json`，NASA 首个在火星极区直接挖掘并证实水冰存在的固定着陆器任务 |
 | `Mars Odyssey` | **火星奥德赛号** | 见 `names.zh.json`，创下围绕地外行星运行最长纪录的 NASA 火星轨道器 |
 | `THEMIS` | **THEMIS**（**热辐射成像系统**） | 火星奥德赛号搭载的热辐射成像系统（Thermal Emission Imaging System），拍摄数十万张可见光与热红外影像 |
+| `Mars Reconnaissance Orbiter` | **火星勘测轨道飞行器** | 见 `names.zh.json`，NASA 高分辨率火星成像与通信中继轨道器 |
+| `MAVEN` / `Mars Atmosphere and Volatile Evolution` | **火星大气与挥发物演化任务 MAVEN** / **MAVEN** | 见 `names.zh.json`，NASA 专门探测火星高层大气与挥发分散逸的轨道器 |
+| `Mars Express` | **火星快车号** | 见 `names.zh.json`，ESA/ASI 联合火星极轨勘测轨道器 |
+| `Trace Gas Orbiter` / `ExoMars Trace Gas Orbiter` | **微量气体轨道器** / **ExoMars 微量气体轨道器** | 见 `names.zh.json`，ESA/Roscosmos 联合火星微量气体与地下水冰探测轨道器 |
 
