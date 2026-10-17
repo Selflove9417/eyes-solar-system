@@ -42,6 +42,9 @@
 | `basaltic rock` | **玄武岩** | — | 灶神星表面凝固的基性岩浆岩 |
 | `protoplanet` | **原行星** | — | 早期太阳系形成阶段的行星胚胎，如智神星、灶神星 |
 | `double-lobed` | **双叶状** | — | 形如雪人的接触双体结构，如阿罗科思 |
+| `floodplain` | **泛滥平原** | — | 土卫六表面经液态甲烷河流冲刷堆积形成的平坦冲积区域 |
+| `cobbles` / `rounded cobbles` | **卵石** / **磨圆卵石** | — | 惠更斯号着陆点发现的受流体长期冲刷呈圆润状的水冰碎块 |
+| `resurfacing` | **地貌重塑** / **表面更新** | — | 木卫一频繁火山喷发覆盖旧撞击坑并快速重塑地表的过程 |
 
 ---
 
@@ -79,6 +82,10 @@
 | `interstellar medium` | **星际介质** | — | 恒星之间存在的气体、尘埃和高能宇宙射线等物质 |
 | `all-nuclear electrical power` | **全核能电力** | — | 航天器完全由核能电池（如放射性同位素热电发生器 RTG）供电 |
 | `light-hours` | **光时** | — | 光在真空中一小时所行进的距离，常用于表示遥远深空探测器的通信单向光行时间 |
+| `spin-stabilized` / `spinning to keep stable` | **自旋稳定** | — | 通过航天器本体自转产生的角动量维持空间姿态稳定的控制方式（如朱诺号） |
+| `radiation belt` | **辐射带** | — | 行星磁场俘获高能带电粒子形成的强辐射环带（如木星甜甜圈状辐射带） |
+| `habitability` | **宜居性** | — | 天体环境支持生命维持和生存的潜在能力，研究宜居性不等于直接寻找现存生命本身 |
+| `ocean world` / `ocean worlds` | **海洋世界** | — | 拥有巨大冰下海洋或表面液态海洋的地外天体统称（如木卫二、土卫二、土卫六） |
 
 ---
 
@@ -197,3 +204,9 @@
 | `Kerberos` | **冥卫四** | 见 `names.zh.json`，冥王星卫星之一 |
 | `Styx` | **冥卫五** | 见 `names.zh.json`，冥王星卫星之一 |
 | `2014 MU69` / `Ultima Thule` | **2014 MU69** / **天涯海角 (Ultima Thule)** | 柯伊伯带双叶状小天体阿罗科思（Arrokoth）的临时编号与最初非正式代号 |
+| `Cassini` / `Cassini spacecraft` | **卡西尼号** | 见 `names.zh.json`，NASA/ESA/ASI 联合土星轨道探测器（1997-2017） |
+| `Huygens` / `Huygens probe` | **惠更斯号** | 见 `names.zh.json`，ESA 制造并在卡西尼任务中搭载的人类首个土卫六着陆器（2005） |
+| `Galileo` / `Galileo spacecraft` | **伽利略号** | 见 `names.zh.json`，NASA 首个环绕木星运行的轨道器及大气释放探测器（1989-2003） |
+| `Juno` / `Juno spacecraft` | **朱诺号** | 见 `names.zh.json`，NASA 新前沿计划大型木星极轨太阳能深空探测器（2011 发射，2016 抵木） |
+| `Europa Clipper` | **欧罗巴快船** | 见 `names.zh.json`，NASA 专用木卫二宜居性调查深空探测器 |
+| `ASI (Italian Space Agency)` | **意大利航天局 (ASI)** | 意大利国家航天机构（Agenzia Spaziale Italiana），卡西尼-惠更斯联合任务三方合作者之一 |

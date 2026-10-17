@@ -26,6 +26,7 @@
   const hasHan = (s) => /[一-鿿]/.test(s);
 
   let entityById = {};   // site slug -> Chinese
+  let entityEnById = {}; // site slug -> English name
   let entityByEn = {};   // rendered English name -> Chinese (menu/breadcrumb items)
   let categoryMap = {};  // "Planet" -> "行星"; consulted last, so "Moon" stays 月球
   let uiMap = {};        // exact English UI string -> Chinese
@@ -141,6 +142,18 @@
     if (!name) return;
     const wanted = `太阳系探索 - ${name} - NASA/JPL（非官方中文）`;
     if (document.title !== wanted) { written.add(document); document.title = wanted; }
+
+    const enName = entityEnById[page];
+    for (const el of document.querySelectorAll('.title.long-title, .semi.title.long-title')) {
+      for (const n of el.childNodes) {
+        if (n.nodeType === Node.TEXT_NODE && !hasHan(n.nodeValue)) {
+          const t = clean(n.nodeValue);
+          if (t && (t === enName || !lookup(t))) {
+            replaceText(n, name);
+          }
+        }
+      }
+    }
   }
 
   // ---- batching: one pass per frame, and our own writes never re-trigger us ----
@@ -189,12 +202,14 @@
       load('data/more.zh.json').catch(() => null),
     ]);
     entityById = {};
+    entityEnById = {};
     entityByEn = {};
     const seenEn = new Map();
     for (const [id, e] of Object.entries(names.entities)) {
       if (!e.zh) continue;
       entityById[id] = e.zh;
       if (!e.en) continue;
+      entityEnById[id] = e.en;
       // "Psyche" is both an asteroid and a spacecraft; an ambiguous English label
       // cannot be resolved without the entity id, so leave it in English.
       if (seenEn.has(e.en) && seenEn.get(e.en) !== e.zh) seenEn.set(e.en, null);
