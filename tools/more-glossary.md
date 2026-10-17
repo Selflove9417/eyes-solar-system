@@ -254,4 +254,18 @@
 | `Artemis III` | **阿尔忒弥斯 III 号** | NASA 阿尔忒弥斯计划载人近地轨道测试/登月后续规划任务 |
 | `Artemis IV` | **阿尔忒弥斯 IV 号** | NASA 阿尔忒弥斯计划未来重返月表载人登月任务 |
 | `Orion` / `Orion spacecraft` | **猎户座飞船** | NASA 专为人类深空探测设计的载人航天器（阿尔忒弥斯计划载人座驾） |
+| `OSIRIS-REx` / `OSIRIS-APEX` | **冥王号 (OSIRIS-REx)** / **奥西里斯-APEX (OSIRIS-APEX)** | 见 `names.zh.json` 与 `missions.zh.json`，美国首个小行星采样返回任务及后续阿波菲斯拓展任务 |
+| `101955 Bennu` / `Bennu` | **贝努** | 见 `names.zh.json`，近地富碳小行星 101955 贝努 |
+| `99942 Apophis` / `Apophis` | **阿波菲斯** | 见 `names.zh.json`，近地潜在威胁小行星 99942 阿波菲斯（OSIRIS-APEX 2029 探测目标） |
+| `DART` / `Double Asteroid Redirection Test` | **双小行星重定向测试 DART** / **DART** | 见 `names.zh.json`，NASA 首个行星防御动能撞击技术验证任务 |
+| `kinetic impactor` | **动能撞击** / **动能撞击技术** | 通过航天器高速碰撞改变小天体运行轨道路径与速度的行星防御关键手段 |
+| `Didymos` / `65803 Didymos` | **迪迪莫斯** | 见 `names.zh.json`，双小行星系统主星（直径约 780 米） |
+| `Dimorphos` | **迪莫弗斯** | 见 `names.zh.json`，绕迪迪莫斯运行的小行星卫星（伴星，直径约 160 米），DART 撞击目标 |
+| `Lucy` | **露西号** | 见 `names.zh.json`，人类首个探测木星特洛伊小行星群的深空探测任务 |
+| `Trojan asteroids` / `Trojans` | **特洛伊小行星** / **特洛伊小行星群** | 与木星共享绕日轨道并在拉格朗日点 L4/L5 聚集的太阳系早期原始天体 |
+| `Psyche` / `16 Psyche` | **灵神星号**（探测器） / **灵神星**（小行星） | 见 `names.zh.json`，探测位于火星与木星之间富金属小行星的深空任务 |
+| `Dawn` | **黎明号** | 见 `names.zh.json`，首个环绕两颗地外天体（灶神星与谷神星）运行的离子推进探测器 |
+| `Vesta` / `4 Vesta` | **灶神星** | 见 `names.zh.json`，小行星带第二大天体，干燥且岩石密布的原行星 |
+| `Ceres` / `1 Ceres` | **谷神星** | 见 `names.zh.json`，小行星带唯一矮行星，富含水冰的潮湿原行星 |
+| `ion propulsion` / `ion engines` | **离子推进** / **离子发动机** | 利用电场加速离子喷射产生推力的高比冲深空推进系统 |
 
