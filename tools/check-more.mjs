@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { verifyQuantitiesEquivalence } from './quantity-parser.mjs';
+import { applyApprovedErrata } from './more-errata.mjs';
 
 const sourcePath = path.resolve('data/source/descriptions.en.json');
 const moreZhPath = path.resolve('data/more.zh.json');
@@ -92,7 +93,25 @@ for (const [slug, entry] of Object.entries(moreZh.entries || {})) {
     }
 
     // Rule 3: en 与 zh 中出现的数值与量级必须完全对应（支持 million/billion/thousand 与 万/亿/千/百万 等价换算）
-    const qCheck = verifyQuantitiesEquivalence(en, zh);
+    // 检查是否属于经过权威证据核准的单项源文事实勘误（严格键控，不泛化）
+    const sourceEntryMore = source[slug]?.description?.more;
+    const sourceParts = sourceEntryMore ? sourceEntryMore.split(/\n+/).map((s) => s.trim()).filter(Boolean) : [];
+    const sourceEn = sourceParts[idx];
+
+    const errataCheck = applyApprovedErrata({
+      slug,
+      paragraphIndex: idx,
+      en,
+      zh,
+      sourceEn
+    });
+
+    if (!errataCheck.ok) {
+      errors.push(`[Rule 3 勘误异常] ${errataCheck.error}`);
+    }
+
+    const enForQuantities = errataCheck.normalizedEn;
+    const qCheck = verifyQuantitiesEquivalence(enForQuantities, zh);
     if (!qCheck.ok) {
       errors.push(`[Rule 3] ${slug} 第 ${idx + 1} 段数值不一致: en 缺失于 zh [${qCheck.missingInZh.join(', ')}], zh 多余 [${qCheck.extraInZh.join(', ')}]`);
     }
