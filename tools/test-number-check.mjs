@@ -91,6 +91,24 @@ const testCases = [
     zh: '于 2020 年 12 月送回地球。',
     shouldPass: true
   },
+  {
+    name: '2 March 2004 -> 2004 年 3 月 2 日 (日-月-年格式)',
+    en: 'Rosetta was launched on 2 March 2004 on an Ariane 5 rocket.',
+    zh: '罗塞塔号于 2004 年 3 月 2 日搭乘阿丽亚娜 5 号运载火箭发射升空。',
+    shouldPass: true
+  },
+  {
+    name: '12 November -> 11 月 12 日 (日-月格式)',
+    en: 'On 12 November the lander touched down on the comet nucleus.',
+    zh: '11 月 12 日，着陆器降落在彗核表面。',
+    shouldPass: true
+  },
+  {
+    name: 'in August 2014 -> 2014 年 8 月 (介词+月份+年份格式)',
+    en: 'Rosetta arrived at the comet in August 2014.',
+    zh: '罗塞塔号于 2014 年 8 月抵达彗星。',
+    shouldPass: true
+  },
   // 7. 反向用例：数值错误 (3 million 错译为 400 万)
   {
     name: '【反向】3 million 错译为 400 万（必须报错）',
@@ -130,6 +148,24 @@ const testCases = [
     name: '【反向】December of 2020 年月错译 (12 月 错写为 11 月)',
     en: 'returned to Earth in December of 2020.',
     zh: '于 2020 年 11 月送回地球。',
+    shouldPass: false
+  },
+  {
+    name: '【反向】2 March 2004 日期错译 (2 日 错写为 5 日)',
+    en: 'Rosetta was launched on 2 March 2004.',
+    zh: '罗塞塔号于 2004 年 3 月 5 日发射。',
+    shouldPass: false
+  },
+  {
+    name: '【反向】12 November 月份错译 (11 月 错写为 10 月)',
+    en: 'touched down on 12 November.',
+    zh: '于 10 月 12 日降落。',
+    shouldPass: false
+  },
+  {
+    name: '【反向】in August 2014 年月错译 (8 月 错写为 9 月)',
+    en: 'arrived at the comet in August 2014.',
+    zh: '于 2014 年 9 月抵达彗星。',
     shouldPass: false
   }
 ];
