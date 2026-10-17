@@ -37,6 +37,7 @@
 | `magma ocean` / `magma oceans` | **岩浆洋** | — | 新生月球早期全球熔融岩浆层 |
 | `ejecta` / `ejecta deposits` | **撞击溅射物** / **溅射沉积物** | 避免混为“喷出物”（那是火山地质学名词） | 撞击地质学规范用词；亦可称“抛射物”，指撞击坑形成时溅射飞出并堆积的物质 |
 | `C-type` | **C 型** | — | 碳质小行星光谱分类，如火卫二表面物质 |
+| `oval-shaped` | **椭球形** / **卵形** | — | 描述如妊神星等高速自转天体的不对称形状 |
 
 ---
 
@@ -128,3 +129,15 @@
 | `Stickney` / `Stickney crater` | **斯蒂克尼撞击坑** | 火卫一标志性最大撞击坑 |
 | `Mars Global Surveyor` | **火星全球勘测者号** | 见 `missions.zh.json` |
 | `New Horizons` | **新视野号** | 见 `missions.zh.json` |
+| `Ceres` | **谷神星** | 见 `names.zh.json` |
+| `Eris` | **阋神星** | 见 `names.zh.json` |
+| `Haumea` | **妊神星** | 见 `names.zh.json` |
+| `Makemake` | **鸟神星** | 见 `names.zh.json` |
+| `Giuseppe Piazzi` | **朱塞佩·皮亚齐** | 1801 年发现谷神星的意大利天文学家 |
+| `Dawn` | **黎明号** | 见 `missions.zh.json`，造访灶神星与谷神星的探测器 |
+| `International Astronomical Union (IAU)` | **国际天文学联合会** | 负责天体命名与定义的权威国际天文组织，2006 年确立矮行星分类 |
+| `2003 UB313` | **2003 UB313** | 阋神星发现初期的临时天文学编号 |
+| `Xena` | **齐娜** | 阋神星发现团队早期的非正式昵称（取自美国电视剧《女战士齐娜》） |
+| `Namaka` | **妊卫二** | 妊神星卫星之一，源自夏威夷神话海神 |
+| `Hiʻiaka` / `Hi’iaka` | **妊卫一** | 妊神星卫星之一，源自夏威夷神话草裙舞女神 |
+| `Rapanui` | **拉帕努伊** | 复活节岛原住民波利尼西亚人及其语言文化与神话体系 |
