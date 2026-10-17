@@ -74,6 +74,11 @@
 | `mutual tidal locking` | **相互潮汐锁定** | — | 双方始终以同一面相互朝向对方的引力潮汐现象（如冥王星与冥卫一） |
 | `binary system` / `binary asteroid` | **双星系统** / **双小行星** | — | 由两颗相互绕转的小天体组成的引力结合系统，如迪迪莫斯-迪莫弗斯 |
 | `planetary defense` | **行星防御** | — | 监测与防止近地天体撞击地球的技术体系与试验领域 |
+| `escape trajectory` / `trajectory to escape` | **逃逸轨道** | — | 速度超过该引力场逃逸速度的开放轨道（如先驱者 10 号脱离太阳系） |
+| `interstellar space` | **星际空间** / **恒星际空间** | — | 恒星与恒星之间的空间区域，日球层顶以外充满星际介质的广袤区域 |
+| `interstellar medium` | **星际介质** | — | 恒星之间存在的气体、尘埃和高能宇宙射线等物质 |
+| `all-nuclear electrical power` | **全核能电力** | — | 航天器完全由核能电池（如放射性同位素热电发生器 RTG）供电 |
+| `light-hours` | **光时** | — | 光在真空中一小时所行进的距离，常用于表示遥远深空探测器的通信单向光行时间 |
 
 ---
 
@@ -182,3 +187,13 @@
 | `EPOXI` | **EPOXI 任务** | 深度撞击号扩展任务（系外行星观测与深空彗星扩展调查） |
 | `Earth-receive time` | **地球接收时间** | 信号传播延迟后地球深空网接收到遥测的时刻 |
 | `UT` / `Universal Time` | **世界时 (UT)** | 国际天文学通用标准时间 |
+| `Pioneer 10` | **先驱者 10 号** | 见 `names.zh.json`，首个飞越木星并进入逃逸轨道的航天器 |
+| `Pioneer 11` | **先驱者 11 号** | 见 `names.zh.json`，首个飞越土星并发现 F 环的航天器 |
+| `Voyager 1` | **旅行者 1 号** | 见 `names.zh.json`，首个进入星际空间的人造航天器 |
+| `Voyager 2` | **旅行者 2 号** | 见 `names.zh.json`，唯一造访天王星与海王星的航天器，第二艘进入星际空间 |
+| `Deep Space Network (DSN)` | **深空网络** / **深空网 (DSN)** | NASA 设立在加州金石、马德里和堪培拉的全球巨型深空测控通信天线阵网 |
+| `Voyager Interstellar Mission (VIM)` | **旅行者星际任务 (VIM)** | 旅行者 1 号与 2 号完成行星探测后的星际介质探测扩展任务 |
+| `F ring` | **F 环** | 土星 A 环外侧狭窄光环，由先驱者 11 号首次发现 |
+| `Kerberos` | **冥卫四** | 见 `names.zh.json`，冥王星卫星之一 |
+| `Styx` | **冥卫五** | 见 `names.zh.json`，冥王星卫星之一 |
+| `2014 MU69` / `Ultima Thule` | **2014 MU69** / **天涯海角 (Ultima Thule)** | 柯伊伯带双叶状小天体阿罗科思（Arrokoth）的临时编号与最初非正式代号 |
