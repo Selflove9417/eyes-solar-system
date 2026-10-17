@@ -50,6 +50,8 @@
 | `ice-soil boundary` | **冰土交界带** | — | 极区地下水冰层与上方风化土壤层的过渡分界面（凤凰号） |
 | `layering` | **岩层层理** / **层理** | — | 火星地表暴露的地壳岩石沉积或火山层理构造（MRO） |
 | `beach ball` | **沙滩球** | — | 形容成像分辨率极高，可清晰分辨地表沙滩球大小的特征（MRO） |
+| `permanently shadowed regions` | **永久阴影区** | — | 月球极区终年无法接收太阳照射的深坑撞击坑底部（LRO） |
+| `global geodetic grid` | **全球大地测量网格** | — | 用于精确测量与标定月球表面三维地形与坐标参考系的大地测量网络（LRO） |
 
 ---
 
@@ -103,6 +105,12 @@
 | `trace gases` | **微量气体** / **痕量气体** | — | 在行星大气中所占比例极低的气体成分，如甲烷、氮氧化物等（TGO） |
 | `nitrogen oxides` | **氮氧化物** | — | 火星大气中微量氮氧化合物气体（TGO） |
 | `acetylene` | **乙炔** | — | 火星大气中微量碳氢化合物气体（TGO） |
+| `distant retrograde orbit` | **远距离逆行轨道** | 避免混为一般逆行轨道 | 围绕月球运行的高度稳定大型逆行环月轨道（Artemis I，简称 DRO） |
+| `lunar polar orbit` | **月球极轨道** | — | 轨道面穿过月球两极上空的环月观测轨道（LRO、克莱门汀号） |
+| `UV albedo` | **紫外反照率** | — | 月面物质反射紫外波段太阳辐射的能力（LRO） |
+| `laser ranging altimetry` | **激光测高** / **激光测距测高** | — | 通过机载脉冲激光往返时间精确反演月面地形高程的遥感技术（克莱门汀号） |
+| `gravimetry` | **重力测量** | — | 测量月球局部重力场及其微小空间梯度的地球物理学方法（克莱门汀号、GRAIL） |
+| `charged particle measurements` | **带电粒子测量** | — | 测量空间等离子体与宇宙射线带电粒子通量及能量谱的探测手段（克莱门汀号） |
 
 ---
 
@@ -238,4 +246,12 @@
 | `MAVEN` / `Mars Atmosphere and Volatile Evolution` | **火星大气与挥发物演化任务 MAVEN** / **MAVEN** | 见 `names.zh.json`，NASA 专门探测火星高层大气与挥发分散逸的轨道器 |
 | `Mars Express` | **火星快车号** | 见 `names.zh.json`，ESA/ASI 联合火星极轨勘测轨道器 |
 | `Trace Gas Orbiter` / `ExoMars Trace Gas Orbiter` | **微量气体轨道器** / **ExoMars 微量气体轨道器** | 见 `names.zh.json`，ESA/Roscosmos 联合火星微量气体与地下水冰探测轨道器 |
+| `Lunar Reconnaissance Orbiter (LRO)` | **月球勘测轨道飞行器** / **LRO** | 见 `names.zh.json`，NASA 高分辨率月球三维测绘与资源勘查轨道器 |
+| `GRAIL` / `GRAIL A` | **重力恢复与内部实验室** / **重力恢复与内部实验室 A** | 见 `names.zh.json`，NASA 通过双星微波测距反演月球重力场的孪生探测器任务 |
+| `Clementine` | **克莱门汀号** | 见 `names.zh.json`，美国国防部 BMDO 与 NASA 联合月球与深空传感器技术验证探测器 |
+| `Artemis I` | **阿尔忒弥斯 I 号** | 见 `names.zh.json`，NASA 阿尔忒弥斯重返月球计划首飞无人飞行试验任务 |
+| `Artemis II` | **阿尔忒弥斯 II 号** | 见 `names.zh.json`，NASA 阿尔忒弥斯计划首次载人绕月飞行测试任务 |
+| `Artemis III` | **阿尔忒弥斯 III 号** | NASA 阿尔忒弥斯计划载人近地轨道测试/登月后续规划任务 |
+| `Artemis IV` | **阿尔忒弥斯 IV 号** | NASA 阿尔忒弥斯计划未来重返月表载人登月任务 |
+| `Orion` / `Orion spacecraft` | **猎户座飞船** | NASA 专为人类深空探测设计的载人航天器（阿尔忒弥斯计划载人座驾） |
 
