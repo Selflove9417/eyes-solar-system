@@ -45,6 +45,9 @@
 | `floodplain` | **泛滥平原** | — | 土卫六表面经液态甲烷河流冲刷堆积形成的平坦冲积区域 |
 | `cobbles` / `rounded cobbles` | **卵石** / **磨圆卵石** | — | 惠更斯号着陆点发现的受流体长期冲刷呈圆润状的水冰碎块 |
 | `resurfacing` | **地貌重塑** / **表面更新** | — | 木卫一频繁火山喷发覆盖旧撞击坑并快速重塑地表的过程 |
+| `crust` | **地壳** | — | 行星最外层固态岩石壳层（与地幔 mantle、地核 core 并列） |
+| `core sample` / `core samples` | **岩心样本** | ❌ 核心样本 | 通过中空钻头采集的圆柱状深层岩石与土壤样品（毅力号） |
+| `ice-soil boundary` | **冰土交界带** | — | 极区地下水冰层与上方风化土壤层的过渡分界面（凤凰号） |
 
 ---
 
@@ -86,6 +89,10 @@
 | `radiation belt` | **辐射带** | — | 行星磁场俘获高能带电粒子形成的强辐射环带（如木星甜甜圈状辐射带） |
 | `habitability` | **宜居性** | — | 天体环境支持生命维持和生存的潜在能力，研究宜居性不等于直接寻找现存生命本身 |
 | `ocean world` / `ocean worlds` | **海洋世界** | — | 拥有巨大冰下海洋或表面液态海洋的地外天体统称（如木卫二、土卫二、土卫六） |
+| `seismology` | **地震学** / **火星震学** | — | 通过记录弹性波探测行星内部圈层结构的地球物理学方法（洞察号“脉搏”） |
+| `heat flow` | **热流** | — | 行星内部热量向外传导的能量流率与温度梯度测量（洞察号“体温”） |
+| `precision tracking` | **精密跟踪** | — | 通过双向无线电多普勒频移测量自转轴进动以反演地核大小与状态的技术（洞察号“反射”） |
+| `chemical building blocks of life` | **生命的化学基石** | — | 构成生命有机体所需的基础含碳分子与化学原料（好奇号） |
 
 ---
 
@@ -210,3 +217,11 @@
 | `Juno` / `Juno spacecraft` | **朱诺号** | 见 `names.zh.json`，NASA 新前沿计划大型木星极轨太阳能深空探测器（2011 发射，2016 抵木） |
 | `Europa Clipper` | **欧罗巴快船** | 见 `names.zh.json`，NASA 专用木卫二宜居性调查深空探测器 |
 | `ASI (Italian Space Agency)` | **意大利航天局 (ASI)** | 意大利国家航天机构（Agenzia Spaziale Italiana），卡西尼-惠更斯联合任务三方合作者之一 |
+| `Mars 2020` / `Perseverance` | **火星 2020（毅力号）** | 见 `names.zh.json`，NASA 采集并封装火星岩心样本以备未来送回地球的火星车任务 |
+| `Ingenuity` | **机智号** | NASA 伴随毅力号抵达火星的首架地外行星动力飞行直升机技术验证机 |
+| `Mars Science Laboratory` / `Curiosity` | **火星科学实验室（好奇号）** | 见 `names.zh.json`，NASA 评估火星远古环境宜居性的重型火星车任务 |
+| `InSight` | **洞察号** | 见 `names.zh.json`，NASA 首个专注于探测火星地壳、地幔与地核深部内部圈层结构的着陆器任务 |
+| `Phoenix` | **凤凰号** | 见 `names.zh.json`，NASA 首个在火星极区直接挖掘并证实水冰存在的固定着陆器任务 |
+| `Mars Odyssey` | **火星奥德赛号** | 见 `names.zh.json`，创下围绕地外行星运行最长纪录的 NASA 火星轨道器 |
+| `THEMIS` | **THEMIS**（**热辐射成像系统**） | 火星奥德赛号搭载的热辐射成像系统（Thermal Emission Imaging System），拍摄数十万张可见光与热红外影像 |
+
