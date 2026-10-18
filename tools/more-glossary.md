@@ -116,7 +116,7 @@
 | `super-Earth` / `super-Earth-sized` | **超级地球** / **超级地球大小** | — | 尺寸介于地球与海王星之间、通常不超过两倍地球大小的系外行星类别（TESS） |
 | `planet candidate` / `planet candidates` | **候选行星** | 避免混同于“已确认行星” | 经凌日等初步观测发现但尚未经独立验证确认的系外行星候选目标（TESS） |
 | `Lagrange point L2` / `Sun-Earth Lagrange point L2` | **拉格朗日点 L2** / **日地拉格朗日点 L2** | — | 日地系统第二拉格朗日引力平衡点，背向太阳一侧约 150 万千米处（韦伯、罗曼） |
-| `infrared astrophysics` | **红外天体物理学** | — | 利用红外波段研究早期宇宙、恒星与行星形成以及冷暗天体的高能物理学分支（罗曼） |
+| `infrared astrophysics` | **红外天体物理学** | — | 利用红外波段研究恒星与行星形成、星际尘埃、冷暗天体及宇宙演化等现象的天体物理研究领域（罗曼） |
 | `planet-forming disk` / `planet-forming disks` | **行星形成盘** / **原行星盘** | — | 围绕年轻恒星旋转由气体和尘埃构成的致密吸积盘，行星在其中孕育成形（罗曼） |
 
 ---
