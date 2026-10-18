@@ -47,8 +47,8 @@ export function createZip(files, outputPath) {
     const compressedSize = compressedData.length;
 
     const mtime = file.mtime || defaultMtime;
-    const dosTime = ((mtime.getHours() << 11) | (mtime.getMinutes() << 5) | (mtime.getSeconds() >> 1)) & 0xFFFF;
-    const dosDate = (((mtime.getFullYear() - 1980) << 9) | ((mtime.getMonth() + 1) << 5) | mtime.getDate()) & 0xFFFF;
+    const dosTime = ((mtime.getUTCHours() << 11) | (mtime.getUTCMinutes() << 5) | (mtime.getUTCSeconds() >> 1)) & 0xFFFF;
+    const dosDate = (((mtime.getUTCFullYear() - 1980) << 9) | ((mtime.getUTCMonth() + 1) << 5) | mtime.getUTCDate()) & 0xFFFF;
 
     // 1. Local file header (30 bytes + filename + data)
     const localHeader = Buffer.alloc(30);

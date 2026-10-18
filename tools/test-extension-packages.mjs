@@ -5,7 +5,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
-import { readZip } from './zip-util.mjs';
+import { readZip, createZip } from './zip-util.mjs';
 
 const root = path.resolve('.');
 const offlineZip = path.join(root, 'dist', 'eyes-zh-extension.zip');
@@ -161,6 +161,33 @@ assert(!contentJsStr.includes('http://'), 'content.js contains zero unencrypted 
 const forbidden = ['.log', '.tmp', '.DS_Store', '.git', '.bak', '~'];
 const hasForbidden = storePaths.some((p) => forbidden.some((f) => p.endsWith(f)));
 assert(!hasForbidden, 'Store package contains zero temporary, log, or git files');
+
+// 8. Multi-timezone Deterministic Build & Timestamp Verification (UTC, Asia/Shanghai, America/Los_Angeles)
+const testTimezones = ['UTC', 'Asia/Shanghai', 'America/Los_Angeles'];
+const tzStoreHashes = [];
+const tzOfflineHashes = [];
+
+const tempOffline = path.join(root, 'dist', '.test-tz-offline.zip');
+const tempStore = path.join(root, 'dist', '.test-tz-store.zip');
+
+for (const tz of testTimezones) {
+  process.env.TZ = tz;
+  const offBuf = createZip(offlineEntries.map(e => ({ path: e.path, data: e.data })), tempOffline);
+  const stoBuf = createZip(storeEntries.map(e => ({ path: e.path, data: e.data })), tempStore);
+  tzOfflineHashes.push(createHash('sha256').update(offBuf).digest('hex'));
+  tzStoreHashes.push(createHash('sha256').update(stoBuf).digest('hex'));
+  fs.rmSync(tempOffline, { force: true });
+  fs.rmSync(tempStore, { force: true });
+}
+
+assert(
+  tzOfflineHashes.every((h) => h === tzOfflineHashes[0]) && tzOfflineHashes[0] === offlineSha,
+  `Offline ZIP SHA256 is deterministic across UTC, Asia/Shanghai, America/Los_Angeles (${offlineSha})`
+);
+assert(
+  tzStoreHashes.every((h) => h === tzStoreHashes[0]) && tzStoreHashes[0] === storeSha,
+  `Store ZIP SHA256 is deterministic across UTC, Asia/Shanghai, America/Los_Angeles (${storeSha})`
+);
 
 console.log(`\n========================================`);
 console.log(`True ZIP & Packaging Verification: ${pass} passed, ${fail} failed.`);
