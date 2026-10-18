@@ -21,7 +21,7 @@
 <meta name="twitter:image:alt" content="卡西尼号土星任务艺术概念图 - 深空之眸">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="alternate icon" href="favicon.ico">
-<link rel="stylesheet" href="assets/css/main.css?v=20261016p6final">
+<link rel="stylesheet" href="assets/css/main.css?v=20261018p17">
 </head>
 <body>
 <main class="wrap">
@@ -58,17 +58,23 @@
   </p>
 </main>
 <script type="module">
-import { renderChrome, getData, getMoreData, el } from './assets/js/site.js?v=20261016p6final';
+import { renderChrome, getData, getMoreData, el } from './assets/js/site.js?v=20261018p17';
 renderChrome('missions.html');
 const { missions, names } = await getData();
 let moreData = null;
+let moreLoadFailed = false;
 try {
   moreData = await getMoreData();
 } catch (err) {
   console.warn('More 详细介绍加载失败:', err);
+  moreLoadFailed = true;
 }
 const list = document.getElementById('list');
 const count = document.getElementById('count');
+if (moreLoadFailed) {
+  const notice = el('div', { class: 'more-fallback-notice', role: 'status' }, '详细介绍暂时无法加载，请刷新页面重试。');
+  list.parentNode.insertBefore(notice, list);
+}
 
 function statusTag(status) {
   if (status === 'common') return el('span', { class: 'entry-status-note' }, '通用译名');

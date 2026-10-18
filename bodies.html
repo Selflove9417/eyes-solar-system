@@ -21,7 +21,7 @@
 <meta name="twitter:image:alt" content="卡西尼号土星任务艺术概念图 - 深空之眸">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="alternate icon" href="favicon.ico">
-<link rel="stylesheet" href="assets/css/main.css?v=20261016p6final">
+<link rel="stylesheet" href="assets/css/main.css?v=20261018p17">
 </head>
 <body>
 <main class="wrap">
@@ -57,17 +57,23 @@
   </p>
 </main>
 <script type="module">
-import { renderChrome, getData, getMoreData, el } from './assets/js/site.js?v=20261016p6final';
+import { renderChrome, getData, getMoreData, el } from './assets/js/site.js?v=20261018p17';
 renderChrome('bodies.html');
 const { bodies, names } = await getData();
 let moreData = null;
+let moreLoadFailed = false;
 try {
   moreData = await getMoreData();
 } catch (err) {
   console.warn('More 详细介绍加载失败:', err);
+  moreLoadFailed = true;
 }
 const list = document.getElementById('list');
 const count = document.getElementById('count');
+if (moreLoadFailed) {
+  const notice = el('div', { class: 'more-fallback-notice', role: 'status' }, '详细介绍暂时无法加载，请刷新页面重试。');
+  list.parentNode.insertBefore(notice, list);
+}
 
 function getSwatchClass(cat) {
   if (cat === 'Planet') return 'swatch-planet';
@@ -86,11 +92,14 @@ function statusTag(status) {
 
 function render(q = '') {
   const needle = q.trim().toLowerCase();
+  const normNeedle = needle.replace(/韦布/g, '韦伯');
   const hits = bodies.bodies.filter((b) => {
     if (!needle) return true;
     const entry = names.entities[b.id];
     const moreZh = moreData?.entries?.[b.id]?.paragraphs?.map((p) => p.zh).join(' ') || '';
-    return [b.zh, entry?.en, b.en, b.cat, names.categories[b.cat], b.id, moreZh].join(' ').toLowerCase().includes(needle);
+    const str = [b.zh, entry?.en, b.en, b.id, b.cat, names.categories[b.cat], b.zhl, moreZh].join(' ').toLowerCase();
+    const strNorm = str.replace(/韦布/g, '韦伯');
+    return str.includes(needle) || strNorm.includes(normNeedle);
   });
   count.textContent = `显示 ${hits.length} / ${bodies.bodies.length} 条`;
   list.replaceChildren(...hits.map((b) => {

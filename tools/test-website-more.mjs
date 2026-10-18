@@ -1,5 +1,5 @@
 // tools/test-website-more.mjs
-// Phase 17: Comprehensive verification of website More content integration
+// Phase 17: Website More Content Integration Test (数据与模拟逻辑验证)
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -22,7 +22,7 @@ function assert(condition, message) {
   }
 }
 
-console.log('=== Phase 17: Website More Content Integration Test ===\n');
+console.log('=== Phase 17: Website More Content Integration Test (数据与模拟逻辑验证) ===\n');
 
 // 1. Data sanity
 console.log('1. Checking Source Data:');
@@ -131,6 +131,17 @@ assert(mainCss.includes('.entry-more-summary'), 'main.css defines .entry-more-su
 assert(mainCss.includes('min-height: 44px') || mainCss.includes('min-height:44px'), 'main.css ensures min-height 44px touch target');
 assert(mainCss.includes('.entry-more-body'), 'main.css defines .entry-more-body');
 assert(mainCss.includes('.entry-more-p'), 'main.css defines .entry-more-p');
+assert(mainCss.includes('.more-fallback-notice'), 'main.css defines .more-fallback-notice');
+
+// Version query checks for cache busting (Task 2)
+assert(missionsHtml.includes('href="assets/css/main.css?v=20261018p17"'), 'missions.html loads main.css?v=20261018p17');
+assert(missionsHtml.includes("from './assets/js/site.js?v=20261018p17'"), 'missions.html imports site.js?v=20261018p17');
+assert(bodiesHtml.includes('href="assets/css/main.css?v=20261018p17"'), 'bodies.html loads main.css?v=20261018p17');
+assert(bodiesHtml.includes("from './assets/js/site.js?v=20261018p17'"), 'bodies.html imports site.js?v=20261018p17');
+
+// Fallback degradation checks (Task 3)
+assert(missionsHtml.includes('moreLoadFailed') && missionsHtml.includes('详细介绍暂时无法加载，请刷新页面重试。'), 'missions.html implements graceful degradation on More load failure');
+assert(bodiesHtml.includes('moreLoadFailed') && bodiesHtml.includes('详细介绍暂时无法加载，请刷新页面重试。'), 'bodies.html implements graceful degradation on More load failure');
 
 // 5. Simulate DOM rendering and verify exact structure
 console.log('\n5. Simulating Card Render Logic:');
@@ -162,7 +173,7 @@ function simulateBodyCard(b, moreEntry) {
     id: b.id,
     zhTitle: b.zh,
     enTitle: b.en,
-    blurb: b.zhBlurb,
+    blurb: b.zhl,
     sourceHref: `https://eyes.nasa.gov/apps/solar-system/#/${b.id}`,
     exploreHref: `explore.html?target=${encodeURIComponent(b.id)}`,
     hasDetails: false,
@@ -209,8 +220,8 @@ for (const b of bodiesList) {
 assert(bodyDetailsCount === 45, `Exactly 45 body cards have details`);
 assert(bodyNoDetailsCount === 2, `Exactly 2 body cards have NO details`);
 
-// 6. Search filtering verification
-console.log('\n6. Verifying Search Filtering with More Content:');
+// 6. Search filtering verification (Task 1)
+console.log('\n6. Verifying Search Filtering with More Content & b.zhl:');
 
 function searchMissions(query) {
   const q = query.trim().toLowerCase();
@@ -236,7 +247,7 @@ function searchBodies(query) {
     if (moreEntry && Array.isArray(moreEntry.paragraphs)) {
       moreZh = moreEntry.paragraphs.map(p => p.zh || '').join(' ');
     }
-    const haystack = [b.zh, b.en, b.id, b.zhBlurb, moreZh].join(' ').toLowerCase();
+    const haystack = [b.zh, b.en, b.id, b.cat, b.zhl, moreZh].join(' ').toLowerCase();
     const haystackNorm = haystack.replace(/韦布/g, '韦伯');
     return haystack.includes(q) || haystackNorm.includes(normQ);
   });
@@ -259,18 +270,22 @@ assert(chandraMissions.some(m => m.id === 'sc_chandra'), `Search '哥伦比亚�
 const issMissions = searchMissions('六名乘组');
 assert(issMissions.some(m => m.id === 'sc_iss'), `Search '六名乘组' matches sc_iss via More text`);
 
-// E. Keyword unique to Europa More: "咸水海洋"
+// E. Keyword unique to Europa More: "咸水海洋" (Task 1 validation)
 const europaBodies = searchBodies('咸水海洋');
 assert(europaBodies.some(b => b.id === 'europa'), `Search '咸水海洋' matches europa via More text`);
 
-// F. Keyword for Sedna: "塞德娜"
+// F. Keyword for Sedna by name: "塞德娜"
 const sednaBodies = searchBodies('塞德娜');
 assert(sednaBodies.length === 1 && sednaBodies[0].id === '90377_sedna', `Search '塞德娜' matches 90377_sedna`);
 
+// G. Keyword in Sedna's Chinese blurb (b.zhl): "轨道极为细长" (Task 1 validation)
+const sednaBlurbBodies = searchBodies('轨道极为细长');
+assert(sednaBlurbBodies.length === 1 && sednaBlurbBodies[0].id === '90377_sedna', `Search '轨道极为细长' matches 90377_sedna via b.zhl`);
+
 console.log(`\n========================================`);
-console.log(`Phase 17 Verification: ${passedTests}/${totalTests} tests passed.`);
+console.log(`Phase 17.1 Static Verification: ${passedTests}/${totalTests} tests passed.`);
 if (passedTests === totalTests) {
-  console.log('🎉 ALL TESTS PASSED!');
+  console.log('🎉 ALL STATIC DATA & SIMULATION TESTS PASSED!');
 } else {
   console.error('💥 SOME TESTS FAILED!');
   process.exitCode = 1;

@@ -910,6 +910,17 @@ details.doc-details p {
 .entry-more-p:last-child {
   margin-bottom: 0;
 }
+.more-fallback-notice {
+  background: rgba(234, 179, 8, 0.08);
+  border: 1px solid rgba(234, 179, 8, 0.25);
+  border-left: 3px solid #eab308;
+  border-radius: var(--r);
+  padding: 10px 16px;
+  margin: 0 0 20px 0;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--fg-dim);
+}
 
 .entry-actions {
   display: flex;
