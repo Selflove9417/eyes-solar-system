@@ -641,35 +641,35 @@
       "paragraphs": [
         {
           "en": "NASA's Parker Solar Probe is diving into the Sun’s atmosphere, facing brutal heat and radiation, on a mission to give humanity its first-ever sampling of a star’s atmosphere.",
-          "zh": ""
+          "zh": "NASA 的帕克太阳探测器正深入探索太阳大气层，直面极端的高温与强辐射，执行人类首次对恒星大气进行直接采样的探测任务。"
         },
         {
           "en": "During its journey, the mission will provide answers to long-standing questions that have puzzled scientists for more than 60 years: Why is the corona much hotter than the Sun's surface (the photosphere)? How does the solar wind accelerate? What are the sources of high-energy solar particles?",
-          "zh": ""
+          "zh": "在其探测旅程中，该任务将解答困扰了科学家 60 多年的长期科学谜题：为什么日冕的温度远高于太阳表面（光球层）？太阳风是如何加速的？高能太阳粒子的来源又是什么？"
         },
         {
           "en": "We live in the Sun's atmosphere and this mission will help scientists better understand the Sun's impact on Earth.",
-          "zh": ""
+          "zh": "我们实际上生活在太阳大气的延伸环境之中，这项任务将帮助科学家更深入地理解太阳对地球产生的深远影响。"
         },
         {
           "en": "Data from Parker will be key to understanding and, perhaps, forecasting space weather. Space weather can change the orbits of satellites, shorten their lifetimes, or interfere with onboard electronics.",
-          "zh": ""
+          "zh": "来自帕克探测器的数据将是理解并预测空间天气的关键。空间天气能够改变人造卫星的运行轨道、缩短其在轨寿命，或干扰星载电子设备的正常运转。"
         },
         {
           "en": "On its final three orbits, Parker Solar Probe will fly to within 3.9 million miles (6.2 million kilometers) of the Sun’s surface—more than seven times closer than the current record holder for a close solar pass: the Helios 2 spacecraft. Helios came within 27 million miles (43 million kilometers) in 1976.",
-          "zh": ""
+          "zh": "在其计划的最后三圈轨道中，帕克太阳探测器将飞至距离太阳表面 390 万英里（620 万千米）以内——比此前近距离掠日纪录保持者太阳神 2 号航天器还要近七倍以上。太阳神号曾于 1976 年飞至距离太阳 2700 万英里（4300 万千米）以内。"
         },
         {
           "en": "Parker can survive these conditions because cutting-edge thermal engineering advances protect the spacecraft during its dangerous journey.",
-          "zh": ""
+          "zh": "帕克探测器之所以能够在如此极端的环境下生存，得益于尖端的热工程防护技术突破在其危险的航程中为航天器保驾护航。"
         },
         {
           "en": "The probe has four instrument suites designed to study magnetic fields, plasma and energetic particles, and image the solar wind.",
-          "zh": ""
+          "zh": "该探测器搭载了四套科学仪器载荷，专门用于研究磁场、等离子体和高能粒子，并对太阳风结构进行成像观测。"
         },
         {
           "en": "The mission is named for Dr. Eugene N. Parker, who pioneered our modern understanding of the Sun.",
-          "zh": ""
+          "zh": "该任务以尤金·N·帕克博士的名字命名，他开创了人类对太阳特性的现代科学认知。"
         }
       ]
     },
@@ -748,7 +748,7 @@
       "paragraphs": [
         {
           "en": "From design to launch, 15 countries collaborated to assemble the world's only permanently crewed orbital facility, which can house a crew of six and 150 ongoing experiments annually across an array of disciplines. The ISS represents a global effort to expand our knowledge and improve life on Earth while testing technology that will extend our reach to the moon, Mars and beyond.",
-          "zh": ""
+          "zh": "从设计到发射，15 个国家通力合作组装了这座世界上唯一持续有人驻留的轨道设施；它常态化容纳六名乘组人员，每年开展 150 项涵盖多个学科领域的在轨实验。国际空间站代表着人类拓展科学认知与改善地球生活的全球努力，同时也在验证将人类探索足迹延伸至月球、火星及更远深空的关键技术。"
         }
       ]
     },
@@ -858,7 +858,7 @@
       "paragraphs": [
         {
           "en": "MESSENGER (Mercury Surface, Space Environment, Geochemistry and Ranging) was the first spacecraft to orbit Mercury. Among its accomplishments, the mission determined Mercury’s surface composition, revealed its geological history, discovered details about its internal magnetic field, and verified its polar deposits are dominantly water-ice. The mission ended when MESSENGER slammed into Mercury’s surface.",
-          "zh": ""
+          "zh": "信使号（水星表面、空间环境、地球化学与测距任务）是第一艘进入水星轨道的航天器。在其众多科学成就中，该任务测定了水星的表面物质成分，揭示了其地质演化历史，探明了其内部磁场的详细特征，并证实其极区沉积物主要由水冰组成。随着信使号高速撞击水星表面，这项开创性的探测任务最终画上了句号。"
         }
       ]
     },
@@ -876,7 +876,7 @@
       "paragraphs": [
         {
           "en": "The Magellan probe was the first interplanetary mission to be launched from the Space Shuttle, the first mission to map the entire surface of Venus, and the first spacecraft to test aerobraking as a method for circularizing its orbit. Magellan was the fifth successful NASA mission to Venus, and it ended an eleven-year gap in U.S. interplanetary probe launches. It self-destructed in the Venusian atmosphere in 1994.",
-          "zh": ""
+          "zh": "麦哲伦号探测器是首个由航天飞机部署发射的行星际探测任务，也是首个绘制金星全球雷达图谱的任务，还是第一艘测试利用大气制动实现轨道圆化的高技术航天器。麦哲伦号是 NASA 第五次成功的金星探测任务，结束了美国长达十一年没有发射行星际探测器的历史空白。该探测器最终于 1994 年坠入金星稠密大气层受控解体。"
         }
       ]
     },
@@ -920,7 +920,7 @@
       "paragraphs": [
         {
           "en": "SDO is designed to help us understand the Sun's influence on Earth and Near-Earth space by studying the solar atmosphere on small scales of space and time and in many wavelengths simultaneously.",
-          "zh": ""
+          "zh": "太阳动力学天文台（SDO）旨在通过在微小时空尺度和多个波段上对太阳大气进行同步多波段观测，帮助我们深入理解太阳对地球及近地空间环境的深远影响。"
         }
       ]
     },
@@ -929,7 +929,7 @@
       "paragraphs": [
         {
           "en": "The ESA-sponsored Solar and Heliospheric Observatory (SOHO) carries 12 scientific instruments to study the solar atmosphere, helioseismology and the solar wind. Information from the mission has allowed scientists to learn more about the Sun’s internal structure and dynamics, the chromosphere, the corona and solar particles.",
-          "zh": ""
+          "zh": "由欧空局（ESA）主导的太阳与日球层天文台（SOHO）搭载了 12 套科学仪器，用于研究太阳大气、日震学以及太阳风。来自该任务的观测数据使科学家得以深入了解太阳的内部结构与动力学机制、色球层、日冕以及太阳粒子活动。"
         }
       ]
     },
@@ -938,7 +938,7 @@
       "paragraphs": [
         {
           "en": "Ulysses was launched in 1990 and made three \"fast latitude scans\" of the Sun in 1994/1995, 2000/2001, and 2007/2008. In addition, the probe studied several comets. The vehicle was designed to fly a unique trajectory that would use a gravity assist from Jupiter to take it out of the plane of the solar system. Ulysses found that the solar wind has become progressively weaker over the last 50 years.",
-          "zh": ""
+          "zh": "尤利西斯号于 1990 年发射升空，并分别在 1994/1995 年、2000/2001 年和 2007/2008 年对太阳进行了三次“快速纬度扫描”观测。此外，该探测器还研究了数颗彗星。该航天器设计了一条独特的飞行轨道，利用木星引力助推使其跃出黄道面（太阳系公转平面）。尤利西斯号发现，在过去 50 年中，太阳风的强度呈现出逐渐减弱的趋势。"
         }
       ]
     },
@@ -1045,7 +1045,7 @@
       "paragraphs": [
         {
           "en": "It was the first spacecraft to detect the Van Allen radiation belt, returning data until its batteries were exhausted after nearly four months. It remained in orbit until 1970.",
-          "zh": ""
+          "zh": "它是第一艘探测到范艾伦辐射带的航天器，在运行近四个月后电池电量耗尽停止传回数据。随后它继续留在轨道上绕地运行，直至 1970 年坠入大气层。"
         }
       ]
     },
@@ -1054,7 +1054,7 @@
       "paragraphs": [
         {
           "en": "During a 42 minute scan of the planet, Mariner 2 gathered significant data on the Venusian atmosphere and the surface before continuing on to heliocentric orbit. The radiometers, in particular, were able to conduct five scans of the night side of the planet, eight across the terminator, and five on the daylight side. NASA maintained contact until 07:00 UT Jan. 3, 1963, when the spacecraft was 53.9 million miles (86.7 million kilometers) from Earth, a new distance record for a deep space probe.",
-          "zh": ""
+          "zh": "在对这颗行星长达 42 分钟的近距离扫描中，水手 2 号在继续飞入绕日轨道之前，收集了关于金星大气和表面的大量关键数据。特别是星载微波与红外辐射计，成功对金星夜面进行了五次扫描，跨越晨昏圈进行了八次扫描，并在昼面进行了五次扫描。NASA 与其保持通信联络，直到世界时 1963 年 1 月 3 日 07:00；此时该航天器距离地球已达 5390 万英里（8670 万千米），创下了深空探测器的通信距离新纪录。"
         }
       ]
     },

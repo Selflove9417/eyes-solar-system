@@ -284,4 +284,23 @@
 | `Chandra X-ray Observatory` | **钱德拉 X 射线天文台** | 见 `missions.zh.json`，NASA 1999 年由哥伦比亚号航天飞机发射的高分辨率 X 射线空间天文台 |
 | `Spitzer Space Telescope` | **斯皮策空间望远镜** | NASA 大天文台计划之一的大型红外空间望远镜（源文笔误作 `Spitizer`，中文统一为规范专名） |
 | `Compton Gamma Ray Observatory` | **康普顿伽马射线天文台** | 见 `missions.zh.json`，NASA 大天文台计划之一的高能伽马射线空间天文台（1991—2000 年在轨，后受控脱轨） |
+| `Parker Solar Probe` | **帕克太阳探测器** | 见 `missions.zh.json`，NASA 太阳近距探测器，开创人类采样恒星大气壮举 |
+| `Eugene N. Parker` | **尤金·N·帕克** | 提出太阳风理论的著名天体物理学家，帕克太阳探测器以其命名 |
+| `photosphere` | **光球层** | 太阳可见表面大气层，温度约 5500°C |
+| `corona` | **日冕** | 太阳最外层稀薄但温度高达数百万摄氏度的高温外层大气 |
+| `space weather` | **空间天气** | 由太阳活动驱动的地磁、辐射带及高层大气状态变化对人造卫星与技术系统的影响 |
+| `International Space Station (ISS)` | **国际空间站** | 见 `missions.zh.json`，15 国联合研制运营的长期载人近地轨道空间实验室 |
+| `MESSENGER` | **信使号** | 见 `missions.zh.json`，NASA 首个环绕水星运行的轨道探测器，证实水星极区水冰 |
+| `Magellan` | **麦哲伦号** | 见 `missions.zh.json`，首个由航天飞机发射的行星际探测器，完成金星全球雷达测绘并验证大气制动 |
+| `aerobraking` | **大气制动** | 利用天体大气阻力实现航天器减速降轨和轨道圆化的航天工程技术 |
+| `SDO` / `Solar Dynamics Observatory` | **太阳动力学天文台** / **SDO** | 见 `missions.zh.json`，NASA 观测太阳多波段动力学及空间天气的地球同步轨道天文台 |
+| `SOHO` / `Solar and Heliospheric Observatory` | **太阳与日球层天文台 SOHO** / **SOHO** | 见 `missions.zh.json`，ESA 与 NASA 联合太阳观测空间实验室 |
+| `helioseismology` | **日震学** | 通过太阳表面压力波脉动研究太阳内部结构与动力学机制的天文学分支 |
+| `Ulysses` | **尤利西斯号** | 见 `missions.zh.json`，ESA 与 NASA 联合研制的首个飞离黄道面展开高纬掠日观测的太阳极轨探测器 |
+| `fast latitude scans` | **快速纬度扫描** | 尤利西斯号在近日点快速跨越太阳南极至北极的高纬度巡视观测模式 |
+| `Explorer 1` | **探索者 1 号** | 见 `missions.zh.json`，美国发射的首颗人造地球卫星，首次探测发现范艾伦辐射带 |
+| `Van Allen radiation belt` | **范艾伦辐射带** | 由地球磁场捕获的带电粒子形成的高能辐射环带 |
+| `Mariner 2` | **水手 2 号** | 见 `missions.zh.json`，人类首个取得成功的行星际探测器，1962 年飞掠金星并首次测得金星高温高压环境 |
+| `terminator` | **晨昏圈** | 天体昼半球与夜半球的分界线 |
+| `radiometer` | **辐射计** | 用于测量特定电磁波段辐射功率或通量的科学探测仪器 |
 
