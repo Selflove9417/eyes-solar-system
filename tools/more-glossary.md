@@ -254,7 +254,7 @@
 | `Artemis III` | **阿尔忒弥斯 III 号** | NASA 阿尔忒弥斯计划载人近地轨道测试/登月后续规划任务 |
 | `Artemis IV` | **阿尔忒弥斯 IV 号** | NASA 阿尔忒弥斯计划未来重返月表载人登月任务 |
 | `Orion` / `Orion spacecraft` | **猎户座飞船** | NASA 专为人类深空探测设计的载人航天器（阿尔忒弥斯计划载人座驾） |
-| `OSIRIS-REx` / `OSIRIS-APEX` | **冥王号 (OSIRIS-REx)** / **奥西里斯-APEX (OSIRIS-APEX)** | 见 `names.zh.json` 与 `missions.zh.json`，美国首个小行星采样返回任务及后续阿波菲斯拓展任务 |
+| `OSIRIS-REx` / `OSIRIS-APEX` | **OSIRIS-REx** / **奥西里斯-APEX (OSIRIS-APEX)** | 见 `names.zh.json` 与 `missions.zh.json`，美国首个小行星采样返回任务及后续阿波菲斯拓展任务 |
 | `101955 Bennu` / `Bennu` | **贝努** | 见 `names.zh.json`，近地富碳小行星 101955 贝努 |
 | `99942 Apophis` / `Apophis` | **阿波菲斯** | 见 `names.zh.json`，近地潜在威胁小行星 99942 阿波菲斯（OSIRIS-APEX 2029 探测目标） |
 | `DART` / `Double Asteroid Redirection Test` | **双小行星重定向测试 DART** / **DART** | 见 `names.zh.json`，NASA 首个行星防御动能撞击技术验证任务 |

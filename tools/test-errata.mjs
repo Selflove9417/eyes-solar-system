@@ -18,6 +18,10 @@ const validClementineEn = 'Clementine was launched in 1994 and The lunar observa
 
 const validClementineZh = '克莱门汀号于 1994 年发射升空，其月球观测项目包括可见光、紫外与红外波段的多波长成像、激光测高、重力测量以及带电粒子测量。克莱门汀号于 1994 年 2 月 19 日成功切入环绕月球的椭圆极轨道（初始周期约八小时），两天后调整为周期约五小时的测绘轨道（约为 270 × 1,830 英里，即 430 × 2,950 千米）（译注：NASA Eyes 英文原文误将轨道周期记为五天；依据 NASA 官方任务记录与研究论文，探测器初始入轨周期约八小时，经调整后的测绘轨道周期实际约为五小时。）在 1994 年的两个月内，它传回了约 160 万幅月球表面数字图像，其中许多图像的分辨率高达约 330 至 660 英尺（100 至 200 米）。在此过程中，它为科学家首次提供了包含极地地区在内的全月球地貌全貌。';
 
+const validDartEn = "An on-orbit demonstration of asteroid deflection was a key test that NASA and other agencies wished to perform before any actual need is present. The DART mission was NASA's demonstration of kinetic impactor technology, impacting an asteroid to adjust its speed and path. The targeted system is composed of two asteroids: the larger asteroid Didymos (diameter: 780 meters, 0.48 miles), and the smaller moonlet asteroid, Dimorphos (diameter: 160 meters, 525 feet), which orbits Didymos. On September 26th, 2022, the DART spacecraft impacted Dimorphos nearly head-on, shortening the time it takes the small asteroid moonlet to orbit Didymos by several minutes.";
+
+const validDartZh = '在实际面临天体撞击威胁前开展小行星偏转的在轨验证，是 NASA 及其他航天机构期望完成的关键试验。DART（双小行星重定向测试）任务是 NASA 对动能撞击技术的演示验证，通过撞击小行星来调整其运行速度与轨道路径。该任务的目标系统由两颗小行星组成：较大的主小行星迪迪莫斯（直径：780 米，即 0.48 英里），以及绕其运行的较小卫星小行星迪莫弗斯（直径：160 米，即 525 英尺）。2022 年 9 月 26 日，DART 探测器以近乎迎头相撞的方式撞击了迪莫弗斯，将这颗小行星卫星绕转迪迪莫斯的轨道周期缩短了约 33 分钟。（译注：NASA Eyes 英文原文采用“数分钟”的笼统表述；此处依据 NASA 官方后续精密观测结果提供量化数据。）';
+
 const testCases = [
   // 1. 正向用例：目标段落正确订正 + 正确译注 + 未改动英文源文
   {
@@ -297,6 +301,135 @@ const testCases = [
       if (!res.ok) return { pass: false, msg: 'applyApprovedErrata 自身不应失败' };
       const qRes = verifyQuantitiesEquivalence(res.normalizedEn, zhTampered);
       return { pass: !qRes.ok && qRes.missingInZh.includes(430) };
+    }
+  },
+
+  // 16. DART 正向用例：正确量化更正为 33 分钟 + 包含指定译注 + 原始英文未改动
+  {
+    name: '【正向】sc_dart:0 正确更正为缩短约 33 分钟并附带指定译注',
+    run: () => {
+      const res = applyApprovedErrata({
+        slug: 'sc_dart',
+        paragraphIndex: 0,
+        en: validDartEn,
+        zh: validDartZh,
+        sourceEn: validDartEn
+      });
+      if (!res.ok) return { pass: false, msg: `预期通过但返回错误: ${res.error}` };
+      const qRes = verifyQuantitiesEquivalence(res.normalizedEn, validDartZh);
+      if (!qRes.ok) return { pass: false, msg: `数值比对未通过: missing=${qRes.missingInZh}, extra=${qRes.extraInZh}` };
+      return { pass: true };
+    }
+  },
+
+  // 17. DART 反向用例：中文仍使用原笼统表述“缩短了数分钟”（必须拦截）
+  {
+    name: '【反向】sc_dart:0 中文仍使用原笼统表述“缩短了数分钟”（必须拦截）',
+    run: () => {
+      const zhOld = validDartZh.replace('缩短了约 33 分钟', '缩短了数分钟');
+      const res = applyApprovedErrata({
+        slug: 'sc_dart',
+        paragraphIndex: 0,
+        en: validDartEn,
+        zh: zhOld,
+        sourceEn: validDartEn
+      });
+      return { pass: !res.ok && res.error.includes('被否决的原错误表述') };
+    }
+  },
+
+  // 18. DART 反向用例：33 分钟被修改为其他未核准数值如 35 分钟（必须拦截）
+  {
+    name: '【反向】sc_dart:0 33 分钟被修改为其他数值如 35 分钟（必须拦截）',
+    run: () => {
+      const zhWrong = validDartZh.replace('约 33 分钟', '约 35 分钟');
+      const res = applyApprovedErrata({
+        slug: 'sc_dart',
+        paragraphIndex: 0,
+        en: validDartEn,
+        zh: zhWrong,
+        sourceEn: validDartEn
+      });
+      if (!res.ok && res.error.includes('未包含核准的更正表述')) {
+        return { pass: true };
+      }
+      const qRes = verifyQuantitiesEquivalence(res.normalizedEn, zhWrong);
+      return { pass: !qRes.ok && qRes.extraInZh.includes(35) };
+    }
+  },
+
+  // 19. DART 反向用例：缺少必需的订正依据译注（必须拦截）
+  {
+    name: '【反向】sc_dart:0 缺少必需的订正依据译注（必须拦截）',
+    run: () => {
+      const zhNoNote = validDartZh.replace('（译注：NASA Eyes 英文原文采用“数分钟”的笼统表述；此处依据 NASA 官方后续精密观测结果提供量化数据。）', '');
+      const res = applyApprovedErrata({
+        slug: 'sc_dart',
+        paragraphIndex: 0,
+        en: validDartEn,
+        zh: zhNoNote,
+        sourceEn: validDartEn
+      });
+      return { pass: !res.ok && res.error.includes('缺少必需的订正依据译注') };
+    }
+  },
+
+  // 20. DART 反向用例：英文源文变动或 sourceEn 不一致（必须拦截）
+  {
+    name: '【反向】sc_dart:0 英文源文变动或 sourceEn 不一致（必须拦截）',
+    run: () => {
+      const resMissing = applyApprovedErrata({
+        slug: 'sc_dart',
+        paragraphIndex: 0,
+        en: validDartEn,
+        zh: validDartZh,
+        sourceEn: undefined
+      });
+      const resAltered = applyApprovedErrata({
+        slug: 'sc_dart',
+        paragraphIndex: 0,
+        en: validDartEn.replace('by several minutes', 'by 33 minutes'),
+        zh: validDartZh,
+        sourceEn: validDartEn
+      });
+      return { pass: !resMissing.ok && !resAltered.ok };
+    }
+  },
+
+  // 21. 反向用例：其他未注册实体 (如 sc_lucy) 擅自添加未经核准的数字（必须拦截）
+  {
+    name: '【反向】其他实体添加未经注册的数字时（必须拦截）',
+    run: () => {
+      const lucyEn = 'Lucy is the first mission to visit the Trojans.';
+      const lucyZhWith33 = '露西号是人类首个探访 33 颗特洛伊小行星的任务。';
+      const res = applyApprovedErrata({
+        slug: 'sc_lucy',
+        paragraphIndex: 0,
+        en: lucyEn,
+        zh: lucyZhWith33,
+        sourceEn: lucyEn
+      });
+      if (res.isErrata) return { pass: false, msg: 'sc_lucy 不得被当作勘误实体' };
+      const qRes = verifyQuantitiesEquivalence(res.normalizedEn, lucyZhWith33);
+      return { pass: !qRes.ok && qRes.extraInZh.includes(33) };
+    }
+  },
+
+  // 22. DART 反向用例：原段落其他数字被篡改或遗漏（如 780 米被修改为 999 米，必须拦截）
+  {
+    name: '【反向】sc_dart:0 原段落其他数字变动时（必须拦截）',
+    run: () => {
+      const zhTampered = validDartZh.replace('780 米', '999 米');
+      const res = applyApprovedErrata({
+        slug: 'sc_dart',
+        paragraphIndex: 0,
+        en: validDartEn,
+        zh: zhTampered,
+        sourceEn: validDartEn
+      });
+      if (!res.ok) return { pass: false, msg: 'applyApprovedErrata 自身不应失败' };
+      const qRes = verifyQuantitiesEquivalence(res.normalizedEn, zhTampered);
+      return { pass: !qRes.ok && qRes.missingInZh.includes(780) && qRes.extraInZh.includes(999) };
     }
   }
 ];

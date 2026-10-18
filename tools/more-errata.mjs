@@ -28,6 +28,17 @@ export const APPROVED_ERRATA = {
     nasaHistoryUrl: 'https://www.nasa.gov/history/30-years-ago-clementine-changes-our-view-of-the-moon/',
     paperUrl: 'https://spudislunarresources.nss.org/Bibliography/p/86.pdf',
     reason: 'NASA Eyes 原文将轨道周期误记为 five days。官方任务记录与科学论文证实，1994 年 2 月 19 日首次切入环月极轨道周期约 8 小时，两天后经微调进入周期约 5 小时的测绘轨道（430 × 2,950 千米）。原文“five days”确系笔误。'
+  },
+  'sc_dart:0': {
+    slug: 'sc_dart',
+    paragraphIndex: 0,
+    originalEnText: 'by several minutes',
+    correctedEnText: 'by about 33 minutes',
+    expectedZhText: '缩短了约 33 分钟',
+    forbiddenZhText: '缩短了数分钟',
+    requiredNote: '（译注：NASA Eyes 英文原文采用“数分钟”的笼统表述；此处依据 NASA 官方后续精密观测结果提供量化数据。）',
+    nasaSourceUrl: 'https://www.nasa.gov/missions/dart/nasa-study-asteroids-orbit-shape-changed-after-dart-impact/',
+    reason: 'NASA Eyes 原文采用 "by several minutes" 这一笼统定性表述。NASA 碰撞后精密测绘与后续权威研究证实，撞击将迪莫弗斯的轨道周期缩短了约 33 分钟（具体为 33 分 15 秒）。中文依据官方后续权威精密测量结果提供量化数据，并在临时副本中补充数值 33 供量级比对。'
   }
 };
 
