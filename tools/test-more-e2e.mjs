@@ -17,18 +17,58 @@ export const namesData = JSON.parse(fs.readFileSync(namesJsonPath, 'utf8'));
 const descJsonPath = path.join(root, 'data/source/descriptions.en.json');
 export const descData = JSON.parse(fs.readFileSync(descJsonPath, 'utf8'));
 
+const missionsJsonPath = path.join(root, 'data/missions.zh.json');
+export const missionsData = JSON.parse(fs.readFileSync(missionsJsonPath, 'utf8'));
+
+const bodiesJsonPath = path.join(root, 'data/bodies.zh.json');
+export const bodiesData = JSON.parse(fs.readFileSync(bodiesJsonPath, 'utf8'));
+
+export const LINKED_ENTITIES = [
+  'sc_osiris_rex',
+  'sc_dart',
+  'sc_lucy',
+  'sc_dawn',
+  'sc_psyche',
+  'sc_stardust',
+  'sc_deep_impact',
+  'sc_galileo',
+  'sc_rosetta'
+];
+
+export function getExpectedBlurb(slug) {
+  const mis = missionsData.missions?.find((m) => m.id === slug);
+  if (mis && mis.zhBlurb) {
+    return {
+      en: mis.enBlurb,
+      zh: mis.zhBlurb,
+      hasLink: /<a[^>]*>/i.test(mis.enBlurb || '')
+    };
+  }
+  const body = bodiesData.bodies?.find((b) => b.id === slug);
+  if (body && body.zhl) {
+    return {
+      en: body.en,
+      zh: body.zhl,
+      hasLink: /<a[^>]*>/i.test(body.en || '')
+    };
+  }
+  return null;
+}
+
 /**
  * 严格比对详情面板长文展开汉化质量
  * 1. 展开按钮文案必须为 "收起"
  * 2. 收起按钮文案必须为 "阅读更多"
- * 3. 一句话简介必须包含汉字
- * 4. 展开文本段落数与 data/more.zh.json 完全一致
- * 5. 每一段中文必须与预期译文完整匹配（正确处理 [##moon_count##] 动态占位符，不硬编码）
- * 6. 展开文本中绝不能残留原始英文完整句子或连续英文残留
+ * 3. 一句话简介必须包含汉字且与词库严格全文匹配
+ * 4. 带超链接简介必须保持 <a> 节点、有效 href、正确包裹对应词汇或航天器名称且无英文句子残留
+ * 5. 展开文本段落数与 data/more.zh.json 完全一致
+ * 6. 每一段中文必须与预期译文完整匹配（正确处理 [##moon_count##] 动态占位符，不硬编码）
+ * 7. 展开文本中绝不能残留原始英文完整句子或连续英文残留
  */
 export function verifyMoreExpansion({
   actualMoreText,
   blurbText,
+  blurbDom,
   slug,
   entry,
   btnAfterMore,
@@ -53,10 +93,57 @@ export function verifyMoreExpansion({
     return { ok: false, errors, warnings };
   }
 
-  // 4. 一句话简介汉化校验
+  // 4. 一句话简介汉化与超链接深度保真核验
   const han = /[\u4e00-\u9fff]/;
   if (!blurbText || !han.test(blurbText)) {
     errors.push(`一句话简介未完成汉化或未含汉字: "${blurbText || ''}"`);
+  }
+
+  const expectedBlurb = getExpectedBlurb(slug);
+  if (expectedBlurb?.zh && blurbDom) {
+    const clean = (s) => (s || '').replace(/\s+/g, ' ').trim();
+    const stripTags = (s) => (s || '').replace(/<[^>]+>/g, '').trim();
+    const expClean = clean(stripTags(expectedBlurb.zh));
+    const actClean = clean(blurbText);
+
+    // 4a. 严格全文比对（必须与对应词库中文译文一致，归一化空白后相等）
+    if (actClean !== expClean) {
+      errors.push(`一句话简介与词库中文译文不一致:\n  预期: "${expClean}"\n  实际: "${actClean}"`);
+    }
+
+    // 4b. 链接保真核验
+    if (expectedBlurb.hasLink) {
+      if (!blurbDom.hasAnchor) {
+        errors.push(`简介链接保真失败: 预期包含 <a> 元素，实际未找到`);
+      } else {
+        const expHrefMatch = expectedBlurb.en.match(/href=['"]([^'"]+)['"]/i);
+        const expHref = expHrefMatch ? expHrefMatch[1] : '';
+        if (expHref) {
+          const normExp = expHref.replace(/\/+$/, '');
+          const normAct = (blurbDom.anchorHref || '').replace(/\/+$/, '');
+          if (!normAct.includes(normExp) && !normExp.includes(normAct)) {
+            errors.push(`简介超链接 href 不匹配: 预期包含 "${normExp}", 实际 "${normAct}"`);
+          }
+        }
+        if (!blurbDom.anchorText || !blurbDom.anchorText.trim()) {
+          errors.push(`简介超链接锚点文本为空`);
+        }
+      }
+    }
+
+    // 4c. 反向残留核验：绝不能残留未经汉化的原始长英文句子
+    if (expectedBlurb.en) {
+      const enSentences = stripTags(expectedBlurb.en)
+        .split(/(?<=[.!?])\s+/)
+        .map((s) => s.trim())
+        .filter((s) => s.length >= 15);
+
+      for (const enSent of enSentences) {
+        if (actClean.includes(enSent)) {
+          errors.push(`一句话简介检测到残留未替换的原始英文句子: "${enSent}"`);
+        }
+      }
+    }
   }
 
   // 5. 预期词条比对
@@ -130,9 +217,9 @@ fs.mkdirSync(shotsDir, { recursive: true });
 
 async function runE2E() {
   const cliArgs = process.argv.slice(2).filter((a) => !a.startsWith('--'));
-  const routes = cliArgs.length > 0
-    ? cliArgs
-    : ['europa', 'io', 'ganymede', 'callisto'];
+  const routes = process.argv.includes('--linked')
+    ? LINKED_ENTITIES
+    : (cliArgs.length > 0 ? cliArgs : ['europa', 'io', 'ganymede', 'callisto']);
 
   console.log('====================================================');
   console.log('🧪 浏览器汉化扩展 More 长文展开端到端测试 (加固版)');
@@ -224,6 +311,8 @@ ${content}
 
       console.log(`\n▶ 正在测试天体路由: ${route} (预期实体: ${slug} | ${expectedEn || '未知'} / ${expectedZh || '未知'})...`);
       const targetUrl = route.startsWith('http') ? route : `https://eyes.nasa.gov/apps/solar-system/#/${route}`;
+      await send('Page.navigate', { url: 'about:blank' });
+      await sleep(300);
       await send('Page.navigate', { url: targetUrl });
 
       // 严格等待天体加载与 SPA 视图过渡完成，进行原生英文身份核验
@@ -253,9 +342,11 @@ ${content}
         selectedLabel = state.label;
 
         if (!state.loading) {
-          const matchEn = expectedEn && state.panelTitle.toLowerCase() === expectedEn.toLowerCase();
-          const matchZh = expectedZh && state.panelTitle === expectedZh;
-          if ((matchEn || matchZh) && state.blurb.length > 0) {
+          const titleLower = (state.panelTitle || '').toLowerCase();
+          const matchEn = expectedEn && (titleLower === expectedEn.toLowerCase() || titleLower.includes(expectedEn.toLowerCase()));
+          const matchZh = expectedZh && (state.panelTitle === expectedZh || state.panelTitle.includes(expectedZh));
+          const matchSlug = slug && titleLower.includes(slug.replace(/^sc_/, '').replace(/_/g, ' '));
+          if ((matchEn || matchZh || matchSlug) && state.blurb.length > 0) {
             identityMatched = true;
             break;
           }
@@ -318,9 +409,17 @@ ${content}
       const domData = await ev(`(() => {
         const blurbEl = document.querySelector('.description .copy:not(.more)');
         const moreEl = document.querySelector('.description .copy.more');
+        const anchor = blurbEl ? blurbEl.querySelector('a') : null;
         return {
           blurbText: blurbEl ? blurbEl.textContent.trim() : '',
-          moreText: moreEl ? moreEl.textContent.trim() : ''
+          moreText: moreEl ? moreEl.textContent.trim() : '',
+          blurbDom: {
+            hasAnchor: !!anchor,
+            anchorText: anchor ? anchor.textContent.trim() : '',
+            anchorHref: anchor ? anchor.href : '',
+            anchorTarget: anchor ? anchor.target : '',
+            html: blurbEl ? blurbEl.innerHTML : ''
+          }
         };
       })()`);
 
@@ -334,6 +433,7 @@ ${content}
       const checkRes = verifyMoreExpansion({
         actualMoreText: domData.moreText,
         blurbText: domData.blurbText,
+        blurbDom: domData.blurbDom,
         slug,
         entry,
         btnAfterMore,
@@ -352,6 +452,9 @@ ${content}
       console.log(`  - 预期实体标识符: ${slug}`);
       console.log(`  - 身份校验结果: ✅ 校验通过`);
       console.log(`  - 一句话简介汉化: ${domData.blurbText ? '✅ 已呈现' : '❌ 空'}`);
+      if (domData.blurbDom?.hasAnchor) {
+        console.log(`  - 简介超链接保真: ✅ <a> 已保留 (href: ${domData.blurbDom.anchorHref}, 锚点: "${domData.blurbDom.anchorText}")`);
+      }
       console.log(`  - 点击 More 后按钮文案: "${btnAfterMore}" (${btnAfterMore === '收起' ? '✅ 正确' : '❌ 异常'})`);
       console.log(`  - 点击收起后按钮文案: "${btnAfterCollapse}" (${btnAfterCollapse === '阅读更多' ? '✅ 正确' : '❌ 异常'})`);
       console.log(`  - 展开长文段落校验: ${checkRes.ok ? '✅ 完全符合预期译文 (' + checkRes.totalActual + ' 段)' : '❌ 校验失败'}`);

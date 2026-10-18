@@ -105,8 +105,59 @@ export async function runNegativeTests() {
     assertFailure('反向测试 5: 展开长文段落缺失时必须失败', res, '段落数量不一致');
   }
 
+  // 6. 反向测试 6: 带链接简介中缺失 <a> 元素时必须失败
+  {
+    const osirisEntry = moreData.entries['sc_osiris_rex'];
+    const validOsirisParas = osirisEntry.paragraphs.map((p) => p.zh).join('\n\n');
+    const validOsirisBlurb = 'NASA 的 OSIRIS-REx 是美国首个将小行星样本送回地球的任务，于 2023 年 9 月 24 日完成送达。该航天器在送样后更名为 OSIRIS-APEX，目前正飞往阿波菲斯小行星，计划于 2029 年与之交会。';
+    const res = verifyMoreExpansion({
+      actualMoreText: validOsirisParas,
+      blurbText: validOsirisBlurb,
+      blurbDom: { hasAnchor: false },
+      slug: 'sc_osiris_rex',
+      entry: osirisEntry,
+      btnAfterMore: '收起',
+      btnAfterCollapse: '阅读更多'
+    });
+    assertFailure('反向测试 6: 带链接简介中缺失 <a> 元素时必须失败', res, '简介链接保真失败');
+  }
+
+  // 7. 反向测试 7: 简介中残留未替换的原始长英文句子时必须失败
+  {
+    const osirisEntry = moreData.entries['sc_osiris_rex'];
+    const validOsirisParas = osirisEntry.paragraphs.map((p) => p.zh).join('\n\n');
+    const englishBlurb = 'NASA’s OSIRIS-REx was the first U.S. mission to deliver an asteroid sample to Earth on September 24th, 2023. The spacecraft, renamed OSIRIS-APEX after the delivery, is now headed to asteroid Apophis for a 2029 rendezvous.';
+    const res = verifyMoreExpansion({
+      actualMoreText: validOsirisParas,
+      blurbText: englishBlurb,
+      blurbDom: { hasAnchor: true, anchorHref: 'https://www.nasa.gov/osiris-rex', anchorText: 'OSIRIS-REx' },
+      slug: 'sc_osiris_rex',
+      entry: osirisEntry,
+      btnAfterMore: '收起',
+      btnAfterCollapse: '阅读更多'
+    });
+    assertFailure('反向测试 7: 简介中残留未替换的原始长英文句子时必须失败', res, '一句话简介未完成汉化或未含汉字');
+  }
+
+  // 8. 反向测试 8: 简介中文与词库不一致时必须失败
+  {
+    const osirisEntry = moreData.entries['sc_osiris_rex'];
+    const validOsirisParas = osirisEntry.paragraphs.map((p) => p.zh).join('\n\n');
+    const mismatchedZhBlurb = 'NASA 的 OSIRIS-REx 是一次探测小行星的任务。';
+    const res = verifyMoreExpansion({
+      actualMoreText: validOsirisParas,
+      blurbText: mismatchedZhBlurb,
+      blurbDom: { hasAnchor: true, anchorHref: 'https://www.nasa.gov/osiris-rex', anchorText: 'OSIRIS-REx' },
+      slug: 'sc_osiris_rex',
+      entry: osirisEntry,
+      btnAfterMore: '收起',
+      btnAfterCollapse: '阅读更多'
+    });
+    assertFailure('反向测试 8: 简介中文与词库不一致时必须失败', res, '一句话简介与词库中文译文不一致');
+  }
+
   console.log('\n================ 反向测试结果汇总 ================');
-  console.log(`总计: 5，通过: ${passed}，失败: ${failed}`);
+  console.log(`总计: 8，通过: ${passed}，失败: ${failed}`);
   console.log('==================================================');
 
   if (failed > 0) {
