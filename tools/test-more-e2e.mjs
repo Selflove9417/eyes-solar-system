@@ -55,6 +55,20 @@ export function getExpectedBlurb(slug) {
   return null;
 }
 
+export function normalizeUrl(urlStr) {
+  if (!urlStr || typeof urlStr !== 'string' || !urlStr.trim()) return '';
+  try {
+    const u = new URL(urlStr.trim());
+    const protocol = u.protocol.toLowerCase();
+    const host = u.host.toLowerCase();
+    const pathname = u.pathname.replace(/\/+$/, '') || '/';
+    const search = u.search;
+    return `${protocol}//${host}${pathname}${search}`;
+  } catch {
+    return urlStr.trim().replace(/\/+$/, '');
+  }
+}
+
 /**
  * 严格比对详情面板长文展开汉化质量
  * 1. 展开按钮文案必须为 "收起"
@@ -116,18 +130,45 @@ export function verifyMoreExpansion({
       if (!blurbDom.hasAnchor) {
         errors.push(`简介链接保真失败: 预期包含 <a> 元素，实际未找到`);
       } else {
+        // 1. 预期与实际 href 都必须非空
+        if (!blurbDom.anchorHref || !blurbDom.anchorHref.trim()) {
+          errors.push(`简介超链接实际 href 为空，违反非空要求`);
+        }
         const expHrefMatch = expectedBlurb.en.match(/href=['"]([^'"]+)['"]/i);
-        const expHref = expHrefMatch ? expHrefMatch[1] : '';
-        if (expHref) {
-          const normExp = expHref.replace(/\/+$/, '');
-          const normAct = (blurbDom.anchorHref || '').replace(/\/+$/, '');
-          if (!normAct.includes(normExp) && !normExp.includes(normAct)) {
-            errors.push(`简介超链接 href 不匹配: 预期包含 "${normExp}", 实际 "${normAct}"`);
+        const expHref = expHrefMatch ? expHrefMatch[1].trim() : '';
+        if (!expHref) {
+          errors.push(`词库预期超链接 href 为空，数据配置异常`);
+        }
+
+        // 2. URL 解析与确定性规范化后严格相等比对，不允许宽松子串包含
+        const normAct = normalizeUrl(blurbDom.anchorHref);
+        const normExp = normalizeUrl(expHref);
+        if (!normAct || !normExp || normAct !== normExp) {
+          errors.push(`简介超链接 href 严格匹配失败: 预期 "${normExp}", 实际 "${normAct}"`);
+        }
+
+        // 3. 对带链接实体检查原有 target 属性
+        const expTargetMatch = expectedBlurb.en.match(/target=['"]([^'"]+)['"]/i);
+        const expTarget = expTargetMatch ? expTargetMatch[1] : '';
+        if (expTarget) {
+          if (blurbDom.anchorTarget !== expTarget) {
+            errors.push(`简介超链接 target 属性不匹配: 预期 "${expTarget}", 实际 "${blurbDom.anchorTarget}"`);
           }
         }
+
+        // 4. 节点对象同一性检验
+        if (blurbDom.isSameAnchorNode === false) {
+          errors.push(`简介超链接 DOM 节点对象已被重建或替换，违反节点保真要求`);
+        }
+
         if (!blurbDom.anchorText || !blurbDom.anchorText.trim()) {
           errors.push(`简介超链接锚点文本为空`);
         }
+      }
+    } else {
+      // 普通简介：检验注入前后子元素结构与必要属性不变
+      if (blurbDom.sameChildrenStructure === false) {
+        errors.push(`普通简介子元素结构在汉化前后发生改变，原有 host 元素被破坏`);
       }
     }
 
@@ -370,6 +411,20 @@ ${content}
         continue;
       }
 
+      // 记录注入前的 DOM 快照，供后续检验节点对象同一性与结构保真
+      await ev(`(() => {
+        const blurbEl = document.querySelector('.description .copy:not(.more)');
+        if (blurbEl) {
+          window.__preAnchorNode = blurbEl.querySelector('a');
+          window.__preCopyChildrenCount = blurbEl.children.length;
+          window.__preCopyChildTags = Array.from(blurbEl.children).map((c) => c.tagName);
+        } else {
+          window.__preAnchorNode = null;
+          window.__preCopyChildrenCount = 0;
+          window.__preCopyChildTags = [];
+        }
+      })()`);
+
       // 注入汉化扩展 content.js
       await ev(bundle);
       await sleep(2500);
@@ -410,6 +465,15 @@ ${content}
         const blurbEl = document.querySelector('.description .copy:not(.more)');
         const moreEl = document.querySelector('.description .copy.more');
         const anchor = blurbEl ? blurbEl.querySelector('a') : null;
+        const currentChildrenCount = blurbEl ? blurbEl.children.length : 0;
+        const currentChildTags = blurbEl ? Array.from(blurbEl.children).map((c) => c.tagName) : [];
+        const sameChildrenStructure = (
+          window.__preCopyChildrenCount === currentChildrenCount &&
+          JSON.stringify(window.__preCopyChildTags) === JSON.stringify(currentChildTags)
+        );
+        const isSameAnchorNode = (
+          window.__preAnchorNode ? (anchor === window.__preAnchorNode) : true
+        );
         return {
           blurbText: blurbEl ? blurbEl.textContent.trim() : '',
           moreText: moreEl ? moreEl.textContent.trim() : '',
@@ -418,6 +482,8 @@ ${content}
             anchorText: anchor ? anchor.textContent.trim() : '',
             anchorHref: anchor ? anchor.href : '',
             anchorTarget: anchor ? anchor.target : '',
+            isSameAnchorNode,
+            sameChildrenStructure,
             html: blurbEl ? blurbEl.innerHTML : ''
           }
         };

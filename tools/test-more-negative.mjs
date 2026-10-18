@@ -30,7 +30,7 @@ export async function runNegativeTests() {
   const sunEntry = moreData.entries['sun'];
   const validSunParagraphs = sunEntry.paragraphs.map((p) => p.zh);
   const validSunText = validSunParagraphs.join('\n\n');
-  const validBlurb = '太阳是太阳系的中心天体。';
+  const validBlurb = '太阳是太阳系的心脏，是一颗黄色矮星——一团炽热发光的气体球。';
 
   // 1. 反向测试 1: 中文段落中残留完整英文句子时必须失败
   {
@@ -156,8 +156,73 @@ export async function runNegativeTests() {
     assertFailure('反向测试 8: 简介中文与词库不一致时必须失败', res, '一句话简介与词库中文译文不一致');
   }
 
+  // 9. 反向测试 9: 带链接简介中 <a> 的 href 为空时必须失败
+  {
+    const osirisEntry = moreData.entries['sc_osiris_rex'];
+    const validOsirisParas = osirisEntry.paragraphs.map((p) => p.zh).join('\n\n');
+    const validOsirisBlurb = 'NASA 的 OSIRIS-REx 是美国首个将小行星样本送回地球的任务，于 2023 年 9 月 24 日完成送达。该航天器在送样后更名为 OSIRIS-APEX，目前正飞往阿波菲斯小行星，计划于 2029 年与之交会。';
+    const res = verifyMoreExpansion({
+      actualMoreText: validOsirisParas,
+      blurbText: validOsirisBlurb,
+      blurbDom: { hasAnchor: true, anchorHref: '', anchorText: 'OSIRIS-REx', anchorTarget: '_blank', isSameAnchorNode: true },
+      slug: 'sc_osiris_rex',
+      entry: osirisEntry,
+      btnAfterMore: '收起',
+      btnAfterCollapse: '阅读更多'
+    });
+    assertFailure('反向测试 9: 简介超链接 href 为空时必须失败', res, '简介超链接实际 href 为空，违反非空要求');
+  }
+
+  // 10. 反向测试 10: 带链接简介中 <a> 的 href 不匹配时必须失败
+  {
+    const osirisEntry = moreData.entries['sc_osiris_rex'];
+    const validOsirisParas = osirisEntry.paragraphs.map((p) => p.zh).join('\n\n');
+    const validOsirisBlurb = 'NASA 的 OSIRIS-REx 是美国首个将小行星样本送回地球的任务，于 2023 年 9 月 24 日完成送达。该航天器在送样后更名为 OSIRIS-APEX，目前正飞往阿波菲斯小行星，计划于 2029 年与之交会。';
+    const res = verifyMoreExpansion({
+      actualMoreText: validOsirisParas,
+      blurbText: validOsirisBlurb,
+      blurbDom: { hasAnchor: true, anchorHref: 'https://fake-mismatch.com', anchorText: 'OSIRIS-REx', anchorTarget: '_blank', isSameAnchorNode: true },
+      slug: 'sc_osiris_rex',
+      entry: osirisEntry,
+      btnAfterMore: '收起',
+      btnAfterCollapse: '阅读更多'
+    });
+    assertFailure('反向测试 10: 简介超链接 href 严格匹配失败时必须失败', res, '简介超链接 href 严格匹配失败');
+  }
+
+  // 11. 反向测试 11: 节点对象同一性检验失败（<a> 被破坏后重新创建）时必须失败
+  {
+    const osirisEntry = moreData.entries['sc_osiris_rex'];
+    const validOsirisParas = osirisEntry.paragraphs.map((p) => p.zh).join('\n\n');
+    const validOsirisBlurb = 'NASA 的 OSIRIS-REx 是美国首个将小行星样本送回地球的任务，于 2023 年 9 月 24 日完成送达。该航天器在送样后更名为 OSIRIS-APEX，目前正飞往阿波菲斯小行星，计划于 2029 年与之交会。';
+    const res = verifyMoreExpansion({
+      actualMoreText: validOsirisParas,
+      blurbText: validOsirisBlurb,
+      blurbDom: { hasAnchor: true, anchorHref: 'https://www.nasa.gov/osiris-rex', anchorText: 'OSIRIS-REx', anchorTarget: '_blank', isSameAnchorNode: false },
+      slug: 'sc_osiris_rex',
+      entry: osirisEntry,
+      btnAfterMore: '收起',
+      btnAfterCollapse: '阅读更多'
+    });
+    assertFailure('反向测试 11: 简介超链接 DOM 节点对象被重建时必须失败', res, '简介超链接 DOM 节点对象已被重建或替换');
+  }
+
+  // 12. 反向测试 12: 普通简介子元素结构被破坏时必须失败
+  {
+    const res = verifyMoreExpansion({
+      actualMoreText: validSunText,
+      blurbText: validBlurb,
+      blurbDom: { hasAnchor: false, sameChildrenStructure: false },
+      slug: 'sun',
+      entry: sunEntry,
+      btnAfterMore: '收起',
+      btnAfterCollapse: '阅读更多'
+    });
+    assertFailure('反向测试 12: 普通简介原有子元素结构被破坏时必须失败', res, '普通简介子元素结构在汉化前后发生改变');
+  }
+
   console.log('\n================ 反向测试结果汇总 ================');
-  console.log(`总计: 8，通过: ${passed}，失败: ${failed}`);
+  console.log(`总计: 12，通过: ${passed}，失败: ${failed}`);
   console.log('==================================================');
 
   if (failed > 0) {

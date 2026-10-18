@@ -25,6 +25,22 @@
   const clean = (s) => (s || '').replace(/\s+/g, ' ').trim();
   const stripTags = (s) => (s || '').replace(/<[^>]+>/g, '').trim();
   const hasHan = (s) => /[一-鿿]/.test(s);
+  const normBlurbText = (s) => (s || '')
+    .replace(/\s+/g, ' ')
+    .replace(/[\u2018\u2019]/g, "'")
+    .replace(/[\u201C\u201D]/g, '"')
+    .trim();
+
+  function normUrl(u) {
+    if (!u) return '';
+    try {
+      const parsed = new URL(u);
+      let p = parsed.pathname.replace(/\/+$/, '') || '/';
+      return `${parsed.protocol.toLowerCase()}//${parsed.host.toLowerCase()}${p}${parsed.search}`;
+    } catch {
+      return (u || '').trim().replace(/\/+$/, '').toLowerCase();
+    }
+  }
 
   let entityById = {};   // site slug -> Chinese
   let entityEnById = {}; // site slug -> English name
@@ -102,33 +118,95 @@
     };
   }
 
+  function translateRegularBlurb(copyEl, expectedZhClean) {
+    const textNodes = [];
+    const walk = (node) => {
+      for (const child of node.childNodes) {
+        if (child.nodeType === Node.TEXT_NODE) {
+          if (clean(child.nodeValue)) textNodes.push(child);
+        } else if (child.nodeType === Node.ELEMENT_NODE) {
+          walk(child);
+        }
+      }
+    };
+    walk(copyEl);
+
+    if (textNodes.length === 1) {
+      replaceText(textNodes[0], expectedZhClean);
+      return true;
+    } else if (textNodes.length > 1) {
+      const firstParent = textNodes[0].parentElement;
+      const sameParent = textNodes.every((n) => n.parentElement === firstParent);
+      if (sameParent) {
+        replaceText(textNodes[0], expectedZhClean);
+        for (let i = 1; i < textNodes.length; i++) {
+          written.add(textNodes[i]);
+          textNodes[i].nodeValue = '';
+        }
+        return true;
+      } else {
+        console.warn('[NASA Eyes 中文汉化] 普通简介包含多个无法安全映射的文本节点，保持原状：', copyEl.innerHTML);
+        return false;
+      }
+    } else {
+      console.warn('[NASA Eyes 中文汉化] 普通简介未包含任何有效文本节点，保持原状：', copyEl.innerHTML);
+      return false;
+    }
+  }
+
   function translateBlurb(copyEl) {
     if (!copyEl || !copyEl.isConnected) return;
-    const curText = clean(copyEl.textContent);
-    if (!curText) return;
+    const curRaw = clean(copyEl.textContent);
+    if (!curRaw) return;
 
-    const normText = curText.replace(/[\u2018\u2019]/g, "'");
-    let entry = blurbByEn.get(normText);
-    if (!entry) {
-      const slug = getRouteEntitySlug();
-      if (slug && missionBlurbMap[slug]) entry = missionBlurbMap[slug];
-    }
-    if (!entry) {
-      const a = copyEl.querySelector('a');
-      if (a && a.href) {
-        const h = a.href.replace(/\/+$/, '');
-        entry = blurbByHref.get(h) || blurbByHref.get(a.getAttribute('href')?.replace(/\/+$/, ''));
-      }
-    }
+    // 1. 路由实体门禁：必须存在当前有效路由实体且在词库中有简介
+    const routeSlug = getRouteEntitySlug();
+    if (!routeSlug) return;
+    const entry = missionBlurbMap[routeSlug];
     if (!entry || !entry.zhBlurb) return;
 
-    const expectedZhClean = clean(stripTags(entry.zhBlurb));
-    if (curText === expectedZhClean) return;
+    const expectedZhClean = normBlurbText(stripTags(entry.zhBlurb));
+    const curNorm = normBlurbText(curRaw);
 
+    // 若当前 DOM 已经是该路由实体的完整合法中文，直接通过，不做冗余操作
+    if (curNorm === expectedZhClean) return;
+
+    // 2. 文本身份门禁：当前 DOM 完整英文内容必须与候选实体原始英文简介严格匹配
+    const expectedEnNorm = normBlurbText(stripTags(entry.enBlurb));
+    if (curNorm !== expectedEnNorm) {
+      // 若当前 DOM 不匹配候选英文源文，可能是上一实体的残留旧文，或 NASA 修改了源文案，绝对不串译覆盖
+      if (!hasHan(curNorm)) {
+        console.warn(`[NASA Eyes 中文汉化] 简介英文与当前路由实体 (${routeSlug}) 源文不一致，保持原文：`, curNorm);
+      }
+      return;
+    }
+
+    // 3. 超链接门禁：有链接时，<a> 必须存在且 URL 必须与该实体预期链接严格一致
+    const hasLinkInSource = /<a[^>]*>/i.test(entry.enBlurb);
     const anchor = copyEl.querySelector('a');
-    if (anchor && /<a[^>]*>/i.test(entry.enBlurb)) {
+
+    if (hasLinkInSource) {
+      if (!anchor) {
+        console.warn(`[NASA Eyes 中文汉化] 实体 (${routeSlug}) 预期包含超链接，但 DOM 容器中未找到 <a> 元素，保持原文`);
+        return;
+      }
+      const expHrefMatch = entry.enBlurb.match(/href=['"]([^'"]+)['"]/i);
+      const expHref = expHrefMatch ? expHrefMatch[1] : '';
+      if (expHref) {
+        const normAct = normUrl(anchor.href || anchor.getAttribute('href'));
+        const normExp = normUrl(expHref);
+        if (normAct !== normExp) {
+          console.warn(`[NASA Eyes 中文汉化] 实体 (${routeSlug}) 超链接地址不匹配（预期 "${normExp}", 实际 "${normAct}"），保持原文`);
+          return;
+        }
+      }
+
+      // 带链接简介：安全切分并更新文本节点，严格保留 <a> 元素节点身份与属性
       const split = getBlurbLinkSplit(entry.id, entry.enBlurb, entry.zhBlurb);
-      if (!split) return;
+      if (!split) {
+        console.warn(`[NASA Eyes 中文汉化] 实体 (${routeSlug}) 超链接切分失败，保持原文`);
+        return;
+      }
 
       const parent = anchor.parentElement || copyEl;
       const childNodes = Array.from(parent.childNodes);
@@ -176,8 +254,12 @@
         parent.appendChild(tNode);
       }
     } else {
-      written.add(copyEl);
-      copyEl.textContent = expectedZhClean;
+      // 4. 普通简介：预期无内联链接，绝对不清空 <span> 等宿主元素，优先走逐文本节点安全替换
+      if (anchor) {
+        console.warn(`[NASA Eyes 中文汉化] 普通实体 (${routeSlug}) 预期无链接但 DOM 包含 <a>，保持原文`);
+        return;
+      }
+      translateRegularBlurb(copyEl, expectedZhClean);
     }
   }
 
