@@ -42,7 +42,8 @@
     <table>
       <thead><tr><th>类别</th><th>事实说明</th></tr></thead>
       <tbody>
-        <tr><td>做了</td><td>中文门户、中文导航、中英术语表、天体与任务的中文转译、官方嵌入参数封装。</td></tr>
+        <tr><td>做了</td><td>中文门户、中文导航、中英术语表、天体与任务一句话简介转译、官方嵌入参数封装。</td></tr>
+        <tr><td>做了</td><td>全量接入 92 个深空实体、150 段 NASA Eyes More 深度中文长文（涵盖 47 个深空任务与 45 个天体），支持折叠交互阅读与全文检索；对官方无长文的实体（如银河系、塞德娜）严谨留白，不主观编造。</td></tr>
         <tr><td>做了</td><td>对官方站点做只读的技术取证：HTTP 响应头、加载完成后的 DOM 结构、运行时 DOM 文本采集、公开 JSON 接口探测。</td></tr>
         <tr><td><strong>没有</strong>做</td><td>没有抓取、复制或重新托管 NASA 的任何程序（<code>app.js</code> / <code>vendors.js</code>）、三维模型、地形瓦片、纹理或星表数据。</td></tr>
         <tr><td><strong>没有</strong>做</td><td>没有自建行星动力学或渲染引擎；画面 100% 来自官方服务驱动解算。</td></tr>
@@ -87,6 +88,7 @@
     <dt>3D 模拟与渲染</dt><dd>NASA/JPL <em>Eyes on the Solar System</em>，<a href="https://eyes.nasa.gov/apps/solar-system/" target="_blank" rel="noopener">eyes.nasa.gov/apps/solar-system</a></dd>
     <dt>实体名称与 id</dt><dd>该应用运行时实体库导出的快照，存档于 <code>data/source/entities.en.json</code>（719 条，导出于 2026-10-11）；英文键名取自实体库的稳定 slug。</dd>
     <dt>天体与任务简介文本</dt><dd>逐条译自该应用公开的 <code>descriptions/&lt;id&gt;.json</code> 的 <code>blurb</code> 字段，数字与单位保持原样，存档于 <code>data/source/descriptions.en.json</code>（93 条）。</dd>
+    <dt>深度科普长文（More）</dt><dd>源自 NASA Eyes 官方 <code>descriptions/&lt;id&gt;.json</code> 的 <code>more</code> 字段，涵盖全部 92 个实体、150 段长文（47 个航天任务、45 个天体），存档于 <code>data/more.zh.json</code>。历经十六批严格的科学事实核查与历史勘误，规范了统一天体物理术语，并对历史时态（如 ISS、帕克、尤利西斯等早期文本）补充审慎译注。本站与浏览器扩展共享该单一数据源。</dd>
     <dt>术语与界面对照驱动</dt><dd>由 <code>data/names.zh.json</code> 与 <code>data/ui.zh.json</code> 共同驱动，站点与浏览器汉化扩展共用同一套术语对照表。</dd>
     <dt>界面字符串</dt><dd>加载完成页面的 DOM 实测采集，存档于 <code>research/harvest_mars.json</code></dd>
     <dt>轨道与历表数据</dt><dd>JPL Solar System Dynamics（<a href="https://ssd.jpl.nasa.gov" target="_blank" rel="noopener">ssd.jpl.nasa.gov</a>）、CNEOS（<a href="https://cneos.jpl.nasa.gov" target="_blank" rel="noopener">cneos.jpl.nasa.gov</a>）——由官方服务自行调用，本项目不接触</dd>

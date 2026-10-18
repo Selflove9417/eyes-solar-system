@@ -26,7 +26,7 @@
 <body>
 <main class="wrap">
   <h1>天体中文名与简介</h1>
-  <p class="lede">天体的中文名称与简介，译自 NASA 官方资料，数字与单位保持原样。<a href="about.html#sources" class="lede-link">数据说明 ↗</a></p>
+  <p class="lede">本页收录 47 个已核对官方原文的重点天体，45 个天体已接入官方 More 中文详细介绍（支持卡片内折叠展开）；距离、直径与周期等数字一律照原文保留。<a href="about.html#sources" class="lede-link">数据说明 ↗</a></p>
   <div class="toolbar">
     <input type="search" id="filter" placeholder="按中文名、英文名或类别筛选…" aria-label="筛选天体">
     <span id="count" style="color:var(--fg-dim);font-size:13.5px"></span>
@@ -57,9 +57,15 @@
   </p>
 </main>
 <script type="module">
-import { renderChrome, getData, el } from './assets/js/site.js?v=20261016p6final';
+import { renderChrome, getData, getMoreData, el } from './assets/js/site.js?v=20261016p6final';
 renderChrome('bodies.html');
 const { bodies, names } = await getData();
+let moreData = null;
+try {
+  moreData = await getMoreData();
+} catch (err) {
+  console.warn('More 详细介绍加载失败:', err);
+}
 const list = document.getElementById('list');
 const count = document.getElementById('count');
 
@@ -83,18 +89,35 @@ function render(q = '') {
   const hits = bodies.bodies.filter((b) => {
     if (!needle) return true;
     const entry = names.entities[b.id];
-    return [b.zh, entry?.en, b.en, b.cat, names.categories[b.cat], b.id].join(' ').toLowerCase().includes(needle);
+    const moreZh = moreData?.entries?.[b.id]?.paragraphs?.map((p) => p.zh).join(' ') || '';
+    return [b.zh, entry?.en, b.en, b.cat, names.categories[b.cat], b.id, moreZh].join(' ').toLowerCase().includes(needle);
   });
   count.textContent = `显示 ${hits.length} / ${bodies.bodies.length} 条`;
   list.replaceChildren(...hits.map((b) => {
     const entry = names.entities[b.id];
     const catZh = names.categories[b.cat] || b.cat || names.categories[entry?.cat] || entry?.cat || '';
     const enTitle = entry?.en || b.id;
-    const card = el('article', { class: 'entry-card' },
+    const moreEntry = moreData?.entries?.[b.id];
+    const hasMore = moreEntry && Array.isArray(moreEntry.paragraphs) && moreEntry.paragraphs.length > 0;
+
+    let moreDetails = null;
+    if (hasMore) {
+      const summary = el('summary', { class: 'entry-more-summary' }, '阅读详细介绍');
+      const body = el('div', { class: 'entry-more-body' },
+        ...moreEntry.paragraphs.map((p) => el('p', { class: 'entry-more-p' }, p.zh))
+      );
+      moreDetails = el('details', { class: 'entry-more-details' }, summary, body);
+      moreDetails.addEventListener('toggle', () => {
+        summary.textContent = moreDetails.open ? '收起详细介绍' : '阅读详细介绍';
+      });
+    }
+
+    const card = el('article', { class: 'entry-card', id: `card-${b.id}` },
       el('div', { class: `entry-swatch ${getSwatchClass(b.cat)}` }),
       el('h2', { class: 'entry-title' }, b.zh || b.id, entry ? statusTag(entry.status) : null),
       el('div', { class: 'entry-en' }, (catZh ? catZh + ' · ' : '') + enTitle),
       el('p', { class: 'entry-desc' }, b.zhl || '官方未提供该条目的简介文本。'),
+      moreDetails,
       b.src
         ? el('details', { class: 'entry-details' },
             el('summary', {}, '英文原文'),

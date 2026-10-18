@@ -851,6 +851,66 @@ details.doc-details p {
   color: var(--fg-muted);
 }
 
+/* ---------- More Long-text Detailed Introduction ---------- */
+.entry-more-details {
+  margin: var(--space-2) 0 var(--space-1);
+}
+.entry-more-summary {
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--accent);
+  cursor: pointer;
+  min-height: 44px;
+  user-select: none;
+  transition: color 150ms ease;
+  outline-offset: 3px;
+}
+.entry-more-summary::-webkit-details-marker {
+  display: none;
+}
+.entry-more-summary::before {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(-45deg);
+  transition: transform 180ms ease;
+  margin-right: 2px;
+}
+.entry-more-details[open] .entry-more-summary::before {
+  transform: rotate(45deg);
+}
+.entry-more-summary:hover {
+  color: var(--accent-hover);
+}
+.entry-more-summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.entry-more-body {
+  margin: var(--space-2) 0 var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: rgba(255, 255, 255, 0.02);
+  border-left: 2px solid var(--line);
+  border-radius: 0 4px 4px 0;
+}
+.entry-more-p {
+  margin: 0 0 var(--space-3);
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--fg-dim);
+}
+.entry-more-p:last-child {
+  margin-bottom: 0;
+}
+
 .entry-actions {
   display: flex;
   flex-wrap: wrap;

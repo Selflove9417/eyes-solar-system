@@ -34,6 +34,13 @@ export async function getData() {
   return cache;
 }
 
+let moreCache = null;
+export async function getMoreData() {
+  if (moreCache) return moreCache;
+  moreCache = await loadJson('data/more.zh.json');
+  return moreCache;
+}
+
 export function zhName(names, id, fallback) {
   const hit = names.entities[id];
   return hit?.zh || fallback || id;

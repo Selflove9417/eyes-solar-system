@@ -26,7 +26,7 @@
 <body>
 <main class="wrap">
   <h1>航天器与任务介绍</h1>
-  <p class="lede">本页收录 47 个已核对官方原文的重点任务，官方实体库共 169 个航天器条目；发射日期、距离与纪录数字一律照原文保留。<a href="about.html#sources" class="lede-link">数据说明 ↗</a></p>
+  <p class="lede">本页收录 47 个已核对官方原文的重点任务，已全面接入官方 More 中文详细介绍（支持卡片内一键折叠展开）；发射日期、距离与纪录数字一律照原文保留。<a href="about.html#sources" class="lede-link">数据说明 ↗</a></p>
   <div class="toolbar">
     <input type="search" id="filter" placeholder="按任务名、代号或关键词筛选…" aria-label="筛选任务">
     <span id="count" style="color:var(--fg-dim);font-size:13.5px"></span>
@@ -58,9 +58,15 @@
   </p>
 </main>
 <script type="module">
-import { renderChrome, getData, el } from './assets/js/site.js?v=20261016p6final';
+import { renderChrome, getData, getMoreData, el } from './assets/js/site.js?v=20261016p6final';
 renderChrome('missions.html');
 const { missions, names } = await getData();
+let moreData = null;
+try {
+  moreData = await getMoreData();
+} catch (err) {
+  console.warn('More 详细介绍加载失败:', err);
+}
 const list = document.getElementById('list');
 const count = document.getElementById('count');
 
@@ -75,18 +81,35 @@ function render(q = '') {
   const normNeedle = needle.replace(/韦布/g, '韦伯');
   const hits = missions.missions.filter((m) => {
     if (!needle) return true;
-    const str = [m.zh, m.en, m.id, m.zhBlurb].join(' ').toLowerCase();
+    const moreZh = moreData?.entries?.[m.id]?.paragraphs?.map((p) => p.zh).join(' ') || '';
+    const str = [m.zh, m.en, m.id, m.zhBlurb, moreZh].join(' ').toLowerCase();
     const strNorm = str.replace(/韦布/g, '韦伯');
     return str.includes(needle) || strNorm.includes(normNeedle);
   });
   count.textContent = `显示 ${hits.length} / ${missions.missions.length} 条`;
   list.replaceChildren(...hits.map((m) => {
     const entry = names.entities[m.id];
-    return el('article', { class: 'entry-card' },
+    const moreEntry = moreData?.entries?.[m.id];
+    const hasMore = moreEntry && Array.isArray(moreEntry.paragraphs) && moreEntry.paragraphs.length > 0;
+
+    let moreDetails = null;
+    if (hasMore) {
+      const summary = el('summary', { class: 'entry-more-summary' }, '阅读详细介绍');
+      const body = el('div', { class: 'entry-more-body' },
+        ...moreEntry.paragraphs.map((p) => el('p', { class: 'entry-more-p' }, p.zh))
+      );
+      moreDetails = el('details', { class: 'entry-more-details' }, summary, body);
+      moreDetails.addEventListener('toggle', () => {
+        summary.textContent = moreDetails.open ? '收起详细介绍' : '阅读详细介绍';
+      });
+    }
+
+    return el('article', { class: 'entry-card', id: `card-${m.id}` },
       el('div', { class: 'entry-swatch swatch-mission' }),
       el('h2', { class: 'entry-title' }, m.zh, entry ? statusTag(entry.status) : null),
       el('div', { class: 'entry-en' }, m.en),
       el('p', { class: 'entry-desc' }, m.zhBlurb || '官方未提供该条目的简介文本。'),
+      moreDetails,
       m.src
         ? el('details', { class: 'entry-details' },
             el('summary', {}, '英文原文'),
