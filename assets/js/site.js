@@ -456,6 +456,12 @@ export function renderChrome(active) {
       <p class="footer-text">
         深空之眸为独立开源非官方科普项目，与 NASA 及 JPL 无官方隶属或商业背书关系。3D 天体轨道与空间数据基于 <a href="${NASA_APP}" target="_blank" rel="noopener">NASA/JPL Eyes on the Solar System</a> 官方模型在客户端 WebGL 实时驱动解算。
       </p>
+      <p class="footer-text footer-links" style="margin-top: 10px;">
+        <span style="opacity: 0.85;">联系与反馈：</span>
+        <a href="https://github.com/Selflove9417/eyes-solar-system" target="_blank" rel="noopener">开源项目 GitHub ↗</a>
+        <span style="opacity: 0.35; margin: 0 8px;">·</span>
+        <a href="https://github.com/Selflove9417/eyes-solar-system/issues" target="_blank" rel="noopener">问题反馈与建议 ↗</a>
+      </p>
     </div>`;
   document.body.appendChild(footer);
 }
