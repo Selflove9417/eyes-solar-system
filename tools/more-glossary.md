@@ -111,6 +111,13 @@
 | `laser ranging altimetry` | **激光测高** / **激光测距测高** | — | 通过机载脉冲激光往返时间精确反演月面地形高程的遥感技术（克莱门汀号） |
 | `gravimetry` | **重力测量** | — | 测量月球局部重力场及其微小空间梯度的地球物理学方法（克莱门汀号、GRAIL） |
 | `charged particle measurements` | **带电粒子测量** | — | 测量空间等离子体与宇宙射线带电粒子通量及能量谱的探测手段（克莱门汀号） |
+| `transit` / `transits` | **凌日** | — | 行星运行至母恒星前方并周期性遮挡部分恒星光线的现象（TESS） |
+| `habitable zone` | **宜居带** | 避免混为“已发现生命” | 母恒星周围允许液态水以自然状态存在于行星表面的轨道范围（开普勒） |
+| `super-Earth` / `super-Earth-sized` | **超级地球** / **超级地球大小** | — | 尺寸介于地球与海王星之间、通常不超过两倍地球大小的系外行星类别（TESS） |
+| `planet candidate` / `planet candidates` | **候选行星** | 避免混同于“已确认行星” | 经凌日等初步观测发现但尚未经独立验证确认的系外行星候选目标（TESS） |
+| `Lagrange point L2` / `Sun-Earth Lagrange point L2` | **拉格朗日点 L2** / **日地拉格朗日点 L2** | — | 日地系统第二拉格朗日引力平衡点，背向太阳一侧约 150 万千米处（韦伯、罗曼） |
+| `infrared astrophysics` | **红外天体物理学** | — | 利用红外波段研究早期宇宙、恒星与行星形成以及冷暗天体的高能物理学分支（罗曼） |
+| `planet-forming disk` / `planet-forming disks` | **行星形成盘** / **原行星盘** | — | 围绕年轻恒星旋转由气体和尘埃构成的致密吸积盘，行星在其中孕育成形（罗曼） |
 
 ---
 
@@ -268,4 +275,13 @@
 | `Vesta` / `4 Vesta` | **灶神星** | 见 `names.zh.json`，小行星带第二大天体，干燥且岩石密布的原行星 |
 | `Ceres` / `1 Ceres` | **谷神星** | 见 `names.zh.json`，小行星带唯一矮行星，富含水冰的潮湿原行星 |
 | `ion propulsion` / `ion engines` | **离子推进** / **离子发动机** | 利用电场加速离子喷射产生推力的高比冲深空推进系统 |
+| `Great Observatories` | **大天文台计划** | NASA 实施的大型空间天文台系列计划，包括哈勃、康普顿、钱德拉与斯皮策四大旗舰天文台 |
+| `Hubble Space Telescope` | **哈勃空间望远镜** | 见 `missions.zh.json`，1990 年发射部署的著名光学/紫外/近红外旗舰空间望远镜 |
+| `James Webb Space Telescope` / `JWST` | **詹姆斯·韦伯空间望远镜** / **JWST** | 见 `missions.zh.json`，运行于日地 L2 点的新一代大型红外空间望远镜 |
+| `Nancy Grace Roman Space Telescope` | **南希·格雷斯·罗曼空间望远镜** | 见 `missions.zh.json`，NASA 宽视场红外巡天望远镜，2026 年 8 月 30 日成功发射 |
+| `Kepler Space Telescope` / `Kepler` | **开普勒空间望远镜** | 见 `missions.zh.json`，NASA 2009—2018 年运行的开创性系外行星凌日探测望远镜 |
+| `Transiting Exoplanet Survey Satellite (TESS)` / `TESS` | **凌日系外行星巡天卫星 TESS** / **TESS** | 见 `missions.zh.json`，NASA 2018 年发射的全天系外行星凌日巡天卫星 |
+| `Chandra X-ray Observatory` | **钱德拉 X 射线天文台** | 见 `missions.zh.json`，NASA 1999 年由哥伦比亚号航天飞机发射的高分辨率 X 射线空间天文台 |
+| `Spitzer Space Telescope` | **斯皮策空间望远镜** | NASA 大天文台计划之一的大型红外空间望远镜（源文笔误作 `Spitizer`，中文统一为规范专名） |
+| `Compton Gamma Ray Observatory` | **康普顿伽马射线天文台** | 见 `missions.zh.json`，NASA 大天文台计划之一的高能伽马射线空间天文台（1991—2000 年在轨，后受控脱轨） |
 
