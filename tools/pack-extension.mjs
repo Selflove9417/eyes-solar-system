@@ -4,6 +4,7 @@
 import { cpSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { execSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 
 const root = new URL('..', import.meta.url).pathname.replace(/^\/(\w:)/, '$1');
 const out = join(root, 'dist', 'eyes-zh-extension');
@@ -34,9 +35,40 @@ writeFileSync(join(out, 'README.txt'), [
 
 console.log('packed -> ' + out);
 
+function calcSha256(filePath) {
+  return createHash('sha256').update(readFileSync(filePath)).digest('hex');
+}
+
+// 1. Package A: Website offline installation package (contains eyes-zh-extension folder)
+const offlineZip = join(root, 'dist', 'eyes-zh-extension.zip');
+rmSync(offlineZip, { force: true });
 try {
-  execSync(`tar -a -c -f "${join(root, 'dist', 'eyes-zh-extension.zip')}" -C "${join(root, 'dist')}" eyes-zh-extension`);
-  console.log('zipped -> ' + join(root, 'dist', 'eyes-zh-extension.zip'));
+  execSync(`tar -a -c -f "${offlineZip}" -C "${join(root, 'dist')}" eyes-zh-extension`);
+  console.log('zipped offline package -> ' + offlineZip);
+  console.log('  SHA256: ' + calcSha256(offlineZip));
 } catch (e) {
-  console.warn('Zip creation failed:', e.message);
+  console.warn('Offline zip creation failed:', e.message);
+}
+
+// 2. Package B: Edge Add-ons store update package (root directly contains manifest.json, content.js, data/)
+const storeZip = join(root, 'dist', 'eyes-zh-extension-edge-store.zip');
+const storeStaging = join(root, 'dist', '.edge-store-staging');
+rmSync(storeZip, { force: true });
+rmSync(storeStaging, { recursive: true, force: true });
+mkdirSync(join(storeStaging, 'data'), { recursive: true });
+
+cpSync(join(root, 'extension', 'manifest.json'), join(storeStaging, 'manifest.json'));
+cpSync(join(root, 'extension', 'content.js'), join(storeStaging, 'content.js'));
+for (const rel of dataFiles) {
+  cpSync(join(root, rel), join(storeStaging, rel));
+}
+
+try {
+  execSync(`tar -a -c -f "${storeZip}" -C "${storeStaging}" manifest.json content.js data`);
+  console.log('zipped Edge store package -> ' + storeZip);
+  console.log('  SHA256: ' + calcSha256(storeZip));
+} catch (e) {
+  console.warn('Edge store zip creation failed:', e.message);
+} finally {
+  rmSync(storeStaging, { recursive: true, force: true });
 }
