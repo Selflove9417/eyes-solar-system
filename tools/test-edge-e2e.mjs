@@ -231,10 +231,10 @@ try {
   check(extTitle.includes('安装中文汉化扩展'), `Page title contains '安装中文汉化扩展' (got '${extTitle}')`);
 
   const kickerText = await ev(`document.querySelector('.feature-kicker')?.textContent?.trim()`);
-  check(kickerText?.includes('v0.2.0') || kickerText?.includes('v0.2.1'), `Kicker badge shows valid version ('v0.2.0' or 'v0.2.1') (got '${kickerText}')`);
+  check(kickerText?.includes('v0.2.1') && kickerText?.includes('v0.2.0'), `Kicker badge distinguishes offline v0.2.1 and Edge store v0.2.0 (got '${kickerText}')`);
 
   const downloadTitle = await ev(`document.querySelector('.download-title')?.textContent?.trim()`);
-  check(downloadTitle?.includes('v0.2.0') || downloadTitle?.includes('v0.2.1'), `Download banner highlights valid version ('v0.2.0' or 'v0.2.1') (got '${downloadTitle}')`);
+  check(downloadTitle?.includes('v0.2.1'), `Download banner highlights offline package 'v0.2.1' (got '${downloadTitle}')`);
 
   const downloadHref = await ev(`document.querySelector('a.btn-primary[download]')?.getAttribute('href')`);
   check(downloadHref === 'dist/eyes-zh-extension.zip', `Download link points to 'dist/eyes-zh-extension.zip' (got '${downloadHref}')`);
