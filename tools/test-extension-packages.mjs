@@ -151,6 +151,7 @@ assert(
   contentMatches.length === 1 && contentMatches[0] === 'https://eyes.nasa.gov/apps/solar-system/*',
   'content_scripts matches strictly https://eyes.nasa.gov/apps/solar-system/*'
 );
+assert(storeManifest.content_scripts?.[0]?.all_frames === true, 'content_scripts has all_frames: true to support embedded iframes');
 
 const contentJsStr = storeContentEntry.data.toString('utf8');
 assert(!contentJsStr.includes('eval('), 'content.js contains zero eval() calls');

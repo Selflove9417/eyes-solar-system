@@ -437,9 +437,256 @@ try {
   }
 
   // =========================================================================
-  // STEP 6: Console Error Auditing
+  // STEP 6: Verify Extension Auto-Injection & Localization in Embedded Iframe
+  // (Website mode: http://127.0.0.1:8994/explore.html embedding NASA Eyes)
   // =========================================================================
-  console.log('\n--- 6. Console Error Audit ---');
+  console.log('\n--- 6. Testing Embedded NASA Eyes Iframe Localization in explore.html ---');
+  await send('Page.navigate', { url: `http://127.0.0.1:${HTTP_PORT}/explore.html` });
+
+  // Poll /json/list to detect the embedded NASA iframe target
+  let iframeTarget = null;
+  for (let i = 0; i < 35; i++) {
+    await sleep(1000);
+    try {
+      const curTargets = await (await fetch(`http://127.0.0.1:${CDP_PORT}/json/list`)).json();
+      iframeTarget = curTargets.find((t) => t.url && t.url.includes('eyes.nasa.gov/apps/solar-system/'));
+      if (iframeTarget?.webSocketDebuggerUrl) break;
+    } catch {}
+  }
+
+  check(!!iframeTarget, 'NASA Eyes official iframe detected in Deep Space Eye explore.html');
+
+  if (iframeTarget?.webSocketDebuggerUrl) {
+    const frameWs = new WebSocket(iframeTarget.webSocketDebuggerUrl);
+    await new Promise((r) => (frameWs.onopen = r));
+
+    let fMsgId = 1;
+    const fPending = new Map();
+    const fExtContexts = [];
+
+    frameWs.onmessage = (ev) => {
+      const data = JSON.parse(ev.data);
+      if (data.id && fPending.has(data.id)) {
+        const cb = fPending.get(data.id);
+        fPending.delete(data.id);
+        if (data.error) cb.reject(new Error(JSON.stringify(data.error)));
+        else cb.resolve(data.result);
+      }
+      if (data.method === 'Runtime.executionContextCreated') {
+        const ctx = data.params.context;
+        if (ctx.origin?.startsWith('chrome-extension://')) {
+          fExtContexts.push(ctx.id);
+        }
+      }
+      if (data.method === 'Runtime.consoleAPICalled' && data.params.type === 'error') {
+        const text = data.params.args?.map(a => a.value || a.description || '').join(' ') || '';
+        consoleErrors.push(text);
+      }
+    };
+
+    const fSend = (method, params = {}) =>
+      new Promise((resolve, reject) => {
+        const reqId = fMsgId++;
+        fPending.set(reqId, { resolve, reject });
+        frameWs.send(JSON.stringify({ id: reqId, method, params }));
+      });
+
+    const fEv = async (expression, contextId = null) => {
+      const opts = { expression, returnByValue: true, awaitPromise: true };
+      if (contextId) opts.contextId = contextId;
+      const r = await fSend('Runtime.evaluate', opts);
+      if (r.exceptionDetails) throw new Error('Iframe Eval Error: ' + JSON.stringify(r.exceptionDetails));
+      return r.result?.value;
+    };
+
+    await fSend('Page.enable');
+    await fSend('Runtime.enable');
+
+    // Wait for extension context inside the iframe
+    for (let i = 0; i < 30; i++) {
+      await sleep(1000);
+      if (fExtContexts.length > 0) break;
+    }
+
+    check(fExtContexts.length > 0, `Extension context detected in embedded iframe (count: ${fExtContexts.length})`);
+
+    const frameExtCtxId = fExtContexts[0];
+    const frameExtState = await fEv(`(() => ({
+      eyesZh: window.__eyesZh,
+      hasRuntimeUrl: !!window.chrome?.runtime?.getURL,
+      manifestVersion: window.chrome?.runtime?.getManifest?.()?.version
+    }))()`, frameExtCtxId);
+
+    check(frameExtState?.eyesZh === true, `Extension content.js automatically executed inside embedded iframe (__eyesZh: ${frameExtState?.eyesZh})`);
+    check(frameExtState?.manifestVersion === '0.2.0', `Extension in iframe reports manifest version 0.2.0 (got '${frameExtState?.manifestVersion}')`);
+
+    // Verify chrome.runtime.getURL inside iframe
+    const frameResourceCheck = await fEv(`(async () => {
+      try {
+        const url = chrome.runtime.getURL('data/more.zh.json');
+        const res = await fetch(url);
+        const json = await res.json();
+        return {
+          ok: res.ok,
+          entriesCount: Object.keys(json.entries || {}).length
+        };
+      } catch (e) {
+        return { ok: false, error: e.message };
+      }
+    })()`, frameExtCtxId);
+
+    check(
+      frameResourceCheck.ok && frameResourceCheck.entriesCount === 92,
+      `chrome.runtime.getURL() inside iframe loaded data/more.zh.json (92 entities)`
+    );
+
+    // Verify 3D labels inside iframe
+    let frameChineseLabels = [];
+    for (let attempt = 0; attempt < 30; attempt++) {
+      await sleep(1000);
+      const labelsRes = await fEv(`
+        Array.from(document.querySelectorAll('.pioneer-label-div .text'))
+          .map(el => el.textContent.trim())
+          .filter(Boolean)
+      `);
+      frameChineseLabels = (labelsRes || []).filter(t => /[\u4e00-\u9fff]/.test(t));
+      if (frameChineseLabels.length > 0) break;
+    }
+
+    check(frameChineseLabels.length > 0, `3D celestial labels in embedded iframe localized to Chinese (${frameChineseLabels.slice(0, 8).join(', ')})`);
+    await capture(path.join(shotsDir, 'edge-iframe-3d-labels.png'));
+
+    // Verify UI buttons / controls in iframe (Toolbox, View Options, Info)
+    const uiTooltips = await fEv(`
+      Array.from(document.querySelectorAll('button[data-tippy-content], [aria-label], .ui-button'))
+        .map(b => b.getAttribute('data-tippy-content') || b.getAttribute('aria-label') || b.textContent.trim())
+        .filter(Boolean)
+    `);
+    const hanTooltips = (uiTooltips || []).filter(t => /[\u4e00-\u9fff]/.test(t));
+    check(hanTooltips.length > 0, `UI controls & tooltips in embedded iframe localized to Chinese`);
+
+    // Verify route transition to sc_iss inside iframe
+    // Wait for initial loading screen in iframe to finish
+    for (let i = 0; i < 30; i++) {
+      await sleep(1000);
+      const isStillLoading = await fEv(`(() => {
+        const ls = document.getElementById('loading-screen');
+        return ls && getComputedStyle(ls).display !== 'none' && getComputedStyle(ls).opacity !== '0';
+      })()`);
+      if (!isStillLoading) break;
+    }
+
+    console.log('\n--- 6.1 Testing sc_iss inside embedded iframe ---');
+    await fEv(`location.hash = '#/sc_iss'`);
+
+    let issReady = false;
+    let issState = null;
+    for (let attempt = 0; attempt < 50; attempt++) {
+      await sleep(1000);
+      issState = await fEv(`(() => {
+        const ls = document.getElementById('loading-screen');
+        const loading = ls && getComputedStyle(ls).display !== 'none' && getComputedStyle(ls).opacity !== '0';
+        const titleEl = document.querySelector('.title.long-title, .semi.title.long-title');
+        const panelTitleZh = titleEl ? titleEl.textContent.trim() : '';
+        const copyEl = document.querySelector('.description .copy:not(.more)');
+        const blurbText = copyEl ? copyEl.textContent.trim() : '';
+        const moreBtn = document.querySelector('button.more-button');
+        const moreBtnText = moreBtn ? moreBtn.textContent.trim() : '';
+        return { loading, panelTitleZh, blurbText, moreBtnText };
+      })()`);
+      if (!issState.loading && issState.panelTitleZh.includes('国际空间站') && issState.blurbText.length > 0) {
+        issReady = true;
+        break;
+      }
+    }
+
+    check(issReady, 'Embedded iframe navigated to sc_iss and localized panel');
+    check(issState?.panelTitleZh?.includes('国际空间站'), `Panel title in iframe matches '国际空间站' (got '${issState?.panelTitleZh}')`);
+    check(/[\u4e00-\u9fff]/.test(issState?.blurbText || ''), `Blurb in iframe localized into Chinese: '${(issState?.blurbText || '').slice(0, 30)}...'`);
+
+    // Expand More in iframe
+    if (issReady) {
+      await fEv(`(() => {
+        const btn = document.querySelector('button.more-button');
+        if (btn) btn.click();
+      })()`);
+      await sleep(800);
+
+      const issExpanded = await fEv(`(() => {
+        const moreEl = document.querySelector('.description .copy.more');
+        const btn = document.querySelector('button.more-button');
+        return {
+          btnText: btn ? btn.textContent.trim() : '',
+          moreText: moreEl ? moreEl.textContent.trim() : ''
+        };
+      })()`);
+
+      check(issExpanded.btnText === '收起', `Iframe More button expands to '收起' (got '${issExpanded.btnText}')`);
+      check(issExpanded.moreText.length > 50 && /[\u4e00-\u9fff]/.test(issExpanded.moreText), `Iframe More text rendered in Chinese`);
+      await capture(path.join(shotsDir, 'edge-iframe-more-sc_iss.png'));
+
+      // Collapse More in iframe
+      await fEv(`(() => {
+        const btn = document.querySelector('button.more-button');
+        if (btn) btn.click();
+      })()`);
+      await sleep(600);
+    } else {
+      check(false, `Iframe More button expands to '收起'`);
+      check(false, `Iframe More text rendered in Chinese`);
+    }
+
+    // Verify route transition to sc_parker_solar_probe inside iframe
+    console.log('\n--- 6.2 Testing sc_parker_solar_probe inside embedded iframe ---');
+    await fEv(`location.hash = '#/sc_parker_solar_probe'`);
+
+    let pspReady = false;
+    let pspState = null;
+    for (let attempt = 0; attempt < 50; attempt++) {
+      await sleep(1000);
+      pspState = await fEv(`(() => {
+        const ls = document.getElementById('loading-screen');
+        const loading = ls && getComputedStyle(ls).display !== 'none' && getComputedStyle(ls).opacity !== '0';
+        const titleEl = document.querySelector('.title.long-title, .semi.title.long-title');
+        const panelTitleZh = titleEl ? titleEl.textContent.trim() : '';
+        const copyEl = document.querySelector('.description .copy:not(.more)');
+        const blurbText = copyEl ? copyEl.textContent.trim() : '';
+        return { loading, panelTitleZh, blurbText };
+      })()`);
+      if (!pspState.loading && pspState.panelTitleZh.includes('帕克太阳探测器') && pspState.blurbText.length > 0) {
+        pspReady = true;
+        break;
+      }
+    }
+
+    check(pspReady, 'Embedded iframe navigated to sc_parker_solar_probe');
+    check(pspState.panelTitleZh.includes('帕克太阳探测器'), `Panel title in iframe matches '帕克太阳探测器'`);
+
+    // Expand More for PSP in iframe
+    await fEv(`(() => {
+      const btn = document.querySelector('button.more-button');
+      if (btn) btn.click();
+    })()`);
+    await sleep(800);
+
+    const pspExpanded = await fEv(`(() => {
+      const moreEl = document.querySelector('.description .copy.more');
+      return moreEl ? moreEl.textContent.trim() : '';
+    })()`);
+
+    check(pspExpanded.length > 100 && /[\u4e00-\u9fff]/.test(pspExpanded), 'PSP 8-paragraph More text in iframe rendered in Chinese');
+    await capture(path.join(shotsDir, 'edge-iframe-more-sc_parker_solar_probe.png'));
+
+    // Capture full page screenshot of the website with embedded localized iframe
+    await capture(path.join(shotsDir, 'edge-iframe-explore-full.png'));
+
+    frameWs.close();
+  }
+
+  // =========================================================================
+  // STEP 7: Console Error Auditing
+  // =========================================================================
+  console.log('\n--- 7. Console Error Audit ---');
   if (consoleErrors.length > 0) {
     console.log('  Captured console errors:', JSON.stringify(consoleErrors, null, 2));
   }

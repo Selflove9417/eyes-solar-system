@@ -8,6 +8,7 @@
       "matches": [
         "https://eyes.nasa.gov/apps/solar-system/*"
       ],
+      "all_frames": true,
       "js": [
         "content.js"
       ],
