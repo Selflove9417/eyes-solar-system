@@ -30,6 +30,7 @@
 # 5. 全局基础安全响应头
 # - CSP 必须保留 script-src/style-src 的 'unsafe-inline'：12 个页面都含内联 module 脚本，
 #   HTML 里还有内联 style 属性；frame-src 必须放行 eyes.nasa.gov，否则 3D 视窗全黑。
+# - 放行 https://static.cloudflareinsights.com 与 https://cloudflareinsights.com 以支持 Cloudflare Web Analytics 探针。
 # - 不要加 COEP/COOP：会破坏 NASA 页面内部的第三方资源。
 # - HSTS 只对本域生效，不含 includeSubDomains（pages.dev 是共享域）。
 /*
@@ -38,4 +39,4 @@
   Strict-Transport-Security: max-age=31536000
   X-Frame-Options: DENY
   Permissions-Policy: camera=(), microphone=(), geolocation=()
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-src https://eyes.nasa.gov; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://cloudflareinsights.com; frame-src https://eyes.nasa.gov; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'
