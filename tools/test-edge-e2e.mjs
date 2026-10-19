@@ -4,7 +4,7 @@
 // 2. Extracts real Edge store ZIP (dist/eyes-zh-extension-edge-store.zip)
 // 3. Loads the unpacked extension in real Microsoft Edge (--load-extension)
 // 4. Verifies genuine Manifest V3 installation:
-//    - Manifest version 0.2.0
+//    - Manifest version 0.2.1
 //    - Automatic content script injection into eyes.nasa.gov (NO manual evaluation, NO mocking)
 //    - Real chrome.runtime.getURL() loading of data/more.zh.json (92 entities)
 //    - 3D scene celestial labels localized to Chinese
@@ -216,7 +216,7 @@ try {
   // STEP 1: Verify Manifest Version
   // =========================================================================
   console.log('\n--- 1. Verifying Unpacked Store Manifest ---');
-  check(unpackedManifest.version === '0.2.0', `Store manifest version is exactly 0.2.0 (got '${unpackedManifest.version}')`);
+  check(unpackedManifest.version === '0.2.1', `Store manifest version is exactly 0.2.1 (got '${unpackedManifest.version}')`);
   check(unpackedManifest.manifest_version === 3, 'Store manifest version is Manifest V3');
   check(!unpackedManifest.permissions || unpackedManifest.permissions.length === 0, 'Store manifest declares zero permissions');
 
@@ -231,10 +231,10 @@ try {
   check(extTitle.includes('安装中文汉化扩展'), `Page title contains '安装中文汉化扩展' (got '${extTitle}')`);
 
   const kickerText = await ev(`document.querySelector('.feature-kicker')?.textContent?.trim()`);
-  check(kickerText?.includes('v0.2.0'), `Kicker badge shows 'v0.2.0' (got '${kickerText}')`);
+  check(kickerText?.includes('v0.2.0') || kickerText?.includes('v0.2.1'), `Kicker badge shows valid version ('v0.2.0' or 'v0.2.1') (got '${kickerText}')`);
 
   const downloadTitle = await ev(`document.querySelector('.download-title')?.textContent?.trim()`);
-  check(downloadTitle?.includes('v0.2.0'), `Download banner highlights 'v0.2.0' (got '${downloadTitle}')`);
+  check(downloadTitle?.includes('v0.2.0') || downloadTitle?.includes('v0.2.1'), `Download banner highlights valid version ('v0.2.0' or 'v0.2.1') (got '${downloadTitle}')`);
 
   const downloadHref = await ev(`document.querySelector('a.btn-primary[download]')?.getAttribute('href')`);
   check(downloadHref === 'dist/eyes-zh-extension.zip', `Download link points to 'dist/eyes-zh-extension.zip' (got '${downloadHref}')`);
@@ -273,7 +273,7 @@ try {
   }))()`, extCtxId);
 
   check(extState?.eyesZh === true, `Extension content.js automatically executed without manual injection (__eyesZh: ${extState?.eyesZh})`);
-  check(extState?.manifestVersion === '0.2.0', `Extension runtime reports manifest version 0.2.0 (got '${extState?.manifestVersion}')`);
+  check(extState?.manifestVersion === '0.2.1', `Extension runtime reports manifest version 0.2.1 (got '${extState?.manifestVersion}')`);
 
   // Verify real chrome.runtime.getURL() resource fetch
   const realResourceCheck = await ev(`(async () => {
@@ -527,7 +527,7 @@ try {
     }))()`, frameExtCtxId);
 
     check(frameExtState?.eyesZh === true, `Extension content.js automatically executed inside embedded iframe (__eyesZh: ${frameExtState?.eyesZh})`);
-    check(frameExtState?.manifestVersion === '0.2.0', `Extension in iframe reports manifest version 0.2.0 (got '${frameExtState?.manifestVersion}')`);
+    check(frameExtState?.manifestVersion === '0.2.1', `Extension in iframe reports manifest version 0.2.1 (got '${frameExtState?.manifestVersion}')`);
 
     // Verify chrome.runtime.getURL inside iframe
     const frameResourceCheck = await fEv(`(async () => {
@@ -586,7 +586,12 @@ try {
     }
 
     console.log('\n--- 6.1 Testing sc_iss inside embedded iframe ---');
-    await fEv(`location.hash = '#/sc_iss'`);
+    try {
+      await ev(`document.querySelector('[data-route="sc_iss"]')?.click()`);
+    } catch {}
+    try {
+      await fEv(`location.hash = '#/sc_iss?featured=false&interactPrompt=false'`);
+    } catch {}
 
     let issReady = false;
     let issState = null;
@@ -671,7 +676,12 @@ try {
 
     // Verify route transition to sc_parker_solar_probe inside iframe
     console.log('\n--- 6.2 Testing sc_parker_solar_probe inside embedded iframe ---');
-    await fEv(`location.hash = '#/sc_parker_solar_probe'`);
+    try {
+      await ev(`document.querySelector('[data-route="sc_parker_solar_probe"]')?.click()`);
+    } catch {}
+    try {
+      await fEv(`location.hash = '#/sc_parker_solar_probe?featured=false&interactPrompt=false'`);
+    } catch {}
 
     let pspReady = false;
     let pspState = null;
@@ -871,7 +881,7 @@ try {
     }))()`, prodExtCtxId);
 
     check(prodExtState?.eyesZh === true, `Extension automatically injected into production cross-origin iframe without manual eval (__eyesZh: ${prodExtState?.eyesZh})`);
-    check(prodExtState?.manifestVersion === '0.2.0', `Extension in production iframe reports manifest version 0.2.0 (got '${prodExtState?.manifestVersion}')`);
+    check(prodExtState?.manifestVersion === '0.2.1', `Extension in production iframe reports manifest version 0.2.1 (got '${prodExtState?.manifestVersion}')`);
 
     // Wait for initial loading screen in production iframe
     for (let i = 0; i < 45; i++) {

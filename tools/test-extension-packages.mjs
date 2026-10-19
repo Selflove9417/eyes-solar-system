@@ -121,8 +121,8 @@ assert(
 const offlineManifest = JSON.parse(offlineManifestEntry.data.toString('utf8'));
 const storeManifest = JSON.parse(storeManifestEntry.data.toString('utf8'));
 
-assert(offlineManifest.version === '0.2.0', `Offline manifest version is 0.2.0 (got ${offlineManifest.version})`);
-assert(storeManifest.version === '0.2.0', `Store manifest version is 0.2.0 (got ${storeManifest.version})`);
+assert(offlineManifest.version === '0.2.1', `Offline manifest version is 0.2.1 (got ${offlineManifest.version})`);
+assert(storeManifest.version === '0.2.1', `Store manifest version is 0.2.1 (got ${storeManifest.version})`);
 assert(storeManifest.manifest_version === 3, 'Manifest version is V3');
 
 const offlineContentEntry = offlineEntries.find((e) => e.path === 'eyes-zh-extension/content.js');
